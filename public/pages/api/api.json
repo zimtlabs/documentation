@@ -1,0 +1,323 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ZIMT Hub API",
+    "version": "v1.0.0",
+    "contact": {
+      "name": "API Support",
+      "url": "https://zimt.co",
+      "email": "tech@zimt.co"
+    },
+    "x-logo": {
+      "url": "https://zimt.co/wp-content/uploads/2019/12/PNG-02-small.png",
+      "backgroundColor": "rgba(255, 255, 255, 0)"
+    }
+  },
+  "servers": [{
+      "url": "https://zimt-hub-test.herokuapp.com",
+      "description": "Hub API - Dev & Test"
+    },
+    {
+      "url": "https://zimt-hub.herokuapp.com",
+      "description": "Hub API - Production"
+    }
+  ],
+  "security": [{
+    "Token": []
+  }],
+  "tags": [{
+    "name": "Other",
+    "description": "Other than core endpoints."
+  }],
+  "x-tagGroups": [{
+    "name": "Other",
+    "tags": [
+      "Other"
+    ]
+  }],
+
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Health",
+        "description": "Returns 200 if server is alive and working.",
+        "tags": [
+          "Other"
+        ],
+        "security": [{
+          "Token": []
+        }],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Health" }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "headers": {},
+    "schemas": {
+      "limit": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "cursor": {
+        "type": "string"
+      },
+      "id": {
+        "type": "string",
+        "description": "Mongo ID",
+        "example": "125ynaw123asfd123"
+      },
+      "meta-response": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32",
+            "example": "200"
+          },
+          "message": {
+            "type": "string",
+            "example": "Ok"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "pagination-response": {
+        "type": "object",
+        "properties": {
+          "hasNext": {
+            "type": "boolean"
+          },
+          "next": {
+            "$ref": "#/components/schemas/cursor"
+          },
+          "hasPrevious": {
+            "type": "boolean"
+          },
+          "previous": {
+            "$ref": "#/components/schemas/cursor"
+          }
+        },
+        "required": [
+          "hasNext",
+          "next",
+          "hasPrevious",
+          "previous"
+        ]
+      },
+      "Authentication": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+      "Authorization": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+      "Health": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+      "anyValue": {
+        "description": "Any type of value"
+      },
+      "query-operator": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "example": "object.data.name"
+          },
+          "operator": {
+            "type": "string",
+            "enum": [
+              "equal",
+              "not-equal",
+              "equal-array",
+              "not-equal-array",
+              "greater-than",
+              "greater-than-equal",
+              "less-than",
+              "less-than-equal",
+              "inrange",
+              "starts-with",
+              "contains"
+            ]
+          },
+          "value": {
+            "$ref": "#/components/schemas/anyValue"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "field",
+          "operator",
+          "value"
+        ]
+      },
+      "query": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "accounts": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/query-operator"
+                },
+                "minItems": 1
+              },
+              "todos": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/query-operator"
+                },
+                "minItems": 1
+              }
+            }
+          },
+          "limit": {
+            "$ref": "#/components/schemas/limit"
+          },
+          "next": {
+            "$ref": "#/components/schemas/cursor"
+          },
+          "previous": {
+            "$ref": "#/components/schemas/cursor"
+          }
+        }
+      }
+    },
+    "examples": {
+      "Health": {
+        "data": "Ok",
+        "meta": {
+          "code": 200
+        }
+      },
+      "Authentication": {
+        "meta": {
+          "code": 401,
+          "message": "Unauthorized"
+        }
+      },
+      "Authorization": {
+        "meta": {
+          "code": 403,
+          "message": "Unauthorized"
+        }
+      },
+      "query": {
+        "query": {
+          "accounts": [{
+            "field": "object.data.name",
+            "operator": "starts-with",
+            "value": "Event"
+          }]
+        },
+        "limit": 45,
+        "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      }
+    },
+    "parameters": {
+      "limit-query": {
+        "name": "limit",
+        "description": "Number of results to return in the response",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/limit"
+        }
+      },
+      "next-query": {
+        "name": "next",
+        "description": "Base64 encoded string - cursor",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/cursor"
+        },
+        "example": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      },
+      "previous-query": {
+        "name": "previous",
+        "description": "Base64 encoded string - cursor",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/cursor"
+        },
+        "example": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+      }
+    },
+    "responses": {
+      "Health": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Health"
+            },
+            "example": {
+              "$ref": "#/components/examples/Health"
+            }
+          }
+        }
+      },
+      "Authentication": {
+        "description": "No authentication provided",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Authentication"
+            },
+            "example": {
+              "$ref": "#/components/examples/Authentication"
+            }
+          }
+        }
+      },
+      "Authorization": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Authorization"
+            },
+            "example": {
+              "$ref": "#/components/examples/Authorization"
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+
+    },
+    "securitySchemes": {
+      "Token": {
+        "description": "Usage format: `ZIMT_TOKEN <Token>`",
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
