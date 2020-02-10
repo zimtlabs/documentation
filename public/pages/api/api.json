@@ -1,16 +1,10 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "ZIMT Hub API",
-    "version": "v1.0.0",
     "contact": {
       "name": "API Support",
       "url": "https://zimt.co",
       "email": "tech@zimt.co"
-    },
-    "x-logo": {
-      "url": "https://zimt.co/wp-content/uploads/2019/12/PNG-02-small.png",
-      "backgroundColor": "rgba(255, 255, 255, 0)"
     }
   },
   "servers": [{
