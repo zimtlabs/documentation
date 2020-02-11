@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import { RedocStandalone } from 'redoc';
+import prism from 'prismjs';
 
 import { parseMarkdownFileReference, getPublicFileUrl } from '../../../utils';
 
@@ -9,11 +10,15 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
 
         '& .menu-content': {
-
         },
+
         '& h3': {
             marginTop: 15,
             marginBottom: 24,
+        },
+
+        '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
+            background: 'none',
         },
     }
 }), { name: 'ApiElement' });
@@ -41,6 +46,9 @@ export default function ApiElement(props) {
                     nativeScrollbars: true,
                     theme: { colors: { primary: { main: theme.palette.primary.main } } },
                     hideDownloadButton: true,
+                }}
+                onLoaded={error => {
+                    if (!error) prism.highlightAll();
                 }}
             />
         </div>

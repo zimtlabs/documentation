@@ -8,44 +8,343 @@
     }
   },
   "servers": [{
-      "url": "https://zimt-hub-test.herokuapp.com",
-      "description": "Hub API - Dev & Test"
-    },
-    {
-      "url": "https://zimt-hub.herokuapp.com",
-      "description": "Hub API - Production"
-    }
-  ],
-  "security": [{
-    "Token": []
+    "url": "https://zimt-hub-test.herokuapp.com",
+    "description": "Hub API - Dev & Test"
   }],
   "tags": [{
-    "name": "Other",
-    "description": "Other than core endpoints."
-  }],
+      "name": "Accounts",
+      "description": "Account management."
+    },
+    {
+      "name": "Organizations",
+      "description": "Organization management."
+    },
+    {
+      "name": "Permissions",
+      "description": "Permission management."
+    },
+    {
+      "name": "Assets",
+      "description": "Asset management."
+    },
+    {
+      "name": "Events",
+      "description": "Event management."
+    },
+    {
+      "name": "Documents",
+      "description": "Document management."
+    },
+    {
+      "name": "Other",
+      "description": "Other than core endpoints."
+    }
+  ],
   "x-tagGroups": [{
-    "name": "Other",
-    "tags": [
-      "Other"
-    ]
-  }],
+      "name": "Accounts",
+      "tags": [
+        "Accounts"
+      ]
+    },
+    {
+      "name": "Organizations",
+      "tags": [
+        "Organizations"
+      ]
+    },
+    {
+      "name": "Permissions",
+      "tags": [
+        "Permissions"
+      ]
+    },
+    {
+      "name": "Assets",
+      "tags": [
+        "Assets"
+      ]
+    },
+    {
+      "name": "Events",
+      "tags": [
+        "Events"
+      ]
+    },
+    {
+      "name": "Documents",
+      "tags": [
+        "Documents"
+      ]
+    },
+    {
+      "name": "Other",
+      "tags": [
+        "Other"
+      ]
+    }
+  ],
 
   "paths": {
     "/": {
       "get": {
-        "summary": "Health",
+        "summary": "Health /",
         "description": "Returns 200 if server is alive and working.",
         "tags": [
           "Other"
         ],
-        "security": [{
-          "Token": []
-        }],
         "responses": {
           "200": { "$ref": "#/components/responses/Health" }
         }
       }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health /health",
+        "description": "Returns 200 if server is alive and working.",
+        "tags": [
+          "Other"
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Health" }
+        }
+      }
+    },
+
+    "/accounts": {
+      "get": {
+        "summary": "Get accounts",
+        "description": "Returns a list of accounts.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": []
+        }],
+        "parameters": [
+          { "$ref": "#/components/parameters/limit-query" },
+          { "$ref": "#/components/parameters/next-query" },
+          { "$ref": "#/components/parameters/previous-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Accounts" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/accounts/search": {
+      "post": {
+        "summary": "Search accounts",
+        "description": "Returns a list of accounts.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": []
+        }],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/search"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/Accounts" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/accounts/{id}": {
+      "get": {
+        "summary": "Get account",
+        "description": "Returns an account.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": []
+        }],
+        "parameters": [
+          { "$ref": "#/components/parameters/id-account" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Account" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update account",
+        "description": "Updates an account.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": []
+        }],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Account-update"
+        },
+        "parameters": [
+          { "$ref": "#/components/parameters/id-account" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Account" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/accounts/me": {
+      "get": {
+        "summary": "My account",
+        "description": "Returns an account based on ZIMT token in request headers.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": []
+        }],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Account-me" },
+          "401": { "$ref": "#/components/responses/Authentication" }
+        }
+      }
+    },
+    "/accounts/token": {
+      "get": {
+        "summary": "Get token",
+        "description": "Returns the account token (account's private key encoded with account's password)",
+        "tags": [
+          "Accounts"
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/getToken"
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/getToken"
+                },
+                "example": {
+                  "data": "as98d5385dc1f0b2b359098405fc182ba9e46fd99e8051cb92a8a58624388da29d0d17a8460eb3303c34a...",
+                  "meta": {
+                    "code": 200,
+                    "message": "Ok"
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/Not found" }
+        }
+      }
+    },
+    "/accounts/organizations": {
+      "get": {
+        "summary": "Get list of organizations account's email is apart of",
+        "description": "Get list of organizations with basic details, account's email is apart of.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": []
+        }],
+        "requestBody": {
+          "description": "Get organizations",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  }
+                },
+                "required": [
+                  "email"
+                ]
+              },
+              "example": {
+                "email": "john@gmail.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "$ref": "#/components/schemas/id"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "settings": {
+                          "type": "object",
+                          "properties": {
+                            "branding": {
+                              "$ref": "#/components/schemas/organization-settings-branding"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "settings"
+                      ]
+                    },
+                    "receipt": {
+                      "$ref": "#/components/schemas/receipt"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "meta",
+                    "signature",
+                    "data",
+                    "receipt"
+                  ],
+                  "additionalProperties": false
+                },
+                "example": {
+                  "data": [{
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "data": {
+                      "name": "My organization",
+                      "settings": {
+                        "branding": "..."
+                      }
+                    },
+                    "receipt": {
+                      "received_at": 1579967810000
+                    }
+                  }],
+                  "meta": {
+                    "code": 200,
+                    "message": "Ok"
+                  }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Authentication" }
+        }
+      }
     }
+
   },
 
   "components": {
@@ -55,15 +354,10 @@
         "type": "integer",
         "format": "int32",
         "minimum": 0,
-        "maximum": 100
+        "maximum": 50
       },
       "cursor": {
         "type": "string"
-      },
-      "id": {
-        "type": "string",
-        "description": "Mongo ID",
-        "example": "125ynaw123asfd123"
       },
       "meta-response": {
         "type": "object",
@@ -104,33 +398,6 @@
           "hasPrevious",
           "previous"
         ]
-      },
-      "Authentication": {
-        "type": "object",
-        "properties": {
-          "meta": {
-            "$ref": "#/components/schemas/meta-response"
-          }
-        }
-      },
-      "Authorization": {
-        "type": "object",
-        "properties": {
-          "meta": {
-            "$ref": "#/components/schemas/meta-response"
-          }
-        }
-      },
-      "Health": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "string"
-          },
-          "meta": {
-            "$ref": "#/components/schemas/meta-response"
-          }
-        }
       },
       "anyValue": {
         "description": "Any type of value"
@@ -180,14 +447,7 @@
                 "items": {
                   "$ref": "#/components/schemas/query-operator"
                 },
-                "minItems": 1
-              },
-              "todos": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/query-operator"
-                },
-                "minItems": 1
+                "minItems": 0
               }
             }
           },
@@ -199,6 +459,312 @@
           },
           "previous": {
             "$ref": "#/components/schemas/cursor"
+          }
+        }
+      },
+      "query-account": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "accounts": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "#/components/schemas/limit"
+          },
+          "next": {
+            "$ref": "#/components/schemas/cursor"
+          },
+          "previous": {
+            "$ref": "#/components/schemas/cursor"
+          }
+        }
+      },
+      "id": {
+        "type": "string",
+        "description": "ID of an object.\n\nReceipt object signed with hub's private key.",
+        "example": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+      },
+      "signature": {
+        "type": "string",
+        "description": "Meta object signed with account's private key.",
+        "example": "0xc0b987fa10a20d83948f8539e37499ba1a8be452fc1cf319c6204fc305bd1a746039239f2c8c38b70de6c4dc1bb9162fbc52eabdf379011c58a2dbb33fe9f5b43a"
+      },
+      "address": {
+        "type": "string",
+        "description": "Account's public address.",
+        "example": "0xb1eacA825D9dEEb576C8F9c6992785360dAC8a1f"
+      },
+      "date": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Creation date and time",
+        "example": "2020-02-01T20:00:00Z"
+      },
+      "object-meta-simple": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "$ref": "#/components/schemas/address"
+          }
+        },
+        "required": [
+          "created_at"
+        ]
+      },
+      "receipt": {
+        "type": "object",
+        "properties": {
+          "received_at": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Database insertion date and time in unix (milliseconds) format",
+            "example": 1581420369765
+          }
+        }
+      },
+      "Authentication": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+      "Not found": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+      "Authorization": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+      "Health": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+      "account-settings": {
+        "type": "object",
+        "properties": {
+          "time_zone": {
+            "type": "string"
+          }
+        }
+      },
+      "organization-settings-branding": {
+        "type": "object",
+        "properties": {
+          "logo": {
+            "type": "object",
+            "properties": {
+              "dark": {
+                "type": "string"
+              },
+              "light": {
+                "type": "string"
+              },
+              "symbol": {
+                "type": "string"
+              }
+            }
+          },
+          "colors": {
+            "type": "object",
+            "properties": {
+              "primary": {
+                "type": "string"
+              },
+              "secondary": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Account": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/object-meta-simple"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "full_name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "address": {
+                "$ref": "#/components/schemas/address"
+              },
+              "settings": {
+                "$ref": "#/components/schemas/account-settings"
+              }
+            },
+            "required": [
+              "full_name",
+              "email",
+              "address"
+            ]
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "data",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Account-data-security": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Account's private key encoded with account's password"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Account-update": {
+        "type": "object",
+        "properties": {
+          "full_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "security": {
+            "$ref": "#/components/schemas/Account-data-security"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Account-me": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/object-meta-simple"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "full_name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "address": {
+                "$ref": "#/components/schemas/address"
+              },
+              "settings": {
+                "$ref": "#/components/schemas/account-settings"
+              },
+              "isOwner": {
+                "type": "boolean"
+              },
+              "isSuperAdmin": {
+                "type": "boolean"
+              },
+              "isAdmin": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "full_name",
+              "email",
+              "address",
+              "isOwner",
+              "isSuperAdmin",
+              "isAdmin"
+            ]
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "data",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Accounts": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Account"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/pagination-response"
+          }
+        }
+      },
+      "getToken": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
           }
         }
       }
@@ -216,22 +782,123 @@
           "message": "Unauthorized"
         }
       },
+      "Not found": {
+        "meta": {
+          "code": 400,
+          "message": "Not found"
+        }
+      },
       "Authorization": {
         "meta": {
           "code": 403,
           "message": "Unauthorized"
         }
       },
-      "query": {
+      "query-account": {
         "query": {
           "accounts": [{
-            "field": "object.data.name",
+            "field": "object.data.full_name",
             "operator": "starts-with",
-            "value": "Event"
+            "value": "John"
           }]
         },
         "limit": 45,
         "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      },
+      "Account": {
+        "data": {
+          "proof": "0x98d5385dc1f0b2b359098405fc182ba9e46fd99e8051cb92a8a58624388da29d0d17a8460eb3303c34a...",
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+          },
+          "data": {
+            "full_name": "John Doe",
+            "email": "john@gmail.com",
+            "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "settings": {
+              "time_zone": "Europe/London"
+            }
+          },
+          "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+          "receipt": {
+            "received_at": 1579967810000
+          }
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Account-update": {
+        "full_name": "John Doe",
+        "email": "john@gmail.com",
+        "security": {
+          "token": "a32188sa76748123ea..."
+        }
+      },
+      "Account-me": {
+        "data": {
+          "proof": "0x98d5385dc1f0b2b359098405fc182ba9e46fd99e8051cb92a8a58624388da29d0d17a8460eb3303c34a...",
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+          },
+          "data": {
+            "full_name": "John Doe",
+            "email": "john@gmail.com",
+            "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "settings": {
+              "time_zone": "Europe/London"
+            },
+            "isOwner": true,
+            "isAdmin": true,
+            "isSuperAdmin": true
+          },
+          "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+          "receipt": {
+            "received_at": 1579967810000
+          }
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Accounts": {
+        "data": [{
+          "proof": "0x98d5385dc1f0b2b359098405fc182ba9e46fd99e8051cb92a8a58624388da29d0d17a8460eb3303c34a...",
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+          },
+          "data": {
+            "full_name": "John Doe",
+            "email": "john@gmail.com",
+            "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "settings": {
+              "time_zone": "Europe/London"
+            }
+          },
+          "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+          "receipt": {
+            "received_at": 1579967810000
+          }
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "hasNext": true,
+          "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
+          "hasPrevious": true,
+          "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+        }
+      },
+      "getToken": {
+        "organization_name": "My organization",
+        "email": "john@gmail.com"
       }
     },
     "parameters": {
@@ -260,6 +927,14 @@
           "$ref": "#/components/schemas/cursor"
         },
         "example": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+      },
+      "id-account": {
+        "name": "id",
+        "description": "ID of an account",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/id"
+        }
       }
     },
     "responses": {
@@ -289,6 +964,19 @@
           }
         }
       },
+      "Not found": {
+        "description": "Not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Not found"
+            },
+            "example": {
+              "$ref": "#/components/examples/Not found"
+            }
+          }
+        }
+      },
       "Authorization": {
         "description": "Unauthorized",
         "content": {
@@ -301,14 +989,104 @@
             }
           }
         }
+      },
+      "Account": {
+        "description": "Account result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Account"
+            },
+            "example": {
+              "$ref": "#/components/examples/Account"
+            }
+          }
+        }
+      },
+      "Account-me": {
+        "description": "Account result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Account-me"
+            },
+            "example": {
+              "$ref": "#/components/examples/Account-me"
+            }
+          }
+        }
+      },
+      "Accounts": {
+        "description": "Account results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Accounts"
+            },
+            "example": {
+              "$ref": "#/components/examples/Accounts"
+            }
+          }
+        }
       }
     },
     "requestBodies": {
-
+      "search": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-account"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-account"
+            }
+          }
+        }
+      },
+      "getToken": {
+        "description": "Get token",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "organization_name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                }
+              },
+              "required": [
+                "organization_name",
+                "email"
+              ]
+            },
+            "example": {
+              "$ref": "#/components/examples/getToken"
+            }
+          }
+        }
+      },
+      "Account-update": {
+        "description": "Account update",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Account-update"
+            },
+            "example": {
+              "$ref": "#/components/examples/Account-update"
+            }
+          }
+        }
+      }
     },
     "securitySchemes": {
-      "Token": {
-        "description": "Usage format: `ZIMT_TOKEN <Token>`",
+      "ZIMT Token": {
+        "description": "\n\n ### About\n\nZIMT token is a private key signed object, which is then serialized and base64 encoded.\n\nUsage format: `ZIMT_TOKEN <Token>`\n\nExample: `ZIMT_TOKEN eyJpZERhdGEiOnsiY3JlYXRlZEJ5IjoiM...`\n\n### Create token\n\n <pre><code class='language-js'>base64url(\n\tserializeForHashing({\n\t\tmeta: {\n\t\t\t// Registered account's address\n\t\t\tcreated_by: '0x123...',\n\t\t\t// Lifetime of the token, how long it's valid\n\t\t\t// ISO 8601 date format\n\t\t\tvalid_until: '2020-02-11T09:14:51.276Z',\n\t\t},\n\t\t// Meta object signed with account's private key\n\t\tsignature: sign(meta, privateKey),\n\t})\n);</code></pre>",
         "type": "http",
         "scheme": "bearer"
       }
