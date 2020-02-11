@@ -118,7 +118,11 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
         }],
         "parameters": [
           { "$ref": "#/components/parameters/limit-query" },
@@ -140,7 +144,11 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
         }],
         "requestBody": {
           "$ref": "#/components/requestBodies/search-account"
@@ -160,7 +168,11 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
         }],
         "parameters": [
           { "$ref": "#/components/parameters/id-account" }
@@ -179,7 +191,9 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "All"
+          ]
         }],
         "requestBody": {
           "$ref": "#/components/requestBodies/Account-update"
@@ -203,7 +217,9 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "All"
+          ]
         }],
         "responses": {
           "200": { "$ref": "#/components/responses/Account-me" },
@@ -251,7 +267,9 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "All"
+          ]
         }],
         "requestBody": {
           "description": "Get organizations",
@@ -354,7 +372,9 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "Hub admin"
+          ]
         }],
         "parameters": [
           { "$ref": "#/components/parameters/limit-query" },
@@ -390,7 +410,9 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "Hub admin"
+          ]
         }],
         "requestBody": {
           "$ref": "#/components/requestBodies/search-organization"
@@ -410,7 +432,9 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "Hub admin"
+          ]
         }],
         "parameters": [
           { "$ref": "#/components/parameters/id-organization" }
@@ -429,7 +453,11 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
         }],
         "requestBody": {
           "$ref": "#/components/requestBodies/Organization-update"
@@ -453,7 +481,11 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
         }],
         "parameters": [
           { "$ref": "#/components/parameters/id-organization" }
@@ -472,7 +504,11 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
         }],
         "parameters": [
           { "$ref": "#/components/parameters/id-organization" }
@@ -496,11 +532,138 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT Token": []
+          "ZIMT Token": [
+            "All"
+          ]
         }],
         "responses": {
           "200": { "$ref": "#/components/responses/Organization" },
           "401": { "$ref": "#/components/responses/Authentication" }
+        }
+      }
+    },
+
+    "/permissions": {
+      "get": {
+        "summary": "Get permissions",
+        "description": "Returns a list of permissions.",
+        "tags": [
+          "Permissions"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "#/components/parameters/limit-query" },
+          { "$ref": "#/components/parameters/next-query" },
+          { "$ref": "#/components/parameters/previous-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Permissions" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create permission",
+        "description": "Creates a permission.",
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "tags": [
+          "Permissions"
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Permission-Create"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/Permission" },
+          "400": { "$ref": "#/components/responses/Validation" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/permissions/search": {
+      "post": {
+        "summary": "Search permissions",
+        "description": "Returns a list of permissions.",
+        "tags": [
+          "Permissions"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/search-permission"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/Permissions" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/permissions/{id}": {
+      "get": {
+        "summary": "Get permission",
+        "description": "Returns a permission.",
+        "tags": [
+          "Permissions"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "#/components/parameters/id-permission" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Permission" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update permission",
+        "description": "Updates a permission.",
+        "tags": [
+          "Permissions"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Permission-update"
+        },
+        "parameters": [
+          { "$ref": "#/components/parameters/id-permission" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Permission" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
         }
       }
     }
@@ -596,20 +759,58 @@
           "value"
         ]
       },
+      "filters": {
+        "type": "object",
+        "properties": {
+          "accounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "organizations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          }
+        }
+      },
       "query": {
         "type": "object",
         "properties": {
           "query": {
-            "type": "object",
-            "properties": {
-              "accounts": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/query-operator"
-                },
-                "minItems": 0
-              }
-            }
+            "$ref": "#/components/schemas/filters"
           },
           "limit": {
             "$ref": "#/components/schemas/limit"
@@ -1135,6 +1336,177 @@
             "$ref": "#/components/schemas/pagination-response"
           }
         }
+      },
+
+      "query-permission": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "permissions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "#/components/schemas/limit"
+          },
+          "next": {
+            "$ref": "#/components/schemas/cursor"
+          },
+          "previous": {
+            "$ref": "#/components/schemas/cursor"
+          }
+        }
+      },
+      "Permission-data-actions": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "asset:GetObject",
+            "asset:PutObject",
+
+            "event:GetObject",
+            "event:GetObject",
+
+            "document:GetObject",
+            "document:GetObject",
+
+            "organization:GetObject:Basic",
+            "organization:PutObject:Basic",
+
+            "organization:GetObject:Advance",
+            "organization:PutObject:Advance"
+          ]
+        }
+      },
+      "Permission-data-principal": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/id"
+        }
+      },
+      "Permission-data-resources": {
+        "$ref": "#/components/schemas/filters"
+      },
+      "Permission-data": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "global": {
+            "type": "boolean"
+          },
+          "actions": {
+            "$ref": "#/components/schemas/Permission-data-actions"
+          },
+          "resources": {
+            "$ref": "#/components/schemas/Permission-data-resources"
+          },
+          "principal": {
+            "$ref": "#/components/schemas/Permission-data-principal"
+          }
+        },
+        "required": [
+          "name",
+          "actions"
+        ]
+      },
+      "Permission-Create": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "$ref": "#/components/schemas/object-simple"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Permission-data"
+          }
+        },
+        "required": [
+          "object",
+          "data"
+        ]
+      },
+      "Permission": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/object-meta-simple"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Permission-data"
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "data",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Permission-update": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "global": {
+            "type": "boolean"
+          },
+          "actions": {
+            "$ref": "#/components/schemas/Permission-data-actions"
+          },
+          "resources": {
+            "$ref": "#/components/schemas/Permission-data-resources"
+          },
+          "principal": {
+            "$ref": "#/components/schemas/Permission-data-principal"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Permissions": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Permission"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/pagination-response"
+          }
+        }
       }
 
     },
@@ -1374,7 +1746,115 @@
           "hasPrevious": true,
           "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
         }
+      },
+
+      "query-permission": {
+        "query": {
+          "permissions": [{
+            "field": "object.data.name",
+            "operator": "starts-with",
+            "value": "Permission"
+          }]
+        },
+        "limit": 45,
+        "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      },
+      "Permission-Create": {
+        "object": {
+          "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+          },
+          "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+        },
+        "data": {
+          "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
+          "actions": [
+            "asset:GetObject"
+          ],
+          "resources": {
+            "assets": [{
+              "field": "object.meta.created_by",
+              "operator": "not-equal",
+              "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
+            }],
+            "events": [{
+              "field": "object.data.tag",
+              "operator": "equal",
+              "value": "tag1"
+            }]
+          },
+          "principal": [
+            "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+          ]
+        }
+      },
+      "Permission": {
+        "data": {
+          "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
+          "actions": [
+            "asset:GetObject"
+          ],
+          "resources": {
+            "assets": [{
+              "field": "object.meta.created_by",
+              "operator": "not-equal",
+              "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
+            }],
+            "events": [{
+              "field": "object.data.tag",
+              "operator": "equal",
+              "value": "tag1"
+            }]
+          },
+          "principal": [
+            "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+          ]
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Permission-update": {
+        "principal": [
+          "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "0x1412258c1a01231148e655cf4abf515191c2b6b5ee466e03c951"
+        ]
+      },
+      "Permissions": {
+        "data": [{
+          "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
+          "actions": [
+            "asset:GetObject"
+          ],
+          "resources": {
+            "assets": [{
+              "field": "object.meta.created_by",
+              "operator": "not-equal",
+              "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
+            }],
+            "events": [{
+              "field": "object.data.tag",
+              "operator": "equal",
+              "value": "tag1"
+            }]
+          },
+          "principal": [
+            "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+          ]
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "hasNext": true,
+          "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
+          "hasPrevious": true,
+          "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+        }
       }
+
     },
     "parameters": {
       "limit-query": {
@@ -1414,6 +1894,14 @@
       "id-organization": {
         "name": "id",
         "description": "ID of an organization",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/id"
+        }
+      },
+      "id-permission": {
+        "name": "id",
+        "description": "ID of an permission",
         "in": "path",
         "schema": {
           "$ref": "#/components/schemas/id"
@@ -1552,6 +2040,33 @@
             }
           }
         }
+      },
+
+      "Permission": {
+        "description": "Permission result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "example": {
+              "$ref": "#/components/examples/Permission"
+            }
+          }
+        }
+      },
+      "Permissions": {
+        "description": "Permission results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Permissions"
+            },
+            "example": {
+              "$ref": "#/components/examples/Permissions"
+            }
+          }
+        }
       }
 
     },
@@ -1661,7 +2176,48 @@
             }
           }
         }
+      },
+
+      "search-permission": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-permission"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-permission"
+            }
+          }
+        }
+      },
+      "Permission-Create": {
+        "description": "Permission create account",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Permission-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/Permission-Create"
+            }
+          }
+        }
+      },
+      "Permission-update": {
+        "description": "Permission update",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Permission-update"
+            },
+            "example": {
+              "$ref": "#/components/examples/Permission-update"
+            }
+          }
+        }
       }
+
     },
     "securitySchemes": {
       "ZIMT Token": {
