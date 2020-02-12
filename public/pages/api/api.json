@@ -155,6 +155,7 @@
         },
         "responses": {
           "200": { "$ref": "#/components/responses/Accounts" },
+          "400": { "$ref": "#/components/responses/Validation" },
           "401": { "$ref": "#/components/responses/Authentication" },
           "403": { "$ref": "#/components/responses/Authorization" }
         }
@@ -419,6 +420,7 @@
         },
         "responses": {
           "200": { "$ref": "#/components/responses/Organizations" },
+          "400": { "$ref": "#/components/responses/Validation" },
           "401": { "$ref": "#/components/responses/Authentication" },
           "403": { "$ref": "#/components/responses/Authorization" }
         }
@@ -611,6 +613,7 @@
         },
         "responses": {
           "200": { "$ref": "#/components/responses/Permissions" },
+          "400": { "$ref": "#/components/responses/Validation" },
           "401": { "$ref": "#/components/responses/Authentication" },
           "403": { "$ref": "#/components/responses/Authorization" }
         }
@@ -666,12 +669,300 @@
           "403": { "$ref": "#/components/responses/Authorization" }
         }
       }
+    },
+
+    "/assets": {
+      "get": {
+        "summary": "Get assets",
+        "description": "Returns a list of assets.",
+        "tags": [
+          "Assets"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "#/components/parameters/limit-query" },
+          { "$ref": "#/components/parameters/next-query" },
+          { "$ref": "#/components/parameters/previous-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Assets" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create asset",
+        "description": "Creates an asset.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Assets"
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Asset-Create"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/Object-Created" },
+          "400": { "$ref": "#/components/responses/Validation" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/assets/search": {
+      "post": {
+        "summary": "Search assets",
+        "description": "Returns a list of assets.",
+        "tags": [
+          "Assets"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/search-asset"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/Assets" },
+          "400": { "$ref": "#/components/responses/Validation" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/assets/{asset_id}": {
+      "get": {
+        "summary": "Get asset",
+        "description": "Returns an asset.",
+        "tags": [
+          "Assets"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "#/components/parameters/asset_id" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Asset" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/assets/{asset_id}/events": {
+      "get": {
+        "summary": "Get asset events",
+        "description": "Returns a list of events.",
+        "tags": [
+          "Events"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "#/components/parameters/asset_id" },
+          { "$ref": "#/components/parameters/limit-query" },
+          { "$ref": "#/components/parameters/next-query" },
+          { "$ref": "#/components/parameters/previous-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Events" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create event",
+        "description": "Creates an event.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          { "$ref": "#/components/parameters/asset_id" }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Event-Create"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/Object-Created" },
+          "400": { "$ref": "#/components/responses/Validation" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/assets/{asset_id}/events/search": {
+      "post": {
+        "summary": "Search asset events",
+        "description": "Returns a list of events.",
+        "tags": [
+          "Events"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "#/components/parameters/asset_id" }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/search-event"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/Events" },
+          "400": { "$ref": "#/components/responses/Validation" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/assets/{asset_id}/events/{event_id}": {
+      "get": {
+        "summary": "Get event",
+        "description": "Returns an event.",
+        "tags": [
+          "Events"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "#/components/parameters/asset_id" },
+          { "$ref": "#/components/parameters/event_id" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Event" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/documents": {
+      "get": {
+        "summary": "Get documents",
+        "description": "Returns a list of documents.",
+        "tags": [
+          "Documents"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "#/components/parameters/limit-query" },
+          { "$ref": "#/components/parameters/next-query" },
+          { "$ref": "#/components/parameters/previous-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Documents" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create document",
+        "description": "Creates a document.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Documents"
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Document-Create"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/Object-Created" },
+          "400": { "$ref": "#/components/responses/Validation" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/documents/search": {
+      "post": {
+        "summary": "Search documents",
+        "description": "Returns a list of documents.",
+        "tags": [
+          "Documents"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/search-document"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/Documents" },
+          "400": { "$ref": "#/components/responses/Validation" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/documents/{id}": {
+      "get": {
+        "summary": "Get document",
+        "description": "Returns a document.",
+        "tags": [
+          "Documents"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "#/components/headers/Document-Accept" },
+          { "$ref": "#/components/parameters/id-document" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Document" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
     }
 
   },
 
   "components": {
-    "headers": {},
+    "headers": {
+      "Document-Accept": {
+        "name": "Accept",
+        "description": "Adding this header param will instruct the API to return JSON version of the document, otherwise it will return the document in its original document type byte response.",
+        "in": "header",
+        "schema": {
+          "type": "string",
+          "const": "application/json"
+        },
+        "example": "application/json"
+      }
+    },
     "schemas": {
       "limit": {
         "type": "integer",
@@ -680,6 +971,9 @@
         "maximum": 50
       },
       "cursor": {
+        "type": "string"
+      },
+      "proof": {
         "type": "string"
       },
       "meta-response": {
@@ -922,6 +1216,569 @@
           },
           "meta": {
             "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+
+      "query-asset": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "assets": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              },
+              "events": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "#/components/schemas/limit"
+          },
+          "next": {
+            "$ref": "#/components/schemas/cursor"
+          },
+          "previous": {
+            "$ref": "#/components/schemas/cursor"
+          }
+        }
+      },
+      "Object-Created": {
+        "type": "object",
+        "properties": {
+          "proof": {
+            "$ref": "#/components/schemas/proof"
+          },
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "proof",
+          "id",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Asset-meta": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "#/components/schemas/address"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/date"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "created_by",
+          "timestamp"
+        ]
+      },
+      "Asset-Create": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Asset-meta"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          }
+        },
+        "required": [
+          "meta",
+          "signature"
+        ]
+      },
+      "Asset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Asset-meta"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Assets": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Asset"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/pagination-response"
+          }
+        }
+      },
+
+      "query-event": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "events": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "#/components/schemas/limit"
+          },
+          "next": {
+            "$ref": "#/components/schemas/cursor"
+          },
+          "previous": {
+            "$ref": "#/components/schemas/cursor"
+          }
+        }
+      },
+      "data-hash": {
+        "type": "string",
+        "description": "Hash of data object"
+      },
+      "type": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "asset_type": {
+        "type": "string"
+      },
+      "documents": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/components/parameters/id-document"
+            },
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "properties": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "name",
+            "type"
+          ]
+        },
+        "additionalItems": false
+      },
+      "location": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "Feature"
+          },
+          "geometry": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "Point"
+              },
+              "coordinates": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2,
+                "additionalItems": false
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "coordinates"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "geometry"
+        ]
+      },
+      "identifiers": {
+        "type": "object",
+        "patternProperties": {
+          "^.*$": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            },
+            "additionalItems": false
+          }
+        }
+      },
+      "properties": {
+        "type": "object"
+      },
+      "Event-meta": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "#/components/schemas/address"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/date"
+          },
+          "asset_id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "data_hash": {
+            "$ref": "#/components/schemas/data-hash"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "created_by",
+          "timestamp",
+          "asset_id",
+          "data_hash"
+        ]
+      },
+      "Event-data": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/type"
+          },
+          "name": {
+            "$ref": "#/components/schemas/name"
+          },
+          "asset_type": {
+            "$ref": "#/components/schemas/asset_type"
+          },
+          "documents": {
+            "$ref": "#/components/schemas/documents"
+          },
+          "location": {
+            "$ref": "#/components/schemas/location"
+          },
+          "identifiers": {
+            "$ref": "#/components/schemas/identifiers"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/properties"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "name"
+        ]
+      },
+      "Event-Create": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Event-meta"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Event-data"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          }
+        },
+        "required": [
+          "meta",
+          "signature"
+        ]
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Event-meta"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Event-data"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Events": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/pagination-response"
+          }
+        }
+      },
+
+      "query-document": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "documents": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "#/components/schemas/limit"
+          },
+          "next": {
+            "$ref": "#/components/schemas/cursor"
+          },
+          "previous": {
+            "$ref": "#/components/schemas/cursor"
+          }
+        }
+      },
+      "content": {
+        "type": "object",
+        "properties": {
+          "dataUri": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "dataUri"
+        ]
+      },
+      "Document-meta": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "#/components/schemas/address"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/date"
+          },
+          "data_hash": {
+            "$ref": "#/components/schemas/data-hash"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "created_by",
+          "timestamp",
+          "data_hash"
+        ]
+      },
+      "Document-data-one": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/type"
+          },
+          "name": {
+            "$ref": "#/components/schemas/name"
+          },
+          "content": {
+            "$ref": "#/components/schemas/content"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/properties"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "name",
+          "content"
+        ]
+      },
+      "Document-data-many": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/type"
+          },
+          "name": {
+            "$ref": "#/components/schemas/name"
+          },
+          "properties": {
+            "$ref": "#/components/schemas/properties"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "name",
+          "content"
+        ]
+      },
+      "Document-Create": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Document-meta"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Document-data-one"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          }
+        },
+        "required": [
+          "meta",
+          "signature"
+        ]
+      },
+      "Document-one": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Document-meta"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Document-data-one"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Document-many": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Document-meta"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Document-data-many"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Documents": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Document-many"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/pagination-response"
           }
         }
       },
@@ -1853,6 +2710,247 @@
           "hasPrevious": true,
           "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
         }
+      },
+
+      "query-asset": {
+        "query": {
+          "assets": [{
+            "field": "object.meta.created_by",
+            "operator": "starts-with",
+            "value": "0x123..."
+          }],
+          "events": [{
+            "field": "object.data.name",
+            "operator": "starts-with",
+            "value": "Event"
+          }]
+        },
+        "limit": 45,
+        "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      },
+      "Asset-Create": {
+        "meta": {
+          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+          "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xe633051fc76ae..."
+      },
+      "Object-Created": {
+        "proof": "0x0192cbd1c59b40ea97f7bc102a16c325a3066bb6b68c9c16bae447d8bb38565a66da29...",
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "receipt": {
+          "object_hash": "0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5",
+          "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+          "received_at": 1579278115000,
+          "organization": "0x123..."
+        }
+      },
+      "Asset": {
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "meta": {
+          "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+          "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xe633051fc76ae...",
+        "receipt": {
+          "received_at": 1579278115000
+        }
+      },
+      "Assets": {
+        "data": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+          },
+          "signature": "0xe633051fc76ae...",
+          "receipt": {
+            "received_at": 1579278115000
+          }
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "hasNext": true,
+          "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
+          "hasPrevious": true,
+          "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+        }
+      },
+
+      "query-event": {
+        "query": {
+          "events": [{
+            "field": "object.data.name",
+            "operator": "starts-with",
+            "value": "Event"
+          }]
+        },
+        "limit": 45,
+        "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      },
+      "Event-Create": {
+        "meta": {
+          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+          "timestamp": "2020-02-10T19:16:13Z",
+          "asset_id": "0x123...",
+          "data_hash": "0x123..."
+        },
+        "data": {
+          "type": "info",
+          "name": "Info event"
+        },
+        "signature": "0xe633051fc76ae..."
+      },
+      "Event": {
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "meta": {
+          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+          "timestamp": "2020-02-10T19:16:13Z",
+          "asset_id": "0x123...",
+          "data_hash": "0x123..."
+        },
+        "data": {
+          "type": "info",
+          "name": "Info event"
+        },
+        "signature": "0xe633051fc76ae...",
+        "receipt": {
+          "received_at": 1579278115000
+        }
+      },
+      "Events": {
+        "data": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13Z",
+            "asset_id": "0x123...",
+            "data_hash": "0x123..."
+          },
+          "data": {
+            "type": "info",
+            "name": "Info event"
+          },
+          "signature": "0xe633051fc76ae...",
+          "receipt": {
+            "received_at": 1579278115000
+          }
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "hasNext": true,
+          "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
+          "hasPrevious": true,
+          "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+        }
+      },
+
+      "query-document": {
+        "query": {
+          "documents": [{
+            "field": "object.data.name",
+            "operator": "starts-with",
+            "value": "Document"
+          }]
+        },
+        "limit": 45,
+        "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      },
+      "Document-Create": {
+        "meta": {
+          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+          "timestamp": "2020-02-10T19:16:13Z",
+          "data_hash": "0x123..."
+        },
+        "data": {
+          "type": "image/png",
+          "name": "Image",
+          "content": {
+            "dataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAADWCAMAAADl7J7tAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDcYeAAEGWge7AAAAAElFTkSuQmCC"
+          },
+          "properties": {
+            "prop": 7
+          }
+        },
+        "signature": "0xe633051fc76ae..."
+      },
+      "Document-one": {
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "meta": {
+          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+          "timestamp": "2020-02-10T19:16:13Z",
+          "data_hash": "0x123..."
+        },
+        "data": {
+          "type": "image/png",
+          "name": "Image",
+          "content": {
+            "dataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAADWCAMAAADl7J7tAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDcYeAAEGWge7AAAAAElFTkSuQmCC"
+          },
+          "properties": {
+            "prop": 7
+          }
+        },
+        "signature": "0xe633051fc76ae...",
+        "receipt": {
+          "received_at": 1579278115000
+        }
+      },
+      "Document-many": {
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "meta": {
+          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+          "timestamp": "2020-02-10T19:16:13Z",
+          "data_hash": "0x123..."
+        },
+        "data": {
+          "type": "image/png",
+          "name": "Image",
+          "properties": {
+            "prop": 7
+          }
+        },
+        "signature": "0xe633051fc76ae...",
+        "receipt": {
+          "received_at": 1579278115000
+        }
+      },
+      "Documents": {
+        "data": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13Z",
+            "data_hash": "0x123..."
+          },
+          "data": {
+            "type": "image/png",
+            "name": "Image",
+            "properties": {
+              "prop": 7
+            }
+          },
+          "signature": "0xe633051fc76ae...",
+          "receipt": {
+            "received_at": 1579278115000
+          }
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "hasNext": true,
+          "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
+          "hasPrevious": true,
+          "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+        }
       }
 
     },
@@ -1902,6 +3000,30 @@
       "id-permission": {
         "name": "id",
         "description": "ID of an permission",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/id"
+        }
+      },
+      "asset_id": {
+        "name": "asset_id",
+        "description": "ID of an asset",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/id"
+        }
+      },
+      "event_id": {
+        "name": "event_id",
+        "description": "ID of an event",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/id"
+        }
+      },
+      "id-document": {
+        "name": "id",
+        "description": "ID of an document",
         "in": "path",
         "schema": {
           "$ref": "#/components/schemas/id"
@@ -2067,6 +3189,100 @@
             }
           }
         }
+      },
+
+      "Object-Created": {
+        "description": "Created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Object-Created"
+            },
+            "example": {
+              "$ref": "#/components/examples/Object-Created"
+            }
+          }
+        }
+      },
+      "Asset": {
+        "description": "Asset result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Asset"
+            },
+            "example": {
+              "$ref": "#/components/examples/Asset"
+            }
+          }
+        }
+      },
+      "Assets": {
+        "description": "Asset results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Assets"
+            },
+            "example": {
+              "$ref": "#/components/examples/Assets"
+            }
+          }
+        }
+      },
+
+      "Event": {
+        "description": "Event result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Event"
+            },
+            "example": {
+              "$ref": "#/components/examples/Event"
+            }
+          }
+        }
+      },
+      "Events": {
+        "description": "Event results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Events"
+            },
+            "example": {
+              "$ref": "#/components/examples/Events"
+            }
+          }
+        }
+      },
+
+      "Document": {
+        "description": "Document result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Document-one"
+            },
+            "example": {
+              "$ref": "#/components/examples/Document-one"
+            }
+          }
+        }
+      },
+      "Documents": {
+        "description": "Document results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Documents"
+            },
+            "example": {
+              "$ref": "#/components/examples/Documents"
+            }
+          }
+        }
       }
 
     },
@@ -2192,7 +3408,7 @@
         }
       },
       "Permission-Create": {
-        "description": "Permission create account",
+        "description": "Permission create",
         "content": {
           "application/json": {
             "schema": {
@@ -2213,6 +3429,87 @@
             },
             "example": {
               "$ref": "#/components/examples/Permission-update"
+            }
+          }
+        }
+      },
+
+      "search-asset": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-asset"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-asset"
+            }
+          }
+        }
+      },
+      "Asset-Create": {
+        "description": "Asset create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Asset-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/Asset-Create"
+            }
+          }
+        }
+      },
+
+      "search-event": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-event"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-event"
+            }
+          }
+        }
+      },
+      "Event-Create": {
+        "description": "Event create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Event-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/Event-Create"
+            }
+          }
+        }
+      },
+
+      "search-document": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-document"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-document"
+            }
+          }
+        }
+      },
+      "Document-Create": {
+        "description": "Document create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Document-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/Document-Create"
             }
           }
         }
