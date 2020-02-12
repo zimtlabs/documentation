@@ -958,9 +958,8 @@
         "in": "header",
         "schema": {
           "type": "string",
-          "const": "application/json"
-        },
-        "example": "application/json"
+          "enum": ["application/json"]
+        }
       }
     },
     "schemas": {
@@ -1421,14 +1420,14 @@
         "properties": {
           "type": {
             "type": "string",
-            "const": "Feature"
+            "enum": ["Feature"]
           },
           "geometry": {
             "type": "object",
             "properties": {
               "type": {
                 "type": "string",
-                "const": "Point"
+                "enum": ["Point"]
               },
               "coordinates": {
                 "type": "array",
