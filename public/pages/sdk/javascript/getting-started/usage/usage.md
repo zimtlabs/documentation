@@ -30,7 +30,7 @@ const sdk = new ZIMTHubSDK({
 ## Usage
 
 **Note**:
-To use the SDK methods that require authentication, you have to have an already registered account in the Hub API (in Hub API URL and with private key used in SDK instantiation).
+To use SDK methods that require authentication, you have to have an already registered account in the Hub API (in Hub API URL and with private key used in SDK instantiation).
 
 ```javascript
 const assets = await sdk.assets.getMany();

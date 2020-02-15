@@ -21,6 +21,7 @@ const Menu = [
                         title: 'API',
                         pathname: '/sdk/javascript/api',
                         children: [
+                            { title: 'General', pathname: '/sdk/javascript/api/general' },
                             { title: 'Assets', pathname: '/sdk/javascript/api/assets' },
                             { title: 'Events', pathname: '/sdk/javascript/api/events' },
                             { title: 'Documents', pathname: '/sdk/javascript/api/documents' },
@@ -35,7 +36,7 @@ const Menu = [
             },
         ],
     },
-    { title: 'Hub API', pathname: '/api' },
+    { title: 'API', pathname: '/api' },
 
     { type: 'divider' },
 
