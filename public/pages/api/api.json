@@ -686,7 +686,8 @@
         "parameters": [
           { "$ref": "#/components/parameters/limit-query" },
           { "$ref": "#/components/parameters/next-query" },
-          { "$ref": "#/components/parameters/previous-query" }
+          { "$ref": "#/components/parameters/previous-query" },
+          { "$ref": "#/components/parameters/attach" }
         ],
         "responses": {
           "200": { "$ref": "#/components/responses/Assets" },
@@ -727,6 +728,9 @@
             "All"
           ]
         }],
+        "parameters": [
+          { "$ref": "#/components/parameters/attach" }
+        ],
         "requestBody": {
           "$ref": "#/components/requestBodies/search-asset"
         },
@@ -2987,6 +2991,14 @@
 
     },
     "parameters": {
+      "attach": {
+        "name": "attach-*",
+        "description": "Attaches all events per each asset found, based on this query filter value.<br> Part of query param key after attach-* represents property database will query against, and value of this query param is the value to match. <br> Both query param key and value have to be URI encoded values.\n\n**Example**: ?attach-object.data.type=info",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
       "limit-query": {
         "name": "limit",
         "description": "Number of results to return in the response",

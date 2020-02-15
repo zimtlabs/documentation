@@ -35,7 +35,7 @@
 | next | Next pagination cursor | string | none | eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0
 | previous | Previous pagination cursor | string | none | eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0
 
-#### Query object
+### Query object
 
 | Name | Description | Type | Default | Example
 |:-----|:------------|:-----|:--------|:-------
@@ -47,7 +47,7 @@
 | permissions | For searching permissions | array of Filters| none | [ { field: 'object.meta.created_by', operator: 'starts-with', value: '0x123' } ]
 
 
-#### Filter
+### Filter
 
 | Name | Description | Type | Default | Example
 |:-----|:------------|:-----|:--------|:-------
@@ -55,7 +55,7 @@
 | value | Value to filter on | any | none | 'Event'
 | operator | Operator to use for evaluation | string | none | 'equal'
 
-#### Operator
+### Operator
 
 Enum:
 - equal
