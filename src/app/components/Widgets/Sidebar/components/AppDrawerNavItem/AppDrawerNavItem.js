@@ -21,19 +21,11 @@ const useStyles = makeStyles(theme => ({
     },
     buttonText: {
         'justify-content': 'flex-start',
-        fontWeight: theme.typography.fontWeightLight,
         padding: '7px 0',
+        fontWeight: theme.typography.fontWeightMedium,
 
         '&.active': {
             color: theme.palette.primary.main,
-        },
-
-        '&.depth-0': {
-            fontWeight: theme.typography.fontWeightMedium,
-        },
-
-        '&.depth-1': {
-            fontWeight: theme.typography.fontWeightMedium,
         },
     },
     linkText: {
@@ -95,7 +87,7 @@ function AppDrawerNavItem(props) {
             }
         }
 
-        setActive(value);
+        setActive(pathname === window.location.pathname);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentPath, pathname]);
 

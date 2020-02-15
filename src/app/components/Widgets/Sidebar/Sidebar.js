@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { duration, useMediaQuery } from '@material-ui/core';
 
-import { List, Divider, Typography, Drawer, Link } from '../../';
+import { List, Divider, Typography, Drawer } from '../../';
 import { StorageService } from '../../../services';
-import Config from '../../../config';
 
 import { useSidebarOpen } from '../../Utils';
 import { theme } from '../../../App';
@@ -141,19 +140,7 @@ export default function Sidebar(props) {
                     variant='body1'
                     style={{ color: theme.palette.text.primary, fontWeight: 600 }}
                 >
-                    API Docs
-                </Typography>
-
-                <span style={{ margin: '0 9px' }}>·</span>
-
-                <Typography
-                    className={classes.version}
-                    variant='body2'
-                    component={Link}
-                    href={Config.config.api.source}
-                    target='_blank'
-                >
-                    {Config.config.api.version}
+                    Documentation
                 </Typography>
             </div>
 

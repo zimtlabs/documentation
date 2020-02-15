@@ -34,7 +34,7 @@ export default function ApiElement(props) {
     } = props;
 
     const options = parseMarkdownFileReference(props.text);
-    const url = getPublicFileUrl(titles.folder, titles.file, options.main);
+    const url = getPublicFileUrl(titles.folders, titles.file, options.main);
 
     return (
         <div

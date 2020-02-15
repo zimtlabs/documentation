@@ -252,22 +252,22 @@ export function textToHash(text, unique = {}) {
     );
 }
 
-export const getGithubFileURL = (folder, file, name) => {
+export const getGithubFileURL = (folders, file, name) => {
     let url = `https://github.com/sensia-io/documentation/blob/master/public/pages`;
-    name = name || `${file || folder}.md`;
+    name = name || `${file || folders[folders.length - 1]}.md`;
 
-    if (folder) url += `/${folder}`;
+    if (folders) folders.forEach(folder => url += `/${folder}`);
     if (file) url += `/${file}`;
     if (name) url += `/${name}`;
 
     return url;
 };
 
-export const getRawGithubFileURL = (folder, file, name) => {
+export const getRawGithubFileURL = (folders, file, name) => {
     let url = `https://raw.githubusercontent.com/sensia-io/documentation/master/public/pages`;
-    name = name || `${file || folder}.md`;
+    name = name || `${file || folders[folders.length - 1]}.md`;
 
-    if (folder) url += `/${folder}`;
+    if (folders) folders.forEach(folder => url += `/${folder}`);
     if (file) url += `/${file}`;
     if (name) url += `/${name}`;
 
@@ -276,11 +276,17 @@ export const getRawGithubFileURL = (folder, file, name) => {
 
 const ROOT_PAGES_URL = '/pages';
 
-export const getPublicFileUrl = (folder, subfolder, name = null) => {
-    name = name || `${subfolder || folder}.md`;
-    let url = '';
-    if (!subfolder) url = `${ROOT_PAGES_URL}/${folder}/${name}`;
-    else url = `${ROOT_PAGES_URL}/${folder}/${subfolder}/${name}`;
+export const getPublicFileUrl = (folders, file, name = null) => {
+
+    if (!folders.length) {
+        if (!name) return `${ROOT_PAGES_URL}/${file}/${file}.md`;
+        else return `${ROOT_PAGES_URL}/${file}/${name}`;
+    }
+    name = name || `${file || folders[folders.length - 1]}.md`;
+
+    let url = `${ROOT_PAGES_URL}`;
+    folders.forEach(folder => url += `/${folder}`);
+    url += `/${file}/${name}`;
 
     return url;
 };

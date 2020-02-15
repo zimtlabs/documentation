@@ -12,7 +12,7 @@ const routes = () => [
     { path: '/', component: lazyLoad(Home), options: { exact: true } },
     { path: '/company/about', component: lazyLoad(About), options: { exact: true } },
     { path: '/company/contact', component: lazyLoad(Contact), options: { exact: true } },
-    { path: '/:folder', component: lazyLoad(Page), options: {} },
+    { path: '*', component: lazyLoad(Page), options: {} },
 ];
 
 const Routes = () => (

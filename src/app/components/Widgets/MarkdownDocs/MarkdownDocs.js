@@ -45,7 +45,7 @@ export default function MarkdownDocs(props) {
                     component='a'
                     target='_blank'
                     rel='noopener nofollow'
-                    href={getGithubFileURL(titles.folder, titles.file)}
+                    href={getGithubFileURL(titles.folders, titles.file)}
                 >
                     EDIT THIS PAGE
                 </Button>

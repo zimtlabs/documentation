@@ -22,25 +22,25 @@ export default function Page() {
 
     useEffect(() => {
         const pathname = window.location.pathname.split('/').filter(Boolean);
-        const folder = pathname[0].replace('-', ' ');
-        const file = pathname[1] && pathname[1].replace('-', ' ');
+        const folders = pathname.slice(0, pathname.length - 1).map(folder => folder.replace('-', ' '));
+        const file = pathname[pathname.length - 1].replace('-', ' ');
         const hash = window.location.hash;
 
         StorageService.crumbSub.next([
             { label: 'Home', to: '/' },
-            { label: uppercase(folder) },
+            ...folders.map(folder => ({ label: uppercase(folder) })),
             ...(file ? [{ label: uppercase(file) }] : []),
         ]);
 
-        getPage(pathname[0], pathname[1], hash);
+        getPage(pathname.slice(0, pathname.length - 1), pathname[pathname.length - 1], hash);
     }, []);
 
-    const getPage = async (folder, file, hash) => {
+    const getPage = async (folders, file, hash) => {
         try {
-            const page = await RequestService.getPage(folder, file);
+            const page = await RequestService.getPage(folders, file);
             if (page.error) throw new Error('No file found');
 
-            setTitles({ folder, file, hash: hash.slice(1) });
+            setTitles({ folders, file, hash: hash.slice(1) });
             setMarkdown(page);
             setLoaded(true);
         } catch (error) {

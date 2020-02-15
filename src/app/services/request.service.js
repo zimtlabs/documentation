@@ -66,8 +66,8 @@ export class RequestService {
 
     get = (url, config = {}) => API.get(url, config);
 
-    getPage = (folder, subfolder, name = null) => {
-        return APIPages.get(getPublicFileUrl(folder, subfolder, name));
+    getPage = (folders, subfolder, name = null) => {
+        return APIPages.get(getPublicFileUrl(folders, subfolder, name));
     };
 
     post = (url, body) => API.post(url, body);
