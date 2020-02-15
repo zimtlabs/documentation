@@ -4,7 +4,6 @@ import { Link as RLink } from 'react-router-dom';
 import clsx from 'clsx';
 
 import MenuIcon from '@material-ui/icons/Menu';
-import GithubIcon from '@material-ui/icons/GitHub';
 import HomeIcon from '@material-ui/icons/HomeWorkOutlined';
 
 import { CheckOnline, AppBar, Toolbar, IconButton, Typography, Breadcrumbs } from '../../';
@@ -158,13 +157,13 @@ export default function Header(props) {
                         </RLink>
                     </div>
                     <div className={classes.menu}>
-                        <IconButton
+                        {/* <IconButton
                             color='inherit'
                             href='https://github.com/sensia-io/hub'
                             target='_blank'
                         >
                             <GithubIcon />
-                        </IconButton>
+                        </IconButton> */}
                     </div>
                 </Toolbar>
             </AppBar>

@@ -1,4 +1,4 @@
-# API
+# Hub
 
 <p class="description">How to install and run the documentation app.</p>
 

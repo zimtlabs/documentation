@@ -81,7 +81,7 @@ export default function AppElement(props) {
 
     const getElement = async () => {
         try {
-            const module = await import(`../../../../pages/${titles.folder}/${titles.file}/${options.main}`);
+            const module = await import(`../../../../pages/${titles.foldersString}/${titles.file}/${options.main}`);
             setElement(module.default);
 
             // Download the syntax for main and all extensions, and add it as state array to loop and make tabs of

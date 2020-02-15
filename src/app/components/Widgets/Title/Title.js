@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     },
     image: {
         width: 'auto',
-        height: 124,
+        height: 104,
         'margin-bottom': 24,
     },
 }), { name: 'Title' });

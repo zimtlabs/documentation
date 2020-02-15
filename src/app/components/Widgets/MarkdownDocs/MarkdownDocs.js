@@ -33,6 +33,8 @@ export default function MarkdownDocs(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    titles.foldersString = titles.folders.reduce((url, folder) => url += `/${folder}`, '');
+
     return (
         <div
             className={classes.root}
