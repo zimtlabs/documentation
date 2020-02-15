@@ -136,7 +136,7 @@ yarn add @zimt/sdk
 npm install @zimt/sdk` },
                                 { type: 'h6', text: `Import` },
                                 {
-                                    type: 'code', format: 'javascript', text: `import ZIMTHubSDK from '@zimt/sdk'`
+                                    type: 'code', format: 'javascript', text: `import ZIMTHubSDK from '@zimt/sdk';`
                                 },
 
                                 { type: 'h6', text: `Use` },

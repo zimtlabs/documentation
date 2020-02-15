@@ -1,25 +1,17 @@
 # Installation
 
-<p class="description">How to install and run the documentation app.</p>
+<p class="description">How to install.</p>
 
-## Getting Started
+To install and save in your package.json dependencies, run:
 
-Install dependencies
+### npm
 
 ```sh
-  yarn
+npm install @zimt/sdk
 ```
 
-Run development
+### yarn
 
 ```sh
-  yarn start
-```
-
-## Production
-
-Build
-
-```sh
-  yarn build
+yarn add @zimt/sdk
 ```
