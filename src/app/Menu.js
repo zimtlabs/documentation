@@ -29,7 +29,6 @@ const Menu = [
                             { title: 'Organizations', pathname: '/sdk/javascript/api/organizations' },
                             { title: 'Permissions', pathname: '/sdk/javascript/api/permissions' },
                             { title: 'Hub', pathname: '/sdk/javascript/api/hub' },
-                            { title: 'Utils', pathname: '/sdk/javascript/api/utils' },
                         ],
                     },
                 ]
