@@ -2,7 +2,33 @@
 
 <p class="description">Data overall used in the SDK.</p>
 
-## Arguments
+
+## Generate object with meta
+
+Returns signed object with meta.
+
+Used for creating organization accounts, permissions..
+
+### Arguments
+
+| Name | Description | Type | Default | Example
+|:-----|:------------|:-----|:--------|:-------
+| Timstamp | Adds ISO 8601 timestamp | boolean | false | true
+
+```javascript
+const result = sdk.accounts.generateObjectWithMeta(true);
+
+// result
+{
+    "meta": {
+        "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+        "timestamp": "2020-02-10T19:16:13Z"
+    },
+    "signature": "0xe633051fc76ae...",
+}
+```
+
+## Generic SDK method arguments
 
 | Name | Description | Type | Default | Example
 |:-----|:------------|:-----|:--------|:-------
