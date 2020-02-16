@@ -149,7 +149,7 @@ Returns list of documents.
 
 ```javascript
 const result = await sdk.documents.search(Query);
-// sdk.documents.getMany(
+// sdk.documents.search(
 //     {
 //       query: {
 //         documents: [
