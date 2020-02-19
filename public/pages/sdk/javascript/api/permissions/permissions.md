@@ -310,3 +310,59 @@ const result = await sdk.permissions.update(permission_id: string, Permission da
   }
 }
 ```
+
+## My permissions
+
+Returns list of permissions based on ZIMT token in request headers.
+
+[API reference](/api#tag/Permissions/paths/~1permissions~1me/get).
+
+```javascript
+const result = await sdk.permissions.me();
+// sdk.permissions.me();
+
+// result
+{
+  "data": [
+    {
+      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+      "meta": {
+        "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+      },
+      "data": {
+        "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
+        "actions": [
+          "asset:GetObject"
+        ],
+        "resources": {
+          "assets": [
+            {
+              "field": "object.meta.created_by",
+              "operator": "not-equal",
+              "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
+            }
+          ],
+          "events": [
+            {
+              "field": "object.data.tag",
+              "operator": "equal",
+              "value": "tag1"
+            }
+          ]
+        },
+        "principal": [
+          "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+        ]
+      },
+      "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+      "receipt": {
+        "received_at": 1579967810000
+      }
+    }
+  ],
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  }
+}
+```
