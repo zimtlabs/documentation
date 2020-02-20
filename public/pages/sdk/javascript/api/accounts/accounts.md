@@ -224,6 +224,26 @@ const result = await sdk.accounts.update(id, Account data);
 }
 ```
 
+## Check if account exists
+
+Returns true if account exists.
+
+[API reference](/api#tag/Accounts/paths/~1accounts~1exists/post).
+
+```javascript
+const result = await sdk.accounts.exists({ address: string, email: string });
+// sdk.accounts.exists({ address: '0x627969CD9Ef88bA7e61694947020540d7eD0001d', email: 'john@gmail.com' });
+
+// result
+{
+  "data": true,
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  }
+}
+```
+
 ## Get token
 
 Returns an account token, used for sign in.

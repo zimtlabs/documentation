@@ -229,7 +229,7 @@
       }
     },
     "/accounts/token": {
-      "get": {
+      "post": {
         "summary": "Get token",
         "description": "Returns the account token (account's private key encoded with account's password)",
         "tags": [
@@ -257,6 +257,37 @@
             }
           },
           "400": { "$ref": "#/components/responses/Not found" }
+        }
+      }
+    },
+    "/accounts/exists": {
+      "post": {
+        "summary": "Check if account exists",
+        "description": "Returns true if account already exists with given address or email",
+        "tags": [
+          "Accounts"
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/accountExists"
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/accountExists"
+                },
+                "example": {
+                  "data": true,
+                  "meta": {
+                    "code": 200,
+                    "message": "Ok"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -2034,6 +2065,18 @@
         }
       },
 
+      "accountExists": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "boolean"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+
       "query-organization": {
         "type": "object",
         "properties": {
@@ -2538,6 +2581,11 @@
 
       "getToken": {
         "organization_name": "My organization",
+        "email": "john@gmail.com"
+      },
+
+      "accountExists": {
+        "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
         "email": "john@gmail.com"
       },
 
@@ -3437,6 +3485,29 @@
             },
             "example": {
               "$ref": "#/components/examples/getToken"
+            }
+          }
+        }
+      },
+
+      "accountExists": {
+        "description": "Check if account exists",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                }
+              }
+            },
+            "example": {
+              "$ref": "#/components/examples/accountExists"
             }
           }
         }
