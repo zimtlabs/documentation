@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { duration, useMediaQuery } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 import { List, Divider, Typography, Drawer } from '../../';
 import { StorageService } from '../../../services';
@@ -138,6 +139,8 @@ export default function Sidebar(props) {
             >
                 <Typography
                     variant='body1'
+                    component={Link}
+                    to='/'
                     style={{ color: theme.palette.text.primary, fontWeight: 600 }}
                 >
                     Documentation
