@@ -77,7 +77,7 @@ const result = await sdk.assets.getMany(Pagination, Asset options);
       "receipt": {
         "received_at": 1579278115000
       },
-      "info: { ... },
+      "info": { ... },
       "events": [
           { ... }
       ]
@@ -154,8 +154,8 @@ Returns an asset.
 [API reference](/api#tag/Assets/paths/~1assets~1{asset_id}/get).
 
 ```javascript
-const result = await sdk.assets.get(id);
-// sdk.assets.get('0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951');
+const result = await sdk.assets.get(id, Asset options);
+// sdk.assets.get('0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951', { info: true });
 
 // result
 {
@@ -168,7 +168,11 @@ const result = await sdk.assets.get(id);
       "signature": "0xe633051fc76ae...",
       "receipt": {
         "received_at": 1579278115000
-      }
+      },
+      "info": { ... },
+      "events": [
+          { ... }
+      ]
   },
   "meta": {
     "code": 200,

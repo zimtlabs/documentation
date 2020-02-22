@@ -803,7 +803,8 @@
           ]
         }],
         "parameters": [
-          { "$ref": "#/components/parameters/asset_id" }
+          { "$ref": "#/components/parameters/asset_id" },
+          { "$ref": "#/components/parameters/attach" }
         ],
         "responses": {
           "200": { "$ref": "#/components/responses/Asset" },
