@@ -22,13 +22,13 @@ const Menu = [
                         pathname: '/sdk/javascript/api',
                         children: [
                             { title: 'General', pathname: '/sdk/javascript/api/general' },
-                            { title: 'Assets', pathname: '/sdk/javascript/api/assets' },
-                            { title: 'Events', pathname: '/sdk/javascript/api/events' },
-                            { title: 'Documents', pathname: '/sdk/javascript/api/documents' },
+                            { title: 'Hub', pathname: '/sdk/javascript/api/hub' },
                             { title: 'Accounts', pathname: '/sdk/javascript/api/accounts' },
                             { title: 'Organizations', pathname: '/sdk/javascript/api/organizations' },
                             { title: 'Permissions', pathname: '/sdk/javascript/api/permissions' },
-                            { title: 'Hub', pathname: '/sdk/javascript/api/hub' },
+                            { title: 'Assets', pathname: '/sdk/javascript/api/assets' },
+                            { title: 'Events', pathname: '/sdk/javascript/api/events' },
+                            { title: 'Documents', pathname: '/sdk/javascript/api/documents' },
                         ],
                     },
                 ]

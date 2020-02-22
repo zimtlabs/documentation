@@ -186,7 +186,9 @@ const result = await sdk.organizations.update(id, Organization data);
 // sdk.organizations.update(
 //     '0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951',
 //     {
-//         name: 'My organization (updated)'
+//         data: {
+//             name: 'My organization (updated)'
+//         }
 //     }
 // );
 

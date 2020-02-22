@@ -1960,18 +1960,27 @@
       "Account-update": {
         "type": "object",
         "properties": {
-          "full_name": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string",
-            "format": "email"
-          },
-          "security": {
-            "$ref": "#/components/schemas/Account-data-security"
+          "data": {
+            "type": "object",
+            "properties": {
+              "full_name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "security": {
+                "$ref": "#/components/schemas/Account-data-security"
+              }
+            },
+            "additionalProperties": false
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "required": [
+          "data"
+        ]
       },
       "Account-me": {
         "type": "object",
@@ -2233,11 +2242,20 @@
       "Organization-update": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string"
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "required": [
+          "data"
+        ]
       },
       "Organizations": {
         "type": "object",
@@ -2389,26 +2407,35 @@
       "Permission-update": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "global": {
-            "type": "boolean"
-          },
-          "actions": {
-            "$ref": "#/components/schemas/Permission-data-actions"
-          },
-          "resources": {
-            "$ref": "#/components/schemas/Permission-data-resources"
-          },
-          "principal": {
-            "$ref": "#/components/schemas/Permission-data-principal"
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "global": {
+                "type": "boolean"
+              },
+              "actions": {
+                "$ref": "#/components/schemas/Permission-data-actions"
+              },
+              "resources": {
+                "$ref": "#/components/schemas/Permission-data-resources"
+              },
+              "principal": {
+                "$ref": "#/components/schemas/Permission-data-principal"
+              }
+            },
+            "additionalProperties": false
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "required": [
+          "data"
+        ]
       },
       "Permissions": {
         "type": "object",
@@ -2515,10 +2542,12 @@
         }
       },
       "Account-update": {
-        "full_name": "John Doe",
-        "email": "john@gmail.com",
-        "security": {
-          "token": "a32188sa76748123ea..."
+        "data": {
+          "full_name": "John Doe",
+          "email": "john@gmail.com",
+          "security": {
+            "token": "a32188sa76748123ea..."
+          }
         }
       },
       "Account-me": {
@@ -2624,7 +2653,9 @@
         }
       },
       "Organization-update": {
-        "name": "My organization"
+        "data": {
+          "name": "My organization"
+        }
       },
       "Organization-Create": {
         "organization": {
@@ -2763,10 +2794,12 @@
         }
       },
       "Permission-update": {
-        "principal": [
-          "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-          "0x1412258c1a01231148e655cf4abf515191c2b6b5ee466e03c951"
-        ]
+        "data": {
+          "principal": [
+            "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "0x1412258c1a01231148e655cf4abf515191c2b6b5ee466e03c951"
+          ]
+        }
       },
       "Permissions": {
         "data": [{
