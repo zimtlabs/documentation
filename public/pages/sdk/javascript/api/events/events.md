@@ -9,8 +9,8 @@ Returns signed event object.
 Used for create event method.
 
 ```javascript
-const result = sdk.events.generateEvent(Event data);
-// sdk.events.generateEvent({
+const result = sdk.events.generateEvent(asset_id: string, Event data);
+// sdk.events.generateEvent('0x123...', {
 //     "type ": "info",
 //     "name": "Info event"
 // });
@@ -39,14 +39,14 @@ Creates an event.
 
 ```javascript
 const result = await sdk.events.createEvent(Event object);
-// sdk.events.createEvent(sdk.events.generateEvent({
+// sdk.events.createEvent(sdk.events.generateEvent('0x123...', {
 //     "type ": "info",
 //     "name": "Info event",
 // }));
 //
 // or
 //
-// sdk.events.createEvent({
+// sdk.events.createEvent('0x123...', {
 //   "meta": {
 //     "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
 //     "timestamp": "2020-02-10T19:16:13Z",
