@@ -1898,6 +1898,9 @@
           },
           "security": {
             "$ref": "#/components/schemas/Account-data-security"
+          },
+          "active": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -2168,6 +2171,9 @@
           },
           "settings": {
             "$ref": "#/components/schemas/Organization-data-settings"
+          },
+          "active": {
+            "type": "boolean"
           }
         }
       },
@@ -2530,7 +2536,8 @@
             "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "settings": {
               "time_zone": "Europe/London"
-            }
+            },
+            "active": true
           },
           "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
           "receipt": {
@@ -2548,7 +2555,8 @@
           "email": "john@gmail.com",
           "security": {
             "token": "a32188sa76748123ea..."
-          }
+          },
+          "active": true
         }
       },
       "Account-me": {
@@ -2566,7 +2574,8 @@
             },
             "owner": true,
             "admin": true,
-            "super_admin": true
+            "super_admin": true,
+            "active": true
           },
           "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
           "receipt": {
@@ -2590,7 +2599,8 @@
             "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "settings": {
               "time_zone": "Europe/London"
-            }
+            },
+            "active": true
           },
           "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
           "receipt": {
@@ -2641,7 +2651,8 @@
             "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "settings": {
               "time_zone": "Europe/London"
-            }
+            },
+            "active": true
           },
           "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
           "receipt": {
@@ -2684,7 +2695,8 @@
           "address": "0x4DC2f66Ea6f7Cd898342378e514cBDAD9dE5CC1B",
           "security": {
             "token": "a4123asuiasy4uay3iaisyu3oiasu3iaous34"
-          }
+          },
+          "active": true
         }
       },
       "Organizations": {
@@ -2698,7 +2710,8 @@
             "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "settings": {
               "time_zone": "Europe/London"
-            }
+            },
+            "active": true
           },
           "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
           "receipt": {
