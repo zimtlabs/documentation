@@ -12,6 +12,10 @@
     "description": "Hub API - Dev & Test"
   }],
   "tags": [{
+      "name": "API keys",
+      "description": "API keys management."
+    },
+    {
       "name": "Accounts",
       "description": "Account management."
     },
@@ -41,6 +45,12 @@
     }
   ],
   "x-tagGroups": [{
+      "name": "API keys",
+      "tags": [
+        "API keys"
+      ]
+    },
+    {
       "name": "Accounts",
       "tags": [
         "Accounts"
@@ -1000,6 +1010,122 @@
           "403": { "$ref": "#/components/responses/Authorization" }
         }
       }
+    },
+
+    "/api-keys": {
+      "get": {
+        "summary": "Get API keys",
+        "description": "Returns a list of API keys.",
+        "tags": [
+          "API keys"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "#/components/parameters/limit-query" },
+          { "$ref": "#/components/parameters/next-query" },
+          { "$ref": "#/components/parameters/previous-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/APIkeys" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create API key",
+        "description": "Creates an API key.",
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "tags": [
+          "API keys"
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/APIkey-Create"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/Object-Created" },
+          "400": { "$ref": "#/components/responses/Validation" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/api-keys/search": {
+      "post": {
+        "summary": "Search API keys",
+        "description": "Returns a list of API keys.",
+        "tags": [
+          "API keys"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/search-api-keys"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/APIkeys" },
+          "400": { "$ref": "#/components/responses/Validation" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/api-keys/{id}": {
+      "get": {
+        "summary": "Get API key",
+        "description": "Returns an API key.",
+        "tags": [
+          "API keys"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "#/components/parameters/id-api-key" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/APIkey" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update API key",
+        "description": "Updates an API key.",
+        "tags": [
+          "API keys"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/APIkey-update"
+        },
+        "parameters": [
+          { "$ref": "#/components/parameters/id-api-key" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/APIkey" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
     }
 
   },
@@ -1116,6 +1242,13 @@
             },
             "minItems": 0
           },
+          "apiKeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
           "organizations": {
             "type": "array",
             "items": {
@@ -1184,6 +1317,11 @@
         "type": "string",
         "description": "Account's public address.",
         "example": "0xb1eacA825D9dEEb576C8F9c6992785360dAC8a1f"
+      },
+      "private_key": {
+        "type": "string",
+        "description": "Account's private key.",
+        "example": "0x14fbd74c7b5bed4109496f7df98a61ea11775edbac3bf203ac1f6cfc8daa999f"
       },
       "date": {
         "type": "string",
@@ -1875,7 +2013,7 @@
         "properties": {
           "token": {
             "type": "string",
-            "description": "Account's private key encoded with account's password"
+            "description": "Account's private key encoded with account's password. Use ZIMT SDK sdk.utils.encrypt and sdk.utils.decrypt to handle token encryption/decryption or your custom methods since token encryption/decryption is only done client side for this token."
           }
         },
         "additionalProperties": false
@@ -2055,6 +2193,207 @@
             "maxItems": 50,
             "items": {
               "$ref": "#/components/schemas/Account"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/pagination-response"
+          }
+        }
+      },
+
+      "query-api-keys": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "apiKeys": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "#/components/schemas/limit"
+          },
+          "next": {
+            "$ref": "#/components/schemas/cursor"
+          },
+          "previous": {
+            "$ref": "#/components/schemas/cursor"
+          }
+        }
+      },
+      "APIkey-data-rules": {
+        "type": "object",
+        "properties": {
+          "http_referrers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "ip_addresses": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "APIkey-data-keys": {
+        "type": "object",
+        "properties": {
+          "private_key": {
+            "$ref": "#/components/schemas/private_key"
+          },
+          "address": {
+            "$ref": "#/components/schemas/address"
+          }
+        },
+        "additionalProperties": false
+      },
+      "APIkey-data": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "rules": {
+            "$ref": "#/components/schemas/APIkey-data-rules"
+          },
+          "keys": {
+            "$ref": "#/components/schemas/APIkey-data-keys"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "APIkey-Create-data": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "rules": {
+            "$ref": "#/components/schemas/APIkey-data-rules"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "APIkey-Create": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "$ref": "#/components/schemas/object-simple"
+          },
+          "data": {
+            "$ref": "#/components/schemas/APIkey-Create-data"
+          }
+        },
+        "required": [
+          "object",
+          "data"
+        ]
+      },
+      "APIkey": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/object-meta-simple"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          },
+          "data": {
+            "$ref": "#/components/schemas/APIkey-data"
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "data",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "APIkey-update": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "active": {
+                "type": "boolean"
+              },
+              "rules": {
+                "$ref": "#/components/schemas/APIkey-data-rules"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data"
+        ]
+      },
+      "APIkeys": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/APIkey"
             }
           },
           "meta": {
@@ -2599,6 +2938,106 @@
             "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "settings": {
               "time_zone": "Europe/London"
+            },
+            "active": true
+          },
+          "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+          "receipt": {
+            "received_at": 1579967810000
+          }
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "hasNext": true,
+          "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
+          "hasPrevious": true,
+          "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+        }
+      },
+
+      "query-api-keys": {
+        "query": {
+          "apiKeys": [{
+            "field": "data.name",
+            "operator": "starts-with",
+            "value": "Developer key"
+          }]
+        },
+        "limit": 45,
+        "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      },
+      "APIkey": {
+        "data": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+          },
+          "data": {
+            "name": "Developer key",
+            "description": "Developer API key",
+            "rules": {
+              "http_referrers": [
+                { "value": "website.com" }
+              ]
+            },
+            "keys": {
+              "address": "0x4DC2f66Ea6f7Cd898342378e514cBDAD9dE5CC1B",
+              "private_key": "0x14fbd74c7b5bed4109496f7df98a61ea11775edbac3bf203ac1f6cfc8daa999f"
+            },
+            "active": true
+          },
+          "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+          "receipt": {
+            "received_at": 1579967810000
+          }
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "APIkey-Create": {
+        "object": {
+          "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+          },
+          "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+        },
+        "data": {
+          "name": "Developer key",
+          "description": "Developer API key",
+          "rules": {
+            "http_referrers": [
+              { "value": "website.com" }
+            ]
+          }
+        }
+      },
+      "APIkey-update": {
+        "data": {
+          "active": false
+        }
+      },
+      "APIkeys": {
+        "data": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+          },
+          "data": {
+            "name": "Developer key",
+            "description": "Developer API key",
+            "rules": {
+              "http_referrers": [
+                { "value": "website.com" }
+              ]
+            },
+            "keys": {
+              "address": "0x4DC2f66Ea6f7Cd898342378e514cBDAD9dE5CC1B",
+              "private_key": "0x14fbd74c7b5bed4109496f7df98a61ea11775edbac3bf203ac1f6cfc8daa999f"
             },
             "active": true
           },
@@ -3191,6 +3630,14 @@
         },
         "example": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
       },
+      "id-api-key": {
+        "name": "id",
+        "description": "ID of an API key",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/id"
+        }
+      },
       "id-account": {
         "name": "id",
         "description": "ID of an account",
@@ -3342,6 +3789,33 @@
             },
             "example": {
               "$ref": "#/components/examples/Accounts"
+            }
+          }
+        }
+      },
+
+      "APIkey": {
+        "description": "APIkey result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/APIkey"
+            },
+            "example": {
+              "$ref": "#/components/examples/APIkey"
+            }
+          }
+        }
+      },
+      "APIkeys": {
+        "description": "APIkey results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/APIkeys"
+            },
+            "example": {
+              "$ref": "#/components/examples/APIkeys"
             }
           }
         }
@@ -3582,6 +4056,46 @@
             },
             "example": {
               "$ref": "#/components/examples/Account-update"
+            }
+          }
+        }
+      },
+
+      "search-api-keys": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-api-keys"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-api-keys"
+            }
+          }
+        }
+      },
+      "APIkey-Create": {
+        "description": "APIkey create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/APIkey-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/APIkey-Create"
+            }
+          }
+        }
+      },
+      "APIkey-update": {
+        "description": "APIkey update",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/APIkey-update"
+            },
+            "example": {
+              "$ref": "#/components/examples/APIkey-update"
             }
           }
         }
