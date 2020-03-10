@@ -36,6 +36,14 @@
       "description": "Document management."
     },
     {
+      "name": "Strategies",
+      "description": "Strategy management."
+    },
+     {
+       "name": "Bundles",
+       "description": "Bundle management."
+     },
+    {
       "name": "Other",
       "description": "Other than core endpoints."
     }
@@ -77,6 +85,18 @@
       ]
     },
     {
+      "name": "Strategies",
+      "tags": [
+          "Strategies"
+        ]
+    },
+    {
+      "name": "Bundles",
+      "tags": [
+        "Bundles"
+      ]
+    },
+    {
       "name": "Other",
       "tags": [
         "Other"
@@ -109,7 +129,6 @@
         }
       }
     },
-
     "/accounts": {
       "get": {
         "summary": "Get accounts",
@@ -1000,8 +1019,23 @@
           "403": { "$ref": "#/components/responses/Authorization" }
         }
       }
+    },
+    "/bundles/{id}": {
+      "get": {
+        "summary": "Get bundle",
+        "description": "Returns a bundle.",
+        "tags": [
+          "Bundles"
+        ],
+        "parameters": [
+          { "$ref": "#/components/parameters/id-bundle" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Bundle" },
+          "400": { "$ref": "#/components/responses/Not found" }
+        }
+      }
     }
-
   },
 
   "components": {
@@ -1185,11 +1219,26 @@
         "description": "Account's public address.",
         "example": "0xb1eacA825D9dEEb576C8F9c6992785360dAC8a1f"
       },
+      "strategy": {
+        "type": "string",
+        "description": "Strategy's id.",
+        "example": "0xb1eacA825D9dEEb576C8F9c6992785360dAC8a1f"
+      },
+      "organization": {
+        "type": "string",
+        "description": "Organization's id.",
+        "example": "0xb1eacA825D9dEEb576C8F9c6992785360dAC8a1f"
+      },
       "date": {
         "type": "string",
         "format": "date-time",
         "description": "Creation date and time",
         "example": "2020-02-01T20:00:00Z"
+      },
+      "timestamp": {
+        "type": "number",
+        "description": "Unix timestamp expressed in milliseconds",
+        "example": "1583853404123"
       },
       "object-meta-simple": {
         "type": "object",
@@ -1431,6 +1480,10 @@
         "type": "string",
         "description": "Hash of data object"
       },
+      "entries-hash": {
+        "type": "string",
+        "description": "Hash of entries array"
+      },
       "type": {
         "type": "string"
       },
@@ -1522,6 +1575,90 @@
       },
       "properties": {
         "type": "object"
+      },
+      "Bundle-object": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Bundle-meta"
+          },
+          "entries": {
+            "$ref": "#/components/schemas/Bundle-entries"
+          }
+        }
+      },
+      "Bundle-entries": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Bundle-entry"
+        }
+      },
+      "Bundle-entry": {
+        "type": "string",
+        "description": "Id of bundled entity"
+      },
+      "Bundle-meta": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "#/components/schemas/address"
+          },
+          "strategy": {
+            "$ref": "#/components/schemas/strategy"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/timestamp"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/organization"
+          },
+          "entries_hash": {
+            "$ref": "#/components/schemas/entries-hash"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "created_by",
+          "timestamp",
+          "asset_id",
+          "data_hash"
+        ]
+      },
+      "Bundle-data": {
+        "type": "object",
+        "properties": {
+          "upload": {
+            "$ref": "#/components/schemas/Bundle-upload"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "upload"
+        ]
+      },
+      "Bundle-upload": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "$ref": "#/components/schemas/upload-url"
+          },
+          "tx_hash": {
+            "$ref": "#/components/schemas/tx_hash"
+          },
+        },
+        "additionalProperties": false,
+        "required": [
+          "url",
+          "tx_hash"
+        ]
+      },
+      "upload-url": {
+        "type": "string",
+        "description": "Url of endpoint where bundle proof was uploaded"
+      },
+      "tx_hash": {
+        "type": "string",
+        "description": "Hash of the transaction in which bundle proof was included"
       },
       "Event-meta": {
         "type": "object",
@@ -1641,6 +1778,30 @@
             "$ref": "#/components/schemas/pagination-response"
           }
         }
+      },
+      "Bundle": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "proof": {
+            "$ref": "#/components/schemas/proof"
+          },
+          "object": {
+            "$ref": "#/components/schemas/Bundle-object"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Bundle-data"
+          }
+        },
+        "required": [
+          "id",
+          "proof",
+          "object",
+          "data"
+        ],
+        "additionalProperties": false
       },
 
       "query-document": {
@@ -3047,6 +3208,33 @@
         }
       },
 
+      "Bundle": {
+        "data": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "proof": "0xaf36da0e790329c1ec630390bf0b366d7249d04175c4701d33034d9e491a9400112a1df4cc475586588673025504b93348eb33070672d982f78b4ef8eec57ac91b",
+          "object": {
+            "meta": {
+              "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+              "created_at": "1233...",
+              "strategy": "0x123...",
+              "organization": "0x123...",
+              "entries_hash": "0x123..."
+            },
+            "entries": ["0x627969CD9Ef88bA7e61694947020540d7eD0001d"]
+          },
+          "data": {
+            "upload": {
+              "url": "'https://kovan.infura.io/v3",
+              "tx_hash": "0x1491258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            }
+          }
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+
       "query-document": {
         "query": {
           "documents": [{
@@ -3194,6 +3382,14 @@
       "id-account": {
         "name": "id",
         "description": "ID of an account",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/id"
+        }
+      },
+      "id-bundle": {
+        "name": "id",
+        "description": "ID of a bundle",
         "in": "path",
         "schema": {
           "$ref": "#/components/schemas/id"
@@ -3476,6 +3672,20 @@
             },
             "example": {
               "$ref": "#/components/examples/Events"
+            }
+          }
+        }
+      },
+
+      "Bundle": {
+        "description": "Bundle result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Bundle"
+            },
+            "example": {
+              "$ref": "#/components/examples/Bundle"
             }
           }
         }
