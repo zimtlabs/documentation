@@ -23,6 +23,7 @@ const Menu = [
                         children: [
                             { title: 'General', pathname: '/sdk/javascript/api/general' },
                             { title: 'Hub', pathname: '/sdk/javascript/api/hub' },
+                            { title: 'API keys', pathname: '/sdk/javascript/api/api-keys' },
                             { title: 'Accounts', pathname: '/sdk/javascript/api/accounts' },
                             { title: 'Organizations', pathname: '/sdk/javascript/api/organizations' },
                             { title: 'Permissions', pathname: '/sdk/javascript/api/permissions' },

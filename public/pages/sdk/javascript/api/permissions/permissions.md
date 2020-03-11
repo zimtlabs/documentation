@@ -297,8 +297,7 @@ const result = await sdk.permissions.update(permission_id: string, Permission da
         ]
       },
       "principal": [
-            "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-            "0x1412258c1a01231148e655cf4abf515191c2b6b5ee466e03c951ee466e03c951"
+        "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
       ]
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
