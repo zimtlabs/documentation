@@ -1069,7 +1069,7 @@
           "$ref": "#/components/requestBodies/Strategy-Create"
         },
         "responses": {
-          "200": { "$ref": "#/components/responses/Object-Created" },
+          "200": { "$ref": "#/components/responses/Strategy-Created" },
           "400": { "$ref": "#/components/responses/Validation" },
           "401": { "$ref": "#/components/responses/Authentication" },
           "403": { "$ref": "#/components/responses/Authorization" }
@@ -1924,7 +1924,7 @@
             "$ref": "#/components/schemas/Strategy-meta"
           },
           "data": {
-            "$ref": "#/components/schemas/Event-data"
+            "$ref": "#/components/schemas/Strategy-data"
           },
           "signature": {
             "$ref": "#/components/schemas/signature"
@@ -1960,6 +1960,26 @@
           }
         }
       },
+      "Strategy-Created": {
+        "type": "object",
+        "properties": {
+          "proof": {
+            "$ref": "#/components/schemas/proof"
+          },
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/strategy-receipt"
+          }
+        },
+        "required": [
+          "proof",
+          "id",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
       "Strategy-meta": {
         "type": "object",
         "properties": {
@@ -1980,11 +2000,48 @@
           "data_hash"
         ]
       },
+      "Strategy-data": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of persistent storage"
+          },
+          "interval": {
+            "type": "number",
+            "description": "Bundling interval expressed in milliseconds."
+          },
+          "config": {
+            "$ref": "#/components/schemas/Strategy-config"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "interval",
+          "config"
+        ]
+      },
+      "Strategy-config": {
+        "type": "object",
+        "properties": {
+          "proxy_rul": {
+            "$ref": "#/components/schemas/upload-url"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "proxy_url"
+        ]
+      },
       "Strategy-Create": {
         "type": "object",
         "properties": {
           "meta": {
-            "$ref": "#/components/schemas/Asset-meta"
+            "$ref": "#/components/schemas/Strategy-meta"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Strategy-data"
           },
           "signature": {
             "$ref": "#/components/schemas/signature"
@@ -1992,6 +2049,7 @@
         },
         "required": [
           "meta",
+          "data",
           "signature"
         ]
       },
@@ -3451,23 +3509,23 @@
 
       "Strategy": {
         "data": {
-          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-          "proof": "0xaf36da0e790329c1ec630390bf0b366d7249d04175c4701d33034d9e491a9400112a1df4cc475586588673025504b93348eb33070672d982f78b4ef8eec57ac91b",
-          "object": {
-            "meta": {
-              "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-              "created_at": "1233...",
-              "strategy": "0x123...",
-              "organization": "0x123...",
-              "entries_hash": "0x123..."
-            },
-            "entries": ["0x627969CD9Ef88bA7e61694947020540d7eD0001d"]
+          "id": "0x867e088491c5e205b5c3e154e05e51a5d2d5766c8c7692deea62df9bf94df76f",
+          "meta": {
+            "created_by": "0x5F501a3aeBc7617B965F877A245F1E19Da043121",
+            "timestamp": "2020-03-11T14:06:52.440Z",
+            "data_hash": "0xb8229d6a4d7cc3273664a8a138ec42efa2402ad105e636ed7b0ccc5ccb74cfb3"
           },
+          "signature": "0xd5210b57bac5e710e08ee0f7be90d83538855204a4696dc87996e5ed64247b5944cf0cc7851ebf8190991f7f63e1e04f0e3a183c0ee2544b0ad512ac808ec1961c",
           "data": {
-            "upload": {
-              "url": "'https://kovan.infura.io/v3",
-              "tx_hash": "0x1491258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            "type": "EVM_BLOCKCHAIN",
+            "interval": 2000,
+            "config": {
+              "proxy_url": "https://kovan.infura.io/v3"
             }
+          },
+          "receipt": {
+            "received_at": 1583935613732,
+            "uploader_address": "0x01cd343654000255761Eca17e5178cc803749A13"
           }
         },
         "meta": {
@@ -3477,23 +3535,23 @@
       },
       "Strategies": {
         "data": [{
-          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-          "proof": "0xaf36da0e790329c1ec630390bf0b366d7249d04175c4701d33034d9e491a9400112a1df4cc475586588673025504b93348eb33070672d982f78b4ef8eec57ac91b",
-          "object": {
-            "meta": {
-              "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-              "created_at": "1233...",
-              "strategy": "0x123...",
-              "organization": "0x123...",
-              "entries_hash": "0x123..."
-            },
-            "entries": ["0x627969CD9Ef88bA7e61694947020540d7eD0001d"]
+          "id": "0x867e088491c5e205b5c3e154e05e51a5d2d5766c8c7692deea62df9bf94df76f",
+          "meta": {
+            "created_by": "0x5F501a3aeBc7617B965F877A245F1E19Da043121",
+            "timestamp": "2020-03-11T14:06:52.440Z",
+            "data_hash": "0xb8229d6a4d7cc3273664a8a138ec42efa2402ad105e636ed7b0ccc5ccb74cfb3"
           },
+          "signature": "0xd5210b57bac5e710e08ee0f7be90d83538855204a4696dc87996e5ed64247b5944cf0cc7851ebf8190991f7f63e1e04f0e3a183c0ee2544b0ad512ac808ec1961c",
           "data": {
-            "upload": {
-              "url": "'https://kovan.infura.io/v3",
-              "tx_hash": "0x1491258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            "type": "EVM_BLOCKCHAIN",
+            "interval": 2000,
+            "config": {
+              "proxy_url": "https://kovan.infura.io/v3"
             }
+          },
+          "receipt": {
+            "received_at": 1583935613732,
+            "uploader_address": "0x01cd343654000255761Eca17e5178cc803749A13"
           }
         }],
         "meta": {
@@ -3507,10 +3565,29 @@
           "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
         }
       },
+      "Strategy-Created": {
+        "proof": "0x0192cbd1c59b40ea97f7bc102a16c325a3066bb6b68c9c16bae447d8bb38565a66da29...",
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "receipt": {
+          "object_hash": "0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5",
+          "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+          "uploader_address": "0x911b3c5090B25b3a63120CF0218750886e37A969",
+          "received_at": 1579278115000,
+          "organization": "0x123..."
+        }
+      },
       "Strategy-Create": {
         "meta": {
           "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-          "timestamp": "2020-02-10T19:16:13Z"
+          "timestamp": "2020-02-10T19:16:13Z",
+          "data_hash": "0x6279..."
+        },
+        "data": {
+          "type": "EVM_BLOCKCHAIN",
+          "interval": 2000,
+          "config": {
+            "proxy_url": "https://kovan.infura.io/v3"
+          }
         },
         "signature": "0xe633051fc76ae..."
       },
@@ -4013,6 +4090,19 @@
             },
             "example": {
               "$ref": "#/components/examples/Strategies"
+            }
+          }
+        }
+      },
+      "Strategy-Created": {
+        "description": "Created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Strategy-Created"
+            },
+            "example": {
+              "$ref": "#/components/examples/Strategy-Created"
             }
           }
         }
