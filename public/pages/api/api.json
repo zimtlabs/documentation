@@ -1020,6 +1020,7 @@
         }
       }
     },
+
     "/bundles/{id}": {
       "get": {
         "summary": "Get bundle",
@@ -1033,6 +1034,96 @@
         "responses": {
           "200": { "$ref": "#/components/responses/Bundle" },
           "400": { "$ref": "#/components/responses/Not found" }
+        }
+      }
+    },
+
+    "/strategies": {
+      "get": {
+        "summary": "Get strategies",
+        "description": "Returns all strategies.",
+        "tags": [
+          "Strategies"
+        ],
+        "parameters": [
+          { "$ref": "#/components/parameters/id-strategy" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Strategies" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create strategy",
+        "description": "Creates a strategy.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Strategies"
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Strategy-Create"
+        },
+        "responses": {
+          "200": { "$ref": "#/components/responses/Object-Created" },
+          "400": { "$ref": "#/components/responses/Validation" },
+          "401": { "$ref": "#/components/responses/Authentication" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/strategies/{id}": {
+      "get": {
+        "summary": "Get strategy",
+        "description": "Returns a strategy.",
+        "tags": [
+          "Strategies"
+        ],
+        "parameters": [
+          { "$ref": "#/components/parameters/id-strategy" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Strategy" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/strategies/{id}/activate": {
+      "put": {
+        "summary": "Activate strategy",
+        "description": "Activates deactivated strategy",
+        "tags": [
+          "Strategies"
+        ],
+        "parameters": [
+          { "$ref": "#/components/parameters/id-strategy" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Activated" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "403": { "$ref": "#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/strategies/{id}/deactivate": {
+      "put": {
+        "summary": "Deactivate strategy",
+        "description": "Deactivates active strategy.",
+        "tags": [
+          "Strategies"
+        ],
+        "parameters": [
+          { "$ref": "#/components/parameters/id-strategy" }
+        ],
+        "responses": {
+          "200": { "$ref": "#/components/responses/Deactivated" },
+          "400": { "$ref": "#/components/responses/Not found" },
+          "403": { "$ref": "#/components/responses/Authorization" }
         }
       }
     }
@@ -1058,9 +1149,6 @@
         "maximum": 50
       },
       "cursor": {
-        "type": "string"
-      },
-      "proof": {
         "type": "string"
       },
       "meta-response": {
@@ -1204,10 +1292,14 @@
           }
         }
       },
+
       "id": {
         "type": "string",
         "description": "ID of an object.\n\nReceipt object signed with hub's private key.",
         "example": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+      },
+      "proof": {
+        "type": "string"
       },
       "signature": {
         "type": "string",
@@ -1229,6 +1321,7 @@
         "description": "Organization's id.",
         "example": "0xb1eacA825D9dEEb576C8F9c6992785360dAC8a1f"
       },
+
       "date": {
         "type": "string",
         "format": "date-time",
@@ -1240,6 +1333,7 @@
         "description": "Unix timestamp expressed in milliseconds",
         "example": "1583853404123"
       },
+
       "object-meta-simple": {
         "type": "object",
         "properties": {
@@ -1266,6 +1360,7 @@
           "signature"
         ]
       },
+
       "receipt": {
         "type": "object",
         "properties": {
@@ -1274,6 +1369,20 @@
             "format": "int32",
             "description": "Database insertion date and time in unix (milliseconds) format",
             "example": 1581420369765
+          }
+        }
+      },
+      "strategy-receipt": {
+        "type": "object",
+        "properties": {
+          "received_at": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Database insertion date and time in unix (milliseconds) format",
+            "example": 1581420369765
+          },
+          "uploader_address": {
+            "$ref": "#/components/schemas/address"
           }
         }
       },
@@ -1576,90 +1685,6 @@
       "properties": {
         "type": "object"
       },
-      "Bundle-object": {
-        "type": "object",
-        "properties": {
-          "meta": {
-            "$ref": "#/components/schemas/Bundle-meta"
-          },
-          "entries": {
-            "$ref": "#/components/schemas/Bundle-entries"
-          }
-        }
-      },
-      "Bundle-entries": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/Bundle-entry"
-        }
-      },
-      "Bundle-entry": {
-        "type": "string",
-        "description": "Id of bundled entity"
-      },
-      "Bundle-meta": {
-        "type": "object",
-        "properties": {
-          "created_by": {
-            "$ref": "#/components/schemas/address"
-          },
-          "strategy": {
-            "$ref": "#/components/schemas/strategy"
-          },
-          "created_at": {
-            "$ref": "#/components/schemas/timestamp"
-          },
-          "organization": {
-            "$ref": "#/components/schemas/organization"
-          },
-          "entries_hash": {
-            "$ref": "#/components/schemas/entries-hash"
-          }
-        },
-        "additionalProperties": false,
-        "required": [
-          "created_by",
-          "timestamp",
-          "asset_id",
-          "data_hash"
-        ]
-      },
-      "Bundle-data": {
-        "type": "object",
-        "properties": {
-          "upload": {
-            "$ref": "#/components/schemas/Bundle-upload"
-          }
-        },
-        "additionalProperties": false,
-        "required": [
-          "upload"
-        ]
-      },
-      "Bundle-upload": {
-        "type": "object",
-        "properties": {
-          "url": {
-            "$ref": "#/components/schemas/upload-url"
-          },
-          "tx_hash": {
-            "$ref": "#/components/schemas/tx_hash"
-          },
-        },
-        "additionalProperties": false,
-        "required": [
-          "url",
-          "tx_hash"
-        ]
-      },
-      "upload-url": {
-        "type": "string",
-        "description": "Url of endpoint where bundle proof was uploaded"
-      },
-      "tx_hash": {
-        "type": "string",
-        "description": "Hash of the transaction in which bundle proof was included"
-      },
       "Event-meta": {
         "type": "object",
         "properties": {
@@ -1779,6 +1804,7 @@
           }
         }
       },
+
       "Bundle": {
         "type": "object",
         "properties": {
@@ -1802,6 +1828,194 @@
           "data"
         ],
         "additionalProperties": false
+      },
+      "Bundle-object": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Bundle-meta"
+          },
+          "entries": {
+            "$ref": "#/components/schemas/Bundle-entries"
+          }
+        }
+      },
+      "Bundle-entries": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Bundle-entry"
+        }
+      },
+      "Bundle-entry": {
+        "type": "string",
+        "description": "Id of bundled entity"
+      },
+      "Bundle-meta": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "#/components/schemas/address"
+          },
+          "strategy": {
+            "$ref": "#/components/schemas/strategy"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/timestamp"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/organization"
+          },
+          "entries_hash": {
+            "$ref": "#/components/schemas/entries-hash"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "created_by",
+          "timestamp",
+          "asset_id",
+          "data_hash"
+        ]
+      },
+      "Bundle-data": {
+        "type": "object",
+        "properties": {
+          "upload": {
+            "$ref": "#/components/schemas/Bundle-upload"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "upload"
+        ]
+      },
+      "Bundle-upload": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "$ref": "#/components/schemas/upload-url"
+          },
+          "tx_hash": {
+            "$ref": "#/components/schemas/tx_hash"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "url",
+          "tx_hash"
+        ]
+      },
+      "upload-url": {
+        "type": "string",
+        "description": "Url of endpoint where bundle proof was uploaded"
+      },
+      "tx_hash": {
+        "type": "string",
+        "description": "Hash of the transaction in which bundle proof was included"
+      },
+
+      "Strategy": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Strategy-meta"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Event-data"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/strategy-receipt"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Strategies": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Strategy"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/pagination-response"
+          }
+        }
+      },
+      "Strategy-meta": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "#/components/schemas/address"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/date"
+          },
+          "data_hash": {
+            "$ref": "#/components/schemas/data-hash"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "created_by",
+          "timestamp",
+          "data_hash"
+        ]
+      },
+      "Strategy-Create": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Asset-meta"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          }
+        },
+        "required": [
+          "meta",
+          "signature"
+        ]
+      },
+      "Activated": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+      "Deactivated": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
       },
 
       "query-document": {
@@ -3235,6 +3449,84 @@
         }
       },
 
+      "Strategy": {
+        "data": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "proof": "0xaf36da0e790329c1ec630390bf0b366d7249d04175c4701d33034d9e491a9400112a1df4cc475586588673025504b93348eb33070672d982f78b4ef8eec57ac91b",
+          "object": {
+            "meta": {
+              "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+              "created_at": "1233...",
+              "strategy": "0x123...",
+              "organization": "0x123...",
+              "entries_hash": "0x123..."
+            },
+            "entries": ["0x627969CD9Ef88bA7e61694947020540d7eD0001d"]
+          },
+          "data": {
+            "upload": {
+              "url": "'https://kovan.infura.io/v3",
+              "tx_hash": "0x1491258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            }
+          }
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Strategies": {
+        "data": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "proof": "0xaf36da0e790329c1ec630390bf0b366d7249d04175c4701d33034d9e491a9400112a1df4cc475586588673025504b93348eb33070672d982f78b4ef8eec57ac91b",
+          "object": {
+            "meta": {
+              "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+              "created_at": "1233...",
+              "strategy": "0x123...",
+              "organization": "0x123...",
+              "entries_hash": "0x123..."
+            },
+            "entries": ["0x627969CD9Ef88bA7e61694947020540d7eD0001d"]
+          },
+          "data": {
+            "upload": {
+              "url": "'https://kovan.infura.io/v3",
+              "tx_hash": "0x1491258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            }
+          }
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "hasNext": true,
+          "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
+          "hasPrevious": true,
+          "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+        }
+      },
+      "Strategy-Create": {
+        "meta": {
+          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+          "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xe633051fc76ae..."
+      },
+      "Activated": {
+        "data": "Ok",
+        "meta": {
+          "code": 200
+        }
+      },
+      "Deactivated": {
+        "data": "Ok",
+        "meta": {
+          "code": 200
+        }
+      },
+
       "query-document": {
         "query": {
           "documents": [{
@@ -3390,6 +3682,14 @@
       "id-bundle": {
         "name": "id",
         "description": "ID of a bundle",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/id"
+        }
+      },
+      "id-strategy": {
+        "name": "id",
+        "description": "ID of a strategy",
         "in": "path",
         "schema": {
           "$ref": "#/components/schemas/id"
@@ -3691,6 +3991,59 @@
         }
       },
 
+      "Strategy": {
+        "description": "Strategy result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Strategy"
+            },
+            "example": {
+              "$ref": "#/components/examples/Strategy"
+            }
+          }
+        }
+      },
+      "Strategies": {
+        "description": "Strategy results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Strategies"
+            },
+            "example": {
+              "$ref": "#/components/examples/Strategies"
+            }
+          }
+        }
+      },
+      "Activated": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Activated"
+            },
+            "example": {
+              "$ref": "#/components/examples/Activated"
+            }
+          }
+        }
+      },
+      "Deactivated": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Deactivated"
+            },
+            "example": {
+              "$ref": "#/components/examples/Deactivated"
+            }
+          }
+        }
+      },
+
       "Document": {
         "description": "Document result",
         "content": {
@@ -3969,8 +4322,21 @@
             }
           }
         }
-      }
+      },
 
+      "Strategy-Create": {
+        "description": "Strategy create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Strategy-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/Strategy-Create"
+            }
+          }
+        }
+      }
     },
     "securitySchemes": {
       "ZIMT Token": {
