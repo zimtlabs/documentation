@@ -1,0 +1,410 @@
+{
+  "components": {
+
+    "schemas": {
+
+      "query-event": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "events": {
+                "type": "array",
+                "items": {
+                  "$ref": "base.json#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "base.json#/components/schemas/limit"
+          },
+          "next": {
+            "$ref": "base.json#/components/schemas/cursor"
+          },
+          "previous": {
+            "$ref": "base.json#/components/schemas/cursor"
+          }
+        }
+      },
+      "data-hash": {
+        "type": "string",
+        "description": "Hash of data object"
+      },
+      "entries-hash": {
+        "type": "string",
+        "description": "Hash of entries array"
+      },
+      "type": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "asset_type": {
+        "type": "string"
+      },
+      "documents": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/components/parameters/id-document"
+            },
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "properties": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "name",
+            "type"
+          ]
+        },
+        "additionalItems": false
+      },
+      "location": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["Feature"]
+          },
+          "geometry": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["Point"]
+              },
+              "coordinates": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2,
+                "additionalItems": false
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "coordinates"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "geometry"
+        ]
+      },
+      "identifiers": {
+        "type": "object",
+        "patternProperties": {
+          "^.*$": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            },
+            "additionalItems": false
+          }
+        }
+      },
+      "properties": {
+        "type": "object"
+      },
+      "Event-meta": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "base.json#/components/schemas/address"
+          },
+          "timestamp": {
+            "$ref": "base.json#/components/schemas/date"
+          },
+          "asset_id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "data_hash": {
+            "$ref": "base.json#/components/schemas/data-hash"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "created_by",
+          "timestamp",
+          "asset_id",
+          "data_hash"
+        ]
+      },
+      "Event-data": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "base.json#/components/schemas/type"
+          },
+          "name": {
+            "$ref": "base.json#/components/schemas/name"
+          },
+          "asset_type": {
+            "$ref": "base.json#/components/schemas/asset_type"
+          },
+          "documents": {
+            "$ref": "base.json#/components/schemas/documents"
+          },
+          "location": {
+            "$ref": "base.json#/components/schemas/location"
+          },
+          "identifiers": {
+            "$ref": "base.json#/components/schemas/identifiers"
+          },
+          "properties": {
+            "$ref": "base.json#/components/schemas/properties"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "name"
+        ]
+      },
+      "Event-Create": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Event-meta"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Event-data"
+          },
+          "signature": {
+            "$ref": "base.json#/components/schemas/signature"
+          }
+        },
+        "required": [
+          "meta",
+          "signature"
+        ]
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Event-meta"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Event-data"
+          },
+          "signature": {
+            "$ref": "base.json#/components/schemas/signature"
+          },
+          "receipt": {
+            "$ref": "base.json/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Events": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            }
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "base.json#/components/schemas/pagination-response"
+          }
+        }
+      }
+
+    },
+    "examples": {
+
+      "query-event": {
+        "query": {
+          "events": [{
+            "field": "object.data.name",
+            "operator": "starts-with",
+            "value": "Event"
+          }]
+        },
+        "limit": 45,
+        "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      },
+      "Event-Create": {
+        "meta": {
+          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+          "timestamp": "2020-02-10T19:16:13Z",
+          "asset_id": "0x123...",
+          "data_hash": "0x123..."
+        },
+        "data": {
+          "type": "info",
+          "name": "Info event"
+        },
+        "signature": "0xe633051fc76ae..."
+      },
+      "Event": {
+        "response": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13Z",
+            "asset_id": "0x123...",
+            "data_hash": "0x123..."
+          },
+          "data": {
+            "type": "info",
+            "name": "Info event"
+          },
+          "signature": "0xe633051fc76ae...",
+          "receipt": {
+            "received_at": 1579278115000
+          }
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Events": {
+        "response": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13Z",
+            "asset_id": "0x123...",
+            "data_hash": "0x123..."
+          },
+          "data": {
+            "type": "info",
+            "name": "Info event"
+          },
+          "signature": "0xe633051fc76ae...",
+          "receipt": {
+            "received_at": 1579278115000
+          }
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "hasNext": true,
+          "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
+          "hasPrevious": true,
+          "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+        }
+      }
+
+    },
+
+    "parameters": {
+
+      "id-event": {
+        "name": "Event ID",
+        "description": "ID of an event",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      }
+
+    },
+
+    "responses": {
+
+      "Event": {
+        "description": "Event result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Event"
+            },
+            "example": {
+              "$ref": "#/components/examples/Event"
+            }
+          }
+        }
+      },
+      "Events": {
+        "description": "Event results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Events"
+            },
+            "example": {
+              "$ref": "#/components/examples/Events"
+            }
+          }
+        }
+      }
+
+    },
+
+    "requestBodies": {
+
+      "search-event": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-event"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-event"
+            }
+          }
+        }
+      },
+      "Event-Create": {
+        "description": "Event create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Event-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/Event-Create"
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+}

@@ -1,0 +1,268 @@
+{
+  "components": {
+
+    "schemas": {
+
+      "query-asset": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "assets": {
+                "type": "array",
+                "items": {
+                  "$ref": "base.json#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              },
+              "events": {
+                "type": "array",
+                "items": {
+                  "$ref": "base.json#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "base.json#/components/schemas/limit"
+          },
+          "next": {
+            "$ref": "base.json#/components/schemas/cursor"
+          },
+          "previous": {
+            "$ref": "base.json#/components/schemas/cursor"
+          }
+        }
+      },
+      "Asset-meta": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "base.json#/components/schemas/address"
+          },
+          "timestamp": {
+            "$ref": "base.json#/components/schemas/date"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "created_by",
+          "timestamp"
+        ]
+      },
+      "Asset-Create": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/Asset-meta"
+          },
+          "signature": {
+            "$ref": "base.json#/components/schemas/signature"
+          }
+        },
+        "required": [
+          "meta",
+          "signature"
+        ]
+      },
+      "Asset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Asset-meta"
+          },
+          "signature": {
+            "$ref": "base.json#/components/schemas/signature"
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Assets": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Asset"
+            }
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "base.json#/components/schemas/pagination-response"
+          }
+        }
+      }
+
+    },
+    "examples": {
+
+      "query-asset": {
+        "query": {
+          "assets": [{
+            "field": "object.meta.created_by",
+            "operator": "starts-with",
+            "value": "0x123..."
+          }],
+          "events": [{
+            "field": "object.data.name",
+            "operator": "starts-with",
+            "value": "Event"
+          }]
+        },
+        "limit": 45,
+        "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      },
+      "Asset-Create": {
+        "meta": {
+          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+          "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xe633051fc76ae..."
+      },
+      "Object-Created": {
+        "proof": "0x0192cbd1c59b40ea97f7bc102a16c325a3066bb6b68c9c16bae447d8bb38565a66da29...",
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "receipt": {
+          "object_hash": "0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5",
+          "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+          "received_at": 1579278115000,
+          "organization": "0x123..."
+        }
+      },
+      "Asset": {
+        "response": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+          },
+          "signature": "0xe633051fc76ae...",
+          "receipt": {
+            "received_at": 1579278115000
+          }
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Assets": {
+        "response": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+          },
+          "signature": "0xe633051fc76ae...",
+          "receipt": {
+            "received_at": 1579278115000
+          }
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "hasNext": true,
+          "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
+          "hasPrevious": true,
+          "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+        }
+      }
+
+    },
+    "parameters": {
+
+      "id-asset": {
+        "name": "Asset ID",
+        "description": "ID of an asset",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      }
+
+    },
+
+    "responses": {
+
+      "Asset": {
+        "description": "Asset result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Asset"
+            },
+            "example": {
+              "$ref": "#/components/examples/Asset"
+            }
+          }
+        }
+      },
+      "Assets": {
+        "description": "Asset results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Assets"
+            },
+            "example": {
+              "$ref": "#/components/examples/Assets"
+            }
+          }
+        }
+      }
+
+    },
+
+    "requestBodies": {
+
+      "search-asset": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-asset"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-asset"
+            }
+          }
+        }
+      },
+      "Asset-Create": {
+        "description": "Asset create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Asset-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/Asset-Create"
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+}

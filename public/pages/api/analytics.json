@@ -1,0 +1,176 @@
+{
+  "components": {
+
+    "schemas": {
+
+      "organization_id": {
+        "type": "string",
+        "description": "Organization's ID"
+      },
+      "collection": {
+        "type": "string",
+        "description": "Collection name",
+        "enum": ["assets", "events", "documents", "accounts", "organizations", "permissions", "apiKeys"]
+      },
+      "group_by": {
+        "type": "string",
+        "description": "Group by parameter",
+        "enum": ["hour", "day", "month", "year"]
+      },
+      "start": {
+        "type": "integer",
+        "description": "Unix timestamp in milliseconds",
+        "format": "int32"
+      },
+      "end": {
+        "type": "integer",
+        "description": "Unix timestamp in milliseconds",
+        "format": "int32"
+      },
+      "count": {
+        "type": "integer",
+        "format": "int32",
+        "example": 24
+      },
+      "Count": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/count"
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          }
+        }
+      },
+      "data points": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "$ref": "#/components/schemas/count"
+            },
+            "timestamp": {
+              "type": "integer",
+              "description": "Unix timestamp in seconds",
+              "format": "int32"
+            }
+          }
+        },
+        "additionalItems": false
+      },
+      "Data points": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "$ref": "#/components/schemas/data points"
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          }
+        }
+      }
+
+    },
+
+    "examples": {
+
+      "Count": {
+        "response": 24,
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Data points": {
+        "response": [{
+          "timestamp": 1583948398,
+          "count": 5
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      }
+
+    },
+
+    "parameters": {
+
+      "organization_id": {
+        "name": "organization_id",
+        "description": "ID of an organization",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/organization_id"
+        }
+      },
+      "collection": {
+        "name": "collection",
+        "description": "Collection name",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/collection"
+        }
+      },
+      "start": {
+        "name": "start",
+        "description": "Unix timestamp in milliseconds",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/start"
+        }
+      },
+      "end": {
+        "name": "end",
+        "description": "Unix timestamp in milliseconds",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/end"
+        }
+      },
+      "group_by": {
+        "name": "group_by",
+        "description": "Group by parametere",
+        "in": "path",
+        "schema": {
+          "$ref": "#/components/schemas/group_by"
+        }
+      }
+
+    },
+
+    "responses": {
+
+      "Count": {
+        "description": "Count result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Count"
+            },
+            "example": {
+              "$ref": "#/components/examples/Count"
+            }
+          }
+        }
+      },
+      "Data points": {
+        "description": "Data points result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Data points"
+            },
+            "example": {
+              "$ref": "#/components/examples/Data points"
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+}

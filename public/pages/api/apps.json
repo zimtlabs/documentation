@@ -1,0 +1,432 @@
+{
+  "components": {
+
+    "schemas": {
+
+      "query-apps": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "apps": {
+                "type": "array",
+                "items": {
+                  "$ref": "base.json#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "base.json#/components/schemas/limit"
+          },
+          "next": {
+            "$ref": "base.json#/components/schemas/cursor"
+          },
+          "previous": {
+            "$ref": "base.json#/components/schemas/cursor"
+          }
+        }
+      },
+      "App-data": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "private": {
+            "boolean": "string"
+          },
+          "private_for": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true,
+            "additionalItems": false
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true,
+            "additionalItems": false
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true,
+            "additionalItems": false
+          },
+          "properties": {
+            "type": "object"
+          },
+          "documents": {
+            "$ref": "base.json#/components/schemas/documents"
+          },
+          "content": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "name",
+          "content"
+        ]
+      },
+      "App": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/object-meta-simple"
+          },
+          "signature": {
+            "$ref": "base.json#/components/schemas/signature"
+          },
+          "data": {
+            "$ref": "#/components/schemas/App-data"
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "data",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Apps-update": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/App-data"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data"
+        ]
+      },
+      "App-Create": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "$ref": "base.json#/components/schemas/object-simple"
+          },
+          "data": {
+            "$ref": "#/components/schemas/App-data"
+          }
+        },
+        "required": [
+          "object",
+          "data"
+        ]
+      },
+      "Apps": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/App"
+            }
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "base.json#/components/schemas/pagination-response"
+          }
+        }
+      }
+
+    },
+
+    "examples": {
+
+      "query-apps": {
+        "query": {
+          "apps": [{
+            "field": "data.name",
+            "operator": "starts-with",
+            "value": "App"
+          }]
+        },
+        "limit": 45,
+        "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      },
+      "App-Create": {
+        "object": {
+          "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+            "timestamp": "2020-02-10T19:16:13Z"
+          },
+          "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+        },
+        "data": {
+          "name": "App",
+          "description": "Description",
+          "tags": ["tag1", "tag2"],
+          "verified": true,
+          "private": false,
+          "content": {
+            "UI": {},
+            "server": {},
+            "permissions": [{
+                "name": "Farmer",
+                "actions": [
+                  "asset:PutObject",
+                  "asset:GetObject"
+                ],
+                "resources": {
+                  "events": [{
+                    "field": "data.asset_type",
+                    "operator": "equal",
+                    "value": "material"
+                  }]
+                }
+              },
+              {
+                "name": "Inspector",
+                "actions": [
+                  "asset:PutObject",
+                  "asset:GetObject"
+                ],
+                "resources": {
+                  "events": [{
+                    "field": "data.asset_type",
+                    "operator": "equal",
+                    "value": "inspection"
+                  }]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "App": {
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "meta": {
+          "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+          "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "data": {
+          "name": "App",
+          "description": "Description",
+          "tags": ["tag1", "tag2"],
+          "verified": true,
+          "private": false,
+          "content": {
+            "UI": {},
+            "server": {},
+            "permissions": [{
+                "name": "Farmer",
+                "actions": [
+                  "asset:PutObject",
+                  "asset:GetObject"
+                ],
+                "resources": {
+                  "events": [{
+                    "field": "data.asset_type",
+                    "operator": "equal",
+                    "value": "material"
+                  }]
+                }
+              },
+              {
+                "name": "Inspector",
+                "actions": [
+                  "asset:PutObject",
+                  "asset:GetObject"
+                ],
+                "resources": {
+                  "events": [{
+                    "field": "data.asset_type",
+                    "operator": "equal",
+                    "value": "inspection"
+                  }]
+                }
+              }
+            ]
+          }
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+        "receipt": {
+          "received_at": 1579967810000
+        }
+      },
+      "Apps-update": {
+        "data": {
+          "name": "New app name",
+          "tags": ["tag4"]
+        }
+      },
+      "Apps": {
+        "response": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+            "timestamp": "2020-02-10T19:16:13Z"
+          },
+          "data": {
+            "name": "App",
+            "description": "Description",
+            "tags": ["tag1", "tag2"],
+            "verified": true,
+            "private": false,
+            "content": {
+              "UI": {},
+              "server": {},
+              "permissions": [{
+                  "name": "Farmer",
+                  "actions": [
+                    "asset:PutObject",
+                    "asset:GetObject"
+                  ],
+                  "resources": {
+                    "events": [{
+                      "field": "data.asset_type",
+                      "operator": "equal",
+                      "value": "material"
+                    }]
+                  }
+                },
+                {
+                  "name": "Inspector",
+                  "actions": [
+                    "asset:PutObject",
+                    "asset:GetObject"
+                  ],
+                  "resources": {
+                    "events": [{
+                      "field": "data.asset_type",
+                      "operator": "equal",
+                      "value": "inspection"
+                    }]
+                  }
+                }
+              ]
+            }
+          },
+          "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+          "receipt": {
+            "received_at": 1579967810000
+          }
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "hasNext": true,
+          "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
+          "hasPrevious": true,
+          "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+        }
+      }
+
+    },
+    "parameters": {
+
+      "id-app": {
+        "name": "id",
+        "description": "ID of an app",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      }
+
+    },
+
+    "responses": {
+
+      "App": {
+        "description": "App result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/App"
+            },
+            "example": {
+              "$ref": "#/components/examples/App"
+            }
+          }
+        }
+      },
+      "Apps": {
+        "description": "Apps results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Apps"
+            },
+            "example": {
+              "$ref": "#/components/examples/Apps"
+            }
+          }
+        }
+      }
+
+    },
+    "requestBodies": {
+
+      "search-apps": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-apps"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-apps"
+            }
+          }
+        }
+      },
+      "App-Create": {
+        "description": "App create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/App-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/App-Create"
+            }
+          }
+        }
+      },
+      "App-update": {
+        "description": "Apps update",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Apps-update"
+            },
+            "example": {
+              "$ref": "#/components/examples/Apps-update"
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+}
