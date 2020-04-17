@@ -114,14 +114,13 @@
       },
       "identifiers": {
         "type": "object",
-        "patternProperties": {
-          "^.*$": {
+        "properties": {
+          "Any property name": {
             "type": "array",
-            "uniqueItems": true,
-            "minItems": 1,
             "items": {
               "type": "string"
             },
+            "minItems": 1,
             "additionalItems": false
           }
         }
@@ -264,17 +263,55 @@
         "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
       },
       "Event-Create": {
-        "meta": {
-          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-          "timestamp": "2020-02-10T19:16:13Z",
-          "asset_id": "0x123...",
-          "data_hash": "0x123..."
-        },
         "data": {
           "type": "info",
-          "name": "Info event"
-        },
-        "signature": "0xe633051fc76ae..."
+          "name": "Palette of fruit",
+          "asset_type": "palette",
+          "documents": [{
+              "name": "photo-457882-1-1587129086010",
+              "type": "image/jpeg",
+              "id": "0xb4d0f01d79e420ff4ff5edaabd49df2d677b1b01fd6d83801cd..."
+            },
+            {
+              "name": "text-file-1-1587129090597",
+              "type": "text/plain",
+              "id": "0xb78321b49fbf5df5387f696a4d2c174ce0f01b7443f896030e1..."
+            }
+          ],
+          "identifiers": {
+            "AAB": [
+              "123",
+              "12345"
+            ],
+            "EEC": [
+              "asd"
+            ]
+          },
+          "location": {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                21.8808406,
+                14.333475399999998
+              ]
+            },
+            "properties": {
+              "name": "Street, Town, Country",
+              "city": "Town",
+              "country": "US",
+              "route": "Street",
+              "street_number": "Street number"
+            }
+          },
+          "properties": {
+            "Custom property 1": "123",
+            "Custom property 2": "1234",
+            "Nested custom prop": {
+              "asd": 123
+            }
+          }
+        }
       },
       "Event": {
         "response": {

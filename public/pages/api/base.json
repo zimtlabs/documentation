@@ -310,14 +310,13 @@
       },
       "identifiers": {
         "type": "object",
-        "patternProperties": {
-          "^.*$": {
+        "properties": {
+          "Any property name": {
             "type": "array",
-            "uniqueItems": true,
-            "minItems": 1,
             "items": {
               "type": "string"
             },
+            "minItems": 1,
             "additionalItems": false
           }
         }
