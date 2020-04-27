@@ -89,6 +89,7 @@ export default function Home() {
                                 { type: 'h6', text: `Get assets` },
                                 {
                                     type: 'code', format: 'bash', text: `curl -X GET HUB_API_URL/assets \\
+-H 'ZIMT_API_KEY: 0x123...'
 -H 'Authorization: ZIMT_TOKEN eaw3123...'
 
 // response

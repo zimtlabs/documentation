@@ -253,7 +253,7 @@ export function textToHash(text, unique = {}) {
 }
 
 export const getGithubFileURL = (folders, file, name) => {
-    let url = `https://github.com/sensia-io/documentation/blob/master/public/pages`;
+    let url = `https://github.com/zimtlabs/documentation/blob/master/public/pages`;
     name = name || `${file || folders[folders.length - 1]}.md`;
 
     if (folders) folders.forEach(folder => url += `/${folder}`);
@@ -264,7 +264,7 @@ export const getGithubFileURL = (folders, file, name) => {
 };
 
 export const getRawGithubFileURL = (folders, file, name) => {
-    let url = `https://raw.githubusercontent.com/sensia-io/documentation/master/public/pages`;
+    let url = `https://raw.githubusercontent.com/zimtlabs/documentation/master/public/pages`;
     name = name || `${file || folders[folders.length - 1]}.md`;
 
     if (folders) folders.forEach(folder => url += `/${folder}`);
