@@ -263,6 +263,12 @@
         "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
       },
       "Event-Create": {
+        "meta": {
+          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+          "timestamp": "2020-02-10T19:16:13Z",
+          "asset_id": "0x123...",
+          "data_hash": "0x123..."
+        },
         "data": {
           "type": "info",
           "name": "Palette of fruit",
@@ -311,7 +317,8 @@
               "asd": 123
             }
           }
-        }
+        },
+        "signature": "0xe633051fc76ae..."
       },
       "Event": {
         "response": {
