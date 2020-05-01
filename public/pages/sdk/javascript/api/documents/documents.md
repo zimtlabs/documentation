@@ -11,13 +11,22 @@ Used for create document method.
 ```javascript
 const result = sdk.documents.generateDocument(Document data);
 // sdk.documents.generateDocument({
-//     "type ": "image/png",
-//     "name": "Image",
-//     "content": {
-//         "dataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAADWCAMAAADl7J7tAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDcYeAAEGWge7AAAAAElFTkSuQmCC"
+//     // Meta is not required
+//     "meta": {
+//         // Valid ISO data, max 24h in the future
+//         // Default is now
+//         timestamp: '2020-02-10T19:16:13+02:00',
 //     },
-//     "properties": {
-//         "prop": 7
+//     // Data is required
+//     "data": {
+//         "type ": "image/png",
+//         "name": "Image",
+//         "content": {
+//             "dataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAADWCAMAAADl7J7tAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDcYeAAEGWge7AAAAAElFTkSuQmCC"
+//         },
+//         "properties": {
+//             "prop": 7
+//         }
 //     }
 // });
 
@@ -25,7 +34,7 @@ const result = sdk.documents.generateDocument(Document data);
 {
   "meta": {
     "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-    "timestamp": "2020-02-10T19:16:13Z",
+    "timestamp": "2020-02-10T19:16:13+02:00",
     "data_hash": "0x123..."
   },
   "data": {

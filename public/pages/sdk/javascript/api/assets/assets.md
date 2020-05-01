@@ -9,13 +9,22 @@ Returns signed asset object.
 Used for create asset method.
 
 ```javascript
-const result = sdk.assets.generateAsset();
+const result = sdk.assets.generateAsset(Asset);
+// {
+//     // Meta is not required
+//     meta: {
+//         // Valid ISO data, max 24h in the future
+//         // Default is now
+//         timestamp: '2020-02-10T19:16:13+02:00',
+//     }
+// }
+
 
 // result
 {
     "meta": {
         "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-        "timestamp": "2020-02-10T19:16:13Z"
+        "timestamp": "2020-02-10T19:16:13+02:00"
     },
     "signature": "0xe633051fc76ae...",
 }

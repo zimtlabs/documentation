@@ -11,15 +11,24 @@ Used for create event method.
 ```javascript
 const result = sdk.events.generateEvent(asset_id: string, Event data);
 // sdk.events.generateEvent('0x123...', {
-//     "type ": "info",
-//     "name": "Info event"
+//     // Meta is not required
+//     "meta": {
+//         // Valid ISO data, max 24h in the future
+//         // Default is now
+//         timestamp: '2020-02-10T19:16:13+02:00',
+//     },
+//     // Data is required
+//     "data": {
+//         "type ": "info",
+//         "name": "Info event"
+//     }
 // });
 
 // result
 {
   "meta": {
     "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-    "timestamp": "2020-02-10T19:16:13Z",
+    "timestamp": "2020-02-10T19:16:13+02:00",
     "asset_id": "0x123...",
     "data_hash": "0x123..."
   },
