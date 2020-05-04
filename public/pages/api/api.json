@@ -1751,7 +1751,7 @@
     "/api-keys/public": {
       "get": {
         "summary": "Get public API keys",
-        "description": "Returns a list of public (private: false) API keys.",
+        "description": "Returns a list of public (private: false) API keys, and active API keys from your organization.",
         "tags": [
           "API keys"
         ],
