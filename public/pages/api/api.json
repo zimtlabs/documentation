@@ -1711,7 +1711,7 @@
         "security": [{
           "ZIMT API key": [],
           "ZIMT Token": [
-            "Hub admin"
+            "Organization admin"
           ]
         }],
         "parameters": [
@@ -1758,8 +1758,6 @@
         "security": [{
           "ZIMT API key": [],
           "ZIMT Token": [
-            "Hub admin",
-            "Organization super admin",
             "Organization admin"
           ]
         }],
@@ -1785,7 +1783,7 @@
         "security": [{
           "ZIMT API key": [],
           "ZIMT Token": [
-            "Hub admin"
+            "Organization admin"
           ]
         }],
         "requestBody": {
@@ -1809,7 +1807,7 @@
         "security": [{
           "ZIMT API key": [],
           "ZIMT Token": [
-            "Hub admin"
+            "Organization admin"
           ]
         }],
         "parameters": [
@@ -1831,7 +1829,7 @@
         "security": [{
           "ZIMT API key": [],
           "ZIMT Token": [
-            "Hub admin"
+            "Organization admin"
           ]
         }],
         "requestBody": {
