@@ -399,6 +399,41 @@ const result = await sdk.organizations.createOrganizationAccount(organization_id
 }
 ```
 
+## Organization signup
+
+Registers an organization account.
+
+[API reference](/api#tag/Organizations/paths/~1organizations~1{id}~1signup/post).
+
+```javascript
+const result = await sdk.organizations.publicSignup(organization_id: string, Account data);
+// sdk.organizations.publicSignup(
+//     'organization_id',
+//     {
+//         "account": {
+//             "full_name": "John Doe",
+//             "email": "john@gmail.com",
+//             "address": "0x4DC2f66Ea6f7Cd898342378e514cBDAD9dE5CC1B",
+//             "security": {
+//                 "token": "a4123asuiasy4uay3iaisyu3oiasu3iaous34"
+//             }
+//         }
+//     }
+// );
+
+// result
+{
+  "proof": "0x0192cbd1c59b40ea97f7bc102a16c325a3066bb6b68c9c16bae447d8bb38565a66da29...",
+  "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+  "receipt": {
+    "object_hash": "0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5",
+    "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+    "received_at": 1579278115000,
+    "organization": "0x123..."
+  }
+}
+```
+
 ## Get many organization apps
 
 Returns list of organization apps.

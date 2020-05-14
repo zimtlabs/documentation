@@ -173,6 +173,17 @@
           "data"
         ]
       },
+      "Organization-Signup": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "$ref": "accounts.json#/components/schemas/Account-Create-data"
+          }
+        },
+        "required": [
+          "account"
+        ]
+      },
       "OrganizationPublicDetails": {
         "type": "object",
         "properties": {
@@ -450,6 +461,16 @@
           "active": true
         }
       },
+      "Organization-Signup": {
+        "account": {
+          "full_name": "John Doe",
+          "email": "john@gmail.com",
+          "address": "0x4DC2f66Ea6f7Cd898342378e514cBDAD9dE5CC1B",
+          "security": {
+            "token": "a4123asuiasy4uay3iaisyu3oiasu3iaous34"
+          }
+        }
+      },
       "Organizations": {
         "response": [{
           "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
@@ -699,6 +720,19 @@
             },
             "example": {
               "$ref": "#/components/examples/Organization-Create-Account"
+            }
+          }
+        }
+      },
+      "Organization-Signup": {
+        "description": "Organization signup",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organization-Signup"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organization-Signup"
             }
           }
         }

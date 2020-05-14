@@ -795,6 +795,29 @@
         }
       }
     },
+    "/organizations/{id}/signup": {
+      "post": {
+        "summary": "Organization signup",
+        "description": "Registers an organization account.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT API key": []
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "requestBody": {
+          "$ref": "organizations.json#/components/requestBodies/Organization-Signup"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" }
+        }
+      }
+    },
     "/organizations/me": {
       "get": {
         "summary": "My organization",
