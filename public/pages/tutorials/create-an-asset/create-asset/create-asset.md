@@ -21,7 +21,7 @@ We will:
     - Add identifiers, one or more by clicking + icon in identifiers title.
 
 ### Create asset form
-![Assets create form](/pages/tutorials/assets/images/create-asset-form-1.png)
+![Assets create form](/pages/tutorials/assets/images/create-asset-form-1.png) \
 ![Assets create form](/pages/tutorials/assets/images/create-asset-form-2.png)
 
 
