@@ -1,5 +1,6 @@
 
 const Menu = [
+    { title: 'API', pathname: '/api' },
     {
         title: 'SDK',
         pathname: '/sdk',
@@ -39,7 +40,22 @@ const Menu = [
             },
         ],
     },
-    { title: 'API', pathname: '/api' },
+    {
+        title: 'Tutorials',
+        pathname: '/tutorials',
+        children: [
+            {
+                title: 'Create an Asset',
+                pathname: '/tutorials/create-an-asset',
+                children: [
+                    { title: 'Getting started', pathname: '/tutorials/create-an-asset/getting-started' },
+                    { title: 'Create permissions', pathname: '/tutorials/create-an-asset/create-permissions' },
+                    { title: 'Create asset', pathname: '/tutorials/create-an-asset/create-asset' },
+                    { title: 'Display in Viewer', pathname: '/tutorials/create-an-asset/display-in-viewer' },
+                ],
+            },
+        ],
+    },
 
     { type: 'divider' },
 

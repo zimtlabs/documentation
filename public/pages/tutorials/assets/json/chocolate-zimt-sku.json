@@ -1,0 +1,113 @@
+[{
+    "meta": {
+      "timestamp": "2019-04-10T12:33:23Z"
+    },
+    "data": {
+      "type": "info",
+      "asset_type": "zimt.sku",
+      "name": "Madagascar Sea Salt - 72% Cocoa",
+      "documents": [{
+        "name": "chocolate-1",
+        "type": "image/jpeg",
+        "id": "0xdf2d6dd1685bc96ea0139c7690ea5e93a77200a88df887af1fa52ca6f1ccd233"
+      }, {
+        "name": "chocolate-2",
+        "type": "image/jpeg",
+        "id": "0xeb0f9f869ec62b7476f8504e2b1e7e11029a5f32565850dcf1090e909fb98cd2"
+      }],
+      "identifiers": {
+        "id": ["SKU-00049"],
+        "GTIN": ["1043345532"]
+      },
+      "properties": {
+        "description": "One bite of our newest creation, 72% of pure Malagasy dark chocolate with sea salt will transport you to the wild beaches of Madagascar. Exclusively made with organic cocoa, organic sugar, organic everything! All locally made and sustainably produced.",
+        "Weight (grams)": "80",
+        "Ingredients": [
+          ["Organic cocoa beans", "72%"],
+          ["Organic cane sugar", "15%"],
+          ["Organic cocoa butter", "10%"],
+          ["Sea Salt", "3%"]
+        ],
+        "Product Information": {
+          "Tasting Notes": "Smokey, Suave, with hints of cinammon and exotic spices.",
+          "Attributes": ["No-GMOs", "Vegan", "Gluten Free,anyway. Kosher, Soy Free"],
+          "Brand": "ZIMT Essentials - Cacao"
+        },
+        "Product Origin": {
+          "Origin": "Madagascar"
+        }
+      }
+    }
+  },
+  {
+    "meta": {
+      "timestamp": "2019-04-10T12:43:23Z"
+    },
+    "data": {
+      "type": "zimt.harvested",
+      "name": "Raw Cocoa Harvested",
+      "documents": [{
+          "name": "harvest-1",
+          "type": "image/jpeg",
+          "id": "0x765c7b7f13552309f390a1fbc1ed23ee12527b054d0ecd6b0821f47699018438"
+        },
+        {
+          "name": "harvest-2",
+          "type": "image/jpeg",
+          "id": "0x24ee2af2ce4197bc8e2c2ef650a300f5e1a557843162ead3df14ea30da767ccb"
+        }
+      ],
+      "location": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -13.7111508, 48.4937583
+          ]
+        },
+        "properties": {
+          "name": "Sambriano Valley",
+          "city": "Ambanja",
+          "country": "Madagascar",
+          "country-code": "MG"
+        }
+      },
+      "properties": {
+        "_type": "public"
+      }
+    }
+  },
+  {
+    "meta": {
+      "timestamp": "2019-05-22T08:32:23Z"
+    },
+    "data": {
+      "type": "zimt.made",
+      "name": "Chocolate Prepared",
+      "documents": [{
+        "name": "made-1",
+        "type": "image/jpeg",
+        "id": "0x8d6bfb78306d8a7bb53e83082ea5c71195ceec41105ed732a4fe5fa65e964006"
+      }],
+      "location": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -13.6683037, 48.4448781
+          ]
+        },
+        "properties": {
+          "name": "Ambanja Atelier",
+          "city": "Ambanja",
+          "country": "Madagascar"
+        }
+      },
+      "properties": {
+        "_type": "public",
+        "_hide": ["timestamp"],
+        "Process": "Hand made"
+      }
+    }
+  }
+]

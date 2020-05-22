@@ -11,6 +11,11 @@ const useStyles = makeStyles(theme => ({
     },
     ol: {
         padding: '7px 24px',
+        flexWrap: 'nowrap',
+        overflowY: 'auto',
+    },
+    li: {
+        whiteSpace: 'nowrap',
     },
 }), { name: 'ZIMTBreadcrumbs' });
 
@@ -23,6 +28,7 @@ export default function ZIMTBreadcrumbs(props) {
             classes={{
                 root: classes.root,
                 ol: classes.ol,
+                li: classes.li,
             }}
             {...props}
         />
