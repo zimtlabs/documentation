@@ -55,6 +55,16 @@ const Menu = [
                     { title: 'Display in Viewer', pathname: '/tutorials/create-an-asset/display-in-viewer' },
                 ],
             },
+            {
+                title: 'Create a Viewer App',
+                pathname: '/tutorials/create-viewer-app',
+                children: [
+                    { title: 'Getting started', pathname: '/tutorials/create-viewer-app/getting-started' },
+                    { title: 'Create an API key', pathname: '/tutorials/create-viewer-app/create-api-key' },
+                    { title: 'Create permission', pathname: '/tutorials/create-viewer-app/create-permission' },
+                    { title: 'Display in Viewer', pathname: '/tutorials/create-viewer-app/display-in-viewer' },
+                ],
+            },
         ],
     },
 
