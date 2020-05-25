@@ -50,7 +50,8 @@ const Menu = [
                 children: [
                     { title: 'Getting started', pathname: '/tutorials/create-an-asset/getting-started' },
                     { title: 'Create permissions', pathname: '/tutorials/create-an-asset/create-permissions' },
-                    { title: 'Create asset', pathname: '/tutorials/create-an-asset/create-asset' },
+                    { title: 'Create asset with form', pathname: '/tutorials/create-an-asset/create-asset-form' },
+                    { title: 'Create asset with JSON', pathname: '/tutorials/create-an-asset/create-asset-json' },
                     { title: 'Display in Viewer', pathname: '/tutorials/create-an-asset/display-in-viewer' },
                 ],
             },
