@@ -51,6 +51,7 @@ const Menu = [
                     { title: 'Getting started', pathname: '/tutorials/create-an-asset/getting-started' },
                     { title: 'Create permissions', pathname: '/tutorials/create-an-asset/create-permissions' },
                     { title: 'Create asset with form', pathname: '/tutorials/create-an-asset/create-asset-form' },
+                    { title: 'Create events with form', pathname: '/tutorials/create-an-asset/create-asset-form-events' },
                     { title: 'Create asset with JSON', pathname: '/tutorials/create-an-asset/create-asset-json' },
                     { title: 'Display in Viewer', pathname: '/tutorials/create-an-asset/display-in-viewer' },
                 ],
