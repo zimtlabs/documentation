@@ -56,6 +56,9 @@
             "id": {
               "$ref": "#/components/parameters/id-document"
             },
+            "url": {
+              "type": "string"
+            },
             "name": {
               "type": "string"
             },
@@ -68,7 +71,6 @@
           },
           "additionalProperties": false,
           "required": [
-            "id",
             "name",
             "type"
           ]

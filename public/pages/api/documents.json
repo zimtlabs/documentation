@@ -328,7 +328,7 @@
 
       "id-document": {
         "name": "id",
-        "description": "ID of an document",
+        "description": "ID of a document",
         "in": "path",
         "schema": {
           "$ref": "base.json#/components/schemas/id"
