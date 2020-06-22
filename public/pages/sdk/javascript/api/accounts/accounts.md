@@ -10,7 +10,7 @@ Returns list of accounts.
 
 ```javascript
 const result = await sdk.accounts.getMany(Pagination);
-// sdk.accounts.getMany({ limit: 5, next: 'ea34...' });
+// sdk.accounts.getMany({ limit: 5, skip: 30 });
 
 // result
 {
@@ -39,10 +39,9 @@ const result = await sdk.accounts.getMany(Pagination);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -97,10 +96,9 @@ const result = await sdk.accounts.search(Query);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+          "limit": 30,
+          "skip": 30,
+          "total": 120
   }
 }
 ```

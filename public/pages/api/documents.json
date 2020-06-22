@@ -35,11 +35,8 @@
           "limit": {
             "$ref": "base.json#/components/schemas/limit"
           },
-          "next": {
-            "$ref": "base.json#/components/schemas/cursor"
-          },
-          "previous": {
-            "$ref": "base.json#/components/schemas/cursor"
+          "skip": {
+            "$ref": "base.json#/components/schemas/skip"
           }
         }
       },
@@ -223,7 +220,7 @@
           }]
         },
         "limit": 45,
-        "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+        "skip": 30
       },
       "Document-Create": {
         "meta": {
@@ -315,10 +312,9 @@
           "message": "Ok"
         },
         "pagination": {
-          "hasNext": true,
-          "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-          "hasPrevious": true,
-          "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+          "limit": 30,
+          "skip": 30,
+          "total": 120
         }
       }
 

@@ -51,7 +51,7 @@ Returns list of API keys.
 
 ```javascript
 const result = await sdk.apiKeys.getMany(Pagination);
-// sdk.apiKeys.getMany({ limit: 5, next: 'ea34...' });
+// sdk.apiKeys.getMany({ limit: 5, skip: 30 });
 
 // result
 {
@@ -88,10 +88,9 @@ const result = await sdk.apiKeys.getMany(Pagination);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -104,7 +103,7 @@ Returns list of public API keys.
 
 ```javascript
 const result = await sdk.apiKeys.getPublic(Pagination);
-// sdk.apiKeys.getPublic({ limit: 5, next: 'ea34...' });
+// sdk.apiKeys.getPublic({ limit: 5, skip: 30 });
 
 // result
 {
@@ -142,10 +141,9 @@ const result = await sdk.apiKeys.getPublic(Pagination);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -208,10 +206,9 @@ const result = await sdk.apiKeys.search(Query);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```

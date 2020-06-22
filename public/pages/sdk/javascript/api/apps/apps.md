@@ -33,7 +33,7 @@ Returns list of apps.
 
 ```javascript
 const result = await sdk.apps.getMany(Pagination);
-// sdk.apps.getMany({ limit: 5, next: 'ea34...' });
+// sdk.apps.getMany({ limit: 5, skip: 30 });
 
 // result
 {
@@ -66,10 +66,9 @@ const result = await sdk.apps.getMany(Pagination);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -82,7 +81,7 @@ Returns list of apps.
 
 ```javascript
 const result = await sdk.apps.search(Pagination);
-// sdk.apps.search({ limit: 5, next: 'ea34...' });
+// sdk.apps.search({ limit: 5, skip: 30 });
 
 // result
 {
@@ -115,10 +114,9 @@ const result = await sdk.apps.search(Pagination);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -201,7 +199,7 @@ Returns list of market apps.
 
 ```javascript
 const result = await sdk.apps.getManyMarket(Pagination);
-// sdk.apps.getManyMarket({ limit: 5, next: 'ea34...' });
+// sdk.apps.getManyMarket({ limit: 5, skip: 30 });
 
 // result
 {
@@ -234,10 +232,9 @@ const result = await sdk.apps.getManyMarket(Pagination);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -250,7 +247,7 @@ Returns list of market apps.
 
 ```javascript
 const result = await sdk.apps.searchMarket(Pagination);
-// sdk.apps.searchMarket({ limit: 5, next: 'ea34...' });
+// sdk.apps.searchMarket({ limit: 5, skip: 30 });
 
 // result
 {
@@ -283,10 +280,9 @@ const result = await sdk.apps.searchMarket(Pagination);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```

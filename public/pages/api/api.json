@@ -344,8 +344,7 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/next-query" },
-          { "$ref": "base.json#/components/parameters/previous-query" }
+          { "$ref": "base.json#/components/parameters/skip-query" }
         ],
         "responses": {
           "200": { "$ref": "accounts.json#/components/responses/Accounts" },
@@ -640,8 +639,7 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/next-query" },
-          { "$ref": "base.json#/components/parameters/previous-query" }
+          { "$ref": "base.json#/components/parameters/skip-query" }
         ],
         "responses": {
           "200": { "$ref": "organizations.json#/components/responses/Organizations" },
@@ -1066,8 +1064,7 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/next-query" },
-          { "$ref": "base.json#/components/parameters/previous-query" }
+          { "$ref": "base.json#/components/parameters/skip-query" }
         ],
         "responses": {
           "200": { "$ref": "apps.json#/components/responses/Apps" },
@@ -1189,8 +1186,7 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/next-query" },
-          { "$ref": "base.json#/components/parameters/previous-query" }
+          { "$ref": "base.json#/components/parameters/skip-query" }
         ],
         "responses": {
           "200": { "$ref": "apps.json#/components/responses/Apps" },
@@ -1297,8 +1293,7 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/next-query" },
-          { "$ref": "base.json#/components/parameters/previous-query" }
+          { "$ref": "base.json#/components/parameters/skip-query" }
         ],
         "responses": {
           "200": { "$ref": "permissions.json#/components/responses/Permissions" },
@@ -1445,8 +1440,7 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/next-query" },
-          { "$ref": "base.json#/components/parameters/previous-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" },
           { "$ref": "base.json#/components/parameters/attach" }
         ],
         "responses": {
@@ -1544,8 +1538,7 @@
         "parameters": [
           { "$ref": "assets.json#/components/parameters/id-asset" },
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/next-query" },
-          { "$ref": "base.json#/components/parameters/previous-query" }
+          { "$ref": "base.json#/components/parameters/skip-query" }
         ],
         "responses": {
           "200": { "$ref": "events.json#/components/responses/Events" },
@@ -1645,8 +1638,7 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/next-query" },
-          { "$ref": "base.json#/components/parameters/previous-query" }
+          { "$ref": "base.json#/components/parameters/skip-query" }
         ],
         "responses": {
           "200": { "$ref": "documents.json#/components/responses/Documents" },
@@ -1739,8 +1731,7 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/next-query" },
-          { "$ref": "base.json#/components/parameters/previous-query" }
+          { "$ref": "base.json#/components/parameters/skip-query" }
         ],
         "responses": {
           "200": { "$ref": "api-keys.json#/components/responses/APIkeys" },
@@ -1786,8 +1777,7 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/next-query" },
-          { "$ref": "base.json#/components/parameters/previous-query" }
+          { "$ref": "base.json#/components/parameters/skip-query" }
         ],
         "responses": {
           "200": { "$ref": "api-keys.json#/components/responses/APIkeys" },
@@ -1902,8 +1892,7 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/next-query" },
-          { "$ref": "base.json#/components/parameters/previous-query" }
+          { "$ref": "base.json#/components/parameters/skip-query" }
         ],
         "responses": {
           "200": { "$ref": "strategies.json#/components/responses/Strategies" },

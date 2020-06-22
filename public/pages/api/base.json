@@ -3,12 +3,20 @@
     "headers": {},
 
     "schemas": {
-
       "limit": {
         "type": "integer",
         "format": "int32",
         "minimum": 0,
         "maximum": 50
+      },
+      "skip": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 0
+      },
+      "total": {
+        "type": "integer",
+        "minimum": 0
       },
       "cursor": {
         "type": "string"
@@ -33,24 +41,20 @@
       "pagination-response": {
         "type": "object",
         "properties": {
-          "hasNext": {
-            "type": "boolean"
+          "limit": {
+            "$ref": "#/components/schemas/limit"
           },
-          "next": {
-            "$ref": "#/components/schemas/cursor"
+          "skip": {
+            "$ref": "#/components/schemas/skip"
           },
-          "hasPrevious": {
-            "type": "boolean"
-          },
-          "previous": {
-            "$ref": "#/components/schemas/cursor"
+          "total": {
+            "$ref": "#/components/schemas/total"
           }
         },
         "required": [
-          "hasNext",
-          "next",
-          "hasPrevious",
-          "previous"
+          "limit",
+          "skip",
+          "total"
         ]
       },
       "anyValue": {
@@ -169,11 +173,8 @@
           "limit": {
             "$ref": "#/components/schemas/limit"
           },
-          "next": {
-            "$ref": "#/components/schemas/cursor"
-          },
-          "previous": {
-            "$ref": "#/components/schemas/cursor"
+          "skip": {
+            "$ref": "#/components/schemas/skip"
           }
         }
       },
@@ -500,6 +501,14 @@
         "in": "query",
         "schema": {
           "$ref": "#/components/schemas/limit"
+        }
+      },
+      "skip-query": {
+        "name": "skip",
+        "description": "Number of results to skip",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/skip"
         }
       },
       "next-query": {

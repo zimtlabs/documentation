@@ -90,7 +90,7 @@ Returns list of events.
 
 ```javascript
 const result = await sdk.events.getEvents(asset_id: string, Pagination);
-// sdk.events.getEvents('0x123...', { limit: 5, next: 'ea34...' });
+// sdk.events.getEvents('0x123...', { limit: 5, skip: 30 });
 
 // result
 {
@@ -118,10 +118,9 @@ const result = await sdk.events.getEvents(asset_id: string, Pagination);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -176,10 +175,9 @@ const result = await sdk.events.searchEvents(asset_id: string, Query);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```

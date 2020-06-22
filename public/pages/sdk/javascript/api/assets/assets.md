@@ -71,7 +71,7 @@ Returns list of assets.
 
 ```javascript
 const result = await sdk.assets.getMany(Pagination, Asset options);
-// sdk.assets.getMany({ limit: 5, next: 'ea34...' }, { info: true, parse: true ));
+// sdk.assets.getMany({ limit: 5, skip: 30 }, { info: true, parse: true ));
 
 // result
 {
@@ -97,10 +97,9 @@ const result = await sdk.assets.getMany(Pagination, Asset options);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -148,10 +147,9 @@ const result = await sdk.assets.search(Query, Asset options);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```

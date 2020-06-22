@@ -10,7 +10,7 @@ Returns list of organizations.
 
 ```javascript
 const result = await sdk.organizations.getMany(Pagination);
-// sdk.organizations.getMany({ limit: 5, next: 'ea34...' });
+// sdk.organizations.getMany({ limit: 5, skip: 30 });
 
 // result
 {
@@ -38,10 +38,9 @@ const result = await sdk.organizations.getMany(Pagination);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -95,10 +94,9 @@ const result = await sdk.organizations.search(Query);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -307,7 +305,7 @@ Returns list of organization accounts.
 
 ```javascript
 const result = await sdk.organizations.getOrganizationAccounts(organization_id: string, Pagination);
-// sdk.organizations.getOrganizationAccounts('organization_id', { limit: 5, next: 'ea34...' });
+// sdk.organizations.getOrganizationAccounts('organization_id', { limit: 5, skip: 30 });
 
 // result
 {
@@ -336,10 +334,9 @@ const result = await sdk.organizations.getOrganizationAccounts(organization_id: 
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -442,7 +439,7 @@ Returns list of organization apps.
 
 ```javascript
 const result = await sdk.organizations.getManyOrganizationApps(Organization ID, Pagination);
-// sdk.organizations.getManyOrganizationApps('0x123...', { limit: 5, next: 'ea34...' });
+// sdk.organizations.getManyOrganizationApps('0x123...', { limit: 5, skip: 30 });
 
 // result
 {
@@ -468,10 +465,9 @@ const result = await sdk.organizations.getManyOrganizationApps(Organization ID, 
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -484,7 +480,7 @@ Returns list of organization apps.
 
 ```javascript
 const result = await sdk.organizations.searchOrganizationApps(Organization ID, Query);
-// sdk.organizations.searchOrganizationApps('0x123...', { limit: 5, next: 'ea34...' });
+// sdk.organizations.searchOrganizationApps('0x123...', { limit: 5, skip: 30 });
 
 // result
 {
@@ -510,10 +506,9 @@ const result = await sdk.organizations.searchOrganizationApps(Organization ID, Q
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -526,7 +521,7 @@ Returns list of active organization apps.
 
 ```javascript
 const result = await sdk.organizations.getManyActiveOrganizationApps(Organization ID, Pagination);
-// sdk.organizations.getManyActiveOrganizationApps('0x123...', { limit: 5, next: 'ea34...' });
+// sdk.organizations.getManyActiveOrganizationApps('0x123...', { limit: 5, skip: 30 });
 
 // result
 {
@@ -552,10 +547,9 @@ const result = await sdk.organizations.getManyActiveOrganizationApps(Organizatio
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -568,7 +562,7 @@ Returns list of active organization apps.
 
 ```javascript
 const result = await sdk.organizations.searchActiveOrganizationApps(Organization ID, Query);
-// sdk.organizations.searchActiveOrganizationApps('0x123...', { limit: 5, next: 'ea34...' });
+// sdk.organizations.searchActiveOrganizationApps('0x123...', { limit: 5, skip: 30 });
 
 // result
 {
@@ -594,10 +588,9 @@ const result = await sdk.organizations.searchActiveOrganizationApps(Organization
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```

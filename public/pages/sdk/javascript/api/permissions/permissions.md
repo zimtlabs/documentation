@@ -65,7 +65,7 @@ Returns list of permissions.
 
 ```javascript
 const result = await sdk.permissions.getMany(Pagination);
-// sdk.permissions.getMany({ limit: 5, next: 'ea34...' });
+// sdk.permissions.getMany({ limit: 5, skip: 30 });
 
 // result
 {
@@ -111,10 +111,9 @@ const result = await sdk.permissions.getMany(Pagination);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -186,10 +185,9 @@ const result = await sdk.permissions.search(Query);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```

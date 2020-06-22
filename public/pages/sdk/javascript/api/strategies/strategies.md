@@ -92,7 +92,7 @@ Returns list of strategies.
 
 ```javascript
 const result = await sdk.strategies.getMany(Pagination);
-// sdk.strategies.getMany({ limit: 5, next: 'ea34...' });
+// sdk.strategies.getMany({ limit: 5, skip: 30 });
 
 // result
 {
@@ -128,10 +128,9 @@ const result = await sdk.strategies.getMany(Pagination);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```

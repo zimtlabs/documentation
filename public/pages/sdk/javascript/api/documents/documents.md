@@ -112,7 +112,7 @@ Returns list of documents.
 
 ```javascript
 const result = await sdk.documents.getMany(Pagination);
-// sdk.documents.getMany({ limit: 5, next: 'ea34...' });
+// sdk.documents.getMany({ limit: 5, skip: 30 });
 
 // result
 {
@@ -142,10 +142,9 @@ const result = await sdk.documents.getMany(Pagination);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -201,10 +200,9 @@ const result = await sdk.documents.search(Query);
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```

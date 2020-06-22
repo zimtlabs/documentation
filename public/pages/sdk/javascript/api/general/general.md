@@ -32,7 +32,7 @@ const result = sdk.accounts.generateObjectWithMeta(true);
 
 | Name | Description | Type | Default | Example
 |:-----|:------------|:-----|:--------|:-------
-| Pagination | Pagination details | object | { } | { limit: 5, next: 'e1s23...' }
+| Pagination | Pagination details | object | { } | { limit: 5, skip: 30 }
 | Asset options | Additional asset options | object | { } | { info: true, parse: true }
 | Query | Query object for search methods | object | { } | { query: { assets: [ { field: 'object.meta.created_by', operator: 'starts-with', value: '0x123' } ] }, limit: 5 }
 
@@ -41,8 +41,7 @@ const result = sdk.accounts.generateObjectWithMeta(true);
 | Name | Description | Type | Default | Example
 |:-----|:------------|:-----|:--------|:-------
 | limit | Amount of results to return | number | 30 | 5
-| next | Next pagination cursor | string | none | eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0
-| previous | Previous pagination cursor | string | none | eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0
+| skip | Number of results to skip | number | 0 | 30
 
 ### Asset options
 
@@ -58,8 +57,7 @@ const result = sdk.accounts.generateObjectWithMeta(true);
 |:-----|:------------|:-----|:--------|:-------
 | query | Query object with search filters | object | none | { assets: [ { field: 'object.meta.created_by', operator: 'starts-with', value: '0x123' } ] }
 | limit | Amount of results to return | number | 30 | 5
-| next | Next pagination cursor | string | none | eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0
-| previous | Previous pagination cursor | string | none | eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0
+| skip | Number of results to skip | number | 0 | 30
 
 ### Query object
 
