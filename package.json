@@ -49,8 +49,8 @@
     "styled-components": "^5.0.1"
   },
   "engines": {
-    "node": "10.16",
-    "yarn": "1.17"
+    "node": ">=12.18",
+    "yarn": ">=1.22"
   },
   "devDependencies": {
     "typescript": "^3.7.4"

@@ -59,7 +59,7 @@ function AppDrawerNavItem(props) {
         const openedPages = StorageService.sidebarOpenedPathSub.getValue();
         const isOpenPath = openedPages.pages.find(key => key.indexOf(pathname.toLowerCase()) > -1);
 
-        if (!href && !open && isOpenPath) return true;
+        if (!href && isOpenPath) return true;
     });
     const [active, setActive] = useState();
     // eslint-disable-next-line no-unused-vars
