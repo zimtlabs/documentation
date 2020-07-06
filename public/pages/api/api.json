@@ -29,6 +29,10 @@
       "description": "Account management."
     },
     {
+      "name": "Auth",
+      "description": "Auth management."
+    },
+    {
       "name": "Analytics",
       "description": "Analytics management."
     },
@@ -66,12 +70,17 @@
     }
   ],
   "x-tagGroups": [{
+      "name": "Auth",
+      "tags": [
+        "Auth"
+      ]
+    },
+    {
       "name": "API keys",
       "tags": [
         "API keys"
       ]
-    },
-    {
+    }, {
       "name": "Apps",
       "tags": [
         "Apps"
@@ -166,6 +175,45 @@
       }
     },
 
+    "/auth/login": {
+      "post": {
+        "summary": "Login",
+        "description": "Returns an account authentication token.",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "$ref": "auth.json#/components/requestBodies/Login"
+        },
+        "responses": {
+          "200": { "$ref": "auth.json#/components/responses/Token" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/auth/token/refresh": {
+      "get": {
+        "summary": "Token refresh",
+        "description": "Returns a fresh new account authentication token.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": { "$ref": "auth.json#/components/responses/Token" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
     "/analytics/count/{collection}": {
       "get": {
         "summary": "Get collection count",
@@ -174,7 +222,6 @@
           "Analytics"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -198,7 +245,6 @@
           "Analytics"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -224,7 +270,6 @@
           "Analytics"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization admin"
@@ -250,7 +295,6 @@
           "Analytics"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization admin"
@@ -278,7 +322,6 @@
           "Analytics"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -305,7 +348,6 @@
           "Analytics"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization admin"
@@ -335,7 +377,6 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -361,7 +402,6 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -387,7 +427,6 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -411,7 +450,6 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -438,7 +476,6 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -457,7 +494,9 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT API key": []
+          "ZIMT Token": [
+            "API key"
+          ]
         }],
         "requestBody": {
           "$ref": "base.json#/components/requestBodies/getToken"
@@ -492,7 +531,9 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT API key": []
+          "ZIMT Token": [
+            "API key"
+          ]
         }],
         "requestBody": {
           "$ref": "accounts.json#/components/requestBodies/accountExists"
@@ -526,7 +567,6 @@
           "Accounts"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -632,7 +672,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -654,7 +693,9 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": []
+          "ZIMT Token": [
+            "API key"
+          ]
         }],
         "requestBody": {
           "$ref": "organizations.json#/components/requestBodies/Organization-Create"
@@ -673,7 +714,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -697,7 +737,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -719,7 +758,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -748,7 +786,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -772,7 +809,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -801,7 +837,9 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": []
+          "ZIMT Token": [
+            "API key"
+          ]
         }],
         "parameters": [
           { "$ref": "organizations.json#/components/parameters/id-organization" }
@@ -824,7 +862,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -843,7 +880,9 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": []
+          "ZIMT Token": [
+            "API key"
+          ]
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/organization" }
@@ -863,7 +902,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -888,7 +926,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -916,7 +953,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -941,7 +977,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -971,7 +1006,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -998,7 +1032,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -1028,7 +1061,6 @@
           "Organizations"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -1057,7 +1089,6 @@
           "Apps"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -1079,7 +1110,6 @@
           "Apps"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -1103,7 +1133,6 @@
           "Apps"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -1127,7 +1156,6 @@
           "Apps"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -1149,7 +1177,6 @@
           "Apps"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -1176,7 +1203,6 @@
           "Apps"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -1203,7 +1229,6 @@
           "Apps"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -1230,7 +1255,6 @@
           "Apps"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -1257,7 +1281,6 @@
           "Apps"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -1284,7 +1307,6 @@
           "Permissions"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -1305,7 +1327,6 @@
         "summary": "Create permission",
         "description": "Creates a permission.",
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -1334,7 +1355,6 @@
           "Permissions"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -1360,7 +1380,6 @@
           "Permissions"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1379,7 +1398,6 @@
           "Permissions"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -1403,7 +1421,6 @@
           "Permissions"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin",
             "Organization super admin",
@@ -1433,7 +1450,6 @@
           "Assets"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1452,7 +1468,6 @@
         "summary": "Create asset",
         "description": "Creates an asset.",
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1479,7 +1494,6 @@
           "Assets"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1505,7 +1519,6 @@
           "Assets"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1530,7 +1543,6 @@
           "Events"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1550,7 +1562,6 @@
         "summary": "Create event",
         "description": "Creates an event.",
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1580,7 +1591,6 @@
           "Events"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1606,7 +1616,6 @@
           "Events"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1631,7 +1640,6 @@
           "Documents"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1649,7 +1657,6 @@
         "summary": "Create document",
         "description": "Creates a document.",
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1676,7 +1683,6 @@
           "Documents"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1699,7 +1705,6 @@
           "Documents"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "All"
           ]
@@ -1724,7 +1729,6 @@
           "API keys"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Organization admin"
           ]
@@ -1743,7 +1747,6 @@
         "summary": "Create API key",
         "description": "Creates an API key.",
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -1770,7 +1773,6 @@
           "API keys"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Organization admin"
           ]
@@ -1794,7 +1796,6 @@
           "API keys"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Organization admin"
           ]
@@ -1818,7 +1819,6 @@
           "API keys"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Organization admin"
           ]
@@ -1840,7 +1840,6 @@
           "API keys"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Organization admin"
           ]
@@ -1885,7 +1884,6 @@
           "Strategies"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -1907,7 +1905,6 @@
           "Strategies"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -1931,7 +1928,6 @@
           "Strategies"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -1954,7 +1950,6 @@
           "Strategies"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -1977,7 +1972,6 @@
           "Strategies"
         ],
         "security": [{
-          "ZIMT API key": [],
           "ZIMT Token": [
             "Hub admin"
           ]
@@ -1998,15 +1992,9 @@
 
     "securitySchemes": {
 
-      "ZIMT API key": {
-        "name": "ZIMT_API_KEY",
-        "description": "\n\n ### About\n\nZIMT API key is a key registered/provided by ZIMT hub. <br />It allows you to make requests to ZIMT hub, without it you can't authenticate.<br />It has to be attached to every request headers.<br />Key has to exist and be active.\n\nUsage format: `ZIMT_API_KEY <API key>`\n\nExample: `headers['ZIMT_API_KEY'] = 0xA3eC2FCcB4D79723D3A060Fc8254e9Ec1B23a259`",
-        "type": "apiKey",
-        "in": "header"
-      },
       "ZIMT Token": {
         "name": "ZIMT token",
-        "description": "\n\n ### About\n\nZIMT token is a private key signed object, which is then serialized and base64 encoded.\n\nUsage format: `ZIMT_TOKEN <Token>`\n\nExample: `headers['Authorization'] = ZIMT_TOKEN eyJpZERhdGEiOnsiY3JlYXRlZEJ5IjoiM...`\n\n### Create token\n\n <pre><code class='language-js'>base64url(\n\tserializeForHashing({\n\t\tmeta: {\n\t\t\t// Registered account's address\n\t\t\tcreated_by: '0x123...',\n\t\t\t// Lifetime of the token, how long it's valid\n\t\t\t// ISO 8601 date format\n\t\t\tvalid_until: '2020-02-11T09:14:51.276Z',\n\t\t},\n\t\t// Meta object signed with account's private key\n\t\tsignature: sign(meta, privateKey),\n\t})\n);</code></pre>",
+        "description": "\n\n ### About\n\nZIMT token is a JWT token you receive using Hub login endpoint.\n\nUsage format: `ZIMT_TOKEN <Token>`\n\nExample: `headers['Authorization'] = ZIMT_TOKEN eyJpZERhdGEiOnsiY3JlYXRlZEJ5IjoiM...`",
         "type": "http",
         "scheme": "bearer",
         "in": "header"

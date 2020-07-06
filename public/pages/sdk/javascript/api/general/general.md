@@ -3,6 +3,18 @@
 <p class="description">Data overall used in the SDK.</p>
 
 
+## Ready
+
+Fetches Hub token and returns true on success, or returns true if token already exists.
+
+This token is used to authenticate all requests SDK makes to ZIMT Hub.
+
+```javascript
+const isReady = await sdk.ready();
+
+console.log(isReady) // true or false
+```
+
 ## Generate object with meta
 
 Returns signed object with meta.

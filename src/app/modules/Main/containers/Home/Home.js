@@ -89,7 +89,6 @@ export default function Home() {
                                 { type: 'h6', text: `Get assets` },
                                 {
                                     type: 'code', format: 'bash', text: `curl -X GET HUB_API_URL/assets \\
--H 'ZIMT_API_KEY: 0x123...'
 -H 'Authorization: ZIMT_TOKEN eaw3123...'
 
 // response
@@ -112,10 +111,9 @@ export default function Home() {
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "total": 445,
+    "limit": 30,
+    "skip": 0
   }
 }
 ` },
@@ -172,10 +170,9 @@ const assets = await sdk.assets.getMany();
     "message": "Ok"
   },
   "pagination": {
-    "hasNext": true,
-    "next": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0",
-    "hasPrevious": true,
-    "previous": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+    "total": 445,
+    "limit": 30,
+    "skip": 0
   }
 }
 ` },

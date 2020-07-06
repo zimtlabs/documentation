@@ -31,6 +31,19 @@ const sdk = new ZIMTHubSDK({
 
 ## Usage
 
+### SDK getting started
+
+This method will fetch ZIMT Hub token that will be included with all Hub requests SDK makes, or return true if token is already fetched. \
+So one time, on app start where you initiate your SDK you can await for SDK to fetch the token and be ready, so you are able to make requests right after SDK init.
+
+```javascript
+const isReady = await sdk.ready();
+
+console.log(isReady) // true or false
+```
+
+### Requests
+
 **Note**:<br />
 Your provided API key has to exist and be active to authenticate.<br />
 To use SDK methods that require authentication, you have to have an already registered account in the Hub API (in Hub API URL and with private key used in SDK instantiation).
