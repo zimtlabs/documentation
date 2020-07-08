@@ -104,6 +104,43 @@ const result = await sdk.assets.getMany(Pagination, Asset options);
 }
 ```
 
+## Get empty assets
+
+Returns list of assets with no events (empty assets).
+
+[API reference](/api#tag/Assets/paths/~1assets~1empty/get).
+
+```javascript
+const result = await sdk.assets.getManyEmpty(Pagination);
+// sdk.assets.getMany({ limit: 5, skip: 30 });
+
+// result
+{
+  "response": [
+    {
+      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+      "meta": {
+        "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+        "timestamp": "2020-02-10T19:16:13Z"
+      },
+      "signature": "0xe633051fc76ae...",
+      "receipt": {
+        "received_at": 1579278115000
+      }
+    }
+  ],
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  },
+  "pagination": {
+    "limit": 30,
+    "skip": 30,
+    "total": 120
+  }
+}
+```
+
 ## Search assets
 
 Returns list of assets.

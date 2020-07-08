@@ -1486,6 +1486,28 @@
         }
       }
     },
+    "/assets/empty": {
+      "get": {
+        "summary": "Get empty assets",
+        "description": "Returns a list of assets with no events (empty assets).",
+        "tags": [
+          "Assets"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "assets.json#/components/responses/Assets" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
     "/assets/search": {
       "post": {
         "summary": "Search assets",
