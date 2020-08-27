@@ -342,6 +342,17 @@
             "$ref": "base.json#/components/schemas/pagination-response"
           }
         }
+      },
+      "OrganizationAppUpgrade": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          }
+        }
       }
 
     },
@@ -540,6 +551,13 @@
           "skip": 30,
           "total": 120
         }
+      },
+      "OrganizationAppUpgrade": {
+        "response": "Upgraded",
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
       }
 
     },
@@ -629,6 +647,19 @@
             },
             "example": {
               "$ref": "#/components/examples/OrganizationApps"
+            }
+          }
+        }
+      },
+      "OrganizationAppUpgrade": {
+        "description": "Organization app upgrade",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrganizationAppUpgrade"
+            },
+            "example": {
+              "$ref": "#/components/examples/OrganizationAppUpgrade"
             }
           }
         }

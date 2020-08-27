@@ -5,4 +5,4 @@
  * Contact: tech@zimt.co
  */
 
-export { default as reset } from './reset';
+export { default as Middleware } from './Middleware';

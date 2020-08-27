@@ -1,19 +1,22 @@
-import React, { useReducer, useEffect, useContext } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider, makeStyles } from '@material-ui/styles';
-import { StylesContext } from '@material-ui/styles/StylesProvider';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Router } from 'react-router-dom';
 
 import { reducer } from './store';
-import { normalize, uiReset } from '../styles';
 import Routes from './Routes';
 import { history, theme as ThemeObject } from './utils';
+import { ScreenLoader } from './components';
+import { reset } from '../styles';
 
 export const theme = createMuiTheme(ThemeObject);
 
 const useStyles = makeStyles(theme => ({
+    '@global': {
+        ...reset(theme),
+    },
     root: {
         display: 'flex',
         flexDirection: 'column',
@@ -32,9 +35,11 @@ const useStyles = makeStyles(theme => ({
 export let dispatch = {};
 
 export default function App(props) {
+    const [loaded, setLoaded] = useState(false);
     const [state, _dispatch] = useReducer(reducer, theme);
     const classes = useStyles();
-    const stylesContext = useContext(StylesContext);
+
+    const { loading, isLatestVersion, refreshCacheAndReload } = props;
 
     useEffect(() => {
         init();
@@ -42,12 +47,14 @@ export default function App(props) {
     }, []);
 
     const init = () => {
-        stylesContext.jss.createStyleSheet(normalize).attach();
-        stylesContext.jss.createStyleSheet(uiReset(theme)).attach();
-
         dispatch = _dispatch;
+
+        setLoaded(true);
     };
 
+    // Show some loader screen
+    if (!loading && !isLatestVersion) refreshCacheAndReload();
+    if (loading || !loaded || (!loading && !isLatestVersion)) return <ScreenLoader />;
     return (
         <ThemeProvider theme={state}>
             <MuiPickersUtilsProvider utils={MomentUtils}>

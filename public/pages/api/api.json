@@ -9,11 +9,11 @@
   },
   "servers": [{
       "url": "https://hub.test.zi.mt",
-      "description": "Hub API - Test"
+      "description": "Hub core API - Test"
     },
     {
       "url": "https://hub.zi.mt",
-      "description": "Hub API - Production"
+      "description": "Hub core API - Production"
     }
   ],
   "tags": [{
@@ -998,6 +998,32 @@
         }
       }
     },
+    "/organizations/{id}/apps/{organization-app-id}/upgrade": {
+      "get": {
+        "summary": "Upgrades organization app to newest hub app version.",
+        "description": "Upgrades an organization app to newest hub app version.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/id-organization-app" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationAppUpgrade" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
     "/organizations/{id}/apps/active": {
       "get": {
         "summary": "Get active organization apps",
@@ -1655,6 +1681,15 @@
     },
 
     "/documents": {
+      "servers": [{
+          "url": "https://documents.test.zi.mt",
+          "description": "Hub documents API - Test"
+        },
+        {
+          "url": "https://documents.zi.mt",
+          "description": "Hub documents API - Production"
+        }
+      ],
       "get": {
         "summary": "Get documents",
         "description": "Returns a list of documents.",
@@ -1698,6 +1733,15 @@
       }
     },
     "/documents/search": {
+      "servers": [{
+          "url": "https://documents.test.zi.mt",
+          "description": "Hub documents API - Test"
+        },
+        {
+          "url": "https://documents.zi.mt",
+          "description": "Hub documents API - Production"
+        }
+      ],
       "post": {
         "summary": "Search documents",
         "description": "Returns a list of documents.",
@@ -1720,6 +1764,15 @@
       }
     },
     "/documents/{id}": {
+      "servers": [{
+          "url": "https://documents.test.zi.mt",
+          "description": "Hub documents API - Test"
+        },
+        {
+          "url": "https://documents.zi.mt",
+          "description": "Hub documents API - Production"
+        }
+      ],
       "get": {
         "summary": "Get document",
         "description": "Returns a document.",

@@ -9,9 +9,11 @@ import 'prismjs/themes/prism-okaidia.css';
 import 'nprogress/nprogress.css';
 
 import * as serviceWorker from './serviceWorker';
+
 import App from './app/App';
-import Config from './app/config';
 import { history } from './app/utils';
+import { Middleware } from './app/components';
+import Config from './app/config';
 
 const init = () => {
     config();
@@ -35,7 +37,9 @@ const init = () => {
 init();
 
 ReactDOM.render(
-    <App />,
+    <Middleware>
+        {props => <App {...props} />}
+    </Middleware>,
     document.getElementById('root')
 );
 

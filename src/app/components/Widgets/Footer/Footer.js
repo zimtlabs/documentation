@@ -72,6 +72,9 @@ export default function Footer(props) {
                         ZIMT
                     </Link>
                 </Typography>
+                <Typography variant='body2'>
+                    v{global.appVersion}
+                </Typography>
             </div>
         </footer>
     );

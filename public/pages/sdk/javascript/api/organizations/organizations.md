@@ -696,3 +696,23 @@ const result = await sdk.organizations.updateOrganizationApp(Organization ID, Or
   }
 }
 ```
+
+## Update organization app
+
+Upgrades organization app.
+
+[API reference](http://localhost:3000/api#tag/Organizations/paths/~1organizations~1{id}~1apps~1{organization-app-id}~1upgrade/get).
+
+```javascript
+const result = await sdk.organizations.upgradeOrganizationApp(Organization ID, Organization App ID);
+// sdk.organizations.upgradeOrganizationApp('0x123...', '0x123...');
+
+// result
+{
+  "response": "Upgraded",
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  }
+}
+```

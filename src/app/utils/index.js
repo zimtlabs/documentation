@@ -290,3 +290,4 @@ export const getPublicFileUrl = (folders, file, name = null) => {
 
     return url;
 };
+

@@ -1,3 +1,37 @@
+/*
+ * Copyright (c) ZIMT AG - All Rights Reserved 2020
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Contact: tech@zimt.co
+ */
+
+const FONT_FAMILY = {
+    primary: [
+        'Zilla Slab',
+        'Merriweather',
+        'Lora',
+        'Georgia',
+        "PT Serif",
+        "Palatino Linotype",
+        "Book Antiqua",
+        'Palatino',
+        'serif'
+    ].join(','),
+    secondary: [
+        'Montserrat',
+        'Helvetica',
+        '"Helvetica Neue"',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        'Arial',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+    ].join(','),
+};
 
 const uiReset = theme => ({
     '@global': {
@@ -12,14 +46,10 @@ const uiReset = theme => ({
             touchAction: 'manipulation',
         },
 
-        'html, body': {
-            width: '100%',
-        },
-
         body: {
             fontSize: '13px',
             color: '#000',
-            fontFamily: '"Rubik", sans-serif',
+            fontFamily: FONT_FAMILY.secondary,
             backgroundColor: '#fff',
             fontWeight: 'normal',
             fontStyle: 'normal',
@@ -32,17 +62,23 @@ const uiReset = theme => ({
             height: 'auto',
         },
 
+        ul: {
+            listStyleType: 'none',
+            padding: 0,
+            margin: 0,
+        },
+
         p: {
-            ...theme.typography.body1,
-            color: '#333',
+            fontSize: '13px',
+            lineHeight: 1.5,
+            color: '#999',
+            fontWeight: 400,
+            margin: 0,
+            wordWrap: 'break-word',
         },
 
         'p + p': {
             marginTop: '20px',
-        },
-
-        li: {
-            ...theme.typography.body1
         },
 
         'h1, h2, h3, h4, h5, h6': {
@@ -84,8 +120,6 @@ const uiReset = theme => ({
         a: {
             textDecoration: 'none',
             cursor: 'pointer',
-            userSelect: 'none',
-            color: theme.palette.primary.main,
         },
 
         b: {
@@ -105,56 +139,8 @@ const uiReset = theme => ({
             margin: '25px 0',
         },
 
-        // NProgress
-        '#nprogress': {
-            direction: 'ltr',
-            pointerEvents: 'none',
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 2,
-            zIndex: theme.zIndex.tooltip,
-            backgroundColor: '#e0e0e0',
-            '& .nprogress-bar': {
-                position: 'fixed',
-                backgroundColor: theme.palette.secondary.main,
-                top: 0,
-                left: 0,
-                right: 0,
-                height: 2,
-            },
-            '& dd, & dt': {
-                position: 'absolute',
-                top: 0,
-                height: 2,
-                boxShadow: `${theme.palette.secondary.main} 1px 0 6px 1px`,
-                borderRadius: '100%',
-                animation: 'mui-nprogress-pulse 2s ease-out 0s infinite',
-            },
-            '& dd': {
-                opacity: 0.6,
-                width: 20,
-                right: 0,
-                clip: 'rect(-6px,22px,14px,10px)',
-            },
-            '& dt': {
-                opacity: 0.6,
-                width: 180,
-                right: -80,
-                clip: 'rect(-6px,90px,14px,-6px)',
-            },
-        },
-        '@keyframes mui-nprogress-pulse': {
-            '30%': {
-                opacity: 0.6,
-            },
-            '60%': {
-                opacity: 0,
-            },
-            to: {
-                opacity: 0.6,
-            },
+        ':focus': {
+            outline: 'none',
         },
     }
 });
