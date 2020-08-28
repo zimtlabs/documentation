@@ -71,7 +71,7 @@ const uiReset = theme => ({
         p: {
             fontSize: '13px',
             lineHeight: 1.5,
-            color: '#999',
+            color: '#000',
             fontWeight: 400,
             margin: 0,
             wordWrap: 'break-word',
