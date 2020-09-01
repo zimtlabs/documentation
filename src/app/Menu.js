@@ -34,6 +34,8 @@ const Menu = [
                             { title: 'Events', pathname: '/sdk/javascript/api/events' },
                             { title: 'Documents', pathname: '/sdk/javascript/api/documents' },
                             { title: 'Strategies', pathname: '/sdk/javascript/api/strategies' },
+                            { title: 'Services', pathname: '/sdk/javascript/api/services' },
+                            { title: 'Hooks', pathname: '/sdk/javascript/api/hooks' },
                         ],
                     },
                 ]

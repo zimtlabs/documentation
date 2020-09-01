@@ -65,6 +65,14 @@
       "description": "Bundle management."
     },
     {
+      "name": "Services",
+      "description": "Service management."
+    },
+    {
+      "name": "Hooks",
+      "description": "Hook management."
+    },
+    {
       "name": "Other",
       "description": "Other than core endpoints."
     }
@@ -138,6 +146,18 @@
       "name": "Bundles",
       "tags": [
         "Bundles"
+      ]
+    },
+    {
+      "name": "Services",
+      "tags": [
+        "Services"
+      ]
+    },
+    {
+      "name": "Hooks",
+      "tags": [
+        "Hooks"
       ]
     },
     {
@@ -1795,7 +1815,6 @@
         }
       }
     },
-
     "/api-keys": {
       "get": {
         "summary": "Get API keys",
@@ -1927,6 +1946,314 @@
         ],
         "responses": {
           "200": { "$ref": "api-keys.json#/components/responses/APIkey" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/services": {
+      "get": {
+        "summary": "Get services",
+        "description": "Returns a list of services.",
+        "tags": [
+          "Services"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "services.json#/components/responses/Services" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create service",
+        "description": "Creates a service.",
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "tags": [
+          "Services"
+        ],
+        "requestBody": {
+          "$ref": "services.json#/components/requestBodies/Service-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/services/public": {
+      "get": {
+        "summary": "Get public services",
+        "description": "Returns a list of public (private: false) services, and active services from your organization.",
+        "tags": [
+          "Services"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "services.json#/components/responses/Services" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/services/search": {
+      "post": {
+        "summary": "Search services",
+        "description": "Returns a list of services.",
+        "tags": [
+          "Services"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "services.json#/components/requestBodies/search-services"
+        },
+        "responses": {
+          "200": { "$ref": "services.json#/components/responses/Services" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/services/{id}": {
+      "get": {
+        "summary": "Get service",
+        "description": "Returns a service.",
+        "tags": [
+          "Services"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "services.json#/components/parameters/id-service" }
+        ],
+        "responses": {
+          "200": { "$ref": "services.json#/components/responses/Service" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update service",
+        "description": "Updates a service.",
+        "tags": [
+          "Services"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "services.json#/components/requestBodies/Service-update"
+        },
+        "parameters": [
+          { "$ref": "services.json#/components/parameters/id-service" }
+        ],
+        "responses": {
+          "200": { "$ref": "services.json#/components/responses/Service" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete service",
+        "description": "Deletes a service.",
+        "tags": [
+          "Services"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "services.json#/components/parameters/id-service" }
+        ],
+        "responses": {
+          "200": { "$ref": "services.json#/components/responses/Service-delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/hooks": {
+      "get": {
+        "summary": "Get hooks",
+        "description": "Returns a list of hooks.",
+        "tags": [
+          "Hooks"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "hooks.json#/components/responses/Hooks" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create hook",
+        "description": "Creates a hook.",
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "tags": [
+          "Hooks"
+        ],
+        "requestBody": {
+          "$ref": "hooks.json#/components/requestBodies/Hook-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/hooks/search": {
+      "post": {
+        "summary": "Search hooks",
+        "description": "Returns a list of hooks.",
+        "tags": [
+          "Hooks"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "hooks.json#/components/requestBodies/search-hook"
+        },
+        "responses": {
+          "200": { "$ref": "hooks.json#/components/responses/Hooks" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/hooks/{id}": {
+      "get": {
+        "summary": "Get hook",
+        "description": "Returns a hook.",
+        "tags": [
+          "Hooks"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "hooks.json#/components/parameters/id-hook" }
+        ],
+        "responses": {
+          "200": { "$ref": "hooks.json#/components/responses/Hooks" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update hook",
+        "description": "Updates a hook.",
+        "tags": [
+          "Hooks"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "hooks.json#/components/requestBodies/Hook-update"
+        },
+        "parameters": [
+          { "$ref": "hooks.json#/components/parameters/id-hook" }
+        ],
+        "responses": {
+          "200": { "$ref": "hooks.json#/components/responses/Hook" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete hook",
+        "description": "Deletes a hook.",
+        "tags": [
+          "Hooks"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "hooks.json#/components/parameters/id-hook" }
+        ],
+        "responses": {
+          "200": { "$ref": "hooks.json#/components/responses/Hook-delete" },
           "400": { "$ref": "base.json#/components/responses/Not found" },
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
