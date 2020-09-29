@@ -234,154 +234,52 @@
       }
     },
 
-    "/analytics/count/{collection}": {
+    "/analytics": {
       "get": {
-        "summary": "Get collection count",
-        "description": "Returns total number of documents in the collection.",
+        "summary": "Get many analytics",
+        "description": "Returns array of analytics.",
         "tags": [
           "Analytics"
         ],
         "security": [{
           "ZIMT Token": [
-            "Hub admin"
+            "Admin"
           ]
         }],
         "parameters": [
-          { "$ref": "analytics.json#/components/parameters/collection" }
+          { "$ref": "analytics.json#/components/parameters/organization" },
+          { "$ref": "analytics.json#/components/parameters/collection" },
+          { "$ref": "analytics.json#/components/parameters/type" },
+          { "$ref": "analytics.json#/components/parameters/date" }
         ],
         "responses": {
-          "200": { "$ref": "analytics.json#/components/responses/Count" },
+          "200": { "$ref": "analytics.json#/components/responses/Analytics" },
           "400": { "$ref": "base.json#/components/responses/Validation" },
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
         }
       }
     },
-    "/analytics/count/{collection}/{start}/{end}": {
+    "/analytics/analytic": {
       "get": {
-        "summary": "Get collection count for time range",
-        "description": "Returns total number of documents in the collection for time range.",
+        "summary": "Get one analytics",
+        "description": "Returns an analytic.",
         "tags": [
           "Analytics"
         ],
         "security": [{
           "ZIMT Token": [
-            "Hub admin"
+            "Admin"
           ]
         }],
         "parameters": [
+          { "$ref": "analytics.json#/components/parameters/organization" },
           { "$ref": "analytics.json#/components/parameters/collection" },
-          { "$ref": "analytics.json#/components/parameters/start" },
-          { "$ref": "analytics.json#/components/parameters/end" }
+          { "$ref": "analytics.json#/components/parameters/type" },
+          { "$ref": "analytics.json#/components/parameters/date" }
         ],
         "responses": {
-          "200": { "$ref": "analytics.json#/components/responses/Count" },
-          "400": { "$ref": "base.json#/components/responses/Validation" },
-          "401": { "$ref": "base.json#/components/responses/Authentication" },
-          "403": { "$ref": "base.json#/components/responses/Authorization" }
-        }
-      }
-    },
-    "/analytics/count/{organization_id}/{collection}": {
-      "get": {
-        "summary": "Get collection count per organization",
-        "description": "Returns total number of documents in the collection created by the organization.",
-        "tags": [
-          "Analytics"
-        ],
-        "security": [{
-          "ZIMT Token": [
-            "Hub admin",
-            "Organization admin"
-          ]
-        }],
-        "parameters": [
-          { "$ref": "analytics.json#/components/parameters/collection" },
-          { "$ref": "analytics.json#/components/parameters/organization_id" }
-        ],
-        "responses": {
-          "200": { "$ref": "analytics.json#/components/responses/Count" },
-          "400": { "$ref": "base.json#/components/responses/Validation" },
-          "401": { "$ref": "base.json#/components/responses/Authentication" },
-          "403": { "$ref": "base.json#/components/responses/Authorization" }
-        }
-      }
-    },
-    "/analytics/count/{organization_id}/{collection}/{start}/{end}": {
-      "get": {
-        "summary": "Get collection count for time range per organization",
-        "description": "Returns total number of documents in the collection for time range, created by the organization.",
-        "tags": [
-          "Analytics"
-        ],
-        "security": [{
-          "ZIMT Token": [
-            "Hub admin",
-            "Organization admin"
-          ]
-        }],
-        "parameters": [
-          { "$ref": "analytics.json#/components/parameters/collection" },
-          { "$ref": "analytics.json#/components/parameters/organization_id" },
-          { "$ref": "analytics.json#/components/parameters/start" },
-          { "$ref": "analytics.json#/components/parameters/end" }
-        ],
-        "responses": {
-          "200": { "$ref": "analytics.json#/components/responses/Count" },
-          "400": { "$ref": "base.json#/components/responses/Validation" },
-          "401": { "$ref": "base.json#/components/responses/Authentication" },
-          "403": { "$ref": "base.json#/components/responses/Authorization" }
-        }
-      }
-    },
-    "/analytics/data-points/{collection}/{start}/{end}/{group_by}": {
-      "get": {
-        "summary": "Get collection data points for time range",
-        "description": "Returns array of data points with timestamp and count, for collection, for time range.",
-        "tags": [
-          "Analytics"
-        ],
-        "security": [{
-          "ZIMT Token": [
-            "Hub admin"
-          ]
-        }],
-        "parameters": [
-          { "$ref": "analytics.json#/components/parameters/collection" },
-          { "$ref": "analytics.json#/components/parameters/start" },
-          { "$ref": "analytics.json#/components/parameters/end" },
-          { "$ref": "analytics.json#/components/parameters/group_by" }
-        ],
-        "responses": {
-          "200": { "$ref": "analytics.json#/components/responses/Data points" },
-          "400": { "$ref": "base.json#/components/responses/Validation" },
-          "401": { "$ref": "base.json#/components/responses/Authentication" },
-          "403": { "$ref": "base.json#/components/responses/Authorization" }
-        }
-      }
-    },
-    "/analytics/data-points/{organization_id}/{collection}/{start}/{end}/{group_by}": {
-      "get": {
-        "summary": "Get collection data points for time range per organization",
-        "description": "Returns array of data points with timestamp and count, for collection, for time range, created by the organization.",
-        "tags": [
-          "Analytics"
-        ],
-        "security": [{
-          "ZIMT Token": [
-            "Hub admin",
-            "Organization admin"
-          ]
-        }],
-        "parameters": [
-          { "$ref": "analytics.json#/components/parameters/collection" },
-          { "$ref": "analytics.json#/components/parameters/organization_id" },
-          { "$ref": "analytics.json#/components/parameters/start" },
-          { "$ref": "analytics.json#/components/parameters/end" },
-          { "$ref": "analytics.json#/components/parameters/group_by" }
-        ],
-        "responses": {
-          "200": { "$ref": "analytics.json#/components/responses/Data points" },
+          "200": { "$ref": "analytics.json#/components/responses/Analytic" },
           "400": { "$ref": "base.json#/components/responses/Validation" },
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }

@@ -1,6 +1,6 @@
 {
   "name": "documentation",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
@@ -10,7 +10,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "serve": "yarn build && serve build -l 1234",
-    "a": "npm version patch --force && yarn build && git add ."
+    "a": "git pull && npm version patch --force && yarn build && git add ."
   },
   "eslintConfig": {
     "extends": "react-app"
