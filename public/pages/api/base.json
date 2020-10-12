@@ -161,6 +161,34 @@
               "$ref": "#/components/schemas/query-operator"
             },
             "minItems": 0
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "hooks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "defaults": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "plans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
           }
         }
       },

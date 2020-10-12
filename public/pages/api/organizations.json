@@ -104,6 +104,7 @@
           "name": {
             "type": "string"
           },
+          "plan": {"type": "string"},
           "settings": {
             "$ref": "#/components/schemas/Organization-data-settings"
           },
@@ -411,6 +412,7 @@
           "data": {
             "name": "My organization",
             "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "plan": "0x123",
             "settings": {
               "time_zone": "Europe/London"
             },
@@ -485,6 +487,7 @@
           "data": {
             "name": "My organization",
             "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "plan": "0x123",
             "settings": {
               "time_zone": "Europe/London"
             },
@@ -567,6 +570,14 @@
       "id-organization": {
         "name": "id",
         "description": "ID of an organization",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      },
+      "id-plan": {
+        "name": "id",
+        "description": "ID of an plan",
         "in": "path",
         "schema": {
           "$ref": "base.json#/components/schemas/id"

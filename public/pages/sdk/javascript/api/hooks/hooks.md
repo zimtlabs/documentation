@@ -198,8 +198,7 @@ const result = await sdk.hooks.get(id);
 
 // result
 {
-  "response": [
-    {
+  "response": {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
       "meta": {
         "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
@@ -231,17 +230,11 @@ const result = await sdk.hooks.get(id);
       "receipt": {
         "received_at": 1579967810000
       }
-    }
-  ],
+    },
   "meta": {
     "code": 200,
     "message": "Ok"
   },
-  "pagination": {
-    "limit": 30,
-    "skip": 30,
-    "total": 120
-  }
 }
 ```
 
@@ -264,8 +257,7 @@ const result = await sdk.hooks.update(hook_id: string, Hook data);
 
 // result
 {
-  "response": [
-    {
+  "response": {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
       "meta": {
         "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
@@ -297,17 +289,11 @@ const result = await sdk.hooks.update(hook_id: string, Hook data);
       "receipt": {
         "received_at": 1579967810000
       }
-    }
-  ],
+    },
   "meta": {
     "code": 200,
     "message": "Ok"
   },
-  "pagination": {
-    "limit": 30,
-    "skip": 30,
-    "total": 120
-  }
 }
 ```
 

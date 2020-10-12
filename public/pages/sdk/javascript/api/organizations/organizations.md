@@ -249,6 +249,47 @@ const result = await sdk.organizations.update(id, Organization data);
 }
 ```
 
+## Plan update
+
+Updates an organization plan.
+
+[API reference](/api#tag/Organizations/paths/~1organizations~1{id}~1plan~1{plan_id}/put).
+
+```javascript
+const result = await sdk.organizations.planUpdate(id, plan_id);
+// sdk.organizations.planUpdate(
+//     '0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951',
+//     '0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c123'
+// );
+
+// result
+{
+  "response": {
+    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "meta": {
+      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    },
+    "data": {
+      "name": "My organization",
+      "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+      "plan": "0x123",
+      "settings": {
+        "time_zone": "Europe/London"
+      },
+      "active": true
+    },
+    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+    "receipt": {
+      "received_at": 1579967810000
+    }
+  },
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  }
+}
+```
+
 ## Create organization (sign up)
 
 Creates an organization and an account for the user as organization owner.

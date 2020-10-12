@@ -75,6 +75,14 @@
     {
       "name": "Other",
       "description": "Other than core endpoints."
+    },
+    {
+      "name": "Defaults",
+      "description": "Defaults management."
+    },
+    {
+      "name": "Plans",
+      "description": "Plans management."
     }
   ],
   "x-tagGroups": [{
@@ -104,6 +112,18 @@
       "name": "Analytics",
       "tags": [
         "Analytics"
+      ]
+    },
+    {
+      "name": "Defaults",
+      "tags": [
+        "Defaults"
+      ]
+    },
+    {
+      "name": "Plans",
+      "tags": [
+        "Plans"
       ]
     },
     {
@@ -767,6 +787,31 @@
         },
         "responses": {
           "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" }
+        }
+      }
+    },
+    "/organizations/{id}/plan/{plan_id}": {
+      "put": {
+        "summary": "Organization plan update",
+        "description": "Updates organization's plan.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/id-plan" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization" },
           "400": { "$ref": "base.json#/components/responses/Not found" },
           "401": { "$ref": "base.json#/components/responses/Authentication" }
         }
@@ -1844,6 +1889,302 @@
         ],
         "responses": {
           "200": { "$ref": "api-keys.json#/components/responses/APIkey" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/defaults": {
+      "get": {
+        "summary": "Get defaults",
+        "description": "Returns a list of defaults.",
+        "tags": [
+          "Defaults"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "defaults.json#/components/responses/Defaults" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create default",
+        "description": "Creates a default.",
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "tags": [
+          "Defaults"
+        ],
+        "requestBody": {
+          "$ref": "defaults.json#/components/requestBodies/Default-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/defaults/search": {
+      "post": {
+        "summary": "Search defaults",
+        "description": "Returns a list of defaults.",
+        "tags": [
+          "Defaults"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "defaults.json#/components/requestBodies/search-defaults"
+        },
+        "responses": {
+          "200": { "$ref": "defaults.json#/components/responses/Defaults" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/defaults/{id}": {
+      "get": {
+        "summary": "Get default",
+        "description": "Returns an default.",
+        "tags": [
+          "Defaults"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "defaults.json#/components/parameters/id-default" }
+        ],
+        "responses": {
+          "200": { "$ref": "defaults.json#/components/responses/Default" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update default",
+        "description": "Updates a default.",
+        "tags": [
+          "Defaults"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "defaults.json#/components/requestBodies/Default-Update"
+        },
+        "parameters": [
+          { "$ref": "defaults.json#/components/parameters/id-default" }
+        ],
+        "responses": {
+          "200": { "$ref": "defaults.json#/components/responses/Default" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete default",
+        "description": "Deletes a default.",
+        "tags": [
+          "Defaults"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "defaults.json#/components/parameters/id-default" }
+        ],
+        "responses": {
+          "200": { "$ref": "defaults.json#/components/responses/Default-Delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/plans": {
+      "get": {
+        "summary": "Get plans",
+        "description": "Returns a list of plans.",
+        "tags": [
+          "Plans"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "plans.json#/components/responses/Plans" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create plan",
+        "description": "Creates a plan.",
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "tags": [
+          "Plans"
+        ],
+        "requestBody": {
+          "$ref": "plans.json#/components/requestBodies/Plan-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/plans/public": {
+      "get": {
+        "summary": "Get public plans",
+        "description": "Returns a list of public (private: false) plans, and active plans.",
+        "tags": [
+          "Plans"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "plans.json#/components/responses/Plans" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/plans/search": {
+      "post": {
+        "summary": "Search plans",
+        "description": "Returns a list of plans.",
+        "tags": [
+          "Plans"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "plans.json#/components/requestBodies/search-plans"
+        },
+        "responses": {
+          "200": { "$ref": "plans.json#/components/responses/Plans" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/plans/{id}": {
+      "get": {
+        "summary": "Get plan",
+        "description": "Returns an plan.",
+        "tags": [
+          "Plans"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "plans.json#/components/parameters/id-plan" }
+        ],
+        "responses": {
+          "200": { "$ref": "plans.json#/components/responses/Plan" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update plan",
+        "description": "Updates a plan.",
+        "tags": [
+          "Plans"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "plans.json#/components/requestBodies/Plan-Update"
+        },
+        "parameters": [
+          { "$ref": "plans.json#/components/parameters/id-plan" }
+        ],
+        "responses": {
+          "200": { "$ref": "plans.json#/components/responses/Plan" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete plan",
+        "description": "Deletes a plan.",
+        "tags": [
+          "Plans"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "plans.json#/components/parameters/id-plan" }
+        ],
+        "responses": {
+          "200": { "$ref": "plans.json#/components/responses/Plan-Delete" },
           "400": { "$ref": "base.json#/components/responses/Not found" },
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
