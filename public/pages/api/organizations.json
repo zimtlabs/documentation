@@ -285,6 +285,19 @@
           "data"
         ]
       },
+      "Organization-Analytics": {
+        "type": "object",
+        "properties": {
+            "assets or events or documents or accounts or permissions or apiKeys or hooks or services or organizationApps": {
+                "type": "array",
+                "items": {
+                    "$ref": "analytics.json#/components/schemas/Analytic"
+                },
+                "additionalItems": false
+            }
+        },
+        "additionalProperties": false
+      },
       "Organization-App-update": {
         "type": "object",
         "properties": {
@@ -561,6 +574,25 @@
           "code": 200,
           "message": "Ok"
         }
+      },
+      "Organization-Analytics": {
+        "response": {
+          "assets": [
+            {
+                "type": "day",
+                "action": "create",
+                "object": "assets",
+                "organization": "0x123...",
+                "value": 4,
+                "date": "2020-07-24",
+                "resolved": true
+            }
+          ]
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
       }
 
     },
@@ -618,6 +650,19 @@
             },
             "example": {
               "$ref": "#/components/examples/Organization"
+            }
+          }
+        }
+      },
+      "Organization-Analytics": {
+        "description": "Organization analytics",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organization-Analytics"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organization-Analytics"
             }
           }
         }

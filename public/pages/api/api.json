@@ -716,6 +716,29 @@
         }
       }
     },
+    "/organizations/{id}/analytics": {
+      "get": {
+        "summary": "Get organization analytics",
+        "description": "Returns organization analytics.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization-Analytics" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
     "/organizations/{id}/accounts": {
       "get": {
         "summary": "Get organization accounts",

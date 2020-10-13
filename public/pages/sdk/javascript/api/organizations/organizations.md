@@ -757,3 +757,34 @@ const result = await sdk.organizations.upgradeOrganizationApp(Organization ID, O
   }
 }
 ```
+
+## Get organization analytics
+
+Returns organization analytics.
+
+[API reference](/api#tag/Organizations/paths/~1organizations~1{id}~1analytics/get).
+
+```javascript
+const result = await sdk.organizations.analytics(Organization ID);
+// sdk.organizations.analytics('0x123...');
+
+// result
+{
+  "response": {
+    "assets": [
+      {
+        "type ": "day",
+        "action": "create",
+        "object": "assets",
+        "organization": "0x123...",
+        "value": 4,
+        "date": "2020-07-24",
+        "resolved": true
+      }
+    ]
+  },
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  }
+}
