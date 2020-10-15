@@ -144,8 +144,8 @@ npm install @zimt/sdk` },
     api: {
         core: "HUB_API_URL",
     },
-    privateKey: "Account's private key",
-    apiKey: "ZIMT Hub provided API key",
+    private_key: "Account's private key",
+    api_key: "ZIMT Hub provided API key",
 });
 
 const assets = await sdk.assets.getMany();
