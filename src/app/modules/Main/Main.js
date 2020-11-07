@@ -26,8 +26,8 @@ const useStyles = makeStyles(theme => ({
         }),
     },
     mainShift: {
-        width: `calc(100% - ${theme.CONSTANTS.sidebar.width}px)`,
-        marginLeft: theme.CONSTANTS.sidebar.width,
+        width: `calc(100% - ${theme.CONST.sidebar.width}px)`,
+        marginLeft: theme.CONST.sidebar.width,
         transition: theme.transitions.create(['margin', 'width'], {
             easing: 'none',
             duration: 'none',

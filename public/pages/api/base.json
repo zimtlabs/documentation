@@ -189,6 +189,13 @@
               "$ref": "#/components/schemas/query-operator"
             },
             "minItems": 0
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
           }
         }
       },
@@ -457,6 +464,17 @@
             "$ref": "#/components/schemas/meta-response"
           }
         }
+      },
+      "Object-Delete": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
       }
 
     },
@@ -501,6 +519,14 @@
       "getToken": {
         "organization_name": "My organization",
         "email": "john@gmail.com"
+      },
+
+      "Object-Delete": {
+        "response": "Removed",
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
       }
 
     },
@@ -510,6 +536,14 @@
       "organization": {
         "name": "organization",
         "description": "Organization name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "for_organization": {
+        "name": "for_organization",
+        "description": "Organization ID, if user is create a resource for an external organization.",
         "in": "query",
         "schema": {
           "type": "string"
@@ -623,6 +657,20 @@
             },
             "example": {
               "$ref": "#/components/examples/Object-Created"
+            }
+          }
+        }
+      },
+
+      "Object-Delete": {
+        "description": "Object delete",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Object-Delete"
+            },
+            "example": {
+              "$ref": "#/components/examples/Object-Delete"
             }
           }
         }

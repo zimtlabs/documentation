@@ -22,10 +22,10 @@ You have to provide:
 ```javascript
 const sdk = new ZIMTHubSDK({
     api: {
-        core: "HUB_API_URL",
+        core: "Hub API URL",
     },
-    privateKey: "Account's private key",
-    apiKey: "ZIMT Hub provided API key"
+    private_key: "Account's private key",
+    api_key: "ZIMT Hub provided API key"
 });
 ```
 

@@ -296,3 +296,23 @@ const result = await sdk.accounts.getOrganizations({ email: string });
   }
 }
 ```
+
+## Delete account
+
+Deletes an account.
+
+[API reference](/api#tag/Accounts/paths/~1accounts~1{id}/delete).
+
+```javascript
+const result = await sdk.accounts.delete(id);
+//sdk.accounts.delete('0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951');
+
+// result
+{
+  "response": "Removed",
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  }
+}
+```

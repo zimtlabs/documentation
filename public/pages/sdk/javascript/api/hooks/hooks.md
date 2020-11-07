@@ -2,9 +2,9 @@
 
 <p class="description">Hooks management.</p>
 
-## Create service
+## Create hook
 
-Creates a service.
+Creates a hook.
 
 [API reference](/api#tag/Hooks/paths/~1hooks/post).
 
@@ -19,10 +19,10 @@ const result = await sdk.hooks.create(Hook object);
 //   },
 //   "data": {
 //     "name": "Hook 1",
-//     "services": [
+//     "hooks": [
 //       {
 //         "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-//         "name": "Service 1"
+//         "name": "Hook 1"
 //       }
 //     ],
 //     "settings": {

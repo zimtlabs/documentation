@@ -83,6 +83,10 @@
     {
       "name": "Plans",
       "description": "Plans management."
+    },
+    {
+      "name": "Teams",
+      "description": "Team management."
     }
   ],
   "x-tagGroups": [{
@@ -184,6 +188,12 @@
       "name": "Other",
       "tags": [
         "Other"
+      ]
+    },
+    {
+      "name": "Teams",
+      "tags": [
+        "Teams"
       ]
     }
   ],
@@ -400,6 +410,28 @@
         ],
         "responses": {
           "200": { "$ref": "accounts.json#/components/responses/Account" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete account",
+        "description": "Deletes a account.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "accounts.json#/components/parameters/id-account" }
+        ],
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
           "400": { "$ref": "base.json#/components/responses/Not found" },
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
@@ -740,29 +772,6 @@
       }
     },
     "/organizations/{id}/accounts": {
-      "get": {
-        "summary": "Get organization accounts",
-        "description": "Returns a list of organization accounts.",
-        "tags": [
-          "Organizations"
-        ],
-        "security": [{
-          "ZIMT Token": [
-            "Hub admin",
-            "Organization super admin",
-            "Organization admin"
-          ]
-        }],
-        "parameters": [
-          { "$ref": "organizations.json#/components/parameters/id-organization" }
-        ],
-        "responses": {
-          "200": { "$ref": "accounts.json#/components/responses/Accounts" },
-          "400": { "$ref": "base.json#/components/responses/Not found" },
-          "401": { "$ref": "base.json#/components/responses/Authentication" },
-          "403": { "$ref": "base.json#/components/responses/Authorization" }
-        }
-      },
       "post": {
         "summary": "Create organization account",
         "description": "Creates an organization account.",
@@ -782,6 +791,136 @@
         "requestBody": {
           "$ref": "organizations.json#/components/requestBodies/Organization-Create-Account"
         },
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Account" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/accounts/public": {
+      "post": {
+        "summary": "Search public organization accounts",
+        "description": "Returns public organization accounts.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "requestBody": {
+          "$ref": "accounts.json#/components/requestBodies/search-account"
+        },
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Accounts" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/teams/public": {
+      "post": {
+        "summary": "Search public organization teams",
+        "description": "Returns public organization teams.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "requestBody": {
+          "$ref": "teams.json#/components/requestBodies/search-team"
+        },
+        "responses": {
+          "200": { "$ref": "teams.json#/components/responses/Teams" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/{collection}": {
+      "get": {
+        "summary": "Get organization collection objects",
+        "description": "For hub admin to get specific organization collection objects.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/collection" },
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Accounts" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/{collection}/search": {
+      "post": {
+        "summary": "Search organization collection objects",
+        "description": "For hub admin to get specific organization collection objects.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/collection" }
+        ],
+        "requestBody": {
+          "$ref": "accounts.json#/components/requestBodies/search-account"
+        },
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Accounts" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/{collection}/{:object_id}": {
+      "get": {
+        "summary": "Get organization collection object",
+        "description": "For hub admin to get specific organization collection object.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/collection" },
+          { "$ref": "organizations.json#/components/parameters/object-id" }
+        ],
         "responses": {
           "200": { "$ref": "accounts.json#/components/responses/Account" },
           "400": { "$ref": "base.json#/components/responses/Not found" },
@@ -875,6 +1014,28 @@
         ],
         "responses": {
           "200": { "$ref": "organizations.json#/components/responses/OrganizationPublicDetails" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/public/search": {
+      "post": {
+        "summary": "Get organizations with public details",
+        "description": "Returns organizations with public details.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "organizations.json#/components/requestBodies/search-organization"
+        },
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationsPublic" },
           "400": { "$ref": "base.json#/components/responses/Not found" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
         }
@@ -1451,6 +1612,28 @@
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
         }
+      },
+      "delete": {
+        "summary": "Delete permission",
+        "description": "Deletes a permission.",
+        "tags": [
+          "Permissions"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "permissions.json#/components/parameters/id-permission" }
+        ],
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
       }
     },
 
@@ -1486,6 +1669,9 @@
         }],
         "tags": [
           "Assets"
+        ],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/for_organization" }
         ],
         "requestBody": {
           "$ref": "assets.json#/components/requestBodies/Asset-Create"
@@ -1604,7 +1790,8 @@
           "Events"
         ],
         "parameters": [
-          { "$ref": "assets.json#/components/parameters/id-asset" }
+          { "$ref": "assets.json#/components/parameters/id-asset" },
+          { "$ref": "base.json#/components/parameters/for_organization" }
         ],
         "requestBody": {
           "$ref": "events.json#/components/requestBodies/Event-Create"
@@ -1706,6 +1893,9 @@
         }],
         "tags": [
           "Documents"
+        ],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/for_organization" }
         ],
         "requestBody": {
           "$ref": "documents.json#/components/requestBodies/Document-Create"
@@ -1916,6 +2106,28 @@
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
         }
+      },
+      "delete": {
+        "summary": "Delete API key",
+        "description": "Deletes a API key.",
+        "tags": [
+          "API keys"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "api-keys.json#/components/parameters/id-api-key" }
+        ],
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
       }
     },
 
@@ -2047,7 +2259,7 @@
           { "$ref": "defaults.json#/components/parameters/id-default" }
         ],
         "responses": {
-          "200": { "$ref": "defaults.json#/components/responses/Default-Delete" },
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
           "400": { "$ref": "base.json#/components/responses/Not found" },
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
@@ -2207,7 +2419,7 @@
           { "$ref": "plans.json#/components/parameters/id-plan" }
         ],
         "responses": {
-          "200": { "$ref": "plans.json#/components/responses/Plan-Delete" },
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
           "400": { "$ref": "base.json#/components/responses/Not found" },
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
@@ -2373,7 +2585,7 @@
           { "$ref": "services.json#/components/parameters/id-service" }
         ],
         "responses": {
-          "200": { "$ref": "services.json#/components/responses/Service-delete" },
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
           "400": { "$ref": "base.json#/components/responses/Not found" },
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
@@ -2515,7 +2727,149 @@
           { "$ref": "hooks.json#/components/parameters/id-hook" }
         ],
         "responses": {
-          "200": { "$ref": "hooks.json#/components/responses/Hook-delete" },
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/teams": {
+      "get": {
+        "summary": "Get teams",
+        "description": "Returns a list of teams.",
+        "tags": [
+          "Teams"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "teams.json#/components/responses/Teams" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create team",
+        "description": "Creates a team.",
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "tags": [
+          "Teams"
+        ],
+        "requestBody": {
+          "$ref": "teams.json#/components/requestBodies/Team-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/teams/search": {
+      "post": {
+        "summary": "Search teams",
+        "description": "Returns a list of teams.",
+        "tags": [
+          "Teams"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "teams.json#/components/requestBodies/search-team"
+        },
+        "responses": {
+          "200": { "$ref": "teams.json#/components/responses/Teams" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/teams/{id}": {
+      "get": {
+        "summary": "Get team",
+        "description": "Returns a team.",
+        "tags": [
+          "Teams"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "teams.json#/components/parameters/id-team" }
+        ],
+        "responses": {
+          "200": { "$ref": "teams.json#/components/responses/Team" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update team",
+        "description": "Updates a team.",
+        "tags": [
+          "Teams"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "teams.json#/components/requestBodies/Team-update"
+        },
+        "parameters": [
+          { "$ref": "teams.json#/components/parameters/id-team" }
+        ],
+        "responses": {
+          "200": { "$ref": "teams.json#/components/responses/Team" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete team",
+        "description": "Deletes a team.",
+        "tags": [
+          "Teams"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "teams.json#/components/parameters/id-team" }
+        ],
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
           "400": { "$ref": "base.json#/components/responses/Not found" },
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }

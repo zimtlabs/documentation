@@ -145,17 +145,6 @@
             "$ref": "base.json#/components/schemas/pagination-response"
           }
         }
-      },
-      "Service-delete": {
-        "type": "object",
-        "properties": {
-          "response": {
-            "type": "string"
-          },
-          "meta": {
-            "$ref": "base.json#/components/schemas/meta-response"
-          }
-        }
       }
 
     },
@@ -245,13 +234,6 @@
           "skip": 30,
           "total": 120
         }
-      },
-      "Service-delete": {
-        "response": "Removed",
-        "meta": {
-          "code": 200,
-          "message": "Ok"
-        }
       }
 
     },
@@ -292,19 +274,6 @@
             },
             "example": {
               "$ref": "#/components/examples/Services"
-            }
-          }
-        }
-      },
-      "Service-delete": {
-        "description": "Service delete",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Service-delete"
-            },
-            "example": {
-              "$ref": "#/components/examples/Service-delete"
             }
           }
         }

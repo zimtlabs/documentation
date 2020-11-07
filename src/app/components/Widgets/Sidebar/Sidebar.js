@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
         flexShrink: 0,
 
         '& .MuiPaper-root': {
-            width: theme.CONSTANTS.sidebar.width,
+            width: theme.CONST.sidebar.width,
         },
     },
     header: {

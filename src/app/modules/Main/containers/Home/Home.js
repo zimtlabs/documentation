@@ -142,7 +142,7 @@ npm install @zimt/sdk` },
                                 {
                                     type: 'code', format: 'javascript', text: `const sdk = new ZIMTHubSDK({
     api: {
-        core: "HUB_API_URL",
+        core: "Hub API URL",
     },
     private_key: "Account's private key",
     api_key: "ZIMT Hub provided API key",

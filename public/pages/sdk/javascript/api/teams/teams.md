@@ -1,36 +1,34 @@
-# Defaults
+# Teams
 
-<p class="description">Defaults management.</p>
+<p class="description">Teams management.</p>
 
-## Create default
+## Create team
 
-Creates a default.
+Creates a team.
 
-[API reference](/api#tag/Defaults/paths/~1defaults/post).
+[API reference](/api#tag/Teams/paths/~1teams/post).
 
 ```javascript
-const result = await sdk.defaults.create(Default object);
-// sdk.defaults.create({
-//   "response": {
-//     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+const result = await sdk.teams.create(Team object);
+// sdk.teams.create({
+//   "object": {
 //     "meta": {
 //       "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
 //     },
-//     "data": {
-//       "name": "Default strategy",
-//       "type ": "notification",
-//       "subtype": "strategy",
-//       "category": "plan",
-//       "active": true
-//     },
-//     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
-//     "receipt": {
-//       "received_at": 1579967810000
-//     }
+//     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
 //   },
-//   "meta": {
-//     "code": 200,
-//     "message": "Ok"
+//   "data": {
+//     "name": "Team 1",
+//     "description": "Our main team",
+//     "active": true,
+//     "private": false,
+//     "members": [
+//       {
+//         "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+//         "full_name": "John Doe",
+//         "role": "maintainer"
+//       }
+//     ]
 //   }
 // });
 
@@ -47,15 +45,15 @@ const result = await sdk.defaults.create(Default object);
 }
 ```
 
-## Get defaults
+## Get teams
 
-Returns list of defaults.
+Returns list of teams.
 
-[API reference](/api#tag/Defaults/paths/~1defaults/get).
+[API reference](/api#tag/Teams/paths/~1teams/get).
 
 ```javascript
-const result = await sdk.defaults.getMany(Pagination);
-//sdk.defaults.getMany({ limit: 5, skip: 30 });
+const result = await sdk.teams.getMany(Pagination);
+//sdk.teams.getMany({ limit: 5, skip: 30 });
 
 // result
 {
@@ -66,11 +64,17 @@ const result = await sdk.defaults.getMany(Pagination);
         "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
       },
       "data": {
-        "name": "Default strategy",
-        "type ": "notification",
-        "subtype": "strategy",
-        "category": "plan",
-        "active": true
+        "name": "Team 1",
+        "description": "Our main team",
+        "active": true,
+        "private": false,
+        "members": [
+          {
+            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "full_name": "John Doe",
+            "role": "maintainer"
+          }
+        ]
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
@@ -90,22 +94,22 @@ const result = await sdk.defaults.getMany(Pagination);
 }
 ```
 
-## Search defaults
+## Search teams
 
-Returns list of defaults.
+Returns list of teams.
 
-[API reference](/api#tag/Defaults/paths/~1defaults~1search/post).
+[API reference](/api#tag/Teams/paths/~1teams~1search/post).
 
 ```javascript
-const result = await sdk.defaults.search(Query);
-//sdk.defaults.search(
+const result = await sdk.teams.search(Query);
+//sdk.teams.search(
 //     {
 //       query: {
-//         defaults: [
+//         teams: [
 //           {
 //             field: 'data.name',
 //             operator: 'starts-with',
-//             value: 'Default',
+//             value: 'Team 1',
 //           },
 //         ],
 //       },
@@ -122,11 +126,17 @@ const result = await sdk.defaults.search(Query);
         "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
       },
       "data": {
-        "name": "Default strategy",
-        "type ": "notification",
-        "subtype": "strategy",
-        "category": "plan",
-        "active": true
+        "name": "Team 1",
+        "description": "Our main team",
+        "active": true,
+        "private": false,
+        "members": [
+          {
+            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "full_name": "John Doe",
+            "role": "maintainer"
+          }
+        ]
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
@@ -146,15 +156,15 @@ const result = await sdk.defaults.search(Query);
 }
 ```
 
-## Get default
+## Get team
 
-Returns a default.
+Returns a team.
 
-[API reference](/api#tag/Defaults/paths/~1defaults~1{id}/get).
+[API reference](/api#tag/Teams/paths/~1teams~1{id}/get).
 
 ```javascript
-const result = await sdk.defaults.get(id);
-//sdk.defaults.get('0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951');
+const result = await sdk.teams.get(id);
+//sdk.teams.get('0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951');
 
 // result
 {
@@ -164,11 +174,17 @@ const result = await sdk.defaults.get(id);
       "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
     },
     "data": {
-      "name": "Default strategy",
-      "type ": "notification",
-      "subtype": "strategy",
-        "category": "plan",
-      "active": true
+      "name": "Team 1",
+      "description": "Our main team",
+      "active": true,
+      "private": false,
+      "members": [
+        {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "full_name": "John Doe",
+          "role": "maintainer"
+        }
+      ]
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
@@ -182,19 +198,19 @@ const result = await sdk.defaults.get(id);
 }
 ```
 
-## Update default
+## Update team
 
-Updates a default.
+Updates a team.
 
-[API reference](/api#tag/Defaults/paths/~1defaults~1{id}/put).
+[API reference](/api#tag/Teams/paths/~1teams~1{id}/put).
 
 ```javascript
-const result = await sdk.defaults.update(default_id: string, default data);
-//sdk.defaults.update(
+const result = await sdk.teams.update(team_id: string, Team data);
+//sdk.teams.update(
 //     '0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951',
 //     {
 //         data: {
-//             name: 'Default (edited)'
+//             name: 'Team (edited)'
 //         }
 //     }
 // );
@@ -207,11 +223,17 @@ const result = await sdk.defaults.update(default_id: string, default data);
       "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
     },
     "data": {
-      "name": "Default strategy",
-      "type ": "notification",
-      "subtype": "strategy",
-        "category": "plan",
-      "active": true
+      "name": "Team (edited)",
+      "description": "Our main team",
+      "active": true,
+      "private": false,
+      "members": [
+        {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "full_name": "John Doe",
+          "role": "maintainer"
+        }
+      ]
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
@@ -225,15 +247,15 @@ const result = await sdk.defaults.update(default_id: string, default data);
 }
 ```
 
-## Delete default
+## Delete team
 
-Deletes a default.
+Deletes a team.
 
-[API reference](/api#tag/Defaults/paths/~1defaults~1{id}/delete).
+[API reference](/api#tag/Teams/paths/~1teams~1{id}/delete).
 
 ```javascript
-const result = await sdk.defaults.delete(id);
-//sdk.defaults.delete('0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951');
+const result = await sdk.teams.delete(id);
+//sdk.teams.delete('0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951');
 
 // result
 {

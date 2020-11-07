@@ -2,8 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 
-import { Typography, Link } from '../..';
-import { useSidebarOpen } from '../../Utils';
+import { Typography, Link, useSidebarOpen } from '../../';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -18,8 +17,8 @@ const useStyles = makeStyles(theme => ({
         }),
     },
     rootShift: {
-        width: `calc(100% - ${theme.CONSTANTS.sidebar.width}px)`,
-        marginLeft: theme.CONSTANTS.sidebar.width,
+        width: `calc(100% - ${theme.CONST.sidebar.width}px)`,
+        marginLeft: theme.CONST.sidebar.width,
         transition: theme.transitions.create(['margin', 'width'], {
             easing: 'none',
             duration: 'none',
@@ -36,12 +35,19 @@ const useStyles = makeStyles(theme => ({
         margin: '0 auto',
     },
     copyright: {
-        fontSize: '0.75rem',
+        fontSize: 12,
         fontWeight: 300,
-        letterSpacing: '0.03333em',
+        letterSpacing: '0.03em',
         color: theme.palette.text.secondary,
         userSelect: 'none',
         textAlign: 'center',
+    },
+    version: {
+        fontFamily: 'monospace',
+        lineHeight: 1,
+        fontSize: 11,
+        marginTop: 11,
+        color: theme.palette.text.disabled,
     },
 }), { name: 'Footer' });
 
@@ -72,7 +78,8 @@ export default function Footer(props) {
                         ZIMT
                     </Link>
                 </Typography>
-                <Typography variant='body2' className={classes.copyright}>
+
+                <Typography variant='body2' className={classes.version}>
                     v{global.appVersion}
                 </Typography>
             </div>

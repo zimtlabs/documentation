@@ -81,30 +81,72 @@
         },
         "additionalProperties": false
       },
+      "Organization-data-settings-privacy": {
+        "type": "object",
+        "properties": {
+          "organization_accounts_search": {
+            "type": "object",
+            "properties": {
+              "all": { "type": "boolean" },
+              "organizations": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type": "string", "description": "Organization ID" },
+                        "name": {"type": "string", "description": "Organization name" }
+                    },
+                    "required": ["id"]
+                },
+                "additionalItems": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "Organization-data-settings-apps": {
+        "type": "object",
+        "properties": {
+          "dashboard": { "type": "object" },
+          "viewer": { "type": "object" }
+        },
+        "additionalProperties": false
+      },
       "Organization-data-settings": {
         "type": "object",
         "properties": {
-          "time_zone": {
-            "type": "string"
-          },
-          "legal_address": {
-            "type": "string"
-          },
-          "branding": {
-            "$ref": "#/components/schemas/Organization-data-settings-branding"
-          }
+          "time_zone": {"type": "string"},
+          "legal_address": {"type": "string"},
+          "allow_public_signup": {"type": "boolean"},
+          "branding": { "$ref": "#/components/schemas/Organization-data-settings-branding" },
+          "apps": { "$ref": "#/components/schemas/Organization-data-settings-apps" },
+          "privacy": { "$ref": "#/components/schemas/Organization-data-settings-privacy" }
         }
       },
       "Organization-data": {
         "type": "object",
         "properties": {
           "owner": {
-            "$ref": "base.json#/components/schemas/id"
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "description": "Account ID"},
+                "full_name": {"type": "string", "description": "Account full name"}
+            },
+            "required": ["id"]
           },
           "name": {
             "type": "string"
           },
-          "plan": {"type": "string"},
+          "plan": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "description": "Plan ID"},
+                "name": {"type": "string", "description": "Plan name"}
+            },
+            "required": ["id"]
+          },
           "settings": {
             "$ref": "#/components/schemas/Organization-data-settings"
           },
@@ -123,7 +165,12 @@
             "type": "boolean"
           },
           "app": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "description": "App ID"},
+                "name": {"type": "string", "description": "App name"}
+            },
+            "required": ["id"]
           }
         }
       },
@@ -182,6 +229,7 @@
       "OrganizationPublicDetails": {
         "type": "object",
         "properties": {
+          "id": {"type": "string"},
           "data": {
             "type": "object",
             "properties": {
@@ -204,8 +252,29 @@
         },
         "required": [
           "id",
-          "meta",
-          "signature",
+          "data",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "OrganizationsPublic": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
           "data",
           "receipt"
         ],
@@ -273,9 +342,12 @@
           "data": {
             "type": "object",
             "properties": {
-              "name": {
-                "type": "string"
-              }
+                "name": {
+                    "type": "string"
+                },
+                "settings": {
+                    "$ref": "#/components/schemas/Organization-data-settings"
+                }
             },
             "additionalProperties": false
           }
@@ -397,6 +469,7 @@
       },
       "OrganizationPublicDetails": {
         "response": {
+          "id": "0x123...",
           "data": {
             "name": "My organization",
             "settings": {
@@ -416,6 +489,26 @@
           "message": "Ok"
         }
       },
+      "OrganizationsPublic": {
+        "response": [{
+          "id": "0x123...",
+          "data": {
+            "name": "My organization"
+          },
+          "receipt": {
+            "received_at": 1579967810000
+          }
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "limit": 30,
+          "skip": 30,
+          "total": 120
+        }
+      },
       "Organization": {
         "response": {
           "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
@@ -424,8 +517,14 @@
           },
           "data": {
             "name": "My organization",
-            "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "plan": "0x123",
+            "owner": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "full_name": "John Doe"
+            },
+            "plan": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "Free"
+            },
             "settings": {
               "time_zone": "Europe/London"
             },
@@ -499,8 +598,14 @@
           },
           "data": {
             "name": "My organization",
-            "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "plan": "0x123",
+            "owner": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "full_name": "John Doe"
+            },
+            "plan": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "Free"
+            },
             "settings": {
               "time_zone": "Europe/London"
             },
@@ -530,7 +635,10 @@
           "data": {
             "name": "Organization app",
             "active": true,
-            "app": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            "app": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "App"
+            }
           },
           "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
           "receipt": {
@@ -551,7 +659,10 @@
           "data": {
             "name": "Organization app",
             "active": true,
-            "app": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            "app": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "App"
+            }
           },
           "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
           "receipt": {
@@ -609,19 +720,32 @@
       },
       "id-plan": {
         "name": "id",
-        "description": "ID of an plan",
+        "description": "ID of a plan",
         "in": "path",
         "schema": {
           "$ref": "base.json#/components/schemas/id"
         }
       },
       "id-organization-app": {
-        "name": "Organization app ID",
+        "name": "id",
         "description": "ID of an organization app",
         "in": "path",
         "schema": {
           "$ref": "base.json#/components/schemas/id"
         }
+      },
+      "object-id": {
+        "name": "object_id",
+        "description": "Object ID",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      },
+      "collection": {
+        "name": "collection",
+        "description": "Allowed collections: accounts, teams, permissions, apiKeys, services and hooks.",
+        "in": "path"
       }
 
     },
@@ -637,6 +761,19 @@
             },
             "example": {
               "$ref": "#/components/examples/OrganizationPublicDetails"
+            }
+          }
+        }
+      },
+      "OrganizationsPublic": {
+        "description": "Organizations with public details",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrganizationsPublic"
+            },
+            "example": {
+              "$ref": "#/components/examples/OrganizationsPublic"
             }
           }
         }

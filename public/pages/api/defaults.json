@@ -26,6 +26,10 @@
           }
         }
       },
+      "Default-data-category": {
+        "type": "string",
+        "enum": ["plan"]
+      },
       "Default-data-type": {
         "type": "string",
         "enum": ["notification"]
@@ -60,7 +64,7 @@
             },
             "collection": {
                 "type": "string",
-                "enum": ["assets", "events", "documents", "accounts", "permissions", "apiKeys", "hooks", "services", "organizationApps"]
+                "enum": ["assets", "events", "documents", "accounts", "permissions", "apiKeys", "hooks", "services", "organizationApps", "teams"]
             },
             "before": { "$ref": "#/components/schemas/Default-data-properties-notification-strategy-condition-before" }
         },
@@ -81,11 +85,6 @@
         "title": "Notification strategy",
         "type": "object",
         "properties": {
-            "id": { "type": "string" },
-            "type": {
-                "type": "string",
-                "enum": ["plan"]
-            },
             "cooldown": {
                 "type": "number"
             },
@@ -105,6 +104,7 @@
           "active": { "type": "boolean" },
           "type": { "$ref": "#/components/schemas/Default-data-type" },
           "subtype": { "$ref": "#/components/schemas/Default-data-subtype" },
+          "category": { "$ref": "#/components/schemas/Default-data-category" },
           "properties": {
               "anyOf": [
                    { "$ref": "#/components/schemas/Default-data-properties-notification-strategy" },
@@ -115,7 +115,8 @@
         "required": [
           "name",
           "type",
-          "subtype"
+          "subtype",
+          "category"
         ]
       },
       "Default-Create": {
@@ -177,17 +178,6 @@
           },
           "pagination": {
             "$ref": "base.json#/components/schemas/pagination-response"
-          }
-        }
-      },
-      "Default-Delete": {
-        "type": "object",
-        "properties": {
-          "response": {
-            "type": "string"
-          },
-          "meta": {
-            "$ref": "base.json#/components/schemas/meta-response"
           }
         }
       }
@@ -259,13 +249,6 @@
           "skip": 30,
           "total": 120
         }
-      },
-      "Default-Delete": {
-        "response": "Removed",
-        "meta": {
-          "code": 200,
-          "message": "Ok"
-        }
       }
 
     },
@@ -306,19 +289,6 @@
             },
             "example": {
               "$ref": "#/components/examples/Defaults"
-            }
-          }
-        }
-      },
-      "Default-Delete": {
-        "description": "Default delete",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Default-Delete"
-            },
-            "example": {
-              "$ref": "#/components/examples/Default-Delete"
             }
           }
         }

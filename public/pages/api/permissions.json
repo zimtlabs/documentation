@@ -48,26 +48,70 @@
           ]
         }
       },
-      "Permission-data-principal": {
-        "type": "array",
-        "items": {
-          "$ref": "base.json#/components/schemas/id"
-        }
-      },
-      "Permission-data-apps": {
-        "type": "array",
-        "items": {
-          "$ref": "base.json#/components/schemas/id"
-        }
-      },
-      "Permission-data-api_keys": {
-        "type": "array",
-        "items": {
-          "$ref": "base.json#/components/schemas/id"
-        }
-      },
       "Permission-data-resources": {
         "$ref": "base.json#/components/schemas/filters"
+      },
+      "Permission-data-routes": { "type": "object" },
+      "Permission-data-id": { "type": "id", "description": "Custom ID assigned to a permission, related to integrated app permission is from. Used so it can be automatically updated on integrated app update." },
+      "Permission-data-app": {
+          "type": "object" ,
+            "properties": {
+                "id": {"type": "string", "description": "Organization app ID"},
+                "name": {"type": "string", "description": "Organization app name"}
+            },
+            "required": ["id"]
+        },
+      "Permission-data-users": {
+          "type": "object" ,
+            "properties": {
+                "api_keys": {
+                    "type": "array",
+                    "items": {
+                        "type": "object" ,
+                        "properties": {
+                            "id": {"type": "string", "description": "API key ID"},
+                            "name": {"type": "string", "description": "API key name"}
+                        },
+                        "required": ["id"]
+                    }
+                },
+                "api_keys_only": {"type": "boolean"},
+                "organizations": {
+                    "type": "array",
+                    "items": {
+                        "type": "object" ,
+                        "properties": {
+                            "id": {"type": "string", "description": "Organization ID"},
+                            "name": {"type": "string", "description": "Organization name"},
+                            "all": {"type": "boolean"},
+                            "teams": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object" ,
+                                    "properties": {
+                                        "id": {"type": "string", "description": "Team ID"},
+                                        "name": {"type": "string", "description": "Team name"}
+                                    },
+                                    "required": ["id"]
+                                }
+                            },
+                            "accounts": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object" ,
+                                    "properties": {
+                                        "id": {"type": "string", "description": "Account ID"},
+                                        "full_name": {"type": "string", "description": "Account full name"}
+                                    },
+                                    "required": ["id"]
+                                }
+                            }
+                        },
+                        "required": ["id"]
+                    }
+                }
+            },
+            "required": ["api_keys_only", "api_keys", "organizations"]
       },
       "Permission-data": {
         "type": "object",
@@ -84,22 +128,21 @@
           "resources": {
             "$ref": "#/components/schemas/Permission-data-resources"
           },
-          "principal": {
-            "$ref": "#/components/schemas/Permission-data-principal"
+          "app": {
+            "$ref": "#/components/schemas/Permission-data-app"
           },
-          "apps": {
-            "$ref": "#/components/schemas/Permission-data-principal"
+          "users": {
+            "$ref": "#/components/schemas/Permission-data-users"
           },
-          "api_keys": {
-            "$ref": "#/components/schemas/Permission-data-principal"
+          "routes": {
+            "$ref": "#/components/schemas/Permission-data-routes"
           },
-          "require_principal": {
-            "type": "boolean"
+          "id": {
+            "$ref": "#/components/schemas/Permission-data-id"
           }
         },
         "required": [
-          "name",
-          "actions"
+          "name"
         ]
       },
       "Permission-Create": {
@@ -163,18 +206,12 @@
               "resources": {
                 "$ref": "#/components/schemas/Permission-data-resources"
               },
-              "principal": {
-                "$ref": "#/components/schemas/Permission-data-principal"
-              },
-              "apps": {
-                "$ref": "#/components/schemas/Permission-data-principal"
-              },
-              "api_keys": {
-                "$ref": "#/components/schemas/Permission-data-principal"
-              },
-              "require_principal": {
-                "type": "boolean"
-              }
+                "users": {
+                    "$ref": "#/components/schemas/Permission-data-users"
+                },
+                "routes": {
+                    "$ref": "#/components/schemas/Permission-data-routes"
+                }
             },
             "additionalProperties": false
           }
@@ -258,12 +295,23 @@
               "value": "tag1"
             }]
           },
-          "principal": [
-            "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-          ],
-          "api_keys": [
-            "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-          ]
+          "users": {
+              "api_keys": [
+                  { "id": "0x123...", "name": "API key" }
+              ],
+              "api_keys_only": false,
+              "organizations": [
+                  {
+                      "id": "0x123...",
+                      "name": "Organization 1",
+                      "all": false,
+                      "teams": [],
+                      "accounts": [
+                          {"id": "0x123...", "full_name": "John Doe"}
+                      ]
+                  }
+              ]
+          }
         }
       },
       "Permission": {
@@ -289,12 +337,23 @@
                 "value": "tag1"
               }]
             },
-            "principal": [
-              "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-            ],
-            "api_keys": [
-              "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-            ]
+            "users": {
+                "api_keys": [
+                    { "id": "0x123...", "name": "API key" }
+                ],
+                "api_keys_only": false,
+                "organizations": [
+                    {
+                        "id": "0x123...",
+                        "name": "Organization 1",
+                        "all": false,
+                        "teams": [],
+                        "accounts": [
+                            {"id": "0x123...", "full_name": "John Doe"}
+                        ]
+                    }
+                ]
+            }
           },
           "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
           "receipt": {
@@ -308,10 +367,23 @@
       },
       "Permission-update": {
         "data": {
-          "principal": [
-            "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-            "0x1412258c1a01231148e655cf4abf515191c2b6b5ee466e03c951"
-          ]
+          "users": {
+              "api_keys": [
+                  { "id": "0x123...", "name": "API key 2" }
+              ],
+              "api_keys_only": false,
+              "organizations": [
+                  {
+                      "id": "0x123...",
+                      "name": "Organization 2",
+                      "all": false,
+                      "teams": [],
+                      "accounts": [
+                          {"id": "0x123...", "full_name": "John Doe"}
+                      ]
+                  }
+              ]
+          }
         }
       },
       "Permissions": {
@@ -337,12 +409,23 @@
                 "value": "tag1"
               }]
             },
-            "principal": [
-              "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-            ],
-            "api_keys": [
-              "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-            ]
+            "users": {
+                "api_keys": [
+                    { "id": "0x123...", "name": "API key" }
+                ],
+                "api_keys_only": false,
+                "organizations": [
+                    {
+                        "id": "0x123...",
+                        "name": "Organization 1",
+                        "all": false,
+                        "teams": [],
+                        "accounts": [
+                            {"id": "0x123...", "full_name": "John Doe"}
+                        ]
+                    }
+                ]
+            }
           },
           "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
           "receipt": {
@@ -382,12 +465,23 @@
                 "value": "tag1"
               }]
             },
-            "principal": [
-              "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-            ],
-            "api_keys": [
-              "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-            ]
+            "users": {
+                "api_keys": [
+                    { "id": "0x123...", "name": "API key" }
+                ],
+                "api_keys_only": false,
+                "organizations": [
+                    {
+                        "id": "0x123...",
+                        "name": "Organization 1",
+                        "all": false,
+                        "teams": [],
+                        "accounts": [
+                            {"id": "0x123...", "full_name": "John Doe"}
+                        ]
+                    }
+                ]
+            }
           },
           "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
           "receipt": {

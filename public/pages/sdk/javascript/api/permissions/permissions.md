@@ -38,9 +38,29 @@ const result = await sdk.permissions.create(Permission object);
 //         }
 //       ]
 //     },
-//     "principal": [
-//       "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-//     ]
+//     "users": {
+//       "api_keys": [
+//         {
+//           "id": "0x123...",
+//           "name": "API key"
+//         }
+//       ],
+//       "api_keys_only": false,
+//       "organizations": [
+//         {
+//           "id": "0x123...",
+//           "name": "Organization 1",
+//           "all": false,
+//           "teams": [],
+//           "accounts": [
+//             {
+//               "id": "0x123...",
+//               "full_name": "John Doe"
+//             }
+//           ]
+//         }
+//       ]
+//     }
 //   }
 // });
 
@@ -96,9 +116,29 @@ const result = await sdk.permissions.getMany(Pagination);
             }
           ]
         },
-        "principal": [
-          "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-        ]
+        "users": {
+          "api_keys": [
+            {
+              "id": "0x123...",
+              "name": "API key"
+            }
+          ],
+          "api_keys_only": false,
+          "organizations": [
+            {
+              "id": "0x123...",
+              "name": "Organization 1",
+              "all": false,
+              "teams": [],
+              "accounts": [
+                {
+                  "id": "0x123...",
+                  "full_name": "John Doe"
+                }
+              ]
+            }
+          ]
+        }
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
@@ -170,9 +210,29 @@ const result = await sdk.permissions.search(Query);
             }
           ]
         },
-        "principal": [
-          "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-        ]
+        "users": {
+          "api_keys": [
+            {
+              "id": "0x123...",
+              "name": "API key"
+            }
+          ],
+          "api_keys_only": false,
+          "organizations": [
+            {
+              "id": "0x123...",
+              "name": "Organization 1",
+              "all": false,
+              "teams": [],
+              "accounts": [
+                {
+                  "id": "0x123...",
+                  "full_name": "John Doe"
+                }
+              ]
+            }
+          ]
+        }
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
@@ -230,9 +290,29 @@ const result = await sdk.permissions.get(id);
           }
         ]
       },
-      "principal": [
-        "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-      ]
+      "users": {
+        "api_keys": [
+          {
+            "id": "0x123...",
+            "name": "API key"
+          }
+        ],
+        "api_keys_only": false,
+        "organizations": [
+          {
+            "id": "0x123...",
+            "name": "Organization 1",
+            "all": false,
+            "teams": [],
+            "accounts": [
+              {
+                "id": "0x123...",
+                "full_name": "John Doe"
+              }
+            ]
+          }
+        ]
+      }
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
@@ -294,9 +374,29 @@ const result = await sdk.permissions.update(permission_id: string, Permission da
           }
         ]
       },
-      "principal": [
-        "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-      ]
+      "users": {
+        "api_keys": [
+          {
+            "id": "0x123...",
+            "name": "API key"
+          }
+        ],
+        "api_keys_only": false,
+        "organizations": [
+          {
+            "id": "0x123...",
+            "name": "Organization 1",
+            "all": false,
+            "teams": [],
+            "accounts": [
+              {
+                "id": "0x123...",
+                "full_name": "John Doe"
+              }
+            ]
+          }
+        ]
+      }
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
@@ -349,9 +449,29 @@ const result = await sdk.permissions.me();
             }
           ]
         },
-        "principal": [
-          "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
-        ]
+        "users": {
+          "api_keys": [
+            {
+              "id": "0x123...",
+              "name": "API key"
+            }
+          ],
+          "api_keys_only": false,
+          "organizations": [
+            {
+              "id": "0x123...",
+              "name": "Organization 1",
+              "all": false,
+              "teams": [],
+              "accounts": [
+                {
+                  "id": "0x123...",
+                  "full_name": "John Doe"
+                }
+              ]
+            }
+          ]
+        }
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
@@ -359,6 +479,31 @@ const result = await sdk.permissions.me();
       }
     }
   ],
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  },
+  "pagination": {
+    "limit": 30,
+    "skip": 30,
+    "total": 120
+  }
+}
+```
+
+## Delete permission
+
+Deletes an permission.
+
+[API reference](/api#tag/Permissions/paths/~1permissions~1{id}/delete).
+
+```javascript
+const result = await sdk.permissions.delete(id);
+//sdk.permissions.delete('0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951');
+
+// result
+{
+  "response": "Removed",
   "meta": {
     "code": 200,
     "message": "Ok"

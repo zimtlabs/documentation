@@ -157,17 +157,6 @@
             "$ref": "base.json#/components/schemas/pagination-response"
           }
         }
-      },
-      "Plan-Delete": {
-        "type": "object",
-        "properties": {
-          "response": {
-            "type": "string"
-          },
-          "meta": {
-            "$ref": "base.json#/components/schemas/meta-response"
-          }
-        }
       }
 
     },
@@ -249,13 +238,6 @@
           "skip": 30,
           "total": 120
         }
-      },
-      "Plan-Delete": {
-        "response": "Removed",
-        "meta": {
-          "code": 200,
-          "message": "Ok"
-        }
       }
 
     },
@@ -296,19 +278,6 @@
             },
             "example": {
               "$ref": "#/components/examples/Plans"
-            }
-          }
-        }
-      },
-      "Plan-Delete": {
-        "description": "Plan delete",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Plan-Delete"
-            },
-            "example": {
-              "$ref": "#/components/examples/Plan-Delete"
             }
           }
         }

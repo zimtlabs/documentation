@@ -22,7 +22,14 @@ const result = await sdk.organizations.getMany(Pagination);
       },
       "data": {
         "name": "My organization",
-        "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+        "owner": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "full_name": "John Doe"
+        },
+        "plan": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "Free"
+        },
         "settings": {
           "time_zone": "Europe/London"
         }
@@ -78,7 +85,14 @@ const result = await sdk.organizations.search(Query);
       },
       "data": {
         "name": "My organization",
-        "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+        "owner": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "full_name": "John Doe"
+        },
+        "plan": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "Free"
+        },
         "settings": {
           "time_zone": "Europe/London"
         }
@@ -120,7 +134,14 @@ const result = await sdk.organizations.get(id);
     },
     "data": {
       "name": "My organization",
-      "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+        "owner": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "full_name": "John Doe"
+        },
+        "plan": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "Free"
+        },
       "settings": {
         "time_zone": "Europe/London"
       }
@@ -189,7 +210,14 @@ const result = await sdk.organizations.me();
     },
     "data": {
       "name": "My organization",
-      "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+        "owner": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "full_name": "John Doe"
+        },
+        "plan": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "Free"
+        },
       "settings": {
         "time_zone": "Europe/London"
       }
@@ -232,7 +260,14 @@ const result = await sdk.organizations.update(id, Organization data);
     },
     "data": {
       "name": "My organization (updated)",
-      "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+        "owner": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "full_name": "John Doe"
+        },
+        "plan": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "Free"
+        },
       "settings": {
         "time_zone": "Europe/London"
       }
@@ -271,8 +306,14 @@ const result = await sdk.organizations.planUpdate(id, plan_id);
     },
     "data": {
       "name": "My organization",
-      "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-      "plan": "0x123",
+        "owner": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "full_name": "John Doe"
+        },
+        "plan": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "Premium"
+        },
       "settings": {
         "time_zone": "Europe/London"
       },
@@ -321,7 +362,14 @@ const result = await sdk.organizations.create(Request data);
     },
     "data": {
       "name": "Johns Organization",
-      "owner": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+        "owner": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "full_name": "John Doe"
+        },
+        "plan": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "Free"
+        },
       "settings": {
         "time_zone": "Europe/London"
       }
@@ -338,15 +386,15 @@ const result = await sdk.organizations.create(Request data);
 }
 ```
 
-## Get organization accounts
+## Search public organization accounts
 
-Returns list of organization accounts.
+Returns public organization accounts.
 
-[API reference](/api#tag/Organizations/paths/~1organizations~1{id}~1accounts/get).
+[API reference](/api#tag/Organizations/paths/~1organizations~1{id}~1accounts~1public/post).
 
 ```javascript
-const result = await sdk.organizations.getOrganizationAccounts(organization_id: string, Pagination);
-// sdk.organizations.getOrganizationAccounts('organization_id', { limit: 5, skip: 30 });
+const result = await sdk.organizations.searchOrganizationAccountsPublic(organization_id: string, Query);
+// sdk.organizations.searchOrganizationAccountsPublic('organization_id', { limit: 5, skip: 30 });
 
 // result
 {
@@ -362,7 +410,220 @@ const result = await sdk.organizations.getOrganizationAccounts(organization_id: 
         "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
         "settings": {
           "time_zone": "Europe/London"
-        }
+        },
+        "active": true
+      },
+      "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+      "receipt": {
+        "received_at": 1579967810000
+      }
+    }
+  ],
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  },
+  "pagination": {
+    "limit": 30,
+    "skip": 30,
+    "total": 120
+  }
+}
+```
+
+## Search public organization teams
+
+Returns public organization teams.
+
+[API reference](/api#tag/Organizations/paths/~1organizations~1{id}~1teams~1public/post).
+
+```javascript
+const result = await sdk.organizations.searchOrganizationTeamsPublic(organization_id: string, Query);
+// sdk.organizations.searchOrganizationTeamsPublic('organization_id', { limit: 5, skip: 30 });
+
+// result
+{
+  "response": [
+    {
+      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+      "meta": {
+        "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+      },
+      "data": {
+        "name": "Team 1",
+        "description": "Our main team",
+        "active": true,
+        "private": false,
+        "members": [
+          {
+            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "full_name": "John Doe",
+            "role": "maintainer"
+          }
+        ]
+      },
+      "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+      "receipt": {
+        "received_at": 1579967810000
+      }
+    }
+  ],
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  },
+  "pagination": {
+    "limit": 30,
+    "skip": 30,
+    "total": 120
+  }
+}
+```
+
+## Get organizations with public details
+
+Returns organizations with public details.
+
+[API reference](/api#tag/Organizations/paths/~1organizations~1public~1search/post).
+
+```javascript
+const result = await sdk.organizations.searchPublic(Query);
+// sdk.organizations.searchPublic({ limit: 5, skip: 30 });
+
+// result
+{
+  "response": [
+    {
+      "id": "0x123...",
+      "data": {
+        "name": "My organization"
+      },
+      "receipt": {
+        "received_at": 1579967810000
+      }
+    }
+  ],
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  },
+  "pagination": {
+    "limit": 30,
+    "skip": 30,
+    "total": 120
+  }
+}
+```
+
+## Get organization collection objects
+
+For hub admin to get specific organization collection objects.
+
+[API reference](/api#tag/Organizations/paths/~1organizations~1{id}~1{collection}/get).
+
+```javascript
+const result = await sdk.organizations.getOrganizationCollectionObjects(organization_id, collection, Pagination);
+// sdk.organizations.getOrganizationCollectionObjects('0x123...', 'accounts', { limit: 5, skip: 30 });
+
+// result
+{
+  "response": [
+    {
+      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+      "meta": {
+        "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+      },
+      "data": {
+        "full_name": "John Doe",
+        "email": "john@gmail.com",
+        "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+        "settings": {
+          "time_zone": "Europe/London"
+        },
+        "active": true
+      },
+      "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+      "receipt": {
+        "received_at": 1579967810000
+      }
+    }
+  ],
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  },
+  "pagination": {
+    "limit": 30,
+    "skip": 30,
+    "total": 120
+  }
+}
+```
+
+## Get organization collection object
+
+For hub admin to get specific organization collection object.
+
+[API reference](/api#tag/Organizations/paths/~1organizations~1{id}~1{collection}~1{:object_id}/get).
+
+```javascript
+const result = await sdk.organizations.getOrganizationCollectionObject(organization_id, collection, object_id);
+// sdk.organizations.getOrganizationCollectionObject('0x123...', 'accounts', '0x123...');
+
+// result
+{
+  "response": {
+    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "meta": {
+      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    },
+    "data": {
+      "full_name": "John Doe",
+      "email": "john@gmail.com",
+      "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+      "settings": {
+        "time_zone": "Europe/London"
+      },
+      "active": true
+    },
+    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+    "receipt": {
+      "received_at": 1579967810000
+    }
+  },
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  }
+}
+```
+
+## Search organization collection objects
+
+For hub admin to get specific organization collection objects.
+
+[API reference](/api#tag/Organizations/paths/~1organizations~1{id}~1{collection}~1search/post).
+
+```javascript
+const result = await sdk.organizations.searchOrganizationCollectionObjects(organization_id, collection, body);
+// sdk.organizations.searchOrganizationCollectionObjects('0x123...', 'accounts', { limit: 5, skip: 30 });
+
+// result
+{
+  "response": [
+    {
+      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+      "meta": {
+        "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+      },
+      "data": {
+        "full_name": "John Doe",
+        "email": "john@gmail.com",
+        "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+        "settings": {
+          "time_zone": "Europe/London"
+        },
+        "active": true
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
@@ -493,7 +754,10 @@ const result = await sdk.organizations.getManyOrganizationApps(Organization ID, 
       "data": {
         "name": "Organization app",
         "active": true,
-        "app": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+        "app": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "App"
+        },
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
@@ -534,7 +798,10 @@ const result = await sdk.organizations.searchOrganizationApps(Organization ID, Q
       "data": {
         "name": "Organization app",
         "active": true,
-        "app": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+        "app": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "App"
+        },
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
@@ -575,7 +842,10 @@ const result = await sdk.organizations.getManyActiveOrganizationApps(Organizatio
       "data": {
         "name": "Organization app",
         "active": true,
-        "app": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+        "app": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "App"
+        },
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
@@ -616,7 +886,10 @@ const result = await sdk.organizations.searchActiveOrganizationApps(Organization
       "data": {
         "name": "Organization app",
         "active": true,
-        "app": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+        "app": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "App"
+        },
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
@@ -656,7 +929,10 @@ const result = await sdk.organizations.getActiveOrganizationApp(Organization ID,
     "data": {
       "name": "Organization app",
       "active": true,
-      "app": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+        "app": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "App"
+        },
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
@@ -690,7 +966,10 @@ const result = await sdk.organizations.getOrganizationApp(Organization ID, Organ
     "data": {
       "name": "Organization app",
       "active": true,
-      "app": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+        "app": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "App"
+        },
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
@@ -724,7 +1003,10 @@ const result = await sdk.organizations.updateOrganizationApp(Organization ID, Or
     "data": {
       "name": "Organization app",
       "active": false,
-      "app": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+        "app": {
+            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "name": "App"
+        },
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {

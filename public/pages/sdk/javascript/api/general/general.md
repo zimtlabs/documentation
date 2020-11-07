@@ -44,7 +44,7 @@ const result = sdk.accounts.generateObjectWithMeta(true);
 
 | Name | Description | Type | Default | Example
 |:-----|:------------|:-----|:--------|:-------
-| Pagination | Pagination details | object | { } | { limit: 5, skip: 30 }
+| Pagination | Pagination details | object | { } | { limit: 5, skip: 30,  sortAscending: false, total: true }
 | Asset options | Additional asset options | object | { } | { info: true, parse: true }
 | Query | Query object for search methods | object | { } | { query: { assets: [ { field: 'object.meta.created_by', operator: 'starts-with', value: '0x123' } ] }, limit: 5 }
 
@@ -54,6 +54,8 @@ const result = sdk.accounts.generateObjectWithMeta(true);
 |:-----|:------------|:-----|:--------|:-------
 | limit | Amount of results to return | number | 30 | 5
 | skip | Number of results to skip | number | 0 | 30
+| sortAscending | Sort results | boolean | false | true
+| total | Total results count | boolean | false | true
 
 ### Asset options
 
@@ -73,14 +75,9 @@ const result = sdk.accounts.generateObjectWithMeta(true);
 
 ### Query object
 
-| Name | Description | Type | Default | Example
-|:-----|:------------|:-----|:--------|:-------
-| assets | For searching assets | array of Filters| none | [ { field: 'object.meta.created_by', operator: 'starts-with', value: '0x123' } ]
-| events | For searching assets and/or events | array of Filters| none | [ { field: 'object.meta.created_by', operator: 'starts-with', value: '0x123' } ]
-| documents | For searching documents | array of Filters| none | [ { field: 'object.meta.created_by', operator: 'starts-with', value: '0x123' } ]
-| accounts | For searching accounts | array of Filters| none | [ { field: 'object.meta.created_by', operator: 'starts-with', value: '0x123' } ]
-| organizations | For searching organizations | array of Filters| none | [ { field: 'object.meta.created_by', operator: 'starts-with', value: '0x123' } ]
-| permissions | For searching permissions | array of Filters| none | [ { field: 'object.meta.created_by', operator: 'starts-with', value: '0x123' } ]
+Allowed collections for quering:
+
+assets, events, documents, organizations, accounts, teams, permissions, apiKeys, apps, organizationApps, services, hooks, plans, defaults, logs, bundles, strategies
 
 
 ### Filter
@@ -94,16 +91,5 @@ const result = sdk.accounts.generateObjectWithMeta(true);
 ### Operator
 
 Enum:
-- equal
-- not-equal
-- equal-array
-- not-equal-array
-- greater-than
-- greater-than-equal
-- less-than
-- less-than-equal
-- inrange
-- starts-with
-- contains
-- array-some
-- array-all
+
+equal, not-equal, greater-than, greater-than-equal, less-than, less-than-equal, array-some, array-all, starts-with, contains

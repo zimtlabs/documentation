@@ -82,7 +82,7 @@ export default {
             },
         },
     },
-    CONSTANTS: {
+    CONST: {
         sidebar: {
             width: 240,
         },
