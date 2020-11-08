@@ -1,86 +1,82 @@
-import React from 'react';
-import { TablePagination, makeStyles } from '@material-ui/core';
+/*
+ * Copyright (c) ZIMT AG - All Rights Reserved 2020
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Contact: tech@zimt.co
+ */
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core';
+import { Pagination } from '@material-ui/lab';
 
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
-
-import { IconButton } from '../../../';
+import { Typography } from '../../Typography';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        overflowX: 'auto',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        'align-items': 'center',
+        'justify-content': 'center',
+        padding: '13px 15px',
     },
-    actions: {
-        flexShrink: 0,
-        marginLeft: theme.spacing(2.5),
+    total: {
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+        marginTop: 5,
     },
-}), { name: 'ZIMTTablePagination' });
+}), { name: 'QPTablePagination' });
 
-function TablePaginationActions(props) {
+export default function QPTablePagination(props) {
     const classes = useStyles();
-    const { count, page, rowsPerPage, onChangePage } = props;
+    const [count, setCount] = useState(0);
+    const [page, setPage] = useState(1);
 
-    const onFirstPageButtonClick = event => {
-        onChangePage(event, 0);
-    };
+    const { loading, pagination = {}, limit: _limit, size, onPaginationChange, type, showTotal, ...other } = props;
 
-    const onBackButtonClick = event => {
-        onChangePage(event, page - 1);
-    };
+    const total = pagination.total || 0;
+    const checkPage = props.page !== page;
 
-    const onNextButtonClick = event => {
-        onChangePage(event, page + 1);
-    };
+    useEffect(() => {
+        if (!loading) {
+            const limit = _limit || 10;
+            let c = total > limit ? Math.ceil(total / limit) : 1;
+            if (props.page < c && c > 10) c = 10;
+            if (props.page >= c && pagination.hasNext) c = props.page + 1;
 
-    const onLastPageButtonClick = event => {
-        onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+            setCount(c);
+            setPage(props.page);
+        }
+
+        // eslint-disable-next-line
+    }, [pagination.total, pagination.hasNext, _limit, checkPage, loading]);
+
+    const onChange = (event, page) => {
+        if (onPaginationChange) onPaginationChange(page);
     };
 
     return (
-        <div className={classes.actions}>
-            <IconButton
-                onClick={onFirstPageButtonClick}
-                disabled={page === 0}
-            >
-                <FirstPageIcon />
-            </IconButton>
-            <IconButton
-                onClick={onBackButtonClick}
-                disabled={page === 0}
-            >
-                <KeyboardArrowLeft />
-            </IconButton>
-            <IconButton
-                onClick={onNextButtonClick}
-                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-            >
-                <KeyboardArrowRight />
-            </IconButton>
-            <IconButton
-                onClick={onLastPageButtonClick}
-                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-            >
-                <LastPageIcon />
-            </IconButton>
+        <div className={classes.root}>
+            <Pagination
+                classes={{
+                    root: classes.root,
+                }}
+                count={count}
+                onChange={onChange}
+                showFirstButton
+                showLastButton
+                disabled={loading}
+                page={page}
+                {...other}
+            />
+            {showTotal && (
+                <Typography
+                    className={classes.total}
+                    variant='body2'
+                >
+                    {total} {type || ''} found
+                </Typography>
+            )}
         </div>
-    );
-}
-
-export default function ZIMTTablePagination(props) {
-    const classes = useStyles();
-
-    return (
-        <TablePagination
-            rowsPerPageOptions={[15, 25, 35, { label: 'All', value: -1 }]}
-            component='div'
-            ActionsComponent={TablePaginationActions}
-            classes={{
-                root: classes.root,
-            }}
-            {...props}
-        />
     );
 }
 

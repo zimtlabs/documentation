@@ -1,16 +1,6 @@
 import axios from 'axios';
-import NProgress from 'nprogress';
 
 import { getPublicFileUrl } from '../utils';
-
-NProgress.configure({
-    template: `
-    <div class="nprogress-bar" role="bar">
-      <dt></dt>
-      <dd></dd>
-    </div>
-  `,
-});
 
 const API = axios.create({
     headers: {
@@ -18,63 +8,50 @@ const API = axios.create({
     },
 });
 
-API.interceptors.request.use(config => {
-    return config;
-}, error => {
-    return ({ error: error.response })
-});
+API.interceptors.request.use(
+    config => config,
+    error => ({ error: error.response })
+);
 
-API.interceptors.response.use(response => {
-    if (response.data) {
-        return response.data;
-    }
-    return response;
-}, error => {
-    return ({ error: error.response })
-});
-
+API.interceptors.response.use(
+    response => {
+        if (response.data) return response.data;
+        return response;
+    },
+    error => ({ error: error.response })
+);
 
 const APIPages = axios.create();
 
-APIPages.interceptors.request.use(config => {
-    NProgress.start();
+APIPages.interceptors.request.use(
+    config => config,
+    error => ({ error: error.response })
+);
 
-    return config;
-}, error => {
-    NProgress.done();
-    return ({ error: error.response })
-});
+const NOT_ACCEPTED_TYPES = ['text/html'];
 
-const NOT_ACCEPT_TYPES = ['text/html'];
+APIPages.interceptors.response.use(
+    response => {
+        if (NOT_ACCEPTED_TYPES.some(type => response.headers['content-type'].indexOf(type) > -1)) throw new Error('No file found');
 
-APIPages.interceptors.response.use(response => {
-    NProgress.done();
+        if (response.data) return response.data;
 
-    if (NOT_ACCEPT_TYPES.some(type => response.headers['content-type'].indexOf(type) > -1)) throw new Error('No file found');
-
-    if (response.data) {
-        return response.data;
-    }
-    return response;
-}, error => {
-    NProgress.done();
-    return ({ error: error.response })
-});
-
+        return response;
+    },
+    error => ({ error: error.response })
+);
 
 export class RequestService {
 
-    get = (url, config = {}) => API.get(url, config);
+    get = (url, options = {}) => API.get(url, options);
 
-    getPage = (folders, subfolder, name = null) => {
-        return APIPages.get(getPublicFileUrl(folders, subfolder, name));
-    };
+    post = (url, body, options = {}) => API.post(url, body, options);
 
-    post = (url, body) => API.post(url, body);
+    delete = (url, options = {}) => API.delete(url, options);
 
-    delete = url => API.delete(url);
+    put = (url, body, options = {}) => API.put(url, body, options);
 
-    put = (url, body) => API.put(url, body);
+    getPage = (folders, subfolder, name = null) => APIPages.get(getPublicFileUrl(folders, subfolder, name));
 
 }
 

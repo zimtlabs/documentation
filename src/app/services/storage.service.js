@@ -1,14 +1,11 @@
 import { Subject, BehaviorSubject } from 'rxjs';
 
-import { isRootPath } from '../utils';
-
-// Storage wrapper
 export class StorageService {
-    namespace = '';
-    // localStorage, sessionStorage
-    storage = localStorage;
+    namespace = 'ZIMT__';
+    storage;
     crumbSub = new Subject();
-    sidebarSub = new BehaviorSubject(window.innerWidth >= 1280 && !isRootPath());
+    currentOrganizationSub = new Subject();
+    sidebarSub = new BehaviorSubject();
     sidebarOpenedPathSub = new BehaviorSubject({
         activePage: {
             pathname: '',
@@ -25,56 +22,67 @@ export class StorageService {
         });
     }
 
+    init(storage) {
+        this.storage = storage;
+    }
+
+    // localStorage wrapper
     set(key, value) {
-        this.storage.setItem(`${this.namespace}${key}`, JSON.stringify(value));
+        if (this.storage) this.storage.setItem(`${this.namespace}${key}`, JSON.stringify(value));
     }
 
     put(key, value) {
-        if (!this.get(key)) {
-            this.storage.setItem(`${this.namespace}${key}`, JSON.stringify(value));
-        } else {
-            return false;
+        if (this.storage) {
+            if (!this.get(key)) {
+                this.storage.setItem(`${this.namespace}${key}`, JSON.stringify(value));
+            } else return false;
         }
     }
 
     get(key) {
-        try {
-            return JSON.parse(this.storage.getItem(`${this.namespace}${key}`));
-        } catch (err) {
-            return this.storage.getItem(`${this.namespace}${key}`);
+        if (this.storage) {
+            try {
+                return JSON.parse(this.storage.getItem(`${this.namespace}${key}`));
+            } catch (err) {
+                return this.storage.getItem(`${this.namespace}${key}`);
+            }
         }
     }
 
     getAll() {
-        const items = Object.keys(this.storage).reduce((acc, key) => {
-            if (key.indexOf(this.namespace) > -1) {
-                acc.push({
-                    key,
-                    value: this.storage.getItem(key),
-                });
-            }
+        if (this.storage) {
+            const items = Object.keys(this.storage).reduce((acc, key) => {
+                if (key.indexOf(this.namespace) > -1) {
+                    acc.push({
+                        key,
+                        value: this.storage.getItem(key),
+                    });
+                }
 
-            return acc;
-        }, []);
+                return acc;
+            }, []);
 
-        return items;
+            return items;
+        }
     }
 
     delete(key) {
-        this.storage.removeItem(`${this.namespace}${key}`);
+        if (this.storage) this.storage.removeItem(`${this.namespace}${key}`);
     }
 
     clear() {
-        const items = this.getAll();
+        if (this.storage) {
+            const items = this.getAll();
 
-        for (const item of items) {
-            this.storage.removeItem(item.key);
+            for (const item of items) {
+                this.storage.removeItem(item.key);
+            }
         }
     }
 
     // Warning: this will delete other websites data as well on localhost only, as for actual domains, each domain has its own localStorage space, so namespaces isn't necessary
     clearEntireStorage() {
-        this.storage.clear();
+        if (this.storage) this.storage.clear();
     }
 }
 

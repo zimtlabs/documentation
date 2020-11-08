@@ -1,49 +1,59 @@
-import 'react-app-polyfill/ie11';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { config } from 'dotenv';
-import GA from 'react-ga';
+const http = require('http');
+const express = require('express');
+const next = require('next');
+const helmet = require('helmet');
+const compression = require('compression');
+const methodOverride = require('method-override');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-import 'prismjs/themes/prism.css';
-import 'prismjs/themes/prism-okaidia.css';
-import 'nprogress/nprogress.css';
+const dev = process.env.NODE_ENV !== 'production';
+const nextApp = next({ dev });
+const handle = nextApp.getRequestHandler();
+const port = process.env.PORT || 3000;
 
-import * as serviceWorker from './serviceWorker';
+const run = async () => {
+    // Server errors
+    process.on('unhandledRejection', error => console.log('!! Unhandled Rejection !!', error));
+    process.on('uncaughtException', error => console.log('!! Uncaught Exception !!', error));
 
-import App from './app/App';
-import { history } from './app/utils';
-import { Middleware } from './app/components';
-import Config from './app/config';
+    await nextApp.prepare();
 
-const init = () => {
-    config();
-    const dev = Config.config.dev;
+    const app = express();
 
-    // Inits in production
-    if (!dev) {
-        GA.initialize('UA-157314622-4');
-        // Initial app open pageview record
-        GA.pageview(window.location.pathname + window.location.search);
-        // Routing record
-        history.listen(location => {
-            // Update the user's current page
-            GA.set({ page: location.pathname });
-            // Record a pageview for the given page
-            GA.pageview(location.pathname + location.search);
-        });
-    }
+    // Middlewares for setup
+    app.set('json spaces', 2);
+    app.set('subdomain offset', 1);
+
+    app.use(helmet());
+    app.use(compression());
+    app.use(methodOverride());
+    app.use(cors({ origin: '*' }));
+    app.use(bodyParser.json());
+
+    app.on('error', error => {
+        switch (error.code) {
+            case 'EACCES':
+                console.error(`${Config.config.port} requires elevated privileges`);
+                break;
+            case 'EADDRINUSE':
+                console.error(`${Config.config.port} is already in use`);
+                break;
+            default:
+                throw error;
+        }
+
+        process.exit(1);
+    });
+
+    app.all('*', (req, res) => handle(req, res));
+
+    const httpServer = http.createServer(app);
+
+    httpServer.listen(port, error => {
+        if (error) throw error;
+        console.log(`Server running on ${port}`);
+    });
 };
 
-init();
-
-ReactDOM.render(
-    <Middleware>
-        {props => <App {...props} />}
-    </Middleware>,
-    document.getElementById('root')
-);
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+run();

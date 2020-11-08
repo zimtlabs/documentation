@@ -105,7 +105,7 @@ const markedOptions = {
 const useStyles = makeStyles(theme => ({
     root: {
         fontFamily: theme.typography.fontFamily,
-        fontSize: 16,
+        fontSize: 13,
         color: theme.palette.text.primary,
         wordBreak: 'break-word',
 
@@ -134,7 +134,7 @@ const useStyles = makeStyles(theme => ({
             color: theme.palette.text.primary,
             backgroundColor:
                 theme.palette.type === 'dark' ? 'rgba(255,229,100,0.2)' : 'rgba(255,229,100,0.1)',
-            fontSize: 14,
+            fontSize: 13,
             borderRadius: 2,
         },
         '& code[class*="language-"]': {
@@ -142,7 +142,7 @@ const useStyles = makeStyles(theme => ({
             color: '#fff',
         },
         '& p code, & ul code, & pre code': {
-            fontSize: 14,
+            fontSize: 13,
         },
         '& .token.operator': {
             background: 'transparent',
@@ -246,7 +246,7 @@ const useStyles = makeStyles(theme => ({
             lineHeight: 1.6,
         },
         '& th': {
-            fontSize: 14,
+            fontSize: 13,
             lineHeight: theme.typography.pxToRem(24),
             fontWeight: theme.typography.fontWeightMedium,
             color: theme.palette.text.primary,

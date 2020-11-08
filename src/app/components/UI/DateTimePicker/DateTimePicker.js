@@ -11,6 +11,7 @@ export default function ZIMTDateTimePicker(props) {
             showTodayButton
             margin='normal'
             format='DD/MM/YYYY'
+            inputVariant='outlined'
             {...props}
         />
     );

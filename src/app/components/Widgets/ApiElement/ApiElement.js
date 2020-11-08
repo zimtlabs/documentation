@@ -9,9 +9,6 @@ const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
 
-        '& .menu-content': {
-        },
-
         '& h3': {
             marginTop: 15,
             marginBottom: 24,
@@ -26,14 +23,10 @@ const useStyles = makeStyles(theme => ({
 export default function ApiElement(props) {
     const classes = useStyles(props);
     const theme = useTheme();
-    const {
-        text,
-        titles,
-        // eslint-disable-next-line no-unused-vars
-        ...other
-    } = props;
 
-    const options = parseMarkdownFileReference(props.text);
+    const { text, titles } = props;
+
+    const options = parseMarkdownFileReference(text);
     const url = getPublicFileUrl(titles.folders, titles.file, options.main);
 
     return (

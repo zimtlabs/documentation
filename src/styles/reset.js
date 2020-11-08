@@ -4,7 +4,6 @@
  * Proprietary and confidential
  * Contact: tech@zimt.co
  */
-
 const FONT_FAMILY = {
     primary: [
         'Zilla Slab',
@@ -63,7 +62,6 @@ const uiReset = theme => ({
         },
 
         ul: {
-            listStyleType: 'none',
             padding: 0,
             margin: 0,
         },
@@ -71,7 +69,7 @@ const uiReset = theme => ({
         p: {
             fontSize: '13px',
             lineHeight: 1.5,
-            color: '#000',
+            color: '#999',
             fontWeight: 400,
             margin: 0,
             wordWrap: 'break-word',

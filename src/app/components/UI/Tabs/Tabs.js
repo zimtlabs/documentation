@@ -5,6 +5,9 @@ const useStyles = makeStyles(theme => ({
     root: {
 
     },
+    indicator: {
+        display: 'none',
+    },
 }), { name: 'ZIMTTabs' });
 
 export default function ZIMTTabs(props) {
@@ -14,9 +17,11 @@ export default function ZIMTTabs(props) {
         <Tabs
             {...props}
             variant={props.variant || 'scrollable'}
-            indicatorColor={props.indicatorColor || 'primary'}
+            indicatorColor='primary'
+            scrollButtons='auto'
             classes={{
                 root: classes.root,
+                indicator: classes.indicator,
             }}
         />
     );

@@ -4,13 +4,14 @@ import { Menu, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
     paper: {
         boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.074)',
-        minWidth: 154,
+        minWidth: props => props.minWidth || 254,
         borderRadius: 8,
     },
 }), { name: 'ZIMTMenu' });
 
 export default function ZIMTMenu(props) {
-    const classes = useStyles();
+    const classes = useStyles(props);
+    const { minWidth, ...other } = props;
 
     return (
         <Menu
@@ -26,7 +27,7 @@ export default function ZIMTMenu(props) {
                 horizontal: 'right',
             }}
             getContentAnchorEl={null}
-            {...props}
+            {...other}
         />
     );
 }

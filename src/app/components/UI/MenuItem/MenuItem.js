@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
     },
 }), { name: 'ZIMTMenuItem' });
 
-export default function ZIMTMenuItem(props) {
+const ZIMTMenuItem = React.forwardRef((props, ref) => {
     const classes = useStyles();
 
     return (
@@ -15,8 +15,11 @@ export default function ZIMTMenuItem(props) {
             classes={{
                 root: classes.root,
             }}
+            innerRef={ref}
             {...props}
         />
     );
-}
+});
+
+export default ZIMTMenuItem;
 
