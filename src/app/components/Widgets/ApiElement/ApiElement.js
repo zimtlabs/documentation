@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
                     background: theme.palette.background.secondary,
                 },
 
-                '& label.eulxKV': {
+                '& label.active': {
                     background: '#272727',
                 },
             },

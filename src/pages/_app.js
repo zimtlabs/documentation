@@ -58,6 +58,9 @@ export default function _App(props) {
                         startPosition={0.04}
                         stopDelayMs={50}
                         height={2}
+                        options={{
+                            showSpinner: false,
+                        }}
                     />
                     <Component {...pageProps} />
                 </App>
