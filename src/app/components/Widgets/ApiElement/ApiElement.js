@@ -6,18 +6,75 @@ import prism from 'prismjs';
 import { parseMarkdownFileReference, getPublicFileUrl } from '../../../utils';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
+    root: () => theme.palette.type === 'dark' ?
+        ({
+            width: '100%',
 
-        '& h3': {
-            marginTop: 15,
-            marginBottom: 24,
-        },
+            '& h3': {
+                marginTop: 15,
+                marginBottom: 24,
+            },
 
-        '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
-            background: 'none',
-        },
-    }
+            '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
+                background: 'none',
+            },
+
+            '& .menu-content': {
+                background: theme.palette.background.secondary,
+
+                '& div': {
+                    background: theme.palette.background.secondary,
+                },
+
+                '& label': {
+                    background: theme.palette.background.secondary,
+                },
+
+                '& label:hover': {
+                    background: theme.palette.background.secondary,
+                },
+
+                '& label.eulxKV': {
+                    background: '#272727',
+                },
+            },
+
+            '& .redoc-wrap': {
+                background: theme.palette.background.primary,
+
+                '& h1, & h2, & h3, & h4, & h5, & h6': {
+                    color: theme.palette.text.primary,
+                },
+
+                '& span, & p, & td, & tr, & button, & input': {
+                    color: theme.palette.text.secondary,
+                },
+
+                '& tr': {
+                    background: [theme.palette.background.primary, '!important'],
+
+                    '& div': {
+                        background: [theme.palette.background.primary, '!important'],
+                    },
+
+                    '& td': {
+                        borderColor: '#333',
+                    },
+                },
+
+                '& button:focus': {
+                    outline: 'none',
+                },
+            },
+        }) :
+        ({
+            width: '100%',
+
+            '& h3': {
+                marginTop: 15,
+                marginBottom: 24,
+            },
+        }),
 }), { name: 'ApiElement' });
 
 export default function ApiElement(props) {

@@ -1,5 +1,5 @@
 # ZIMT Hub
 
-<p class="description">API documentation v1.0.0</p>
+<p class="description">API documentation</p>
 
 {{ "type": "api", "main": "api.json" }}

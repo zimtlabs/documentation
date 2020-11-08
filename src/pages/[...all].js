@@ -43,7 +43,10 @@ function All() {
 
     const getPage = async (folders, file, hash) => {
         try {
-            if ((folders && !!folders.length) || file) {
+            if (
+                (folders && !!folders.length && folders.indexOf('company') === -1) ||
+                (file && ['about', 'contact'].indexOf(file) === -1)
+            ) {
                 const page = await RequestService.getPage(folders, file);
                 if (page.error) throw new Error('No file found');
 

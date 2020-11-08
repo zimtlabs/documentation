@@ -3,7 +3,7 @@ import GA from 'react-ga';
 
 import Config from '../config';
 
-export { default as theme } from './theme';
+export * from './theme';
 export * from './colorManipulation';
 export * from './parseMarkdown';
 
@@ -153,7 +153,7 @@ export const capitalize = value => {
 export const normalize = value => {
     const v = capitalize(value || '');
 
-    return v.replaceAll('-', ' ').trim();
+    return v.replaceAll('-', ' ').replaceAll('Api', 'API').trim();
 };
 
 export function stringToArray(value) {

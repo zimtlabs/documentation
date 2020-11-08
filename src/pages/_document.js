@@ -27,13 +27,13 @@ export default class CustomDocument extends Document {
                     <meta name='apple-touch-fullscreen' content='yes' />
                     <meta name='apple-mobile-web-app-status-bar-style' content='#ffffff' />
 
-                    <link rel='apple-touch-icon' sizes='180x180' href='/favicons/apple-touch-icon.png' />
-                    <link rel='icon' type='image/png' sizes='32x32' href='/favicons/favicon-32x32.png' />
-                    <link rel='icon' type='image/png' sizes='16x16' href='/favicons/favicon-16x16.png' />
-                    <link rel='manifest' href='/favicons/site.webmanifest' />
-                    <link rel='mask-icon' href='/favicons/safari-pinned-tab.svg' color='#AB9363' />
+                    <link rel='apple-touch-icon' sizes='180x180' href='/favicons/light/apple-touch-icon.png' />
+                    <link rel='icon' type='image/png' sizes='32x32' href='/favicons/light/favicon-32x32.png' />
+                    <link rel='icon' type='image/png' sizes='16x16' href='/favicons/light/favicon-16x16.png' />
+                    <link rel='manifest' href='/favicons/light/site.webmanifest' />
+                    <link rel='mask-icon' href='/favicons/light/safari-pinned-tab.svg' color='#ab9363' />
                     <meta name='msapplication-TileColor' content='#ffffff' />
-                    <meta name='theme-color' content='#AB9363' />
+                    <meta name='theme-color' content='#ab9363' />
                 </Head>
 
                 <body>

@@ -5,6 +5,7 @@ export class StorageService {
     storage;
     crumbSub = new Subject();
     currentOrganizationSub = new Subject();
+    userTheme = new Subject();
     sidebarSub = new BehaviorSubject();
     sidebarOpenedPathSub = new BehaviorSubject({
         activePage: {

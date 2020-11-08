@@ -5,7 +5,7 @@
  * Contact: tech@zimt.co
  */
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles, useTheme } from '@material-ui/styles';
 import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 15,
-        background: '#fff',
+        background: theme.palette.background.secondary,
     },
     logo: {
         height: 45,
@@ -33,11 +33,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function ScreenLoader(props) {
     const classes = useStyles(props);
+    const theme = useTheme();
 
     return (
         <div className={clsx(classes.root)}>
             <img
-                src='/assets/svg/logo.svg'
+                src={`/assets/svg/logo${theme.palette.type === 'dark' ? '-light' : ''}.svg`}
                 alt='ZIMT logo'
                 className={classes.logo}
             />

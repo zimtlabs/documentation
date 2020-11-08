@@ -90,6 +90,8 @@ const Menu = [
 
     { title: 'About', pathname: '/company/about' },
     { title: 'Contact', pathname: '/company/contact' },
+
+    { type: 'divider' },
 ];
 
 export default Menu;
