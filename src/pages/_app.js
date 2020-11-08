@@ -22,6 +22,7 @@ export default function _App(props) {
 
         const ut = StorageService.get('userTheme');
         if (ut) setUserTheme(ut);
+        else StorageService.set('userTheme', 'auto');
 
         StorageService.userTheme.subscribe(value => setUserTheme(value));
 

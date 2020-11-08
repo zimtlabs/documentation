@@ -9,7 +9,7 @@ import HomeIcon from '@material-ui/icons/HomeWorkOutlined';
 
 import { CheckOnline, AppBar, Toolbar, IconButton, Typography, Breadcrumbs, useSidebarOpen } from '../../';
 import { StorageService } from '../../../services';
-import { rgbToRGBA } from '../../../utils';
+import { normalize, rgbToRGBA } from '../../../utils';
 
 import Logo from '../../../../../public/assets/svg/logo.svg';
 
@@ -42,10 +42,6 @@ const useStyles = makeStyles(theme => ({
     avatar: {
         backgroundColor: theme.palette.secondary.main,
         color: '#fff',
-    },
-    menu: {
-        display: 'flex',
-        alignItems: 'center',
     },
     link: {
         display: 'flex',
@@ -140,7 +136,7 @@ export default function Header(props) {
                             className={classes.link}
                         >
                             {!index && <HomeIcon className={classes.icon} />}
-                            {crumb.label}
+                            {normalize(crumb.label)}
                         </Typography>
                     </a>
                 </NLink>
@@ -151,7 +147,7 @@ export default function Header(props) {
                         key={index}
                     >
                         {!index && <HomeIcon className={classes.icon} />}
-                        {crumb.label}
+                        {normalize(crumb.label)}
                     </Typography>
                 ))}
         </Breadcrumbs>
@@ -188,15 +184,6 @@ export default function Header(props) {
                                 <Logo />
                             </a>
                         </NLink>
-                    </div>
-                    <div className={classes.menu}>
-                        {/* <IconButton
-                            color='inherit'
-                            href='https://github.com/sensia-io/hub'
-                            target='_blank'
-                        >
-                            <GithubIcon />
-                        </IconButton> */}
                     </div>
                 </Toolbar>
             </AppBar>
