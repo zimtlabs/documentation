@@ -2,13 +2,13 @@
 class Config {
     default = {
         env: process.env.NODE_ENV,
-        services: {
-            logging: 'https://dcee31d5cefc4e9e9d8c5048367c1b67@o346545.ingest.sentry.io/5202546',
-        },
         api: {
             core: 'https://hub.zi.mt',
             version: 'v1.0.0',
             source: 'https://github.com/zimtlabs/hub',
+        },
+        services: {
+            logging: 'https://dcee31d5cefc4e9e9d8c5048367c1b67@o346545.ingest.sentry.io/5202546',
         },
     };
 

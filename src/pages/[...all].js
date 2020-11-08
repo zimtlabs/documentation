@@ -43,12 +43,14 @@ function All() {
 
     const getPage = async (folders, file, hash) => {
         try {
-            const page = await RequestService.getPage(folders, file);
-            if (page.error) throw new Error('No file found');
+            if ((folders && !!folders.length) || file) {
+                const page = await RequestService.getPage(folders, file);
+                if (page.error) throw new Error('No file found');
 
-            setTitles({ folders, file, hash: hash.slice(1) });
-            setMarkdown(page);
-            setLoaded(true);
+                setTitles({ folders, file, hash: hash.slice(1) });
+                setMarkdown(page);
+                setLoaded(true);
+            }
         } catch (error) {
             router.push('/');
         }
