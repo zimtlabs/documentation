@@ -21,6 +21,9 @@ class Config {
                 version: process.env.REACT_APP_API_API_VERSION || this.default.api.version,
                 source: process.env.REACT_APP_API_API_SOURCE || this.default.api.source,
             },
+            services: {
+                logging: process.env.NEXT_PUBLIC_SENTRY_DSN || this.default.services.logging,
+            },
         }
     }
 }
