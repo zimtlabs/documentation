@@ -26,7 +26,7 @@ const THEME_MODE_OPTIONS = [
 
 function SidebarMenu(props) {
     const classes = useStyles();
-    const [userTheme, setUserTheme] = useState();
+    const [userTheme, setUserTheme] = useState('auto');
 
     useEffect(() => {
         init();

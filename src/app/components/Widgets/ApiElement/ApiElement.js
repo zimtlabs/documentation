@@ -56,10 +56,10 @@ const useStyles = makeStyles(theme => ({
                     '& div': {
                         background: [theme.palette.background.primary, '!important'],
                     },
+                },
 
-                    '& td': {
-                        borderColor: '#333',
-                    },
+                '& table td, & table th': {
+                    borderColor: '#333',
                 },
 
                 '& button:focus': {
@@ -73,6 +73,16 @@ const useStyles = makeStyles(theme => ({
             '& h3': {
                 marginTop: 15,
                 marginBottom: 24,
+            },
+
+            '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
+                background: 'none',
+            },
+
+            '& .redoc-wrap': {
+                '& button:focus': {
+                    outline: 'none',
+                },
             },
         }),
 }), { name: 'ApiElement' });
