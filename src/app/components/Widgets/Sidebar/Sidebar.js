@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import { duration, useMediaQuery } from '@material-ui/core';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 import { List, Divider, Typography, Drawer, useSidebarOpen, noSidebarRoutes } from '../../';
 import { StorageService } from '../../../services';
 
-import SidebarMenu from '../../../Menu';
-import { AppDrawerNavItem } from './components';
-import { useRouter } from 'next/router';
+import Menu from '../../../Menu';
+import { AppDrawerNavItem, SidebarMenu } from './components';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        zIndex: '15000 !important',
+        zIndex: '1300 !important',
         flexShrink: 0,
 
         '& .MuiPaper-root': {
@@ -152,7 +152,10 @@ export default function Sidebar(props) {
 
             <Divider style={{ marginBottom: 24 }} />
 
-            {renderNavItems({ pages: SidebarMenu, depth: 0 })}
+            {renderNavItems({ pages: Menu, depth: 0 })}
+
+            {/* Settings  */}
+            <SidebarMenu />
         </Drawer>
     );
 }

@@ -5,7 +5,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        background: '#fff',
+        background: theme.palette.background.secondary,
         width: '100%',
         borderBottom: '1px solid #eee',
     },

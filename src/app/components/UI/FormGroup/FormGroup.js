@@ -4,23 +4,19 @@ import { FormGroup, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
-        flexWrap: 'nowrap',
-        flexDirection: 'column',
+        display: 'grid',
+        gridGap: 16,
+        gridTemplateColumns: 'repeat( auto-fit, minmax(250px, 1fr))',
 
         '@media only screen and (min-width: 720px)': {
-            flexDirection: props => props.row ? 'row' : 'column',
-
-            '& > *': {
-                width: props => (props.row && !props.widthAuto) ? '50%' : 'initial',
-                marginRight: [theme.spacing(1), '!important'],
-                marginLeft: [theme.spacing(1), '!important'],
-            },
+            gridTemplateColumns: props => (props.row && !props.widthAuto) ? 'repeat(50%, minmax(250px, 1fr))' : 'initial',
         },
     },
 }), { name: 'ZIMTFormGroup' });
 
 export default function ZIMTFormGroup(props) {
     const classes = useStyles(props);
+
     const { widthAuto, ...other } = props;
 
     return (

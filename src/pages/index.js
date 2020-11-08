@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NextSeo } from 'next-seo';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles, useTheme } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
 import IconSDK from '@material-ui/icons/Code';
@@ -39,6 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 function Home() {
     const classes = useStyles();
+    const theme = useTheme();
 
     useEffect(() => {
         StorageService.sidebarSub.next(false);
@@ -65,7 +66,7 @@ function Home() {
                 <Title
                     title='Documentation'
                     size='small'
-                    image='/assets/svg/logo.svg'
+                    image={`/assets/svg/logo${theme.palette.type === 'dark' ? '-light' : ''}.svg`}
                 />
 
                 <div
@@ -78,7 +79,7 @@ function Home() {
                         Documentation for the ZIMT Hub API and SDKs.
                     </Typography>
 
-                    <Grid container spacing={0} direction='row' style={{ textAlign: 'left' }}>
+                    <Grid container spacing={2} direction='row' style={{ textAlign: 'left' }}>
                         <Grid item xs={12} lg={6}>
                             <Quick
                                 title='Hub API'

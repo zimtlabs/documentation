@@ -8,8 +8,8 @@ const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         flex: '0 0 auto',
-        backgroundColor: '#fff',
-        zIndex: '5000 !important',
+        backgroundColor: theme.palette.background.primary,
+        zIndex: '700 !important',
         marginTop: 24,
         transition: theme.transitions.create(['margin', 'width'], {
             easing: 'none',
@@ -73,7 +73,7 @@ export default function Footer(props) {
                     <Link
                         href='https://zimt.co'
                         target='_blank'
-                        style={{ fontSize: 11 }}
+                        style={{ fontSize: 11, fontWeight: 600 }}
                     >
                         ZIMT
                     </Link>

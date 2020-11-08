@@ -9,13 +9,13 @@ import HomeIcon from '@material-ui/icons/HomeWorkOutlined';
 
 import { CheckOnline, AppBar, Toolbar, IconButton, Typography, Breadcrumbs, useSidebarOpen } from '../../';
 import { StorageService } from '../../../services';
-import { convertHexToRGBA } from '../../../utils';
+import { rgbToRGBA } from '../../../utils';
 
 import Logo from '../../../../../public/assets/svg/logo.svg';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        zIndex: '5000 !important',
+        zIndex: '1000 !important',
         position: () => window.location.pathname.indexOf('/api') > -1 ? 'relative' : 'fixed',
         width: '100%',
         top: 0,
@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme => ({
         }),
 
         '&.notTop': {
-            'background-color': convertHexToRGBA(theme.palette.primary.main, 84),
+            'background-color': rgbToRGBA(theme.palette.primary[theme.palette.type === 'dark' ? 'dark' : 'main'], 84),
         },
     },
     appBarShift: {
@@ -93,7 +93,7 @@ const useStyles = makeStyles(theme => ({
 
         '&.notTop': {
             'box-shadow': '0px -1px 7px rgba(0, 0, 0, 0.1)',
-            'background-color': convertHexToRGBA('#fff', 84),
+            'background-color': rgbToRGBA(theme.palette.background.secondary, 84),
         },
     },
     breadcrumbsShift: {
