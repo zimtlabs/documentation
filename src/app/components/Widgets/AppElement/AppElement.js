@@ -6,8 +6,8 @@ import { ToggleButtonGroup, ToggleButton } from '@material-ui/lab';
 import GithubIcon from '@material-ui/icons/GitHub';
 import CodeIcon from '@material-ui/icons/Code';
 
-import { ReactComponent as JsIcon } from '../../../../assets/svg/js.svg';
-import { ReactComponent as TsIcon } from '../../../../assets/svg/ts.svg';
+import JsIcon from '../../../../../public/assets/svg/js.svg';
+import TsIcon from '../../../../../public/assets/svg/ts.svg';
 
 import { parseMarkdownFileReference, getGithubFileURL } from '../../../utils';
 import { RequestService } from '../../../services';

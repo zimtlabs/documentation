@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Link as RLink } from 'react-router-dom';
+import { useScrollTrigger } from '@material-ui/core';
+import NLink from 'next/link';
 import clsx from 'clsx';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/HomeWorkOutlined';
 
-import { CheckOnline, AppBar, Toolbar, IconButton, Typography, Breadcrumbs } from '../../';
+import { CheckOnline, AppBar, Toolbar, IconButton, Typography, Breadcrumbs, useSidebarOpen } from '../../';
 import { StorageService } from '../../../services';
+import { convertHexToRGBA } from '../../../utils';
 
-import { ReactComponent as LogoIcon } from '../../../../assets/svg/logo.svg';
-import { useSidebarOpen } from '../../Utils';
+import Logo from '../../../../../public/assets/svg/logo.svg';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        zIndex: 15000,
+        zIndex: '5000 !important',
+        position: () => window.location.pathname.indexOf('/api') > -1 ? 'relative' : 'fixed',
+        width: '100%',
+        top: 0,
+        left: 0,
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -25,6 +30,8 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
     },
     logo: {
+        lineHeight: 0,
+
         '& > svg': {
             width: 'auto',
             height: 27,
@@ -43,18 +50,29 @@ const useStyles = makeStyles(theme => ({
     link: {
         display: 'flex',
         alignItems: 'center',
-        fontSize: 13,
+        color: theme.palette.primary.main,
+    },
+    linkText: {
+        color: theme.palette.text.primary,
     },
     icon: {
-        marginRight: theme.spacing(0.5),
+        marginRight: theme.spacing(1),
         width: 20,
         height: 20,
     },
     appBar: {
-        transition: theme.transitions.create(['margin', 'width'], {
+        color: '#fff',
+        'box-shadow': 'none',
+        'backdrop-filter': 'blur(15px)',
+
+        transition: theme.transitions.create(['margin', 'width', 'background-color'], {
             easing: 'none',
             duration: 'none',
         }),
+
+        '&.notTop': {
+            'background-color': convertHexToRGBA(theme.palette.primary.main, 84),
+        },
     },
     appBarShift: {
         width: `calc(100% - ${theme.CONST.sidebar.width}px)`,
@@ -65,10 +83,18 @@ const useStyles = makeStyles(theme => ({
         }),
     },
     breadcrumbs: {
-        transition: theme.transitions.create(['margin', 'width'], {
+        borderBottom: 'none',
+        'backdrop-filter': 'blur(15px)',
+
+        transition: theme.transitions.create(['margin', 'width', 'background-color', 'box-shadow'], {
             easing: 'none',
             duration: 'none',
         }),
+
+        '&.notTop': {
+            'box-shadow': '0px -1px 7px rgba(0, 0, 0, 0.1)',
+            'background-color': convertHexToRGBA('#fff', 84),
+        },
     },
     breadcrumbsShift: {
         width: `calc(100% - ${theme.CONST.sidebar.width}px)`,
@@ -85,6 +111,10 @@ export default function Header(props) {
     const [crumbs, setCrumbs] = useState([
         { label: 'Home' },
     ]);
+    const trigger = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 0,
+    });
     const sidebarOpen = useSidebarOpen();
 
     useEffect(() => {
@@ -97,24 +127,27 @@ export default function Header(props) {
 
     const breadcrumbs = (
         <Breadcrumbs
-            className={clsx(classes.breadcrumbs, {
-                [classes.breadcrumbsShift]: sidebarOpen,
-            })}
+            className={clsx(classes.breadcrumbs, { [classes.breadcrumbsShift]: sidebarOpen, notTop: !!trigger })}
         >
             {crumbs.map((crumb, index) => crumb.to ? (
-                <RLink
-                    color='inherit'
-                    to={crumb.to}
-                    className={classes.link}
+                <NLink
+                    href={crumb.to}
                     key={index}
                 >
-                    {!index && <HomeIcon className={classes.icon} />}
-                    {crumb.label}
-                </RLink>
+                    <a>
+                        <Typography
+                            variant='body2'
+                            className={classes.link}
+                        >
+                            {!index && <HomeIcon className={classes.icon} />}
+                            {crumb.label}
+                        </Typography>
+                    </a>
+                </NLink>
             ) : (
                     <Typography
-                        color='textPrimary'
-                        className={classes.link}
+                        variant='body2'
+                        className={clsx(classes.link, classes.linkText)}
                         key={index}
                     >
                         {!index && <HomeIcon className={classes.icon} />}
@@ -135,9 +168,7 @@ export default function Header(props) {
             <CheckOnline />
 
             <AppBar
-                className={clsx(classes.appBar, {
-                    [classes.appBarShift]: sidebarOpen,
-                })}
+                className={clsx(classes.appBar, { [classes.appBarShift]: sidebarOpen, notTop: !!trigger })}
                 position='relative'
             >
                 <Toolbar>
@@ -152,9 +183,11 @@ export default function Header(props) {
                         </IconButton>
                     )}
                     <div className={classes.title}>
-                        <RLink to='/' className={classes.logo}>
-                            <LogoIcon />
-                        </RLink>
+                        <NLink href='/'>
+                            <a className={classes.logo}>
+                                <Logo />
+                            </a>
+                        </NLink>
                     </div>
                     <div className={classes.menu}>
                         {/* <IconButton

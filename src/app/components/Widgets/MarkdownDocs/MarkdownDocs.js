@@ -14,6 +14,10 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'flex-end',
         padding: 24,
     },
+    button: {
+        fontSize: 12,
+        fontWeight: 600,
+    },
 }), { name: 'MarkdownDocs' });
 
 export default function MarkdownDocs(props) {
@@ -42,12 +46,12 @@ export default function MarkdownDocs(props) {
             <div className={classes.header}>
                 <Button
                     variant='text'
-                    size='medium'
                     color='default'
                     component='a'
                     target='_blank'
                     rel='noopener nofollow'
                     href={getGithubFileURL(titles.folders, titles.file)}
+                    className={classes.button}
                 >
                     EDIT THIS PAGE
                 </Button>

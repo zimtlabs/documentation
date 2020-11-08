@@ -11,7 +11,7 @@ const pkg = require('../package.json');
 const { version } = pkg;
 
 const data = {
-    name: 'Dashboard',
+    name: 'Viewer',
     version,
 };
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
-import { Typography, Icon, CodeSnippet, Button } from '../..';
+import { Typography, Icon, CodeSnippet, Button } from '../../';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
         'border-left-width': 8,
         'border-right-width': 8,
         width: '100%',
+        alignSelf: 'flex-start',
     },
     title: {
         display: 'flex',
@@ -31,6 +32,8 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.text.primary,
     },
     content: {
+        width: '100%',
+
         '& > *': {
             marginBottom: 15,
         },
@@ -90,16 +93,18 @@ export default function Quick(props) {
                     </React.Fragment>
                 ))}
             </div>
-            <Button
-                variant='text'
-                color='default'
-                style={{ marginTop: 8 }}
-                align='flex-start'
-                component={Link}
-                to={props.to}
-            >
-                Read the docs
-            </Button>
+            <Link href={props.to}>
+                <a>
+                    <Button
+                        variant='text'
+                        color='default'
+                        align='flex-start'
+                        style={{ marginTop: 8 }}
+                    >
+                        Read the docs
+                    </Button>
+                </a>
+            </Link>
         </div>
     );
 }

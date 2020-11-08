@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Collapse } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-import { ListItem, Button } from '../../../../';
-import { useRoute } from '../../../../Utils';
+import { ListItem, Button, noSidebarRoutes } from '../../../../';
 import { StorageService } from '../../../../../services';
-import { isRootPath, copy } from '../../../../../utils';
+import { copy } from '../../../../../utils';
 
 const useStyles = makeStyles(theme => ({
     item: {
@@ -19,23 +19,21 @@ const useStyles = makeStyles(theme => ({
         paddingTop: 0,
         paddingBottom: 0,
     },
-    buttonText: {
-        'justify-content': 'flex-start',
-        padding: '7px 0',
-        fontWeight: theme.typography.fontWeightMedium,
+    text: {
+        justifyContent: 'flex-start',
+        fontSize: 12,
 
         '&.active': {
             color: theme.palette.primary.main,
         },
     },
-    linkText: {
-        'justify-content': 'flex-start',
-        fontWeight: theme.typography.fontWeightLight,
+    buttonText: {
         padding: '7px 0',
-
-        '&.active': {
-            color: theme.palette.primary.main,
-        },
+        fontWeight: theme.typography.fontWeightBold,
+    },
+    linkText: {
+        fontWeight: theme.typography.fontWeightRegular,
+        padding: '7px 0',
 
         '&.depth-0': {
             fontWeight: theme.typography.fontWeightMedium,
@@ -52,6 +50,7 @@ function AppDrawerNavItem(props) {
         title,
         pathname,
         subheader,
+        button,
         ...other
     } = props;
     const classes = useStyles();
@@ -63,13 +62,16 @@ function AppDrawerNavItem(props) {
     });
     const [active, setActive] = useState();
     // eslint-disable-next-line no-unused-vars
-    const [currentLocation, currentPath] = useRoute();
+    const router = useRouter();
+
+    const currentPath = window.location.pathname;
+    const isRootPath = noSidebarRoutes.find(route => route === router.pathname);
 
     useEffect(() => {
         const value = currentPath.indexOf(pathname) > -1;
         const currentValue = copy(StorageService.sidebarOpenedPathSub.getValue());
 
-        if (!href && !isRootPath() && !subheader) {
+        if (!href && !isRootPath && !subheader) {
             const index = currentValue.pages.indexOf(pathname);
             const exists = index >= 0;
 
@@ -79,7 +81,7 @@ function AppDrawerNavItem(props) {
         const isOpenPath = currentValue.pages.find(key => key.indexOf(pathname.toLowerCase()) > -1);
 
         if (!href) {
-            if (isRootPath()) {
+            if (isRootPath) {
                 if (isOpenPath) handleOpen(true);
             }
             else {
@@ -130,20 +132,22 @@ function AppDrawerNavItem(props) {
                 disableGutters
                 {...other}
             >
-                <Button
-                    component={Link}
-                    to={href}
-                    onClick={onClick}
-                    className={clsx(classes.linkText, active && 'active', `depth-${depth}`)}
-                    style={style}
-                    disableRipple={depth >= 1}
-                    variant='text'
-                    color='default'
-                    fullWidth
-                    naked
-                >
-                    {title}
-                </Button>
+                <Link href={href}>
+                    <a>
+                        <Button
+                            onClick={onClick}
+                            className={clsx(classes.text, button ? classes.buttonText : classes.linkText, active && 'active', `depth-${depth}`)}
+                            style={style}
+                            disableRipple={depth >= 1}
+                            variant='text'
+                            color='default'
+                            fullWidth
+                            naked
+                        >
+                            {title}
+                        </Button>
+                    </a>
+                </Link>
             </ListItem>
         );
     }
@@ -156,7 +160,7 @@ function AppDrawerNavItem(props) {
         >
             <Button
                 style={style}
-                className={clsx(classes.buttonText, `depth-${depth}`)}
+                className={clsx(classes.text, classes.buttonText, `depth-${depth}`)}
                 onClick={handleClick}
                 variant='text'
                 color='default'

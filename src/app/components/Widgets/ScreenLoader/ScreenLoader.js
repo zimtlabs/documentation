@@ -1,8 +1,12 @@
+/*
+ * Copyright (c) ZIMT AG - All Rights Reserved 2020
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Contact: tech@zimt.co
+ */
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
-
-import { ReactComponent as IconLogo } from '../../../../assets/svg/logo.svg';
 
 const useStyles = makeStyles(theme => ({
     '@keyframes flicker': {
@@ -32,7 +36,9 @@ export default function ScreenLoader(props) {
 
     return (
         <div className={clsx(classes.root)}>
-            <IconLogo
+            <img
+                src='/assets/svg/logo.svg'
+                alt='ZIMT logo'
                 className={classes.logo}
             />
         </div>

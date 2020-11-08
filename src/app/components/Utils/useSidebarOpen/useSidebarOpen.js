@@ -1,10 +1,10 @@
-import { useMediaQuery } from '@material-ui/core';
-
-import { theme } from '../../../App';
-import { isRootPath } from '../../../utils';
+import { useMediaQuery, useTheme } from '@material-ui/core';
+import { useRouter } from 'next/router';
 
 export default function useSidebarOpen() {
+    const theme = useTheme();
     const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+    const router = useRouter();
 
-    return isDesktop && !isRootPath();
+    return isDesktop && !['/', '/company/about', '/company/contact'].find(route => route === router.pathname);
 }

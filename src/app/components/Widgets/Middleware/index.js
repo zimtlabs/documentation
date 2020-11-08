@@ -4,5 +4,4 @@
  * Proprietary and confidential
  * Contact: tech@zimt.co
  */
-
 export { default as Middleware } from './Middleware';

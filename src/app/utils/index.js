@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
+import GA from 'react-ga';
+
 import Config from '../config';
 
-export { default as lazyLoad } from './lazyLoad';
-export * from './formatDate';
-export * from './validators';
+export { default as theme } from './theme';
 export * from './colorManipulation';
 export * from './parseMarkdown';
-export { default as history } from './history';
-export { default as theme } from './theme';
+
+export const lazyLoad = Component => {
+    return props => <Suspense fallback={<div></div>}><Component {...props} /></Suspense>;
+};
 
 export const numWithCommas = (val, delimiter = ',') => {
     return val ? val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, delimiter) : 0;
@@ -146,7 +148,13 @@ export const capitalize = value => {
     } else {
         return value;
     }
-}
+};
+
+export const normalize = value => {
+    const v = capitalize(value || '');
+
+    return v.replaceAll('-', ' ').trim();
+};
 
 export function stringToArray(value) {
     let result = (value && value.split(',')) || [];
@@ -210,10 +218,6 @@ export const parseError = error => {
 
 export const getDocumentURL = document => {
     return `${Config.config.api.core}/documents/${document._id}`
-};
-
-export const isRootPath = () => {
-    return window.location.pathname === '/' || window.location.pathname.indexOf('company') > -1;
 };
 
 export const uppercase = value => {
@@ -289,5 +293,31 @@ export const getPublicFileUrl = (folders, file, name = null) => {
     url += `/${file}/${name}`;
 
     return url;
+};
+
+export const appSetup = async () => {
+    try {
+        console.log('App setup start');
+
+        console.log('Removing stale cache');
+        if (window && window.caches) {
+            const names = await window.caches.keys();
+            for (const name of names) {
+                if (name.indexOf('document') > -1) await window.caches.delete(name);
+            }
+        }
+
+        console.log('App is ready');
+    } catch (error) {
+        console.log('App setup failed: ', error);
+        throw error;
+    }
+};
+
+export const recordPageView = () => {
+    // Update the user's current page
+    GA.set({ page: location.pathname });
+    // Record a pageview for the given page
+    GA.pageview(location.pathname + location.search);
 };
 

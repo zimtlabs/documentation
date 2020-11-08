@@ -14,6 +14,7 @@ const useStyles = makeStyles(theme => ({
         padding: '0 15px',
         textTransform: 'uppercase',
         fontSize: 9,
+        fontFamily: 'Rubik, sans-serif',
         color: '#fff',
         background: '#777',
         lineHeight: 1,

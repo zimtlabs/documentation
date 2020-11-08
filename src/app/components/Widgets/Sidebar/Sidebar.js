@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles, useTheme } from '@material-ui/styles';
 import { duration, useMediaQuery } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
-import { List, Divider, Typography, Drawer } from '../../';
+import { List, Divider, Typography, Drawer, useSidebarOpen, noSidebarRoutes } from '../../';
 import { StorageService } from '../../../services';
-
-import { useSidebarOpen } from '../../Utils';
-import { theme } from '../../../App';
 
 import SidebarMenu from '../../../Menu';
 import { AppDrawerNavItem } from './components';
-import { isRootPath } from '../../../utils';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        zIndex: 20000,
+        zIndex: '15000 !important',
         flexShrink: 0,
 
         '& .MuiPaper-root': {
@@ -45,9 +42,12 @@ export default function Sidebar(props) {
     const classes = useStyles(props);
     const [open, setOpen] = useState();
     const up600 = useMediaQuery('(min-width: 600px');
+    const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('lg'));
     const shouldBeOpen = useSidebarOpen();
+    const router = useRouter();
 
+    const isRootPath = noSidebarRoutes.find(route => route === router.pathname);
     const mobile = !desktop;
 
     useEffect(() => {
@@ -63,7 +63,7 @@ export default function Sidebar(props) {
     }, []);
 
     const onClose = () => {
-        if (mobile || isRootPath()) StorageService.sidebarSub.next(false);
+        if (mobile || isRootPath) StorageService.sidebarSub.next(false);
     };
 
     function renderNavItems(options) {
@@ -80,7 +80,6 @@ export default function Sidebar(props) {
     }
 
     function reduceChildRoutes({ props, items, page, depth }) {
-
         if (page.type === 'divider') {
             items.push(<Divider key={new Date().getTime() + items.length} style={{ margin: '15px 0' }} />);
 
@@ -97,6 +96,7 @@ export default function Sidebar(props) {
                     title={title}
                     pathname={page.pathname}
                     subheader={page.subheader}
+                    button={page.button}
                 >
                     {renderNavItems({ props, pages: page.children, depth: depth + 1 })}
                 </AppDrawerNavItem>,
@@ -114,6 +114,7 @@ export default function Sidebar(props) {
                     onClick={onClose}
                     pathname={page.pathname}
                     subheader={page.subheader}
+                    button={page.button}
                 />,
             );
         }
@@ -137,14 +138,16 @@ export default function Sidebar(props) {
                 className={classes.header}
                 style={{ height: up600 ? 64 : 56 }}
             >
-                <Typography
-                    variant='body1'
-                    component={Link}
-                    to='/'
-                    style={{ color: theme.palette.text.primary, fontWeight: 600 }}
-                >
-                    Documentation
-                </Typography>
+                <Link href='/'>
+                    <a>
+                        <Typography
+                            variant='body1'
+                            style={{ color: theme.palette.text.primary, fontWeight: 600 }}
+                        >
+                            Documentation
+                        </Typography>
+                    </a>
+                </Link>
             </div>
 
             <Divider style={{ marginBottom: 24 }} />

@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         flex: '0 0 auto',
         backgroundColor: '#fff',
-        zIndex: 14000,
+        zIndex: '5000 !important',
         marginTop: 24,
         transition: theme.transitions.create(['margin', 'width'], {
             easing: 'none',

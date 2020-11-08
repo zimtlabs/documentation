@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import ArrowBack from '@material-ui/icons/KeyboardBackspace';
 
@@ -24,12 +24,7 @@ const useStyles = makeStyles(theme => ({
         lineHeight: 1.35,
         marginBottom: 15,
         position: 'relative',
-        padding: props => props.backTo ? '0 44px' : 0,
         textAlign: props => props.align || 'center',
-
-        '@media only screen and (min-width: 1200px)': {
-            padding: props => props.backTo ? '0 74px' : 0,
-        },
     },
     subtitle: {
         color: theme.palette.text.secondary,
@@ -46,13 +41,8 @@ const useStyles = makeStyles(theme => ({
         padding: '0 7px',
     },
     backTo: {
-        position: 'absolute',
-        top: 0,
-        left: -20,
-
-        '@media only screen and (min-width: 1200px)': {
-            left: 8,
-        },
+        position: 'relative',
+        marginRight: 15,
     },
     options: {
         position: 'absolute',
@@ -104,13 +94,15 @@ export default function Title(props) {
             >
                 {backTo && (
                     <Tooltip title='Back' className={classes.backTo}>
-                        <Link to={backTo}>
-                            <IconButton
-                                color='default'
-                            >
-                                <ArrowBack />
-                            </IconButton>
-                        </Link>
+                        <span>
+                            <Link href={backTo}>
+                                <a>
+                                    <IconButton color='default'>
+                                        <ArrowBack />
+                                    </IconButton>
+                                </a>
+                            </Link>
+                        </span>
                     </Tooltip>
                 )}
                 {title}
