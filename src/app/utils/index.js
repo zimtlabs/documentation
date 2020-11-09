@@ -153,7 +153,7 @@ export const capitalize = value => {
 export const normalize = value => {
     const v = capitalize(value || '');
 
-    return v.replaceAll('-', ' ').replaceAll('Api', 'API').trim();
+    return v.replace(/\-/, ' ').replace(/api/ig, 'API').trim();
 };
 
 export function stringToArray(value) {
