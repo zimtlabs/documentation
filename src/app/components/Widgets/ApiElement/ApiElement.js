@@ -58,10 +58,6 @@ const useStyles = makeStyles(theme => ({
                     },
                 },
 
-                '& table td, & table th': {
-                    borderColor: '#333',
-                },
-
                 '& button:focus': {
                     outline: 'none',
                 },

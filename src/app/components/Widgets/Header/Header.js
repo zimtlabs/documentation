@@ -16,7 +16,7 @@ import Logo from '../../../../../public/assets/svg/logo.svg';
 const useStyles = makeStyles(theme => ({
     root: {
         zIndex: '1000 !important',
-        position: () => window.location.pathname.indexOf('/api') > -1 ? 'relative' : 'fixed',
+        position: () => window.location.pathname.indexOf('/api') === 0 ? 'relative' : 'fixed',
         width: '100%',
         top: 0,
         left: 0,
@@ -47,6 +47,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'center',
         color: theme.palette.primary.main,
+        whiteSpace: 'nowrap',
     },
     linkText: {
         color: theme.palette.text.primary,

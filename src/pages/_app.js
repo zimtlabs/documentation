@@ -52,16 +52,16 @@ export default function _App(props) {
         </Head>
         <ThemeProvider theme={theme}>
             <Middleware>
+                <NextNprogress
+                    color={theme.palette.secondary.main}
+                    startPosition={0.04}
+                    stopDelayMs={50}
+                    height={2}
+                    options={{
+                        showSpinner: false,
+                    }}
+                />
                 <App>
-                    <NextNprogress
-                        color={theme.palette.secondary.main}
-                        startPosition={0.04}
-                        stopDelayMs={50}
-                        height={2}
-                        options={{
-                            showSpinner: false,
-                        }}
-                    />
                     <Component {...pageProps} />
                 </App>
             </Middleware>

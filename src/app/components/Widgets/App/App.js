@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         minHeight: '100vh',
         backgroundColor: theme.palette.background.primary,
         position: 'relative',
-        paddingTop: () => window.location.pathname.indexOf('/api') > -1 ? 0 : 91,
+        paddingTop: () => window.location.pathname.indexOf('/api') === 0 ? 0 : 91,
     },
     main: {
         flex: '1 1 auto',

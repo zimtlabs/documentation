@@ -134,7 +134,7 @@ const useStyles = makeStyles(theme => ({
             color: theme.palette.text.primary,
             backgroundColor:
                 theme.palette.type === 'dark' ? 'rgba(255,229,100,0.2)' : 'rgba(255,229,100,0.1)',
-            fontSize: 13,
+            fontSize: 12,
             borderRadius: 2,
         },
         '& code[class*="language-"]': {
@@ -142,7 +142,7 @@ const useStyles = makeStyles(theme => ({
             color: '#fff',
         },
         '& p code, & ul code, & pre code': {
-            fontSize: 13,
+            fontSize: 12,
         },
         '& .token.operator': {
             background: 'transparent',
@@ -183,8 +183,7 @@ const useStyles = makeStyles(theme => ({
         },
         '& h1, & h2, & h3, & h4': {
             '& code': {
-                fontSize: 'inherit',
-                lineHeight: 'inherit',
+                fontSize: 12,
                 // Remove scroll on small screens.
                 wordBreak: 'break-all',
             },
@@ -242,7 +241,7 @@ const useStyles = makeStyles(theme => ({
             color: theme.palette.text.primary,
         },
         '& td code': {
-            fontSize: 13,
+            fontSize: 12,
             lineHeight: 1.6,
         },
         '& th': {
