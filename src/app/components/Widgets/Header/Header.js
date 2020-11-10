@@ -83,6 +83,10 @@ const useStyles = makeStyles(theme => ({
         borderBottom: 'none',
         'backdrop-filter': 'blur(15px)',
 
+        '& li:last-child': {
+            paddingRight: 24,
+        },
+
         transition: theme.transitions.create(['margin', 'width', 'background-color', 'box-shadow'], {
             easing: 'none',
             duration: 'none',
