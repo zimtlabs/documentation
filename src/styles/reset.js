@@ -61,8 +61,8 @@ const uiReset = theme => ({
         },
 
         code: {
-            '& > *': {
-                whiteSpace: 'nowrap',
+            '& span': {
+                whiteSpace: 'pre-wrap',
             },
         },
 
