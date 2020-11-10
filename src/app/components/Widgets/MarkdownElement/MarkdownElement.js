@@ -132,8 +132,7 @@ const useStyles = makeStyles(theme => ({
             WebkitFontSmoothing: 'subpixel-antialiased',
             padding: '2px 6px',
             color: theme.palette.text.primary,
-            backgroundColor:
-                theme.palette.type === 'dark' ? 'rgba(255,229,100,0.2)' : 'rgba(255,229,100,0.1)',
+            backgroundColor: theme.palette.type === 'dark' ? 'rgba(255,229,100,0.2)' : 'rgba(255,229,100,0.1)',
             fontSize: 13,
             borderRadius: 2,
         },

@@ -8,6 +8,10 @@ import { FONT_FAMILY } from '../app/utils';
 
 const uiReset = theme => ({
     '@global': {
+        html: {
+            '-webkit-text-size-adjust': '100% !important',
+        },
+
         '*': {
             margin: 0,
             padding: 0,
@@ -54,6 +58,12 @@ const uiReset = theme => ({
             background: '#D8D8D8',
             width: '100%',
             margin: '25px 0',
+        },
+
+        code: {
+            '& > *': {
+                whiteSpace: 'nowrap',
+            },
         },
 
         ':focus': {
