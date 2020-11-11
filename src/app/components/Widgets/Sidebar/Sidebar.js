@@ -14,7 +14,6 @@ const useStyles = makeStyles(theme => ({
     root: {
         zIndex: '1300 !important',
         flexShrink: 0,
-        paddingBottom: 44,
 
         '& .MuiPaper-root': {
             width: theme.CONST.sidebar.width,
