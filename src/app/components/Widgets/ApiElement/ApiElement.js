@@ -3,7 +3,7 @@ import { makeStyles, useTheme } from '@material-ui/styles';
 import { RedocStandalone } from 'redoc';
 import prism from 'prismjs';
 
-import { parseMarkdownFileReference, getPublicFileUrl } from '../../../utils';
+import { parseMarkdownFileReference, getPublicFileUrl, FONT_FAMILY } from '../../../utils';
 
 const useStyles = makeStyles(theme => ({
     root: () => theme.palette.type === 'dark' ?
@@ -36,6 +36,17 @@ const useStyles = makeStyles(theme => ({
 
                 '& label.active': {
                     background: '#272727',
+                },
+            },
+
+            '& .api-content': {
+                '& > div > div > div > div > div > div > div > div': {
+                    fontFamily: FONT_FAMILY.tertiary,
+                    fontSize: 12,
+                },
+
+                '& > div > div > div > div > div > div > div > div > span': {
+                    color: '#555',
                 },
             },
 
@@ -78,6 +89,13 @@ const useStyles = makeStyles(theme => ({
             '& .redoc-wrap': {
                 '& button:focus': {
                     outline: 'none',
+                },
+            },
+
+            '& .api-content': {
+                '& > div > div > div > div > div > div > div > div': {
+                    fontFamily: FONT_FAMILY.tertiary,
+                    fontSize: 12,
                 },
             },
         }),
