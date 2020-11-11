@@ -79,7 +79,7 @@ function Home() {
                         Documentation for the ZIMT Hub API and SDKs.
                     </Typography>
 
-                    <Grid container spacing={3} direction='row' style={{ textAlign: 'left' }}>
+                    <Grid container spacing={2} direction='row' style={{ textAlign: 'left' }}>
                         <Grid item xs={12} lg={6}>
                             <Quick
                                 title='Hub API'

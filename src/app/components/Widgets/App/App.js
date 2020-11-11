@@ -1,10 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
-import { DefaultSeo } from 'next-seo';
 
-import { Header, Sidebar, Footer, useSidebarOpen } from '../../';
 import { reset } from '../../../../styles';
+import { useSidebarOpen, Sidebar, Header, Footer } from '../../';
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -43,14 +42,7 @@ export default function App(props) {
     const classes = useStyles();
     const sidebarOpen = useSidebarOpen();
 
-    return <>
-        <DefaultSeo
-            openGraph={{
-                type: 'website',
-                locale: 'en_IE',
-                site_name: 'ZIMT Documentation',
-            }}
-        />
+    return (
         <div className={classes.root}>
             <Sidebar />
             <Header />
@@ -59,5 +51,5 @@ export default function App(props) {
             </main>
             <Footer />
         </div>
-    </>;
+    );
 }

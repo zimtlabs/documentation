@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { useMediaQuery } from '@material-ui/core';
+import { useMediaQuery, ThemeProvider, createMuiTheme } from '@material-ui/core';
 import NextNprogress from 'nextjs-progressbar';
 
-import 'prismjs/themes/prism.css';
-import 'prismjs/themes/prism-okaidia.css';
-
-import { GetTheme } from '../app/utils';
+import { GetTheme, DEFAULT_THEME } from '../app/utils';
 import { Middleware, App } from '../app/components';
 import { StorageService } from '../app/services';
 
 export default function _App(props) {
     const isDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
-    const [userTheme, setUserTheme] = useState();
+    const [userTheme, setUserTheme] = useState(DEFAULT_THEME);
 
     const { Component, pageProps } = props;
 
@@ -21,35 +17,38 @@ export default function _App(props) {
         StorageService.init(window.localStorage);
 
         const ut = StorageService.get('userTheme');
-        if (ut) setUserTheme(ut);
-        else StorageService.set('userTheme', 'auto');
 
-        StorageService.userTheme.subscribe(value => setUserTheme(value));
+        if (ut && ut !== DEFAULT_THEME) StorageService.setUserTheme(ut);
+
+        StorageService.userTheme.subscribe(value => {
+            if (value !== userTheme) setUserTheme(value);
+        });
 
         return () => {
             StorageService.userTheme.unsubscribe();
         };
     }, []);
 
-    let theme_type = isDarkTheme ? 'dark' : 'light';
-    if (userTheme && userTheme !== 'auto') theme_type = userTheme;
+    const autoTheme = isDarkTheme ? 'dark' : 'light';
+    const themeType = userTheme === 'auto' ? autoTheme : userTheme;
 
     const theme = React.useMemo(() => {
-        const object = GetTheme({ theme: theme_type });
+        const object = GetTheme({ theme: themeType });
 
         return createMuiTheme(object);
-    }, [theme_type]);
+    }, [themeType]);
 
     return <>
         <Head>
-            <link rel='apple-touch-icon' sizes='180x180' href={`/favicons/${theme_type}/apple-touch-icon.png`} />
-            <link rel='icon' type='image/png' sizes='32x32' href={`/favicons/${theme_type}/favicon-32x32.png`} />
-            <link rel='icon' type='image/png' sizes='16x16' href={`/favicons/${theme_type}/favicon-16x16.png`} />
-            <link rel='manifest' href={`/favicons/${theme_type}/site.webmanifest`} />
-            <link rel='mask-icon' href={`/favicons/${theme_type}/safari-pinned-tab.svg`} color='#ab9363' />
+            <link rel='apple-touch-icon' sizes='180x180' href={`/favicons/${themeType}/apple-touch-icon.png`} />
+            <link rel='icon' type='image/png' sizes='32x32' href={`/favicons/${themeType}/favicon-32x32.png`} />
+            <link rel='icon' type='image/png' sizes='16x16' href={`/favicons/${themeType}/favicon-16x16.png`} />
+            <link rel='manifest' href={`/favicons/${themeType}/site.webmanifest`} />
+            <link rel='mask-icon' href={`/favicons/${themeType}/safari-pinned-tab.svg`} color='#ab9363' />
             <meta name='msapplication-TileColor' content='#ab9363' />
             <meta name='theme-color' content='#ab9363' />
         </Head>
+
         <ThemeProvider theme={theme}>
             <Middleware>
                 <NextNprogress
@@ -61,6 +60,7 @@ export default function _App(props) {
                         showSpinner: false,
                     }}
                 />
+
                 <App>
                     <Component {...pageProps} />
                 </App>

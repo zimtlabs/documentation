@@ -284,7 +284,7 @@ const useStyles = makeStyles(theme => ({
             'list-style-position': 'inside',
 
             '& li': {
-                marginBottom: 9,
+                marginBottom: 4,
 
                 '&:last-of-type': {
                     marginBottom: 0,

@@ -7,52 +7,25 @@
 import React, { useState, useEffect } from 'react';
 import { CssBaseline } from '@material-ui/core';
 import * as Sentry from '@sentry/browser';
+import { DefaultSeo } from 'next-seo';
 
-import { ErrorBoundry } from './components';
+import 'prismjs/themes/prism.css';
+import 'prismjs/themes/prism-okaidia.css';
+
+import { ErrorBoundry, Theme } from './components';
 import { ScreenLoader } from '../../';
 import { StorageService } from '../../../services';
-import { appSetup } from '../../../utils';
+import { appSetup, semverGreaterThan } from '../../../utils';
 import Config from '../../../config';
 
 import pkg from '../../../../../package.json';
 
 global.appVersion = pkg.version;
 
-// version from response - first param, local version second param
-const semverGreaterThan = (versionA, versionB) => {
-    const versionsA = versionA.split(/\./g);
-
-    const versionsB = versionB.split(/\./g);
-    while (versionsA.length || versionsB.length) {
-        const a = Number(versionsA.shift());
-
-        const b = Number(versionsB.shift());
-        // eslint-disable-next-line no-continue
-        if (a === b) continue;
-        // eslint-disable-next-line no-restricted-globals
-        return a > b || isNaN(b);
-    }
-    return false;
-};
-
 export default function Middleware(props) {
     const [loading, setLoading] = useState(true);
     const [isLatestVersion, setIsLatestVersion] = useState(false);
     const [loaded, setLoaded] = useState(false);
-
-    const refreshCacheAndReload = () => {
-        console.log('Clearing cache and hard reloading...');
-
-        if (caches) {
-            // Service worker cache should be cleared with caches.delete()
-            caches.keys().then(function (names) {
-                for (let name of names) caches.delete(name);
-            });
-        }
-
-        // Delete browser cache and hard reload
-        window.location.reload(true);
-    };
 
     useEffect(() => {
         init();
@@ -62,7 +35,7 @@ export default function Middleware(props) {
         if (isLatestVersion && !loaded) initApp();
     }, [isLatestVersion]);
 
-    const initApp = async () => {// Init services
+    const initApp = async () => {
         StorageService.init(window.localStorage);
 
         // Remove the server-side injected CSS.
@@ -90,6 +63,20 @@ export default function Middleware(props) {
         setLoaded(true);
     };
 
+    const refreshCacheAndReload = () => {
+        console.log('Clearing cache and hard reloading...');
+
+        if (caches) {
+            // Service worker cache should be cleared with caches.delete()
+            caches.keys().then(function (names) {
+                for (let name of names) caches.delete(name);
+            });
+        }
+
+        // Delete browser cache and hard reload
+        window.location.reload(true);
+    };
+
     const init = () => {
         const headers = new Headers();
 
@@ -105,15 +92,14 @@ export default function Middleware(props) {
                 const shouldForceRefresh = semverGreaterThan(latestVersion, currentVersion);
                 if (shouldForceRefresh) {
                     console.log(`We have a new version - ${latestVersion}. Should force refresh.`);
-
                     setIsLatestVersion(false);
-                    setLoading(false);
-                } else {
-                    console.log(`You already have the latest version - ${latestVersion}. No cache refresh needed.`);
-
-                    setIsLatestVersion(true);
-                    setLoading(false);
                 }
+                else {
+                    console.log(`You already have the latest version - ${latestVersion}. No cache refresh needed.`);
+                    setIsLatestVersion(true);
+                }
+
+                setLoading(false);
             });
     };
 
@@ -125,7 +111,16 @@ export default function Middleware(props) {
 
     return (
         <ErrorBoundry>
+            <DefaultSeo
+                openGraph={{
+                    type: 'website',
+                    locale: 'en_IE',
+                    site_name: 'ZIMT Documentation',
+                }}
+            />
+
             <CssBaseline />
+
             {content}
         </ErrorBoundry>
     );

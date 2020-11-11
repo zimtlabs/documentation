@@ -5,8 +5,10 @@
  * Contact: tech@zimt.co
  */
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
+
+import Logo from '../../../../../public/assets/svg/logo.svg';
 
 const useStyles = makeStyles(theme => ({
     '@keyframes flicker': {
@@ -28,18 +30,16 @@ const useStyles = makeStyles(theme => ({
         height: 45,
         width: 'auto',
         animation: '$flicker 1.54s infinite',
+        fill: theme.palette.text.primary,
     },
 }), { name: 'ScreenLoader' });
 
 export default function ScreenLoader(props) {
     const classes = useStyles(props);
-    const theme = useTheme();
 
     return (
         <div className={clsx(classes.root)}>
-            <img
-                src={`/assets/svg/logo${theme.palette.type === 'dark' ? '-light' : ''}.svg`}
-                alt='ZIMT logo'
+            <Logo
                 className={classes.logo}
             />
         </div>

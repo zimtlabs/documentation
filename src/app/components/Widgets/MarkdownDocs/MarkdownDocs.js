@@ -16,7 +16,6 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         fontSize: 12,
-        fontWeight: 600,
     },
 }), { name: 'MarkdownDocs' });
 
