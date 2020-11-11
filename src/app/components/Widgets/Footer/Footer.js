@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     },
     copyright: {
         fontSize: 12,
-        fontWeight: 300,
+        fontWeight: 500,
         letterSpacing: '0.03em',
         color: theme.palette.text.secondary,
         userSelect: 'none',

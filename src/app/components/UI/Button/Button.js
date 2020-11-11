@@ -6,11 +6,11 @@ import { useTheme } from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        fontWeight: 500,
+        fontWeight: 600,
         lineHeight: 1.75,
         borderRadius: props => props.naked ? 0 : 24,
         letterSpacing: '0.06em',
-        fontSize: '13px',
+        fontSize: 13,
         textTransform: 'none',
         alignSelf: props => props.align || 'center',
     },
