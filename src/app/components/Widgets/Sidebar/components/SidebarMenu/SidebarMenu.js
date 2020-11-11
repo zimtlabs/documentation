@@ -29,13 +29,7 @@ function SidebarMenu() {
     const [userTheme, setUserTheme] = useState(DEFAULT_THEME);
 
     useEffect(() => {
-        const ut = StorageService.get('userTheme');
-
-        if (ut && ut !== DEFAULT_THEME) StorageService.setUserTheme(ut);
-
-        const userThemeSub = StorageService.userTheme.subscribe(value => {
-            if (value !== userTheme) setUserTheme(value);
-        });
+        const userThemeSub = StorageService.userTheme.subscribe(value => setUserTheme(value));
 
         return () => {
             userThemeSub.unsubscribe();
