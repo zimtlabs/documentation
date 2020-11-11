@@ -12,9 +12,8 @@ import { DefaultSeo } from 'next-seo';
 import 'prismjs/themes/prism.css';
 import 'prismjs/themes/prism-okaidia.css';
 
-import { ErrorBoundry, Theme } from './components';
+import { ErrorBoundry } from './components';
 import { ScreenLoader } from '../../';
-import { StorageService } from '../../../services';
 import { appSetup, semverGreaterThan } from '../../../utils';
 import Config from '../../../config';
 
@@ -36,8 +35,6 @@ export default function Middleware(props) {
     }, [isLatestVersion]);
 
     const initApp = async () => {
-        StorageService.init(window.localStorage);
-
         // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side');
         if (jssStyles) jssStyles.parentElement.removeChild(jssStyles);

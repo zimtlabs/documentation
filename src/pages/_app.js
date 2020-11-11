@@ -20,12 +20,12 @@ export default function _App(props) {
 
         if (ut && ut !== DEFAULT_THEME) StorageService.setUserTheme(ut);
 
-        StorageService.userTheme.subscribe(value => {
+        const userThemeSub = StorageService.userTheme.subscribe(value => {
             if (value !== userTheme) setUserTheme(value);
         });
 
         return () => {
-            StorageService.userTheme.unsubscribe();
+            userThemeSub.unsubscribe();
         };
     }, []);
 

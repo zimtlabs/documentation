@@ -24,18 +24,23 @@ const THEME_MODE_OPTIONS = [
     { label: 'Auto', value: 'auto' },
 ];
 
-function SidebarMenu(props) {
+function SidebarMenu() {
     const classes = useStyles();
     const [userTheme, setUserTheme] = useState(DEFAULT_THEME);
 
     useEffect(() => {
-        init();
-    }, []);
-
-    const init = () => {
         const ut = StorageService.get('userTheme');
-        if (ut) setUserTheme(ut);
-    };
+
+        if (ut && ut !== DEFAULT_THEME) StorageService.setUserTheme(ut);
+
+        const userThemeSub = StorageService.userTheme.subscribe(value => {
+            if (value !== userTheme) setUserTheme(value);
+        });
+
+        return () => {
+            userThemeSub.unsubscribe();
+        };
+    }, []);
 
     const onThemeChange = event => {
         const value = event.target.value;
