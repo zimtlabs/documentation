@@ -1,4 +1,3 @@
-export * from './useOnline';
 export * from './useSidebarOpen';
 export * from './prism';
 
