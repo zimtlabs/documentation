@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/HomeWorkOutlined';
 
-import { CheckOnline, AppBar, Toolbar, IconButton, Typography, Breadcrumbs, useSidebarOpen } from '../../';
+import { AppBar, Toolbar, IconButton, Typography, Breadcrumbs, useSidebarOpen } from '../../';
 import { StorageService } from '../../../services';
 import { normalize, rgbToRGBA } from '../../../utils';
 
@@ -166,8 +166,6 @@ export default function Header(props) {
         <div
             className={classes.root}
         >
-            <CheckOnline />
-
             <AppBar
                 className={clsx(classes.appBar, { [classes.appBarShift]: sidebarOpen, notTop: !!trigger })}
                 position='relative'
