@@ -85,8 +85,8 @@ export default function Middleware(props) {
             .then(meta => {
                 const latestVersion = meta.version;
                 const currentVersion = global.appVersion;
-
                 const shouldForceRefresh = semverGreaterThan(latestVersion, currentVersion);
+
                 if (shouldForceRefresh) {
                     console.log(`We have a new version - ${latestVersion}. Should force refresh.`);
                     setIsLatestVersion(false);
