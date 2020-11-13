@@ -34,8 +34,8 @@ function All() {
 
         StorageService.crumbSub.next([
             { label: 'Home', to: '/' },
-            ...folders.map(folder => ({ label: uppercase(folder) })),
-            ...(file ? [{ label: uppercase(file) }] : []),
+            ...folders.map(folder => ({ label: normalize(folder) })),
+            ...(file ? [{ label: normalize(file) }] : []),
         ]);
 
         getPage(pathname.slice(0, pathname.length - 1), pathname[pathname.length - 1], hash);
@@ -59,7 +59,7 @@ function All() {
         }
     };
 
-    let title = normalize(titles.file ? `${titles.file} - ` : '');
+    let title = normalize(titles.file ? `${titles.file}` : '');
     if (title) title += ' - ';
 
     let description = (titles.folders && titles.folders.length) ? normalize(titles.folders.join(' ')) : '';

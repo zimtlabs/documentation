@@ -17,7 +17,7 @@ export const capitalize = value => {
 export const normalize = value => {
     const v = capitalize(value || '');
 
-    return v.replace(/\-/, ' ').replace(/api/ig, 'API').trim();
+    return v.replace(/\-/ig, ' ').replace(/api/ig, 'API').trim();
 };
 
 export function useInterval(callback, delay) {
