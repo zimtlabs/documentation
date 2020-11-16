@@ -1366,6 +1366,27 @@
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
         }
+      },
+      "delete": {
+        "summary": "Delete app",
+        "description": "Deletes a app.",
+        "tags": [
+          "Apps"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "apps.json#/components/parameters/id-app" }
+        ],
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
       }
     },
     "/apps/market": {
