@@ -54,6 +54,12 @@
                     "description": {
                         "type": "string"
                     },
+                    "active": {
+                        "boolean": "string"
+                    },
+                    "verified": {
+                        "boolean": "string"
+                    },
                     "private": {
                         "boolean": "string"
                     },
@@ -194,6 +200,7 @@
                         "description": "Description",
                             "tags": ["tag1", "tag2"],
                                 "verified": true,
+                                "active": true,
                                     "private": false,
                                         "content": {
                         "UI": { },
@@ -241,6 +248,7 @@
                         "description": "Description",
                             "tags": ["tag1", "tag2"],
                                 "verified": true,
+                                "active": true,
                                     "private": false,
                                         "content": {
                         "UI": { },
@@ -299,6 +307,7 @@
                         "description": "Description",
                         "tags": ["tag1", "tag2"],
                         "verified": true,
+                        "active": true,
                         "private": false,
                         "content": {
                             "UI": {},

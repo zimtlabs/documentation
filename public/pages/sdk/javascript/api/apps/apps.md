@@ -52,6 +52,7 @@ const result = await sdk.apps.getMany(Pagination);
           "tag2"
         ],
         "verified": true,
+        "active": true,
         "private": true,
         "private_for": [
             { "id": "0x123..", "name": "Organization" },
@@ -103,6 +104,7 @@ const result = await sdk.apps.search(Pagination);
           "tag2"
         ],
         "verified": true,
+        "active": true,
         "private": true,
         "private_for": [
             { "id": "0x123..", "name": "Organization" },
@@ -152,10 +154,11 @@ const result = await sdk.apps.get(App ID);
       "tag2"
     ],
     "verified": true,
-        "private": true,
-        "private_for": [
-            { "id": "0x123..", "name": "Organization" },
-        ],
+    "active": true,
+    "private": true,
+    "private_for": [
+        { "id": "0x123..", "name": "Organization" },
+    ],
     "content": {}
   },
   "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
@@ -190,10 +193,11 @@ const result = await sdk.apps.update(App ID, Data);
       "tag2"
     ],
     "verified": true,
-        "private": true,
-        "private_for": [
-            { "id": "0x123..", "name": "Organization" },
-        ],
+    "active": true,
+    "private": true,
+    "private_for": [
+        { "id": "0x123..", "name": "Organization" },
+    ],
     "content": {}
   },
   "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
@@ -230,6 +234,7 @@ const result = await sdk.apps.getManyMarket(Pagination);
           "tag2"
         ],
         "verified": true,
+        "active": true,
         "private": true,
         "private_for": [
             { "id": "0x123..", "name": "Organization" },
@@ -281,6 +286,7 @@ const result = await sdk.apps.searchMarket(Pagination);
           "tag2"
         ],
         "verified": true,
+        "active": true,
         "private": true,
         "private_for": [
             { "id": "0x123..", "name": "Organization" },
@@ -330,10 +336,11 @@ const result = await sdk.apps.getOneMarket(App ID);
       "tag2"
     ],
     "verified": true,
-        "private": true,
-        "private_for": [
-            { "id": "0x123..", "name": "Organization" },
-        ],
+    "active": true,
+    "private": true,
+    "private_for": [
+        { "id": "0x123..", "name": "Organization" },
+    ],
     "content": {},
     "installed": false
   },
