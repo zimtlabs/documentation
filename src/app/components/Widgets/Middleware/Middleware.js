@@ -71,27 +71,33 @@ export default function Middleware(props) {
         }
 
         // Delete browser cache and hard reload
-        window.location.reload(true);
+        window.location.reload();
     };
 
     const init = () => {
         const headers = new Headers();
 
         headers.append('pragma', 'no-cache');
-        headers.append('cache-control', 'no-cache');
+        headers.append('cache-control', 'no-store');
 
         fetch('/meta.json', { headers })
             .then(res => res.json())
-            .then(meta => {
+            .then(async meta => {
+                console.log('Meta.json: ', meta);
+
+                // Wait for spam
+                if (!meta) await wait(1500);
+
                 const latestVersion = meta.version;
                 const currentVersion = global.appVersion;
                 const shouldForceRefresh = semverGreaterThan(latestVersion, currentVersion);
 
+                console.log(`Meta.json new: ${latestVersion} current: ${currentVersion} should refresh: ${shouldForceRefresh}`);
+
                 if (shouldForceRefresh) {
                     console.log(`We have a new version - ${latestVersion}. Should force refresh.`);
                     setIsLatestVersion(false);
-                }
-                else {
+                } else {
                     console.log(`You already have the latest version - ${latestVersion}. No cache refresh needed.`);
                     setIsLatestVersion(true);
                 }
