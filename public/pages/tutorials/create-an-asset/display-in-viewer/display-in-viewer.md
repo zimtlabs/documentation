@@ -16,7 +16,7 @@ Finally, we can view our asset and its events in ZIMT Viewer.
 - If Viewer has permission to view requested asset, it will display the asset information, otherwise display an error.
 
 ### Scan
-![Viewer scan asset](/pages/tutorials/assets/images/viewer-scan-qr.jpg) <br />
+![Viewer scan asset](/pages/tutorials/assets/images/viewer-scan-qr.png) <br />
 
 ### Asset
 ![Viewer asset](/pages/tutorials/assets/images/viewer-asset.png)

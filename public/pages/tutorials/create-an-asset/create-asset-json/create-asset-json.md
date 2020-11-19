@@ -16,4 +16,4 @@ We will:
 [Example JSON](https://github.com/zimtlabs/documentation/tree/master/public/pages/tutorials/assets/json/chocolate-zimt-sku.json)
 
 ### Create asset JSON input
-![Asset create JSON](/pages/tutorials/assets/images/create-asset-json-1.png)
+![Asset create JSON](/pages/tutorials/assets/images/create-asset-json.png)

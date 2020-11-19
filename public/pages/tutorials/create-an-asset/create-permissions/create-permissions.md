@@ -17,14 +17,6 @@ We will create 3 permissions:
     - Filters: from the dropdown you can choose which filter type the permission will use. In the first example below, by choosing “Events“ from the drop down menu  and creating three filters `object.data.asset_type: zimt.sku (or zimt.lot or zimt.item)` you allow the  Viewer to only view (get) assets which contains any of the following events `object.data.asset_type: zimt.sku (or zimt.lot or zimt.item)`. To add multiple filters click the + button.
     - To associate a permission with any app different from the dashboard, we have to select the API key of the app of interest. In this permission we select the API key of the viewer (a.k.a. ZIMT Engage). Start typing “Viewer” in the box visualise the possible options. ZIMT Viewer app is using specific API key to send requests, so in order to allow Viewer to view assets defined in this permission, we have to select Viewer's API key.
 
-### Assets permission
+### Asset, event and document permission
 
-![Assets permission](/pages/tutorials/assets/images/assets-permission.png)
-
-### Events permission
-
-![Assets permission](/pages/tutorials/assets/images/events-permission.png)
-
-### Documents permission
-
-![Assets permission](/pages/tutorials/assets/images/documents-permission.png)
+![permission](/pages/tutorials/assets/images/permissions.png)

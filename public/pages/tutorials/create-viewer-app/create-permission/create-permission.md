@@ -14,4 +14,4 @@ As previously mentioned, we need to create permissions allowing some of our orga
 
 ### Viewer app permission
 
-![Viewer permission](/pages/tutorials/assets/images/viewer-create-permission.png)
+![Viewer permission](/pages/tutorials/assets/images/permissions.png)
