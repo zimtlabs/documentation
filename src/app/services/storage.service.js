@@ -1,13 +1,11 @@
 import { Subject, BehaviorSubject } from 'rxjs';
 
-import { ALLOWED_THEMES, DEFAULT_THEME } from '../utils';
-
 export class StorageService {
     namespace = 'ZIMT__';
     storage;
     crumbSub = new Subject();
     currentOrganizationSub = new Subject();
-    userTheme = new BehaviorSubject(DEFAULT_THEME);
+    userTheme = new BehaviorSubject('light');
     sidebarSub = new BehaviorSubject();
     sidebarOpenedPathSub = new BehaviorSubject({
         activePage: {
@@ -27,7 +25,7 @@ export class StorageService {
 
     setUserTheme(theme) {
         if (this.storage) {
-            if (ALLOWED_THEMES.indexOf(theme) > -1) {
+            if (['light', 'dark', 'auto'].indexOf(theme) > -1) {
                 this.set('userTheme', theme);
                 this.userTheme.next(theme);
             }

@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { Typography, FormGroup, FormControl, InputLabel, Select, MenuItem } from '../../../../';
 import { StorageService } from '../../../../../services';
-import { FONT_FAMILY } from '../../../../../utils';
+import { DEFAULT_THEME, FONT_FAMILY } from '../../../../../utils';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -24,25 +24,23 @@ const THEME_MODE_OPTIONS = [
     { label: 'Auto', value: 'auto' },
 ];
 
-function SidebarMenu(props) {
+function SidebarMenu() {
     const classes = useStyles();
-    const [userTheme, setUserTheme] = useState('auto');
+    const [userTheme, setUserTheme] = useState(DEFAULT_THEME);
 
     useEffect(() => {
-        init();
-    }, []);
+        const userThemeSub = StorageService.userTheme.subscribe(value => setUserTheme(value));
 
-    const init = () => {
-        const ut = StorageService.get('userTheme');
-        if (ut) setUserTheme(ut);
-    };
+        return () => {
+            userThemeSub.unsubscribe();
+        };
+    }, []);
 
     const onThemeChange = event => {
         const value = event.target.value;
 
         setUserTheme(value);
-        StorageService.set('userTheme', value);
-        StorageService.userTheme.next(value);
+        StorageService.setUserTheme(value);
     };
 
     return (

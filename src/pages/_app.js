@@ -18,14 +18,12 @@ export default function _App(props) {
 
         const ut = StorageService.get('userTheme');
 
-        if (ut && ut !== DEFAULT_THEME) StorageService.setUserTheme(ut);
+        if (ut) StorageService.setUserTheme(ut);
 
-        StorageService.userTheme.subscribe(value => {
-            if (value !== userTheme) setUserTheme(value);
-        });
+        const userThemeSub = StorageService.userTheme.subscribe(value => setUserTheme(value));
 
         return () => {
-            StorageService.userTheme.unsubscribe();
+            userThemeSub.unsubscribe();
         };
     }, []);
 

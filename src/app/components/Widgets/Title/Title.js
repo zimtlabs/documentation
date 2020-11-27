@@ -11,7 +11,6 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         marginTop: 44,
         marginBottom: 44,
-        fontFamily: 'Rubik',
         textAlign: 'center',
 
         '@media only screen and (min-width: 640px)': {

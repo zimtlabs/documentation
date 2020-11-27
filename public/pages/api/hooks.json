@@ -71,6 +71,15 @@
           "send"
         ]
       },
+      "Hook-data-app": {
+        "type": "object" ,
+        "properties": {
+            "id": {"type": "string", "description": "Organization app ID"},
+            "name": {"type": "string", "description": "Organization app name"}
+        },
+        "required": ["id"]
+      },
+      "Hook-data-id": { "type": "id", "description": "Custom ID assigned to a hook, related to integrated app hook is from. Used so it can be automatically updated on integrated app update." },
       "Hook-data": {
         "type": "object",
         "properties": {
@@ -85,6 +94,12 @@
           },
           "settings": {
             "$ref": "#/components/schemas/Hook-data-settings"
+          },
+          "app": {
+            "$ref": "#/components/schemas/Hook-data-app"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Hook-data-id"
           }
         },
         "required": [

@@ -76,6 +76,7 @@ export const colors = {
 };
 
 export const ALLOWED_THEMES = ['light', 'dark', 'auto'];
+
 export const DEFAULT_THEME = 'light';
 
 export const GetTheme = (options = { theme: 'light' }) => {

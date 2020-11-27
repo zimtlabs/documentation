@@ -22,7 +22,7 @@ const result = sdk.documents.generateDocument(Document data);
 //         "type ": "image/png",
 //         "name": "Image",
 //         "content": {
-//             "dataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAADWCAMAAADl7J7tAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDcYeAAEGWge7AAAAAElFTkSuQmCC"
+//             "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
 //         },
 //         "properties": {
 //             "prop": 7
@@ -41,7 +41,7 @@ const result = sdk.documents.generateDocument(Document data);
     "type ": "image/png",
     "name": "Image",
     "content": {
-      "dataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAADWCAMAAADl7J7tAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDcYeAAEGWge7AAAAAElFTkSuQmCC"
+        "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
     },
     "properties": {
       "prop": 7
@@ -58,37 +58,40 @@ Creates a document.
 [API reference](/api#tag/Documents/paths/~1documents/post).
 
 ```javascript
-const result = await sdk.documents.create(Document object);
-// sdk.documents.create(sdk.documents.generateDocument({
+const result = await sdk.documents.create({ document, file });
+// sdk.documents.create({ object: sdk.documents.generateDocument({
 //     "type ": "image/png",
 //     "name": "Image",
 //     "content": {
-//         "dataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAADWCAMAAADl7J7tAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDcYeAAEGWge7AAAAAElFTkSuQmCC"
+//          "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
 //     },
 //     "properties": {
 //         "prop": 7
 //     }
-// }));
+// }), file }); // optional
 //
 // or
 //
 // sdk.documents.create({
-//   "meta": {
-//     "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-//     "timestamp": "2020-02-10T19:16:13Z",
-//     "data_hash": "0x123..."
-//   },
-//   "data": {
-//     "type ": "image/png",
-//     "name": "Image",
-//     "content": {
-//       "dataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAADWCAMAAADl7J7tAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDcYeAAEGWge7AAAAAElFTkSuQmCC"
+//     object: {
+//         "meta": {
+//             "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+//             "timestamp": "2020-02-10T19:16:13Z",
+//             "data_hash": "0x123..."
+//         },
+//         "data": {
+//             "type ": "image/png",
+//             "name": "Image",
+//             "content": {
+//             "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
+//             },
+//             "properties": {
+//             "prop": 7
+//             }
+//         },
+//         "signature": "0xe633051fc76ae..."
 //     },
-//     "properties": {
-//       "prop": 7
-//     }
-//   },
-//   "signature": "0xe633051fc76ae..."
+//     "file": "A file (blob), from file system", // optional
 // });
 
 // result
@@ -230,7 +233,7 @@ const result = await sdk.documents.get(id);
       "type ": "image/png",
       "name": "Image",
       "content": {
-        "dataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAADWCAMAAADl7J7tAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDcYeAAEGWge7AAAAAElFTkSuQmCC"
+        "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
       },
       "properties": {
         "prop": 7

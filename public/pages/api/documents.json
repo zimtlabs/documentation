@@ -43,13 +43,13 @@
       "content": {
         "type": "object",
         "properties": {
-          "dataUri": {
+          "file_hash": {
             "type": "string"
           }
         },
         "additionalProperties": false,
         "required": [
-          "dataUri"
+          "file_hash"
         ]
       },
       "Document-meta": {
@@ -118,19 +118,27 @@
       "Document-Create": {
         "type": "object",
         "properties": {
-          "meta": {
-            "$ref": "#/components/schemas/Document-meta"
+          "object": {
+              "type": "object",
+              "properties": {
+                    "meta": {
+                        "$ref": "#/components/schemas/Document-meta"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/Document-data-one"
+                    },
+                    "signature": {
+                        "$ref": "base.json#/components/schemas/signature"
+                    }
+              }
           },
-          "data": {
-            "$ref": "#/components/schemas/Document-data-one"
-          },
-          "signature": {
-            "$ref": "base.json#/components/schemas/signature"
+          "file": {
+              "type": "blob",
+              "format": "binary"
           }
         },
         "required": [
-          "meta",
-          "signature"
+          "object"
         ]
       },
       "Document-one": {
@@ -223,22 +231,25 @@
         "skip": 30
       },
       "Document-Create": {
-        "meta": {
-          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-          "timestamp": "2020-02-10T19:16:13Z",
-          "data_hash": "0x123..."
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "data": {
+                "type": "image/png",
+                "name": "Image",
+                "content": {
+                    "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd"
+                },
+                "properties": {
+                    "prop": 7
+                }
+            },
+            "signature": "0xe633051fc76ae..."
         },
-        "data": {
-          "type": "image/png",
-          "name": "Image",
-          "content": {
-            "dataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAADWCAMAAADl7J7tAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDcYeAAEGWge7AAAAAElFTkSuQmCC"
-          },
-          "properties": {
-            "prop": 7
-          }
-        },
-        "signature": "0xe633051fc76ae..."
+        "file": "A file (blob), from file system"
       },
       "Document-one": {
         "response": {
@@ -252,7 +263,7 @@
             "type": "image/png",
             "name": "Image",
             "content": {
-              "dataUri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOwAAADWCAMAAADl7J7tAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BMQEAAADCoPVPbQ0PoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeDcYeAAEGWge7AAAAAElFTkSuQmCC"
+                "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd"
             },
             "properties": {
               "prop": 7
@@ -382,7 +393,7 @@
       "Document-Create": {
         "description": "Document create",
         "content": {
-          "application/json": {
+          "multipart/form-data": {
             "schema": {
               "$ref": "#/components/schemas/Document-Create"
             },

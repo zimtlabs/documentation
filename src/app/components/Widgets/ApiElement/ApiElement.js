@@ -40,13 +40,15 @@ const useStyles = makeStyles(theme => ({
             },
 
             '& .api-content': {
-                '& > div > div > div > div > div > div > div > div': {
-                    fontFamily: FONT_FAMILY.tertiary,
-                    fontSize: 12,
+                '& > div > div > div > div > button + div': {
+                    background: '#333',
                 },
 
-                '& > div > div > div > div > div > div > div > div > span': {
-                    color: '#555',
+                '& > div > div > div > div > button + div > div > div > div': {
+                    fontFamily: FONT_FAMILY.tertiary,
+                    fontSize: 12,
+                    background: '#444',
+                    border: '1px solid #555',
                 },
             },
 
