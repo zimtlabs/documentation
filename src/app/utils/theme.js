@@ -207,7 +207,12 @@ export const GetTheme = (options = { theme: 'light' }) => {
         overrides: {
             MuiInputBase: {
                 root: {
-                    fontSize: '0.85rem',
+                    fontSize: 13,
+                },
+            },
+            MuiButton: {
+                root: {
+                    fontSize: 12,
                 },
             },
             MuiFormLabel: {
@@ -221,6 +226,7 @@ export const GetTheme = (options = { theme: 'light' }) => {
                 },
             },
         },
+
         mixins: {
             body: {
                 width: '100%',
@@ -239,6 +245,7 @@ export const GetTheme = (options = { theme: 'light' }) => {
                 flexDirection: 'column',
             },
         },
+
         CONST: {
             side_padding: 40,
             sidebar: {
