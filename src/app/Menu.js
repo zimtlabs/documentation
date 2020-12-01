@@ -42,8 +42,6 @@ const Menu = [
                             { title: 'Strategies', pathname: '/sdk/javascript/api/strategies' },
                             { title: 'Services', pathname: '/sdk/javascript/api/services' },
                             { title: 'Hooks', pathname: '/sdk/javascript/api/hooks' },
-                            { title: 'Defaults', pathname: '/sdk/javascript/api/defaults' },
-                            { title: 'Plans', pathname: '/sdk/javascript/api/plans' },
                         ],
                     },
                 ]
