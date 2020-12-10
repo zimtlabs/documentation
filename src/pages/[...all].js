@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import { MarkdownDocs } from '../app/components';
 import { StorageService, RequestService } from '../app/services';
-import { normalize, uppercase } from '../app/utils';
+import { normalize } from '../app/utils';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,9 +31,10 @@ function All() {
         const folders = pathname.slice(0, pathname.length - 1).map(folder => folder.replace('-', ' '));
         const file = pathname[pathname.length - 1] && pathname[pathname.length - 1].replace('-', ' ');
         const hash = window.location.hash;
+        const isHome = window.location.pathname === '/';
 
         StorageService.crumbSub.next([
-            { label: 'Home', to: '/' },
+            { label: 'Home', ...(!isHome ? { to: '/' } : {}) },
             ...folders.map(folder => ({ label: normalize(folder) })),
             ...(file ? [{ label: normalize(file) }] : []),
         ]);
