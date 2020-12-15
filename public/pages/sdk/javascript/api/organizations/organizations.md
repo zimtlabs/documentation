@@ -1070,3 +1070,91 @@ const result = await sdk.organizations.analytics(Organization ID);
     "message": "Ok"
   }
 }
+```
+
+## Get organization budget
+
+Returns organization budget.
+
+[API reference](/api#tag/Organizations/paths/~1organizations~1{id}~1budget/get).
+
+```javascript
+const result = await sdk.organizations.budget(Organization ID);
+// sdk.organizations.budget('0x123...');
+
+// result
+{
+  "response": {
+    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "meta": {
+      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    },
+    "data": {
+      "type ": "plan",
+      "value": {
+        "tokens": 14000
+      },
+      "active": {
+        "date": {
+          "month": "2020-01"
+        },
+        "plan": {
+          "id": "0x123...",
+          "name": "Free"
+        }
+      },
+      "organization": {
+        "id": "0x123...",
+        "name": "Organization 1"
+      }
+    },
+    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+    "receipt": {
+      "received_at": 1579967810000
+    }
+  },
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  }
+}
+```
+
+## Get organization credit
+
+Returns organization credit.
+
+[API reference](/api#tag/Organizations/paths/~1organizations~1{id}~1credit/get).
+
+```javascript
+const result = await sdk.organizations.credit(Organization ID);
+// sdk.organizations.credit('0x123...');
+
+// result
+{
+  "response": {
+    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "meta": {
+      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    },
+    "data": {
+      "type ": "plan",
+      "value": {
+        "tokens": 7000
+      },
+      "organization": {
+        "id": "0x123...",
+        "name": "Organization 1"
+      }
+    },
+    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
+    "receipt": {
+      "received_at": 1579967810000
+    }
+  },
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  }
+}
+```

@@ -751,6 +751,52 @@
         }
       }
     },
+    "/organizations/{id}/budget": {
+      "get": {
+        "summary": "Get organization budget",
+        "description": "Returns organization budget.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization-Budget" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/credit": {
+      "get": {
+        "summary": "Get organization credit",
+        "description": "Returns organization credit.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization-Credit" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
     "/organizations/{id}/accounts": {
       "post": {
         "summary": "Create organization account",

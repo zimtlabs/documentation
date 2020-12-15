@@ -10,9 +10,8 @@ export default class CustomDocument extends Document {
                     <meta charSet='UTF-8' />
                     <meta httpEquiv='X-UA-Compatible' content='IE=edge,chrome=1' />
 
-                    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap' rel='stylesheet' />
-                    <link href='https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;700&display=swap' rel='stylesheet' />
-                    <link href='https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap' rel='stylesheet' />
+                    <link rel='preconnect' href='https://fonts.gstatic.com' />
+                    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Roboto+Mono&family=Zilla+Slab:wght@400;700&display=auto' rel='stylesheet' />
 
                     <link rel='manifest' href='/manifest.json' />
 
