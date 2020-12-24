@@ -8,7 +8,7 @@ import { List, Divider, Typography, Drawer, useSidebarOpen, noSidebarRoutes } fr
 import { StorageService } from '../../../services';
 
 import Menu from '../../../Menu';
-import { AppDrawerNavItem, SidebarMenu } from './components';
+import { AppDrawerNavItem } from './components';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -154,8 +154,6 @@ export default function Sidebar(props) {
 
             {renderNavItems({ pages: Menu, depth: 0 })}
 
-            {/* Settings  */}
-            <SidebarMenu />
         </Drawer>
     );
 }
