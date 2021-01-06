@@ -1698,8 +1698,7 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/skip-query" },
-          { "$ref": "base.json#/components/parameters/attach" }
+          { "$ref": "base.json#/components/parameters/skip-query" }
         ],
         "responses": {
           "200": { "$ref": "assets.json#/components/responses/Assets" },
@@ -1765,9 +1764,6 @@
             "All"
           ]
         }],
-        "parameters": [
-          { "$ref": "base.json#/components/parameters/attach" }
-        ],
         "requestBody": {
           "$ref": "assets.json#/components/requestBodies/search-asset"
         },
@@ -1791,9 +1787,31 @@
           ]
         }],
         "parameters": [
-          { "$ref": "assets.json#/components/parameters/id-asset" },
-          { "$ref": "base.json#/components/parameters/attach" }
+          { "$ref": "assets.json#/components/parameters/id-asset" }
         ],
+        "responses": {
+          "200": { "$ref": "assets.json#/components/responses/Asset" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update asset",
+        "description": "Updates asset's data and/or ownership of the asset. Both data and ownership update creates an audit event that is verified and stored on chain, to keep track of any data change on the asset.",
+        "tags": [
+          "Assets"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "assets.json#/components/parameters/id-asset" }
+        ],
+        "requestBody": {
+          "$ref": "assets.json#/components/requestBodies/Asset-Update"
+        },
         "responses": {
           "200": { "$ref": "assets.json#/components/responses/Asset" },
           "400": { "$ref": "base.json#/components/responses/Not found" },

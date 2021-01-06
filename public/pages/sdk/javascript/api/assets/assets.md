@@ -11,22 +11,32 @@ Used for create asset method.
 ```javascript
 const result = sdk.assets.generateAsset(Asset);
 // {
-//     // Meta is not required
-//     meta: {
-//         // Valid ISO data, max 24h in the future
-//         // Default is now
-//         timestamp: '2020-02-10T19:16:13+02:00',
+//     // Object is not required
+//     object: {
+//         // Meta is not required
+//         meta: {
+//             // Valid ISO data, max 24h in the future
+//             // Default is now
+//             timestamp: '2020-02-10T19:16:13+02:00',
+//         }
+//     },
+//     data: {
+//         name: 'Asset name'
 //     }
 // }
 
-
 // result
 {
-    "meta": {
-        "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-        "timestamp": "2020-02-10T19:16:13+02:00"
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13+02:00"
+        },
+        "signature": "0xe633051fc76ae...",
     },
-    "signature": "0xe633051fc76ae...",
+    "data": {
+        "name": "Asset name"
+    }
 }
 ```
 
@@ -38,16 +48,21 @@ Creates an asset.
 
 ```javascript
 const result = await sdk.assets.create(Asset object);
-// sdk.assets.create(sdk.assets.generateAsset());
-//
-// or
-//
+sdk.assets.create(sdk.assets.generateAsset());
+
+or
+
 // sdk.assets.create({
-//   "meta": {
-//     "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-//     "timestamp": "2020-02-10T19:16:13Z"
+//   "object": {
+//       "meta": {
+//         "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+//         "timestamp": "2020-02-10T19:16:13Z"
+//     },
+//     "signature": "0xe633051fc76ae..."
 //   },
-//   "signature": "0xe633051fc76ae..."
+//   "data": {
+//       "name": "Asset name"
+//   }
 // });
 
 // result
@@ -59,6 +74,47 @@ const result = await sdk.assets.create(Asset object);
     "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
     "received_at": 1579278115000,
     "organization": "0x123..."
+  }
+}
+```
+
+## Update asset
+
+Updates an asset.
+
+[API reference](/api#tag/Assets/paths/~1assets~1{asset_id}/put).
+
+```javascript
+const result = await sdk.assets.update(Asset data);
+sdk.assets.update({ data: { name: 'New name' } });
+
+or
+
+// sdk.assets.update({
+//   "data": {
+//       "name": "New name"
+//   }
+// });
+
+// result
+{
+  "response": {
+      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+      "meta": {
+        "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+        "timestamp": "2020-02-10T19:16:13Z"
+      },
+      "signature": "0xe633051fc76ae...",
+      "receipt": {
+        "received_at": 1579278115000
+      },
+      "data": {
+          "name": "New name"
+      }
+  },
+  "meta": {
+    "code": 200,
+    "message": "Ok"
   }
 }
 ```
@@ -86,10 +142,9 @@ const result = await sdk.assets.getMany(Pagination, Asset options);
       "receipt": {
         "received_at": 1579278115000
       },
-      "info": { ... },
-      "events": [
-          { ... }
-      ]
+      "data": {
+          "name": "Asset name"
+      }
     }
   ],
   "meta": {
@@ -154,9 +209,9 @@ const result = await sdk.assets.search(Query, Asset options);
 //       query: {
 //         assets: [
 //           {
-//             field: 'object.meta.created_by',
-//             operator: 'equal',
-//             value: '0x8752F61635543a870826D9F4CA20a9D1F3934079',
+//             field: 'data.name',
+//             operator: 'starts-with',
+//             value: 'Asset',
 //           },
 //         ],
 //       },
@@ -172,6 +227,9 @@ const result = await sdk.assets.search(Query, Asset options);
       "meta": {
         "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
         "timestamp": "2020-02-10T19:16:13Z"
+      },
+      "data": {
+          "name": "Asset name"
       },
       "signature": "0xe633051fc76ae...",
       "receipt": {
@@ -213,10 +271,9 @@ const result = await sdk.assets.get(id, Asset options);
       "receipt": {
         "received_at": 1579278115000
       },
-      "info": { ... },
-      "events": [
-          { ... }
-      ]
+      "data": {
+          "name": "Asset name"
+      }
   },
   "meta": {
     "code": 200,

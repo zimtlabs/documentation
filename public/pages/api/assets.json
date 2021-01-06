@@ -49,7 +49,76 @@
           "timestamp"
         ]
       },
+      "Asset-data": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "base.json#/components/schemas/type"
+          },
+          "name": {
+            "$ref": "base.json#/components/schemas/name"
+          },
+          "documents": {
+            "$ref": "base.json#/components/schemas/documents"
+          },
+          "location": {
+            "$ref": "base.json#/components/schemas/location"
+          },
+          "identifiers": {
+            "$ref": "base.json#/components/schemas/identifiers"
+          },
+          "properties": {
+            "$ref": "base.json#/components/schemas/properties"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "name"
+        ]
+      },
       "Asset-Create": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "$ref": "#/components/schemas/Asset-meta"
+                },
+                "signature": {
+                    "$ref": "base.json#/components/schemas/signature"
+                }
+            },
+            "required": [
+                "meta",
+                "signature"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/Asset-data"
+          }
+        },
+        "required": [
+          "object"
+        ]
+      },
+      "Asset-Update": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Asset-data"
+          },
+          "ownership": {
+              "type": "object",
+              "properties": {
+                  "organization": {"type": "string"}
+              },
+              "required": ["organization"]
+          }
+        }
+      },
+      "Asset-object": {
         "type": "object",
         "properties": {
           "meta": {
@@ -62,7 +131,8 @@
         "required": [
           "meta",
           "signature"
-        ]
+        ],
+        "additionalProperties": false
       },
       "Asset": {
         "type": "object",
@@ -70,11 +140,11 @@
           "id": {
             "$ref": "base.json#/components/schemas/id"
           },
-          "meta": {
-            "$ref": "#/components/schemas/Asset-meta"
+          "object": {
+            "$ref": "#/components/schemas/Asset-object"
           },
-          "signature": {
-            "$ref": "base.json#/components/schemas/signature"
+          "data": {
+            "$ref": "#/components/schemas/Asset-data"
           },
           "receipt": {
             "$ref": "base.json#/components/schemas/receipt"
@@ -114,25 +184,33 @@
       "query-asset": {
         "query": {
           "assets": [{
-            "field": "object.meta.created_by",
-            "operator": "starts-with",
-            "value": "0x123..."
-          }],
-          "events": [{
             "field": "object.data.name",
             "operator": "starts-with",
-            "value": "Event"
+            "value": "Asset"
           }]
         },
         "limit": 45,
         "skip": 30
       },
       "Asset-Create": {
-        "meta": {
-          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-          "timestamp": "2020-02-10T19:16:13Z"
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xe633051fc76ae..."
         },
-        "signature": "0xe633051fc76ae..."
+        "data": {
+            "name": "Asset name"
+        }
+      },
+      "Asset-Update": {
+        "data": {
+            "name": "Asset name"
+        },
+        "ownership": {
+            "organization": "0x627969CD9Ef88bA7e61694947020540d7eD0001d"
+        }
       },
       "Object-Created": {
         "proof": "0x0192cbd1c59b40ea97f7bc102a16c325a3066bb6b68c9c16bae447d8bb38565a66da29...",
@@ -151,6 +229,54 @@
             "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
             "timestamp": "2020-02-10T19:16:13Z"
           },
+            "data": {
+            "type": "zimt/lot",
+            "name": "Palette of fruit",
+            "documents": [{
+                "name": "photo-457882-1-1587129086010",
+                "type": "image/jpeg",
+                "id": "0xb4d0f01d79e420ff4ff5edaabd49df2d677b1b01fd6d83801cd..."
+                },
+                {
+                "name": "text-file-1-1587129090597",
+                "type": "text/plain",
+                "id": "0xb78321b49fbf5df5387f696a4d2c174ce0f01b7443f896030e1..."
+                }
+            ],
+            "identifiers": {
+                "AAB": [
+                "123",
+                "12345"
+                ],
+                "EEC": [
+                "asd"
+                ]
+            },
+            "location": {
+                "type": "Feature",
+                "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    21.8808406,
+                    14.333475399999998
+                ]
+                },
+                "properties": {
+                "name": "Street, Town, Country",
+                "city": "Town",
+                "country": "US",
+                "route": "Street",
+                "street_number": "Street number"
+                }
+            },
+            "properties": {
+                "Custom property 1": "123",
+                "Custom property 2": "1234",
+                "Nested custom prop": {
+                "asd": 123
+                }
+            }
+            },
           "signature": "0xe633051fc76ae...",
           "receipt": {
             "received_at": 1579278115000
@@ -168,6 +294,54 @@
             "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
             "timestamp": "2020-02-10T19:16:13Z"
           },
+            "data": {
+            "type": "zimt/lot",
+            "name": "Palette of fruit",
+            "documents": [{
+                "name": "photo-457882-1-1587129086010",
+                "type": "image/jpeg",
+                "id": "0xb4d0f01d79e420ff4ff5edaabd49df2d677b1b01fd6d83801cd..."
+                },
+                {
+                "name": "text-file-1-1587129090597",
+                "type": "text/plain",
+                "id": "0xb78321b49fbf5df5387f696a4d2c174ce0f01b7443f896030e1..."
+                }
+            ],
+            "identifiers": {
+                "AAB": [
+                "123",
+                "12345"
+                ],
+                "EEC": [
+                "asd"
+                ]
+            },
+            "location": {
+                "type": "Feature",
+                "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    21.8808406,
+                    14.333475399999998
+                ]
+                },
+                "properties": {
+                "name": "Street, Town, Country",
+                "city": "Town",
+                "country": "US",
+                "route": "Street",
+                "street_number": "Street number"
+                }
+            },
+            "properties": {
+                "Custom property 1": "123",
+                "Custom property 2": "1234",
+                "Nested custom prop": {
+                "asd": 123
+                }
+            }
+            },
           "signature": "0xe633051fc76ae...",
           "receipt": {
             "received_at": 1579278115000
@@ -253,6 +427,19 @@
             },
             "example": {
               "$ref": "#/components/examples/Asset-Create"
+            }
+          }
+        }
+      },
+      "Asset-Update": {
+        "description": "Asset update",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Asset-Update"
+            },
+            "example": {
+              "$ref": "#/components/examples/Asset-Update"
             }
           }
         }

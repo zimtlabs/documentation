@@ -61,8 +61,6 @@ const result = sdk.accounts.generateObjectWithMeta(true);
 
 | Name | Description | Type | Default | Example
 |:-----|:------------|:-----|:--------|:-------
-| info | Finds all info events for each asset and adds them under 'events' property | boolean | false | true
-| parse | Finds latest info event for each asset, if any exists in 'events' property, and attaches it under 'info' property | boolean | false | true
 | queryParams | Any additional query params to attach to the API url (all param keys and values will be URI encoded) | object | { } | { param: 'value' }
 
 ### Query

@@ -13,7 +13,7 @@ We will:
     - Add name.
     - Add custom properties. Click + icon in properties title to add a new property.
         - Add properties:
-            - Key: asset_type; Value: zimt.sku
+            - Key: type; Value: zimt.sku
             - Key: description; Value: ...
             - Key: Weight (grams); Value: 80
     - Add/upload documents.

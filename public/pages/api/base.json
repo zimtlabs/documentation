@@ -272,9 +272,6 @@
       "name": {
         "type": "string"
       },
-      "asset_type": {
-        "type": "string"
-      },
       "document": {
         "type": "object",
         "properties": {
@@ -544,14 +541,6 @@
       "for_organization": {
         "name": "for_organization",
         "description": "Organization ID, if user is create a resource for an external organization.",
-        "in": "query",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "attach": {
-        "name": "attach-*",
-        "description": "Attaches all events per each asset found, based on this query filter value.<br> Part of query param key after attach-* represents property database will query against, and value of this query param is the value to match. <br> Both query param key and value have to be URI encoded values.\n\n**Example**: ?attach-object.data.type=info",
         "in": "query",
         "schema": {
           "type": "string"
