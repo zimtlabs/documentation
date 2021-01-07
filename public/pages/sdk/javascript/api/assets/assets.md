@@ -249,6 +249,59 @@ const result = await sdk.assets.search(Query, Asset options);
 }
 ```
 
+## Search assets based on asset's events
+
+Returns list of assets.
+
+[API reference](/api#tag/Assets/paths/~1assets~1search~1events/post).
+
+```javascript
+const result = await sdk.assets.searchEvents(Query, Asset options);
+// sdk.assets.searchEvents(
+//     {
+//       query: {
+//         events: [
+//           {
+//             field: 'object.data.name',
+//             operator: 'starts-with',
+//             value: 'Event',
+//           },
+//         ],
+//       },
+//       limit: 5
+//     },
+// );
+
+// result
+{
+  "response": [
+    {
+      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+      "meta": {
+        "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+        "timestamp": "2020-02-10T19:16:13Z"
+      },
+      "data": {
+          "name": "Asset name"
+      },
+      "signature": "0xe633051fc76ae...",
+      "receipt": {
+        "received_at": 1579278115000
+      }
+    }
+  ],
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  },
+  "pagination": {
+    "limit": 30,
+    "skip": 30,
+    "total": 120
+  }
+}
+```
+
 ## Get asset
 
 Returns an asset.

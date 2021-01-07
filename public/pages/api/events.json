@@ -37,6 +37,9 @@
       "type": {
         "type": "string"
       },
+      "asset_type": {
+        "type": "string"
+      },
       "name": {
         "type": "string"
       },
@@ -156,6 +159,9 @@
           },
           "name": {
             "$ref": "base.json#/components/schemas/name"
+          },
+          "asset_type": {
+            "$ref": "base.json#/components/schemas/asset_type"
           },
           "documents": {
             "$ref": "base.json#/components/schemas/documents"

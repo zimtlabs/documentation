@@ -1774,6 +1774,28 @@
         }
       }
     },
+    "/assets/search/events": {
+      "post": {
+        "summary": "Search assets based on asset's events",
+        "description": "Returns a list of assets.",
+        "tags": [
+          "Assets"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "events.json#/components/requestBodies/search-event"
+        },
+        "responses": {
+          "200": { "$ref": "assets.json#/components/responses/Assets" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
     "/assets/{asset_id}": {
       "get": {
         "summary": "Get asset",

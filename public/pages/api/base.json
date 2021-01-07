@@ -272,6 +272,9 @@
       "name": {
         "type": "string"
       },
+      "asset_type": {
+        "type": "string"
+      },
       "document": {
         "type": "object",
         "properties": {
