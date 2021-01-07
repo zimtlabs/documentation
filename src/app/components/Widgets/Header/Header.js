@@ -64,11 +64,7 @@ const useStyles = makeStyles(theme => ({
         color: '#fff',
         'box-shadow': 'none',
         'backdrop-filter': 'blur(15px)',
-
-        transition: theme.transitions.create(['margin', 'width', 'background-color'], {
-            easing: 'none',
-            duration: 'none',
-        }),
+        transition: 'background-color .2s, box-shadow .2s',
 
         '&.notTop': {
             'background-color': rgbToRGBA(theme.palette.primary[theme.palette.type === 'dark' ? 'dark' : 'main'], 84),
@@ -85,15 +81,11 @@ const useStyles = makeStyles(theme => ({
     breadcrumbs: {
         borderBottom: 'none',
         'backdrop-filter': 'blur(15px)',
+        transition: 'background-color .2s, box-shadow .2s',
 
         '& li:last-child': {
             paddingRight: 24,
         },
-
-        transition: theme.transitions.create(['margin', 'width', 'background-color', 'box-shadow'], {
-            easing: 'none',
-            duration: 'none',
-        }),
 
         '&.notTop': {
             'box-shadow': '0px -1px 7px rgba(0, 0, 0, 0.1)',

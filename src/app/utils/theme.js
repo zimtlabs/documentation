@@ -225,6 +225,72 @@ export const GetTheme = (options = { theme: 'light' }) => {
                     boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.14), 0px 1px 1px 0px rgba(0,0,0,0.08), 0px 2px 1px -1px rgba(0,0,0,0.05)',
                 },
             },
+            MuiCssBaseline: {
+                '@global': {
+                    html: {
+                        '-webkit-text-size-adjust': '100% !important',
+                    },
+
+                    '*': {
+                        margin: 0,
+                        padding: 0,
+                        border: 0,
+                        outline: 'none',
+                        fontSize: '100%',
+                        background: 'transparent',
+                        boxSizing: 'border-box',
+                        touchAction: 'manipulation',
+                    },
+
+                    body: {
+                        fontSize: '13px',
+                        fontFamily: FONT_FAMILY.secondary,
+                        fontWeight: 'normal',
+                        fontStyle: 'normal',
+                        position: 'relative',
+                        overflowX: 'hidden',
+                        backgroundColor: theme !== 'light' ? '#000' : '#fff',
+                    },
+
+                    'img, embed, object, video': {
+                        maxWidth: '100%',
+                        height: 'auto',
+                    },
+
+                    ul: {
+                        padding: 0,
+                        margin: 0,
+                    },
+
+                    a: {
+                        textDecoration: 'none',
+                        cursor: 'pointer',
+                    },
+
+                    span: {
+                        wordWrap: 'break-word',
+                    },
+
+                    hr: {
+                        boxSizing: 'content-box',
+                        height: '1px',
+                        overflow: 'visible',
+                        background: '#D8D8D8',
+                        width: '100%',
+                        margin: '25px 0',
+                    },
+
+                    code: {
+                        '& span': {
+                            whiteSpace: 'pre-wrap',
+                        },
+                    },
+
+                    ':focus': {
+                        outline: 'none',
+                    },
+                },
+            },
         },
 
         mixins: {
