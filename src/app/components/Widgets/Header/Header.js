@@ -6,9 +6,9 @@ import clsx from 'clsx';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/HomeWorkOutlined';
-import IconThemeAuto from '@material-ui/icons/Brightness6';
-import IconThemeLight from '@material-ui/icons/Brightness7';
-import IconThemeDark from '@material-ui/icons/Brightness4';
+import IconThemeAuto from '@material-ui/icons/Brightness6Outlined';
+import IconThemeLight from '@material-ui/icons/Brightness5Outlined';
+import IconThemeDark from '@material-ui/icons/Brightness4Outlined';
 
 import Logo from '../../../../../public/assets/svg/logo.svg';
 
