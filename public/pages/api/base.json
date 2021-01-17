@@ -401,6 +401,9 @@
           }
         }
       },
+      "namespace": {
+        "type": "object"
+      },
       "Object-Created": {
         "type": "object",
         "properties": {

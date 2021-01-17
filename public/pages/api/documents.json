@@ -135,6 +135,9 @@
           "file": {
               "type": "blob",
               "format": "binary"
+          },
+          "namespace": {
+            "$ref": "base.json#/components/schemas/namespace"
           }
         },
         "required": [
@@ -249,7 +252,10 @@
             },
             "signature": "0xe633051fc76ae..."
         },
-        "file": "A file (blob), from file system"
+        "file": "A file (blob), from file system",
+        "namespace": {
+            "app": true
+        }
       },
       "Document-one": {
         "response": {

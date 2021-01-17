@@ -9,7 +9,7 @@ Returns signed asset object.
 Used for create asset method.
 
 ```javascript
-const result = sdk.assets.generateAsset(Asset);
+const result = sdk.assets.generateAsset(Asset, Namespace);
 // {
 //     // Object is not required
 //     object: {
@@ -22,6 +22,9 @@ const result = sdk.assets.generateAsset(Asset);
 //     },
 //     data: {
 //         name: 'Asset name'
+//     },
+//     namespace: {
+//         app: true
 //     }
 // }
 
@@ -36,6 +39,9 @@ const result = sdk.assets.generateAsset(Asset);
     },
     "data": {
         "name": "Asset name"
+    },
+    "namespace": {
+        app: true
     }
 }
 ```

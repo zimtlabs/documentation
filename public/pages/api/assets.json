@@ -97,6 +97,9 @@
           },
           "data": {
             "$ref": "#/components/schemas/Asset-data"
+          },
+          "namespace": {
+            "$ref": "base.json#/components/schemas/namespace"
           }
         },
         "required": [
@@ -148,6 +151,9 @@
           },
           "receipt": {
             "$ref": "base.json#/components/schemas/receipt"
+          },
+          "namespace": {
+            "$ref": "base.json#/components/schemas/namespace"
           }
         },
         "required": [
@@ -202,6 +208,9 @@
         },
         "data": {
             "name": "Asset name"
+        },
+        "namespace": {
+            "app": true
         }
       },
       "Asset-Update": {
