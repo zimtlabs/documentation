@@ -30,6 +30,9 @@
           },
           "skip": {
             "$ref": "base.json#/components/schemas/skip"
+          },
+          "permissions": {
+            "$ref": "base.json#/components/schemas/permissions"
           }
         }
       },
@@ -196,7 +199,8 @@
           }]
         },
         "limit": 45,
-        "skip": 30
+        "skip": 30,
+        "permissions": true
       },
       "Asset-Create": {
         "object": {

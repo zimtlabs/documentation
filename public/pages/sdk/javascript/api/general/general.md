@@ -56,6 +56,7 @@ const result = sdk.accounts.generateObjectWithMeta(true);
 | skip | Number of results to skip | number | 0 | 30
 | sortAscending | Sort results | boolean | false | true
 | total | Total results count | boolean | false | true
+| permissions | Evaluates permissions | boolean | false | true
 
 ### Asset options
 
@@ -70,6 +71,7 @@ const result = sdk.accounts.generateObjectWithMeta(true);
 | query | Query object with search filters | object | none | { assets: [ { field: 'object.meta.created_by', operator: 'starts-with', value: '0x123' } ] }
 | limit | Amount of results to return | number | 30 | 5
 | skip | Number of results to skip | number | 0 | 30
+| permissions | Evaluates permissions | boolean | false | true
 
 ### Query object
 

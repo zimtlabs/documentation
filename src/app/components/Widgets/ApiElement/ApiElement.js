@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import { RedocStandalone } from 'redoc';
 import prism from 'prismjs';
 
 import { parseMarkdownFileReference, getPublicFileUrl, FONT_FAMILY } from '../../../utils';
+import { StorageService } from '../../../services';
 
 const useStyles = makeStyles(theme => {
-    const isWindows = window.navigator.platform.toLowerCase().indexOf('win') > -1;
+    const isWin = /(win)/i.test(navigator.platform);
 
     return ({
         root: () => theme.palette.type === 'dark' ?
@@ -59,7 +60,7 @@ const useStyles = makeStyles(theme => {
                     background: theme.palette.background.primary,
 
                     '& code': {
-                        fontWeight: isWindows ? 800 : 400,
+                        fontWeight: isWin ? 800 : 400,
                     },
 
                     '& h1, & h2, & h3, & h4, & h5, & h6': {
@@ -97,7 +98,7 @@ const useStyles = makeStyles(theme => {
 
                 '& .redoc-wrap': {
                     '& code': {
-                        fontWeight: isWindows ? 800 : 400,
+                        fontWeight: isWin ? 800 : 400,
                     },
 
                     '& button:focus': {
@@ -123,6 +124,10 @@ export default function ApiElement(props) {
 
     const options = parseMarkdownFileReference(text);
     const url = getPublicFileUrl(titles.folders, titles.file, options.main);
+
+    useEffect(() => {
+        StorageService.sidebarSub.next(false);
+    }, []);
 
     return (
         <div

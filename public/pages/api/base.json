@@ -14,6 +14,9 @@
         "format": "int32",
         "minimum": 0
       },
+      "permissions": {
+        "type": "boolean"
+      },
       "total": {
         "type": "integer",
         "minimum": 0
@@ -576,6 +579,14 @@
           "$ref": "#/components/schemas/cursor"
         },
         "example": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      },
+      "permissions": {
+        "name": "permissions",
+        "description": "Evaluates permissions",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/permissions"
+        }
       },
       "previous-query": {
         "name": "previous",

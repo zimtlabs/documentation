@@ -6,5 +6,5 @@ export default function useSidebarOpen() {
     const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
     const router = useRouter();
 
-    return isDesktop && !['/', '/company/about', '/company/contact'].find(route => route === router.pathname);
+    return isDesktop && !['/', '/company/about', '/company/contact', '/api'].find(route => route === '/' ? route === router.asPath : router.asPath.indexOf(route) > -1);
 }

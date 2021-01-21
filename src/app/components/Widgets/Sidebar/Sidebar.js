@@ -47,7 +47,7 @@ export default function Sidebar(props) {
     const shouldBeOpen = useSidebarOpen();
     const router = useRouter();
 
-    const isRootPath = noSidebarRoutes.find(route => route === router.pathname);
+    const noSidebar = noSidebarRoutes.find(route => route === '/' ? route === router.asPath : router.asPath.indexOf(route) > -1);
     const mobile = !desktop;
 
     useEffect(() => {
@@ -63,7 +63,7 @@ export default function Sidebar(props) {
     }, []);
 
     const onClose = () => {
-        if (mobile || isRootPath) StorageService.sidebarSub.next(false);
+        if (mobile || noSidebar) StorageService.sidebarSub.next(false);
     };
 
     function renderNavItems(options) {

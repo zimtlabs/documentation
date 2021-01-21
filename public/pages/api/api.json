@@ -1699,7 +1699,8 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/skip-query" }
+          { "$ref": "base.json#/components/parameters/skip-query" },
+          { "$ref": "base.json#/components/parameters/permissions" }
         ],
         "responses": {
           "200": { "$ref": "assets.json#/components/responses/Assets" },
@@ -1745,7 +1746,8 @@
         }],
         "parameters": [
           { "$ref": "base.json#/components/parameters/limit-query" },
-          { "$ref": "base.json#/components/parameters/skip-query" }
+          { "$ref": "base.json#/components/parameters/skip-query" },
+          { "$ref": "base.json#/components/parameters/permissions" }
         ],
         "responses": {
           "200": { "$ref": "assets.json#/components/responses/Assets" },
@@ -1810,7 +1812,8 @@
           ]
         }],
         "parameters": [
-          { "$ref": "assets.json#/components/parameters/id-asset" }
+          { "$ref": "assets.json#/components/parameters/id-asset" },
+          { "$ref": "base.json#/components/parameters/permissions" }
         ],
         "responses": {
           "200": { "$ref": "assets.json#/components/responses/Asset" },
