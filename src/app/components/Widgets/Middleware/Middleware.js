@@ -108,10 +108,6 @@ export default function Middleware(props) {
 
     if (!loading && !isLatestVersion) refreshCacheAndReload();
 
-    let content = <></>;
-    if (loading || !loaded || (!loading && !isLatestVersion)) content = <ScreenLoader />;
-    else content = props.children;
-
     return (
         <ErrorBoundry>
             <DefaultSeo
@@ -124,7 +120,9 @@ export default function Middleware(props) {
 
             <CssBaseline />
 
-            {content}
+            {(loading || !loaded || (!loading && !isLatestVersion)) && <ScreenLoader />}
+
+            {props.children}
         </ErrorBoundry>
     );
 }

@@ -19,7 +19,7 @@ import { normalize, rgbToRGBA, DEFAULT_THEME } from '../../../utils';
 const useStyles = makeStyles(theme => ({
     root: {
         zIndex: '1000 !important',
-        position: () => window.location.pathname.indexOf('/api') === 0 ? 'relative' : 'fixed',
+        position: () => process.browser && location.pathname.indexOf('/api') === 0 ? 'relative' : 'fixed',
         width: '100%',
         top: 0,
         left: 0,
