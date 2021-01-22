@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Sidebar(props) {
     const classes = useStyles(props);
-    const [open, setOpen] = useState();
+    const [open, setOpen] = useState(false);
     const up600 = useMediaQuery('(min-width: 600px');
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('lg'));
