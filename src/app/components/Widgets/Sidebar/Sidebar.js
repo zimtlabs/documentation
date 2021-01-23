@@ -47,7 +47,7 @@ export default function Sidebar(props) {
     const shouldBeOpen = useSidebarOpen();
     const router = useRouter();
 
-    const noSidebar = noSidebarRoutes.find(route => route === '/' ? route === router.asPath : router.asPath.indexOf(route) > -1);
+    const noSidebar = noSidebarRoutes.find(route => route === '/' ? route === router.asPath : router.asPath.indexOf(route) === 0);
     const mobile = !desktop;
 
     useEffect(() => {
