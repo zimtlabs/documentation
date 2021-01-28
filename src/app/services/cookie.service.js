@@ -13,6 +13,12 @@ export class CookieService {
         this.domain = window.location.host;
 
         if (this.domain.indexOf('localhost') > -1) this.domain = '';
+        else {
+            let rootHost = this.domain.split('.');
+            rootHost = `${rootHost[rootHost.length - 2]}.${rootHost[rootHost.length - 1]}`;
+
+            this.domain = rootHost;
+        }
     }
 
     set(key, value) {
