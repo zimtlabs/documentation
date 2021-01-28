@@ -8,13 +8,14 @@ import React, { useState, useEffect } from 'react';
 import { CssBaseline } from '@material-ui/core';
 import * as Sentry from '@sentry/browser';
 import { DefaultSeo } from 'next-seo';
+import Router from 'next/router';
 
 import 'prismjs/themes/prism.css';
 import 'prismjs/themes/prism-okaidia.css';
 
 import { ErrorBoundry } from './components';
-import { ScreenLoader } from '../../';
-import { appSetup, semverGreaterThan } from '../../../utils';
+import { ScreenLoader, Privacy } from '../../';
+import { appSetup, semverGreaterThan, GAInit, GAPageView } from '../../../utils';
 import Config from '../../../config';
 
 import pkg from '../../../../../package.json';
@@ -33,6 +34,15 @@ export default function Middleware(props) {
     useEffect(() => {
         if (isLatestVersion && !loaded) initApp();
     }, [isLatestVersion]);
+
+    const track = () => {
+        GAInit();
+
+        Router.events.on('routeChangeComplete', GAPageView);
+
+        GAPageView();
+        // recordVisitor();
+    };
 
     const initApp = async () => {
         // Remove the server-side injected CSS.
@@ -106,6 +116,11 @@ export default function Middleware(props) {
             });
     };
 
+    const onPrivacySuccess = () => {
+        // Only if visitor agreed to our privacy policy
+        track();
+    };
+
     if (!loading && !isLatestVersion) refreshCacheAndReload();
 
     return (
@@ -119,6 +134,10 @@ export default function Middleware(props) {
             />
 
             <CssBaseline />
+
+            <Privacy
+                onSuccess={onPrivacySuccess}
+            />
 
             {(loading || !loaded || (!loading && !isLatestVersion)) && <ScreenLoader />}
 

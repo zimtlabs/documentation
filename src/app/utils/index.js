@@ -1,8 +1,20 @@
 import React, { useEffect } from 'react';
+import GA from 'react-ga';
 
 export * from './theme';
 export * from './colorManipulation';
 export * from './parseMarkdown';
+
+export const GAInit = () => {
+    GA.initialize('');
+};
+
+export const GAPageView = () => {
+    // Update the user's current page
+    GA.set({ page: location.pathname });
+    // Record a pageview for the given page
+    GA.pageview(location.pathname + location.search);
+};
 
 export const copy = data => JSON.parse(JSON.stringify(data));
 
