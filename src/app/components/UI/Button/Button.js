@@ -1,18 +1,18 @@
 import React from 'react';
 import { Button, makeStyles } from '@material-ui/core';
+import { useTheme } from '@material-ui/styles';
 
 import { CircularProgress } from '../../';
-import { useTheme } from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
     root: {
         fontWeight: 600,
         lineHeight: 1.75,
-        borderRadius: props => props.naked ? 0 : 24,
+        borderRadius: 24,
         letterSpacing: '0.06em',
         fontSize: 13,
         textTransform: 'none',
-        alignSelf: props => props.align || 'center',
+        alignSelf: 'center',
     },
     sizeLarge: {
         minWidth: 153,
@@ -21,22 +21,22 @@ const useStyles = makeStyles(theme => ({
     sizeSmall: {
         padding: '4px 12px',
     },
+    contained: {
+        color: '#fff',
+    },
 }), { name: 'ZIMTButton' });
 
 export default function ZIMTButton(props) {
     const classes = useStyles();
     const theme = useTheme();
-    const { children, loading, disabled, naked, ...other } = props;
-
-    const c = {};
-    Object.keys(classes).forEach(key => c[key] = classes[key]);
+    const { children, loading, disabled, ...other } = props;
 
     return (
         <Button
             variant='contained'
             color='primary'
             size='medium'
-            classes={c}
+            classes={classes}
             disabled={disabled || loading}
             {...other}
         >
