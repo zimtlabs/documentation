@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import GA from 'react-ga';
 
+import Config from '../config';
+
 export * from './theme';
 export * from './colorManipulation';
 export * from './parseMarkdown';
 
 export const GAInit = () => {
-    GA.initialize('');
+    GA.initialize(Config.config.services.analytics);
 };
 
 export const GAPageView = () => {
