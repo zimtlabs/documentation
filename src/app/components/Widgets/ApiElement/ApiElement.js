@@ -1,107 +1,120 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import { RedocStandalone } from 'redoc';
 import prism from 'prismjs';
 
 import { parseMarkdownFileReference, getPublicFileUrl, FONT_FAMILY } from '../../../utils';
+import { StorageService } from '../../../services';
 
-const useStyles = makeStyles(theme => ({
-    root: () => theme.palette.type === 'dark' ?
-        ({
-            width: '100%',
+const useStyles = makeStyles(theme => {
+    const isWin = /(win)/i.test(navigator.platform);
 
-            '& h3': {
-                marginTop: 15,
-                marginBottom: 24,
-            },
+    return ({
+        root: () => theme.palette.type === 'dark' ?
+            ({
+                width: '100%',
 
-            '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
-                background: 'none',
-            },
+                '& h3': {
+                    marginTop: 15,
+                    marginBottom: 24,
+                },
 
-            '& .menu-content': {
-                background: theme.palette.background.secondary,
+                '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
+                    background: 'none',
+                },
 
-                '& div': {
+                '& .menu-content': {
                     background: theme.palette.background.secondary,
-                },
-
-                '& label': {
-                    background: theme.palette.background.secondary,
-                },
-
-                '& label:hover': {
-                    background: theme.palette.background.secondary,
-                },
-
-                '& label.active': {
-                    background: '#272727',
-                },
-            },
-
-            '& .api-content': {
-                '& > div > div > div > div > button + div': {
-                    background: '#333',
-                },
-
-                '& > div > div > div > div > button + div > div > div > div': {
-                    fontFamily: FONT_FAMILY.tertiary,
-                    fontSize: 12,
-                    background: '#444',
-                    border: '1px solid #555',
-                },
-            },
-
-            '& .redoc-wrap': {
-                background: theme.palette.background.primary,
-
-                '& h1, & h2, & h3, & h4, & h5, & h6': {
-                    color: theme.palette.text.primary,
-                },
-
-                '& span, & p, & td, & tr, & button, & input': {
-                    color: theme.palette.text.secondary,
-                },
-
-                '& tr': {
-                    background: [theme.palette.background.primary, '!important'],
 
                     '& div': {
-                        background: [theme.palette.background.primary, '!important'],
+                        background: theme.palette.background.secondary,
+                    },
+
+                    '& label': {
+                        background: theme.palette.background.secondary,
+                    },
+
+                    '& label:hover': {
+                        background: theme.palette.background.secondary,
+                    },
+
+                    '& label.active': {
+                        background: '#272727',
                     },
                 },
 
-                '& button:focus': {
-                    outline: 'none',
+                '& .api-content': {
+                    '& > div > div > div > div > button + div': {
+                        background: '#333',
+                    },
+
+                    '& > div > div > div > div > button + div > div > div > div': {
+                        fontFamily: FONT_FAMILY.tertiary,
+                        fontSize: 12,
+                        background: '#444',
+                        border: '1px solid #555',
+                    },
                 },
-            },
-        }) :
-        ({
-            width: '100%',
 
-            '& h3': {
-                marginTop: 15,
-                marginBottom: 24,
-            },
+                '& .redoc-wrap': {
+                    background: theme.palette.background.primary,
 
-            '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
-                background: 'none',
-            },
+                    '& code': {
+                        fontWeight: isWin ? 800 : 400,
+                    },
 
-            '& .redoc-wrap': {
-                '& button:focus': {
-                    outline: 'none',
+                    '& h1, & h2, & h3, & h4, & h5, & h6': {
+                        color: theme.palette.text.primary,
+                    },
+
+                    '& span, & p, & td, & tr, & button, & input, & li': {
+                        color: theme.palette.text.secondary,
+                    },
+
+                    '& tr': {
+                        background: [theme.palette.background.primary, '!important'],
+
+                        '& div': {
+                            background: [theme.palette.background.primary, '!important'],
+                        },
+                    },
+
+                    '& button:focus': {
+                        outline: 'none',
+                    },
                 },
-            },
+            }) :
+            ({
+                width: '100%',
 
-            '& .api-content': {
-                '& > div > div > div > div > div > div > div > div': {
-                    fontFamily: FONT_FAMILY.tertiary,
-                    fontSize: 12,
+                '& h3': {
+                    marginTop: 15,
+                    marginBottom: 24,
                 },
-            },
-        }),
-}), { name: 'ApiElement' });
+
+                '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
+                    background: 'none',
+                },
+
+                '& .redoc-wrap': {
+                    '& code': {
+                        fontWeight: isWin ? 800 : 400,
+                    },
+
+                    '& button:focus': {
+                        outline: 'none',
+                    },
+                },
+
+                '& .api-content': {
+                    '& > div > div > div > div > div > div > div > div': {
+                        fontFamily: FONT_FAMILY.tertiary,
+                        fontSize: 12,
+                    },
+                },
+            }),
+    });
+}, { name: 'ApiElement' });
 
 export default function ApiElement(props) {
     const classes = useStyles(props);
@@ -111,6 +124,10 @@ export default function ApiElement(props) {
 
     const options = parseMarkdownFileReference(text);
     const url = getPublicFileUrl(titles.folders, titles.file, options.main);
+
+    useEffect(() => {
+        StorageService.sidebarSub.next(false);
+    }, []);
 
     return (
         <div

@@ -6,17 +6,20 @@ import clsx from 'clsx';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/HomeWorkOutlined';
-
-import { AppBar, Toolbar, IconButton, Typography, Breadcrumbs, useSidebarOpen } from '../../';
-import { StorageService } from '../../../services';
-import { normalize, rgbToRGBA } from '../../../utils';
+import IconThemeAuto from '@material-ui/icons/Brightness6Outlined';
+import IconThemeLight from '@material-ui/icons/Brightness5Outlined';
+import IconThemeDark from '@material-ui/icons/Brightness4Outlined';
 
 import Logo from '../../../../../public/assets/svg/logo.svg';
+
+import { AppBar, Toolbar, IconButton, Typography, Breadcrumbs, useSidebarOpen, Tooltip } from '../../';
+import { StorageService } from '../../../services';
+import { normalize, rgbToRGBA, DEFAULT_THEME } from '../../../utils';
 
 const useStyles = makeStyles(theme => ({
     root: {
         zIndex: '1000 !important',
-        position: () => window.location.pathname.indexOf('/api') === 0 ? 'relative' : 'fixed',
+        position: () => process.browser && location.pathname.indexOf('/api') === 0 ? 'relative' : 'fixed',
         width: '100%',
         top: 0,
         left: 0,
@@ -61,11 +64,7 @@ const useStyles = makeStyles(theme => ({
         color: '#fff',
         'box-shadow': 'none',
         'backdrop-filter': 'blur(15px)',
-
-        transition: theme.transitions.create(['margin', 'width', 'background-color'], {
-            easing: 'none',
-            duration: 'none',
-        }),
+        transition: 'background-color .2s, box-shadow .2s',
 
         '&.notTop': {
             'background-color': rgbToRGBA(theme.palette.primary[theme.palette.type === 'dark' ? 'dark' : 'main'], 84),
@@ -82,15 +81,11 @@ const useStyles = makeStyles(theme => ({
     breadcrumbs: {
         borderBottom: 'none',
         'backdrop-filter': 'blur(15px)',
+        transition: 'background-color .2s, box-shadow .2s',
 
         '& li:last-child': {
             paddingRight: 24,
         },
-
-        transition: theme.transitions.create(['margin', 'width', 'background-color', 'box-shadow'], {
-            easing: 'none',
-            duration: 'none',
-        }),
 
         '&.notTop': {
             'box-shadow': '0px -1px 7px rgba(0, 0, 0, 0.1)',
@@ -105,6 +100,13 @@ const useStyles = makeStyles(theme => ({
             duration: 'none',
         }),
     },
+    iconTheme: {
+        fontSize: '1.6rem',
+
+        '@media only screen and (min-width: 720px)': {
+            fontSize: '1.7rem',
+        },
+    },
 }), { name: 'Header' });
 
 export default function Header(props) {
@@ -117,6 +119,7 @@ export default function Header(props) {
         threshold: 0,
     });
     const sidebarOpen = useSidebarOpen();
+    const [userTheme, setUserTheme] = useState(DEFAULT_THEME);
 
     useEffect(() => {
         const crumbSub = StorageService.crumbSub.subscribe(c => setCrumbs(c));
@@ -125,6 +128,28 @@ export default function Header(props) {
             crumbSub.unsubscribe();
         };
     }, []);
+
+    useEffect(() => {
+        const userThemeSub = StorageService.userTheme.subscribe(value => setUserTheme(value));
+
+        return () => {
+            userThemeSub.unsubscribe();
+        };
+    }, []);
+
+    const onThemeChange = () => {
+        let value = 'auto';
+        if (userTheme === 'auto') value = 'light';
+        if (userTheme === 'light') value = 'dark';
+
+        setUserTheme(value);
+        StorageService.setUserTheme(value);
+    };
+
+    let Icon = IconThemeAuto;
+
+    if (userTheme === 'light') Icon = IconThemeLight;
+    if (userTheme === 'dark') Icon = IconThemeDark;
 
     const breadcrumbs = (
         <Breadcrumbs
@@ -188,6 +213,20 @@ export default function Header(props) {
                             </a>
                         </NLink>
                     </div>
+
+                    <Tooltip
+                        title={`${normalize(userTheme)} theme`}
+                    >
+                        <IconButton
+                            onClick={onThemeChange}
+                            color='inherit'
+                            size='small'
+                        >
+                            <Icon
+                                className={classes.iconTheme}
+                            />
+                        </IconButton>
+                    </Tooltip>
                 </Toolbar>
             </AppBar>
             {breadcrumbs}

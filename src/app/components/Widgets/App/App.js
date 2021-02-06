@@ -2,20 +2,16 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 
-import { reset } from '../../../../styles';
 import { useSidebarOpen, Sidebar, Header, Footer } from '../../';
 
 const useStyles = makeStyles(theme => ({
-    '@global': {
-        ...reset(theme),
-    },
     root: {
         display: 'flex',
         flexDirection: 'column',
         minHeight: '100vh',
         backgroundColor: theme.palette.background.primary,
         position: 'relative',
-        paddingTop: () => window.location.pathname.indexOf('/api') === 0 ? 0 : 91,
+        paddingTop: () => process.browser && window.location.pathname.indexOf('/api') === 0 ? 0 : 91,
     },
     main: {
         flex: '1 1 auto',

@@ -33,6 +33,7 @@
           "enum": [
             "asset:GetObject",
             "asset:PutObject",
+            "asset:UpdateObject",
 
             "event:GetObject",
             "event:GetObject",

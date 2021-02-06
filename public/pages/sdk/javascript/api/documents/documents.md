@@ -9,45 +9,53 @@ Returns signed document object.
 Used for create document method.
 
 ```javascript
-const result = sdk.documents.generateDocument(Document data);
-// sdk.documents.generateDocument({
-//     // Meta is not required
-//     "meta": {
-//         // Valid ISO data, max 24h in the future
-//         // Default is now
-//         timestamp: '2020-02-10T19:16:13+02:00',
-//     },
-//     // Data is required
-//     "data": {
-//         "type ": "image/png",
-//         "name": "Image",
-//         "content": {
-//             "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
+const result = sdk.documents.generateDocument(Document data, Namespace);
+//  sdk.documents.generateDocument(
+//     {
+//         // Meta is not required
+//         "meta": {
+//             // Valid ISO data, max 24h in the future
+//             // Default is now
+//             timestamp: '2020-02-10T19:16:13+02:00',
 //         },
-//         "properties": {
-//             "prop": 7
+//         // Data is required
+//         "data": {
+//             "type ": "image/png",
+//             "name": "Image",
+//             "content": {
+//                 "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
+//             },
+//             "properties": {
+//                 "prop": 7
+//             }
 //         }
-//     }
-// });
+//     },
+//     { "app": true }
+// );
 
 // result
 {
-  "meta": {
-    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-    "timestamp": "2020-02-10T19:16:13+02:00",
-    "data_hash": "0x123..."
-  },
-  "data": {
-    "type ": "image/png",
-    "name": "Image",
-    "content": {
-        "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
+    "object": {
+        "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13+02:00",
+            "data_hash": "0x123..."
+        },
+        "data": {
+            "type ": "image/png",
+            "name": "Image",
+            "content": {
+                "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
+            },
+            "properties": {
+            "prop": 7
+            }
+        },
+        "signature": "0xe633051fc76ae..."
     },
-    "properties": {
-      "prop": 7
+    "namespace": {
+        app: true
     }
-  },
-  "signature": "0xe633051fc76ae..."
 }
 ```
 

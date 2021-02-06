@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/styles';
-import { duration, useMediaQuery } from '@material-ui/core';
+import { duration, useMediaQuery, SwipeableDrawer } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-import { List, Divider, Typography, Drawer, useSidebarOpen, noSidebarRoutes } from '../../';
+import { List, Divider, Typography, useSidebarOpen, noSidebarRoutes } from '../../';
 import { StorageService } from '../../../services';
 
 import Menu from '../../../Menu';
-import { AppDrawerNavItem, SidebarMenu } from './components';
+import { AppDrawerNavItem } from './components';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -40,14 +40,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function Sidebar(props) {
     const classes = useStyles(props);
-    const [open, setOpen] = useState();
+    const [open, setOpen] = useState(false);
     const up600 = useMediaQuery('(min-width: 600px');
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('lg'));
     const shouldBeOpen = useSidebarOpen();
     const router = useRouter();
 
-    const isRootPath = noSidebarRoutes.find(route => route === router.pathname);
+    const noSidebar = noSidebarRoutes.find(route => route === '/' ? route === router.asPath : router.asPath.indexOf(route) === 0);
     const mobile = !desktop;
 
     useEffect(() => {
@@ -63,7 +63,7 @@ export default function Sidebar(props) {
     }, []);
 
     const onClose = () => {
-        if (mobile || isRootPath) StorageService.sidebarSub.next(false);
+        if (mobile || noSidebar) StorageService.sidebarSub.next(false);
     };
 
     function renderNavItems(options) {
@@ -122,8 +122,10 @@ export default function Sidebar(props) {
         return items;
     }
 
+    const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+
     return (
-        <Drawer
+        <SwipeableDrawer
             open={open}
             onClose={() => onClose()}
             variant={shouldBeOpen ? 'persistent' : 'temporary'}
@@ -133,6 +135,8 @@ export default function Sidebar(props) {
                 keepMounted: true, // Better open performance on mobile.
             }}
             transitionDuration={mobile || !shouldBeOpen ? { enter: duration.enteringScreen, exit: duration.leavingScreen } : 0}
+            disableBackdropTransition={!iOS}
+            disableDiscovery={iOS}
         >
             <div
                 className={classes.header}
@@ -154,8 +158,6 @@ export default function Sidebar(props) {
 
             {renderNavItems({ pages: Menu, depth: 0 })}
 
-            {/* Settings  */}
-            <SidebarMenu />
-        </Drawer>
+        </SwipeableDrawer>
     );
 }

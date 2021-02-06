@@ -10,3 +10,4 @@ export * from './Sidebar';
 export * from './Title';
 export * from './ScreenLoader';
 export * from './App';
+export * from './Privacy';

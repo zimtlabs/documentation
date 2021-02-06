@@ -213,7 +213,7 @@
                             ],
                             "resources": {
                                 "events": [{
-                                    "field": "data.asset_type",
+                                    "field": "data.type",
                                     "operator": "equal",
                                     "value": "material"
                                 }]
@@ -227,7 +227,7 @@
                             ],
                             "resources": {
                                 "events": [{
-                                    "field": "data.asset_type",
+                                    "field": "data.type",
                                     "operator": "equal",
                                     "value": "inspection"
                                 }]
@@ -261,7 +261,7 @@
                             ],
                             "resources": {
                                 "events": [{
-                                    "field": "data.asset_type",
+                                    "field": "data.type",
                                     "operator": "equal",
                                     "value": "material"
                                 }]
@@ -275,7 +275,7 @@
                             ],
                             "resources": {
                                 "events": [{
-                                    "field": "data.asset_type",
+                                    "field": "data.type",
                                     "operator": "equal",
                                     "value": "inspection"
                                 }]
@@ -320,7 +320,7 @@
                                 ],
                                 "resources": {
                                     "events": [{
-                                        "field": "data.asset_type",
+                                        "field": "data.type",
                                         "operator": "equal",
                                         "value": "material"
                                     }]
@@ -334,7 +334,7 @@
                                 ],
                                 "resources": {
                                     "events": [{
-                                        "field": "data.asset_type",
+                                        "field": "data.type",
                                         "operator": "equal",
                                         "value": "inspection"
                                     }]

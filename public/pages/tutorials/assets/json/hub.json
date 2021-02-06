@@ -312,7 +312,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"query\": {\n        \"events\": [\n            {\n                \"field\": \"object.data.asset_type\",\n                \"operator\": \"equal\",\n                \"value\": \"zimt.lot\"\n            }\n        ]\n    },\n    \"limit\": 10,\n    \"skip\": 2\n}",
+									"raw": "{\n    \"query\": {\n        \"events\": [\n            {\n                \"field\": \"object.data.type\",\n                \"operator\": \"equal\",\n                \"value\": \"zimt.lot\"\n            }\n        ]\n    },\n    \"limit\": 10,\n    \"skip\": 2\n}",
 									"options": {
 										"raw": {
 											"language": "json"
