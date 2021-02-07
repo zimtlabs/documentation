@@ -217,15 +217,17 @@ export default function Header(props) {
                     <Tooltip
                         title={`${normalize(userTheme)} theme`}
                     >
-                        <IconButton
-                            onClick={onThemeChange}
-                            color='inherit'
-                            size='small'
-                        >
-                            <Icon
-                                className={classes.iconTheme}
-                            />
-                        </IconButton>
+                        <span>
+                            <IconButton
+                                onClick={onThemeChange}
+                                color='inherit'
+                                size='small'
+                            >
+                                <Icon
+                                    className={classes.iconTheme}
+                                />
+                            </IconButton>
+                        </span>
                     </Tooltip>
                 </Toolbar>
             </AppBar>

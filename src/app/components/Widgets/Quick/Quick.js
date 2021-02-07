@@ -93,12 +93,13 @@ export default function Quick(props) {
                 ))}
             </div>
             <Link href={props.to}>
-                <a>
+                <a
+                    style={{ marginTop: 8, alignSelf: 'flex-start' }}
+                >
                     <Button
                         variant='text'
                         color='default'
                         align='flex-start'
-                        style={{ marginTop: 8 }}
                     >
                         Read the docs
                     </Button>

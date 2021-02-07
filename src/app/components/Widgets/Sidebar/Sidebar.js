@@ -128,6 +128,7 @@ export default function Sidebar(props) {
         <SwipeableDrawer
             open={open}
             onClose={() => onClose()}
+            onOpen={() => { }}
             variant={shouldBeOpen ? 'persistent' : 'temporary'}
             anchor='left'
             className={classes.root}
