@@ -62,12 +62,11 @@ const useStyles = makeStyles(theme => ({
     },
     appBar: {
         color: '#fff',
-        'box-shadow': 'none',
-        'backdrop-filter': 'blur(15px)',
+        boxShadow: 'none',
         transition: 'background-color .2s, box-shadow .2s',
 
         '&.notTop': {
-            'background-color': rgbToRGBA(theme.palette.primary[theme.palette.type === 'dark' ? 'dark' : 'main'], 84),
+            backgroundColor: rgbToRGBA(theme.palette.primary[theme.palette.type === 'dark' ? 'dark' : 'main'], 98),
         },
     },
     appBarShift: {
@@ -80,16 +79,14 @@ const useStyles = makeStyles(theme => ({
     },
     breadcrumbs: {
         borderBottom: 'none',
-        'backdrop-filter': 'blur(15px)',
-        transition: 'background-color .2s, box-shadow .2s',
 
         '& li:last-child': {
             paddingRight: 24,
         },
 
         '&.notTop': {
-            'box-shadow': '0px -1px 7px rgba(0, 0, 0, 0.1)',
-            'background-color': rgbToRGBA(theme.palette.background.secondary, 84),
+            boxShadow: '0px -1px 7px rgba(0, 0, 0, 0.1)',
+            backgroundColor: rgbToRGBA(theme.palette.background.secondary, 98),
         },
     },
     breadcrumbsShift: {
@@ -231,6 +228,7 @@ export default function Header(props) {
                     </Tooltip>
                 </Toolbar>
             </AppBar>
+
             {breadcrumbs}
         </div>
     );

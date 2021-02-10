@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import { RedocStandalone } from 'redoc';
 import prism from 'prismjs';
+import clsx from 'clsx';
 
 import { parseMarkdownFileReference, getPublicFileUrl, FONT_FAMILY } from '../../../utils';
 import { StorageService } from '../../../services';
@@ -10,19 +11,50 @@ const useStyles = makeStyles(theme => {
     const isWin = /(win)/i.test(navigator.platform);
 
     return ({
-        root: () => theme.palette.type === 'dark' ?
+        root: {
+            width: '100%',
+
+            '& h3': {
+                marginTop: 15,
+                marginBottom: 24,
+            },
+
+            '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
+                background: 'none',
+            },
+
+            '& label[type=group]': {
+                display: 'none',
+            },
+
+            '& a[href*=redoc]': {
+                display: 'none',
+            },
+
+            '& li[data-item-id*=group]': {
+                marginTop: 0,
+            },
+
+            '& label[role=menuitem]': {
+                fontWeight: 500,
+            },
+
+            '& label[type=section], label[type=tag], h1, h2': {
+                fontWeight: 600,
+            },
+
+            '& .redoc-wrap': {
+                '& code': {
+                    fontWeight: isWin ? 800 : 400,
+                },
+
+                '& button:focus': {
+                    outline: 'none',
+                },
+            },
+        },
+        theme: () => theme.palette.type === 'dark' ?
             ({
-                width: '100%',
-
-                '& h3': {
-                    marginTop: 15,
-                    marginBottom: 24,
-                },
-
-                '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
-                    background: 'none',
-                },
-
                 '& .menu-content': {
                     background: theme.palette.background.secondary,
 
@@ -59,10 +91,6 @@ const useStyles = makeStyles(theme => {
                 '& .redoc-wrap': {
                     background: theme.palette.background.primary,
 
-                    '& code': {
-                        fontWeight: isWin ? 800 : 400,
-                    },
-
                     '& h1, & h2, & h3, & h4, & h5, & h6': {
                         color: theme.palette.text.primary,
                     },
@@ -78,34 +106,9 @@ const useStyles = makeStyles(theme => {
                             background: [theme.palette.background.primary, '!important'],
                         },
                     },
-
-                    '& button:focus': {
-                        outline: 'none',
-                    },
                 },
             }) :
             ({
-                width: '100%',
-
-                '& h3': {
-                    marginTop: 15,
-                    marginBottom: 24,
-                },
-
-                '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
-                    background: 'none',
-                },
-
-                '& .redoc-wrap': {
-                    '& code': {
-                        fontWeight: isWin ? 800 : 400,
-                    },
-
-                    '& button:focus': {
-                        outline: 'none',
-                    },
-                },
-
                 '& .api-content': {
                     '& > div > div > div > div > div > div > div > div': {
                         fontFamily: FONT_FAMILY.tertiary,
@@ -131,7 +134,7 @@ export default function ApiElement(props) {
 
     return (
         <div
-            className={classes.root}
+            className={clsx(classes.root, classes.theme)}
         >
             <RedocStandalone
                 specUrl={url}
