@@ -40,7 +40,7 @@
     "next": "^9.4.4",
     "next-seo": "^4.5.0",
     "nextjs-progressbar": "0.0.7",
-    "prismjs": "^1.22.0",
+    "prismjs": "^1.23.0",
     "react": "^16.14.0",
     "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.8.0",
