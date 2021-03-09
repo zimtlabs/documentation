@@ -209,7 +209,7 @@
     "/auth/login": {
       "post": {
         "summary": "Login",
-        "description": "Returns an account authentication token.",
+        "description": "Returns an account authentication token. <br/><br/> If you are a developer creating an app that has a login / is used by hub accounts, you would first make a request in this endpoint just with the app's api_key, get a JWT token from the response that only represents your app without a user. Then, include it in next requests headers, and then ie. get account's encrypted token (POST /accounts/token), decrypt it using password, and then make another request to this login endpoint, but, second time around you have both app's api_key and now private key of the hub account using your app, now you can generate the token described below, and response will be JWT token that represents your app and hub account using your app, and then you can include that JWT token in headers instead of the first one, and make create asset requests or whatever your app needs.",
         "tags": [
           "Auth"
         ],

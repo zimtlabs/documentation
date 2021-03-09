@@ -14,7 +14,7 @@ const CACHES = {
 const getMinutes = minutes => minutes * 60000;
 
 const CONFIG = {
-    cacheLifeTime: getMinutes(1),
+    cacheLifeTime: getMinutes(94),
 };
 
 self.addEventListener('install', event => {
@@ -57,8 +57,7 @@ const housekeeping = () => {
                     const isDocumentsCache = cacheName.indexOf('documents') > -1;
                     if (!isDocumentsCache) return false;
 
-                    // Always remove on initial app all previously cached documents, so app can cache new ones for app use lifetime
-                    const shouldRemove = true;
+                    const shouldRemove = checkIfCacheExpired(cacheName);
 
                     return shouldRemove
                 })
@@ -103,7 +102,7 @@ self.addEventListener('fetch', event => {
     // you can parse by http method, url, etc.
     // FYI, Also caches 400+ network request responses
     if (
-        event.request.url.indexOf('hub') > -1 &&
+        event.request.url.indexOf('zi.mt') > -1 &&
         event.request.url.indexOf('/documents') > -1 &&
         event.request.method === 'GET' &&
         event.request.headers.get('accept').indexOf('application/json') === -1
