@@ -11,3 +11,5 @@ export * from './Title';
 export * from './ScreenLoader';
 export * from './App';
 export * from './Privacy';
+export * from './ErrorBoundary';
+export * from './Wrapper';

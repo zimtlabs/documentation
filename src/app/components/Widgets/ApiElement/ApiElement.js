@@ -4,6 +4,7 @@ import { RedocStandalone } from 'redoc';
 import prism from 'prismjs';
 import clsx from 'clsx';
 
+import { Wrapper } from '../../';
 import { parseMarkdownFileReference, getPublicFileUrl, FONT_FAMILY } from '../../../utils';
 import { StorageService } from '../../../services';
 
@@ -133,20 +134,22 @@ export default function ApiElement(props) {
     }, []);
 
     return (
-        <div
-            className={clsx(classes.root, classes.theme)}
-        >
-            <RedocStandalone
-                specUrl={url}
-                options={{
-                    nativeScrollbars: true,
-                    theme: { colors: { primary: { main: theme.palette.primary.main } } },
-                    hideDownloadButton: true,
-                }}
-                onLoaded={error => {
-                    if (!error) prism.highlightAll();
-                }}
-            />
-        </div>
+        <Wrapper>
+            <div
+                className={clsx(classes.root, classes.theme)}
+            >
+                <RedocStandalone
+                    specUrl={url}
+                    options={{
+                        nativeScrollbars: true,
+                        theme: { colors: { primary: { main: theme.palette.primary.main } } },
+                        hideDownloadButton: true,
+                    }}
+                    onLoaded={error => {
+                        if (!error) prism.highlightAll();
+                    }}
+                />
+            </div>
+        </Wrapper>
     );
 }

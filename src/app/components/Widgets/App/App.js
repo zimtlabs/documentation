@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 
-import { useSidebarOpen, Sidebar, Header, Footer } from '../../';
+import { useSidebarOpen, Sidebar, Header, Footer, Wrapper } from '../../';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,13 +39,15 @@ export default function App(props) {
     const sidebarOpen = useSidebarOpen();
 
     return (
-        <div className={classes.root}>
-            <Sidebar />
-            <Header />
-            <main className={clsx(classes.main, { [classes.mainShift]: sidebarOpen })}>
-                {props.children}
-            </main>
-            <Footer />
-        </div>
+        <Wrapper fallback>
+            <div className={classes.root}>
+                <Sidebar />
+                <Header />
+                <main className={clsx(classes.main, { [classes.mainShift]: sidebarOpen })}>
+                    {props.children}
+                </main>
+                <Footer />
+            </div>
+        </Wrapper>
     );
 }

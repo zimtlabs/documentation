@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import ArrowBack from '@material-ui/icons/KeyboardBackspace';
 
-import { Typography, IconButton, Tooltip } from '../../../components';
+import { Typography, IconButton, Tooltip, Wrapper } from '../../';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -75,55 +75,57 @@ export default function Title(props) {
     const subtitleProps = [];
 
     return (
-        <div
-            className={classes.root}
-            {...other}
-        >
-            {image && (
-                <img
-                    className={classes.image}
-                    src={image}
-                    alt=''
-                />
-            )}
-            <Typography
-                className={classes.title}
-                variant={titleVariant || 'h4'}
-                {...(titleProps || {})}
+        <Wrapper>
+            <div
+                className={classes.root}
+                {...other}
             >
-                {backTo && (
-                    <Tooltip title='Back' className={classes.backTo}>
-                        <span>
-                            <Link href={backTo}>
-                                <a>
-                                    <IconButton color='default'>
-                                        <ArrowBack />
-                                    </IconButton>
-                                </a>
-                            </Link>
-                        </span>
-                    </Tooltip>
+                {image && (
+                    <img
+                        className={classes.image}
+                        src={image}
+                        alt=''
+                    />
                 )}
-                {title}
-                {options && (
-                    <span className={classes.options}>
-                        {options}
-                    </span>
-                )}
-            </Typography>
-            <Typography
-                className={classes.subtitle}
-                variant='body1'
-            >
-                {subtitle ? subtitle : <>
-                    {subtitleProps.map((prop, index) => (
-                        <span className={classes.subtitleItem} key={index}>
-                            <span className={classes.dot}>•</span><span className={classes.subtitleKey}>{prop.key}:</span> {prop.value}
+                <Typography
+                    className={classes.title}
+                    variant={titleVariant || 'h4'}
+                    {...(titleProps || {})}
+                >
+                    {backTo && (
+                        <Tooltip title='Back' className={classes.backTo}>
+                            <span>
+                                <Link href={backTo}>
+                                    <a>
+                                        <IconButton color='default'>
+                                            <ArrowBack />
+                                        </IconButton>
+                                    </a>
+                                </Link>
+                            </span>
+                        </Tooltip>
+                    )}
+                    {title}
+                    {options && (
+                        <span className={classes.options}>
+                            {options}
                         </span>
-                    ))}
-                </>}
+                    )}
+                </Typography>
+                <Typography
+                    className={classes.subtitle}
+                    variant='body1'
+                >
+                    {subtitle ? subtitle : <>
+                        {subtitleProps.map((prop, index) => (
+                            <span className={classes.subtitleItem} key={index}>
+                                <span className={classes.dot}>•</span><span className={classes.subtitleKey}>{prop.key}:</span> {prop.value}
+                            </span>
+                        ))}
+                    </>}
 
-            </Typography>
-        </div>
+                </Typography>
+            </div>
+        </Wrapper>
     );
 }

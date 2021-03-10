@@ -13,8 +13,7 @@ import Router from 'next/router';
 import 'prismjs/themes/prism.css';
 import 'prismjs/themes/prism-okaidia.css';
 
-import { ErrorBoundry } from './components';
-import { ScreenLoader, Privacy } from '../../';
+import { ScreenLoader, Privacy, ErrorBoundary } from '../../';
 import { appSetup, semverGreaterThan, GAInit, GAPageView } from '../../../utils';
 import Config from '../../../config';
 
@@ -124,7 +123,7 @@ export default function Middleware(props) {
     if (!loading && !isLatestVersion) refreshCacheAndReload();
 
     return (
-        <ErrorBoundry>
+        <ErrorBoundary>
             <DefaultSeo
                 openGraph={{
                     type: 'website',
@@ -142,6 +141,6 @@ export default function Middleware(props) {
             {(loading || !loaded || (!loading && !isLatestVersion)) && <ScreenLoader />}
 
             {props.children}
-        </ErrorBoundry>
+        </ErrorBoundary>
     );
 }

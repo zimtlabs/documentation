@@ -10,6 +10,8 @@ import clsx from 'clsx';
 
 import Logo from '../../../../../public/assets/svg/logo.svg';
 
+import { Wrapper } from '../../';
+
 const useStyles = makeStyles(theme => ({
     '@keyframes flicker': {
         '0%': { opacity: 1 },
@@ -42,10 +44,12 @@ export default function ScreenLoader(props) {
     const classes = useStyles(props);
 
     return (
-        <div className={clsx(classes.root)}>
-            <Logo
-                className={classes.logo}
-            />
-        </div>
+        <Wrapper>
+            <div className={clsx(classes.root)}>
+                <Logo
+                    className={classes.logo}
+                />
+            </div>
+        </Wrapper>
     );
 }

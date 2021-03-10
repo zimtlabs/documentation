@@ -4,7 +4,7 @@ import { duration, useMediaQuery, SwipeableDrawer } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-import { List, Divider, Typography, useSidebarOpen, noSidebarRoutes } from '../../';
+import { List, Divider, Typography, useSidebarOpen, noSidebarRoutes, Wrapper } from '../../';
 import { StorageService } from '../../../services';
 
 import Menu from '../../../Menu';
@@ -125,40 +125,42 @@ export default function Sidebar(props) {
     const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
     return (
-        <SwipeableDrawer
-            open={open}
-            onClose={() => onClose()}
-            onOpen={() => { }}
-            variant={shouldBeOpen ? 'persistent' : 'temporary'}
-            anchor='left'
-            className={classes.root}
-            ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-            }}
-            transitionDuration={mobile || !shouldBeOpen ? { enter: duration.enteringScreen, exit: duration.leavingScreen } : 0}
-            disableBackdropTransition={!iOS}
-            disableDiscovery={iOS}
-        >
-            <div
-                className={classes.header}
-                style={{ height: up600 ? 64 : 56 }}
+        <Wrapper>
+            <SwipeableDrawer
+                open={open}
+                onClose={() => onClose()}
+                onOpen={() => { }}
+                variant={shouldBeOpen ? 'persistent' : 'temporary'}
+                anchor='left'
+                className={classes.root}
+                ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                }}
+                transitionDuration={mobile || !shouldBeOpen ? { enter: duration.enteringScreen, exit: duration.leavingScreen } : 0}
+                disableBackdropTransition={!iOS}
+                disableDiscovery={iOS}
             >
-                <Link href='/'>
-                    <a>
-                        <Typography
-                            variant='body1'
-                            style={{ color: theme.palette.text.primary, fontWeight: 600 }}
-                        >
-                            Documentation
-                        </Typography>
-                    </a>
-                </Link>
-            </div>
+                <div
+                    className={classes.header}
+                    style={{ height: up600 ? 64 : 56 }}
+                >
+                    <Link href='/'>
+                        <a>
+                            <Typography
+                                variant='body1'
+                                style={{ color: theme.palette.text.primary, fontWeight: 600 }}
+                            >
+                                Documentation
+                            </Typography>
+                        </a>
+                    </Link>
+                </div>
 
-            <Divider style={{ marginBottom: 24 }} />
+                <Divider style={{ marginBottom: 24 }} />
 
-            {renderNavItems({ pages: Menu, depth: 0 })}
+                {renderNavItems({ pages: Menu, depth: 0 })}
 
-        </SwipeableDrawer>
+            </SwipeableDrawer>
+        </Wrapper>
     );
 }

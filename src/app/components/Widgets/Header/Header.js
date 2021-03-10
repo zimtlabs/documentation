@@ -12,7 +12,7 @@ import IconThemeDark from '@material-ui/icons/Brightness4Outlined';
 
 import Logo from '../../../../../public/assets/svg/logo.svg';
 
-import { AppBar, Toolbar, IconButton, Typography, Breadcrumbs, useSidebarOpen, Tooltip } from '../../';
+import { AppBar, Toolbar, IconButton, Typography, Breadcrumbs, useSidebarOpen, Tooltip, Wrapper } from '../../';
 import { StorageService } from '../../../services';
 import { normalize, rgbToRGBA, DEFAULT_THEME } from '../../../utils';
 
@@ -168,15 +168,15 @@ export default function Header(props) {
                     </a>
                 </NLink>
             ) : (
-                    <Typography
-                        variant='body2'
-                        className={clsx(classes.link, classes.linkText)}
-                        key={index}
-                    >
-                        {!index && <HomeIcon className={classes.icon} />}
-                        {normalize(crumb.label)}
-                    </Typography>
-                ))}
+                <Typography
+                    variant='body2'
+                    className={clsx(classes.link, classes.linkText)}
+                    key={index}
+                >
+                    {!index && <HomeIcon className={classes.icon} />}
+                    {normalize(crumb.label)}
+                </Typography>
+            ))}
         </Breadcrumbs>
     );
 
@@ -185,51 +185,53 @@ export default function Header(props) {
     };
 
     return (
-        <div
-            className={classes.root}
-        >
-            <AppBar
-                className={clsx(classes.appBar, { [classes.appBarShift]: sidebarOpen, notTop: !!trigger })}
-                position='relative'
+        <Wrapper>
+            <div
+                className={classes.root}
             >
-                <Toolbar>
-                    {!sidebarOpen && (
-                        <IconButton
-                            edge='start'
-                            className={classes.menuButton}
-                            color='inherit'
-                            onClick={sidebarToggle}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                    )}
-                    <div className={classes.title}>
-                        <NLink href='/'>
-                            <a className={classes.logo}>
-                                <Logo />
-                            </a>
-                        </NLink>
-                    </div>
-
-                    <Tooltip
-                        title={`${normalize(userTheme)} theme`}
-                    >
-                        <span>
+                <AppBar
+                    className={clsx(classes.appBar, { [classes.appBarShift]: sidebarOpen, notTop: !!trigger })}
+                    position='relative'
+                >
+                    <Toolbar>
+                        {!sidebarOpen && (
                             <IconButton
-                                onClick={onThemeChange}
+                                edge='start'
+                                className={classes.menuButton}
                                 color='inherit'
-                                size='small'
+                                onClick={sidebarToggle}
                             >
-                                <Icon
-                                    className={classes.iconTheme}
-                                />
+                                <MenuIcon />
                             </IconButton>
-                        </span>
-                    </Tooltip>
-                </Toolbar>
-            </AppBar>
+                        )}
+                        <div className={classes.title}>
+                            <NLink href='/'>
+                                <a className={classes.logo}>
+                                    <Logo />
+                                </a>
+                            </NLink>
+                        </div>
 
-            {breadcrumbs}
-        </div>
+                        <Tooltip
+                            title={`${normalize(userTheme)} theme`}
+                        >
+                            <span>
+                                <IconButton
+                                    onClick={onThemeChange}
+                                    color='inherit'
+                                    size='small'
+                                >
+                                    <Icon
+                                        className={classes.iconTheme}
+                                    />
+                                </IconButton>
+                            </span>
+                        </Tooltip>
+                    </Toolbar>
+                </AppBar>
+
+                {breadcrumbs}
+            </div>
+        </Wrapper>
     );
 }
