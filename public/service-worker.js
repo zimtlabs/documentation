@@ -40,7 +40,7 @@ if (typeof importScripts === 'function') {
                         statuses: [0, 200]
                     }),
                     new workbox.expiration.ExpirationPlugin({
-                        maxEntries: 20,
+                        maxEntries: 1e4,
                         maxAgeSeconds: 3 * 24 * 60 * 60,
                     })
                 ]
