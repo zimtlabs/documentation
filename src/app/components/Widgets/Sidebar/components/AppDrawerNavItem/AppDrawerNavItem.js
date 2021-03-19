@@ -142,7 +142,6 @@ function AppDrawerNavItem(props) {
                             variant='text'
                             color='default'
                             fullWidth
-                            naked
                         >
                             {title}
                         </Button>
@@ -166,7 +165,6 @@ function AppDrawerNavItem(props) {
                     variant='text'
                     color='default'
                     fullWidth
-                    naked
                 >
                     {title}
                 </Button>

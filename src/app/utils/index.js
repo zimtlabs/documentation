@@ -115,17 +115,6 @@ export const getPublicFileUrl = (folders, file, name = null) => {
     return url;
 };
 
-export const appSetup = async () => {
-    try {
-        console.log('App setup start');
-
-        console.log('App is ready');
-    } catch (error) {
-        console.log('App setup failed: ', error);
-        throw error;
-    }
-};
-
 export const semverGreaterThan = (versionA, versionB) => {
     const versionsA = versionA.split(/\./g);
 
