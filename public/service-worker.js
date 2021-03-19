@@ -1,5 +1,5 @@
 if (typeof importScripts === 'function') {
-    importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.1.1/workbox-sw.js');
+    importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.1.2/workbox-sw.js');
 
     /* global workbox */
     if (workbox) {
@@ -19,33 +19,28 @@ if (typeof importScripts === 'function') {
             }
         });
 
-        workbox.routing.registerRoute(
-            ({ request }) => request.mode === 'navigate',
-            new workbox.strategies.NetworkFirst({
-                cacheName: 'pages',
-                plugins: [
-                    new workbox.cacheableResponse.CacheableResponsePlugin({
-                        statuses: [200],
-                    }),
-                ],
-            }),
-        );
+        // Recipes
 
-        workbox.routing.registerRoute(
-            new RegExp('.(?:png|gif|jpg|jpeg|webp|svg)$'),
-            new workbox.strategies.CacheFirst({
-                cacheName: 'images',
-                plugins: [
-                    new workbox.cacheableResponse.CacheableResponsePlugin({
-                        statuses: [0, 200]
-                    }),
-                    new workbox.expiration.ExpirationPlugin({
-                        maxEntries: 1e4,
-                        maxAgeSeconds: 3 * 24 * 60 * 60,
-                    })
-                ]
-            })
-        );
+        workbox.recipes.pageCache();
+
+        workbox.recipes.googleFontsCache();
+
+        workbox.recipes.staticResourceCache();
+
+        // Custom
+
+        // Plugins
+
+        const IgnoreQueryStringPlugin = {
+            cachedResponseWillBeUsed: async ({ cacheName, request, matchOptions, cachedResponse, event }) => {
+                if (cachedResponse) return cachedResponse;
+
+                // This will match same URL / different query string, where the original failed
+                return caches.match(request.url, { ignoreSearch: true });
+            },
+        };
+
+        // Documents (ZIMT)
 
         workbox.routing.registerRoute(
             ({ request, url }) => (
@@ -63,41 +58,31 @@ if (typeof importScripts === 'function') {
                         maxEntries: 1e4,
                         maxAgeSeconds: 3 * 24 * 60 * 60,
                     }),
+                    IgnoreQueryStringPlugin,
                 ],
             }),
         );
 
+        // Images (Other)
+
         workbox.routing.registerRoute(
-            ({ request }) => (
-                request.destination === 'style' ||
-                request.destination === 'script' ||
-                request.destination === 'worker'
-            ),
-            new workbox.strategies.StaleWhileRevalidate({
-                cacheName: 'assets',
+            new RegExp('.(?:png|gif|jpg|jpeg|webp|svg)$'),
+            new workbox.strategies.CacheFirst({
+                cacheName: 'images',
                 plugins: [
                     new workbox.cacheableResponse.CacheableResponsePlugin({
-                        statuses: [200],
+                        statuses: [0, 200]
                     }),
+                    new workbox.expiration.ExpirationPlugin({
+                        maxEntries: 1e4,
+                        maxAgeSeconds: 3 * 24 * 60 * 60,
+                    }),
+                    IgnoreQueryStringPlugin,
                 ],
-            }),
-        );
-
-        workbox.routing.registerRoute(
-            /index\.html/,
-            new workbox.strategies.NetworkFirst({
-                cacheName: 'html',
-            })
-        );
-
-        workbox.routing.registerRoute(
-            new RegExp('/_next/static/'),
-            new workbox.strategies.StaleWhileRevalidate({
-                cacheName: 'static-caches',
             })
         );
 
     } else {
-        // console.log('Workbox could not be loaded. No Offline support');
+        console.log('Workbox could not be loaded. No Offline support.');
     }
 }

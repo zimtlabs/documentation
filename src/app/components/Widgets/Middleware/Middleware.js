@@ -10,6 +10,9 @@ import * as Sentry from '@sentry/browser';
 import Router from 'next/router';
 import { DefaultSeo } from 'next-seo';
 
+import 'prismjs/themes/prism.css';
+import 'prismjs/themes/prism-okaidia.css';
+
 import { ScreenLoader, Privacy, ErrorBoundary } from '../../';
 import { appSetup, GAInit, GAPageView, semverGreaterThan, getMeta } from '../../../utils';
 import Config from '../../../config';

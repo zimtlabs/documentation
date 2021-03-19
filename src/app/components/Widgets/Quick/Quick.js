@@ -86,6 +86,7 @@ export default function Quick(props) {
                     )}
                     {props.title}
                 </Typography>
+
                 <div className={classes.content}>
                     {props.content.map((item, index) => (
                         <React.Fragment key={index}>
@@ -93,6 +94,7 @@ export default function Quick(props) {
                         </React.Fragment>
                     ))}
                 </div>
+
                 <Link href={props.to}>
                     <a
                         style={{ marginTop: 8, alignSelf: 'flex-start' }}
@@ -103,7 +105,7 @@ export default function Quick(props) {
                             align='flex-start'
                         >
                             Read the docs
-                    </Button>
+                        </Button>
                     </a>
                 </Link>
             </div>

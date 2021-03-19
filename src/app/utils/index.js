@@ -119,14 +119,6 @@ export const appSetup = async () => {
     try {
         console.log('App setup start');
 
-        console.log('Removing stale cache');
-        if (window && window.caches) {
-            const names = await window.caches.keys();
-            for (const name of names) {
-                if (name.indexOf('document') > -1) await window.caches.delete(name);
-            }
-        }
-
         console.log('App is ready');
     } catch (error) {
         console.log('App setup failed: ', error);
