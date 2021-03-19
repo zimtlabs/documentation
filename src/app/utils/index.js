@@ -149,3 +149,19 @@ export const semverGreaterThan = (versionA, versionB) => {
     }
     return false;
 };
+
+export const getMeta = async () => {
+    try {
+        const headers = new Headers();
+
+        headers.append('pragma', 'no-cache');
+        headers.append('cache-control', 'no-store');
+
+        let meta = await fetch('/meta.json', { headers });
+        meta = await meta.json();
+
+        return meta;
+    } catch (error) {
+        console.log(error);
+    }
+};

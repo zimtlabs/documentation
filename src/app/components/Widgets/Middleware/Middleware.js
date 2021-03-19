@@ -11,7 +11,6 @@ import Router from 'next/router';
 import { DefaultSeo } from 'next-seo';
 
 import { ScreenLoader, Privacy, ErrorBoundary } from '../../';
-import { SocketsService, ZIMTService } from '../../../services';
 import { appSetup, GAInit, GAPageView, semverGreaterThan, getMeta } from '../../../utils';
 import Config from '../../../config';
 
@@ -66,11 +65,6 @@ export default function Middleware(props) {
         }
 
         await appSetup();
-
-        await ZIMTService.ready();
-
-        // Connect to web socket server
-        await SocketsService.setup();
 
         setLoaded(true);
     };
