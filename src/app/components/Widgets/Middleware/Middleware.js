@@ -4,27 +4,28 @@
  * Proprietary and confidential
  * Contact: tech@zimt.co
  */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { CssBaseline } from '@material-ui/core';
 import * as Sentry from '@sentry/browser';
-import { DefaultSeo } from 'next-seo';
 import Router from 'next/router';
-
-import 'prismjs/themes/prism.css';
-import 'prismjs/themes/prism-okaidia.css';
+import { DefaultSeo } from 'next-seo';
 
 import { ScreenLoader, Privacy, ErrorBoundary } from '../../';
-import { appSetup, semverGreaterThan, GAInit, GAPageView } from '../../../utils';
+import { SocketsService, ZIMTService } from '../../../services';
+import { appSetup, GAInit, GAPageView, semverGreaterThan, getMeta } from '../../../utils';
 import Config from '../../../config';
 
 import pkg from '../../../../../package.json';
 
 global.appVersion = pkg.version;
 
+let interval;
+
 export default function Middleware(props) {
     const [loading, setLoading] = useState(true);
     const [isLatestVersion, setIsLatestVersion] = useState(false);
     const [loaded, setLoaded] = useState(false);
+    const meta = useRef();
 
     useEffect(() => {
         init();
@@ -32,7 +33,7 @@ export default function Middleware(props) {
 
     useEffect(() => {
         if (isLatestVersion && !loaded) initApp();
-    }, [isLatestVersion]);
+    }, [isLatestVersion, loaded]);
 
     const track = () => {
         GAInit();
@@ -66,6 +67,11 @@ export default function Middleware(props) {
 
         await appSetup();
 
+        await ZIMTService.ready();
+
+        // Connect to web socket server
+        await SocketsService.setup();
+
         setLoaded(true);
     };
 
@@ -83,36 +89,47 @@ export default function Middleware(props) {
         window.location.reload();
     };
 
-    const init = () => {
-        const headers = new Headers();
+    const checkMeta = _meta => {
+        if (!_meta || !window.navigator.onLine) {
+            setIsLatestVersion(true);
+        }
+        else {
+            const latestVersion = _meta.version;
+            const currentVersion = global.appVersion;
+            const shouldForceRefresh = semverGreaterThan(latestVersion, currentVersion);
 
-        headers.append('pragma', 'no-cache');
-        headers.append('cache-control', 'no-store');
+            console.log(`Meta.json new: ${latestVersion} current: ${currentVersion} should refresh: ${shouldForceRefresh}`);
 
-        fetch('/meta.json', { headers })
-            .then(res => res.json())
-            .then(async meta => {
-                console.log('Meta.json: ', meta);
+            if (shouldForceRefresh) {
+                console.log(`We have a new version - ${latestVersion}. Should force refresh.`);
+                setIsLatestVersion(false);
+            } else {
+                console.log(`You already have the latest version - ${latestVersion}. No cache refresh needed.`);
+                setIsLatestVersion(true);
+            }
 
-                // Wait for spam
-                if (!meta) await wait(1500);
+            clearInterval(interval);
+        }
 
-                const latestVersion = meta.version;
-                const currentVersion = global.appVersion;
-                const shouldForceRefresh = semverGreaterThan(latestVersion, currentVersion);
+        setLoading(false);
+    };
 
-                console.log(`Meta.json new: ${latestVersion} current: ${currentVersion} should refresh: ${shouldForceRefresh}`);
+    const init = async () => {
+        const _meta = await getMeta();
 
-                if (shouldForceRefresh) {
-                    console.log(`We have a new version - ${latestVersion}. Should force refresh.`);
-                    setIsLatestVersion(false);
-                } else {
-                    console.log(`You already have the latest version - ${latestVersion}. No cache refresh needed.`);
-                    setIsLatestVersion(true);
-                }
+        meta.current = _meta;
 
-                setLoading(false);
-            });
+        checkMeta(_meta);
+
+        if (!_meta) {
+            console.log('No meta: ', _meta);
+
+            interval = setInterval(async () => {
+                meta.current = await getMeta();
+
+                checkMeta(meta.current);
+            }, 1500);
+        }
     };
 
     const onPrivacySuccess = () => {
