@@ -198,7 +198,7 @@
           },
           "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
           "receipt": {
-            "received_at": 1579967810000
+            "received_at": 1579967810
           }
         },
         "meta": {
@@ -230,7 +230,7 @@
           },
           "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
           "receipt": {
-            "received_at": 1579967810000
+            "received_at": 1579967810
           }
         }],
         "meta": {

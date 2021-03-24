@@ -75,7 +75,7 @@ or
   "receipt": {
     "object_hash": "0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5",
     "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
-    "received_at": 1579278115000,
+    "received_at": 1579278115,
     "organization": "0x123..."
   }
 }
@@ -109,7 +109,7 @@ or
       },
       "signature": "0xe633051fc76ae...",
       "receipt": {
-        "received_at": 1579278115000
+        "received_at": 1579278110
       },
       "data": {
           "name": "New name"
@@ -143,7 +143,7 @@ const result = await sdk.assets.getMany(Pagination, Asset options);
       },
       "signature": "0xe633051fc76ae...",
       "receipt": {
-        "received_at": 1579278115000
+        "received_at": 1579278110
       },
       "data": {
           "name": "Asset name"
@@ -183,7 +183,7 @@ const result = await sdk.assets.getManyEmpty(Pagination);
       },
       "signature": "0xe633051fc76ae...",
       "receipt": {
-        "received_at": 1579278115000
+        "received_at": 1579278110
       }
     }
   ],
@@ -236,7 +236,7 @@ const result = await sdk.assets.search(Query, Asset options);
       },
       "signature": "0xe633051fc76ae...",
       "receipt": {
-        "received_at": 1579278115000
+        "received_at": 1579278110
       }
     }
   ],
@@ -289,7 +289,7 @@ const result = await sdk.assets.searchEvents(Query, Asset options);
       },
       "signature": "0xe633051fc76ae...",
       "receipt": {
-        "received_at": 1579278115000
+        "received_at": 1579278110
       }
     }
   ],
@@ -325,7 +325,7 @@ const result = await sdk.assets.get(id, Asset options);
       },
       "signature": "0xe633051fc76ae...",
       "receipt": {
-        "received_at": 1579278115000
+        "received_at": 1579278110
       },
       "data": {
           "name": "Asset name"

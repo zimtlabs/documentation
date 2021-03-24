@@ -85,7 +85,7 @@ const result = await sdk.events.createEvent(Event object);
   "receipt": {
     "object_hash": "0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5",
     "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
-    "received_at": 1579278115000,
+    "received_at": 1579278115,
     "organization": "0x123..."
   }
 }
@@ -118,7 +118,7 @@ const result = await sdk.events.getEvents(asset_id: string, Pagination);
       },
       "signature": "0xe633051fc76ae...",
       "receipt": {
-        "received_at": 1579278115000
+        "received_at": 1579278110
       }
     }
   ],
@@ -175,7 +175,7 @@ const result = await sdk.events.searchEvents(asset_id: string, Query);
       },
       "signature": "0xe633051fc76ae...",
       "receipt": {
-        "received_at": 1579278115000
+        "received_at": 1579278110
       }
     }
   ],
@@ -217,7 +217,7 @@ const result = await sdk.events.getEvent(asset_id: string, event_id: string);
     },
     "signature": "0xe633051fc76ae...",
     "receipt": {
-      "received_at": 1579278115000
+      "received_at": 1579278110
     }
   },
   "meta": {

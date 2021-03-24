@@ -11,7 +11,7 @@ Generates a token for authentication.
 | Name | Description | Type | Default | Example
 |:-----|:------------|:-----|:--------|:-------
 | Private key | Private key | string | Account's private key | '0x123...'
-| Timstamp | Unix date as length of token validity | number | Timestamp 3 days from now | 1581867002042
+| Timstamp | Unix date as length of token validity | number | Timestamp 3 days from now | 1581867002
 
 ```javascript
 const result = sdk.hub.getToken(private key: string, timestamp: number (Date as unix));

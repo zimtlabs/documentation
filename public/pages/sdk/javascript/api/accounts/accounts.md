@@ -30,7 +30,7 @@ const result = await sdk.accounts.getMany(Pagination);
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -87,7 +87,7 @@ const result = await sdk.accounts.search(Query);
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -130,7 +130,7 @@ const result = await sdk.accounts.get(id);
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -170,7 +170,7 @@ const result = await sdk.accounts.me();
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -214,7 +214,7 @@ const result = await sdk.accounts.update(id, Account data);
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -286,7 +286,7 @@ const result = await sdk.accounts.getOrganizations({ email: string });
         }
       },
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
