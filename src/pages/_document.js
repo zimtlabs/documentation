@@ -14,7 +14,7 @@ export default class CustomDocument extends Document {
                     <meta httpEquiv="cache-control" content="no-cache, no-store, must-revalidate" />
 
                     <link rel='preconnect' href='https://fonts.gstatic.com' />
-                    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Roboto+Mono&family=Zilla+Slab:wght@400;700&display=auto' rel='stylesheet' />
+                    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto+Mono&family=Zilla+Slab:wght@400;700&display=auto' rel='stylesheet' />
 
                     <link rel='manifest' href='/manifest.json' />
 
