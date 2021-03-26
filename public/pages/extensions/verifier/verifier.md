@@ -37,7 +37,8 @@ If you are a developer, and you want to utilize ZIMT Verifier, as additional fun
 3. If object already has bundles attached in the key `object.bundles`, extension will use that information and resolve all the verification details.
 4. If object doesn't have bundles attached, extension will fetch all bundles from `object.proof_locations`.
     - By default, extension will fetch a bundle from ZIMT API.
-    - If bundles are stored in your own server, you can provide extension with a bundle url (it has to be public, GET endpoint). You can specify this settings information, by saving to your session storage an item with a key `ZIMT__extension_verifier_settings`, and value a stringified JSON settings object, ie.:
+    - If bundles are stored in your own server, you can provide extension with a bundle url (it has to be public, GET endpoint).
+5. You can specify this settings information, by saving to your session storage an item with a key `ZIMT__extension_verifier_settings`, and value a stringified JSON settings object, ie.:
 ```js
     const settings = {
         bundle: {
@@ -53,8 +54,8 @@ If you are a developer, and you want to utilize ZIMT Verifier, as additional fun
 ```js
     window.sessionStorage.setItem('ZIMT__extension_verifier_settings', JSON.stringify(settings));
 ```
-5. Once user leaves the page, but still using same tab (same session), you can delete items above from session storage, so if they reopen the extension they don't keep seeing verification result of the object from the previous page.
-6. Here are 2 screenshots of how it looks in practice:
+6. Once user leaves the page, but still using same tab (same session), you can delete items above from session storage, so if they reopen the extension they don't keep seeing verification result of the object from the previous page.
+7. Here are 2 screenshots of how it looks in practice:
 
 ##### No object found to verify
 ![No object](/pages/extensions/assets/images/no-object.png)
