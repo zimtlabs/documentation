@@ -49,6 +49,16 @@ const Menu = [
         ],
     },
     {
+        title: 'Extensions',
+        pathname: '/extensions',
+        children: [
+            {
+                title: 'Verifier',
+                pathname: '/extensions/verifier'
+            },
+        ],
+    },
+    {
         title: 'Tutorials',
         pathname: '/tutorials',
         children: [
