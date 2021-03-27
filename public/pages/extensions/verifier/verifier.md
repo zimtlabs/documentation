@@ -33,7 +33,7 @@ If you are a developer, and you want to utilize ZIMT Verifier, as additional fun
 ```js
     window.sessionStorage.setItem('ZIMT__extension_verifier_object', JSON.stringify(object));
 ```
-2. Extension will use this object to proceed with verificaction.
+2. Extension will use this object to proceed with verification.
 3. If object already has bundles attached in the key `object.bundles`, extension will use that information and resolve all the verification details.
 4. If object doesn't have bundles attached, extension will fetch all bundles from `object.proof_locations`.
     - By default, extension will fetch a bundle from ZIMT API.
