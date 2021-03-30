@@ -5,7 +5,7 @@ import { Collapse } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-import { ListItem, Button, noSidebarRoutes } from '../../../../';
+import { ListItem, Button, noSidebarRoutes, Wrapper } from '../../../../';
 import { StorageService } from '../../../../../services';
 import { copy } from '../../../../../utils';
 
@@ -142,7 +142,6 @@ function AppDrawerNavItem(props) {
                             variant='text'
                             color='default'
                             fullWidth
-                            naked
                         >
                             {title}
                         </Button>
@@ -153,27 +152,28 @@ function AppDrawerNavItem(props) {
     }
 
     return (
-        <ListItem
-            className={classes.item}
-            disableGutters
-            {...other}
-        >
-            <Button
-                style={style}
-                className={clsx(classes.text, classes.buttonText, `depth-${depth}`)}
-                onClick={handleClick}
-                variant='text'
-                color='default'
-                fullWidth
-                naked
+        <Wrapper>
+            <ListItem
+                className={classes.item}
+                disableGutters
+                {...other}
             >
-                {title}
-            </Button>
+                <Button
+                    style={style}
+                    className={clsx(classes.text, classes.buttonText, `depth-${depth}`)}
+                    onClick={handleClick}
+                    variant='text'
+                    color='default'
+                    fullWidth
+                >
+                    {title}
+                </Button>
 
-            <Collapse in={open} timeout='auto' unmountOnExit>
-                {children}
-            </Collapse>
-        </ListItem>
+                <Collapse in={open} timeout='auto' unmountOnExit>
+                    {children}
+                </Collapse>
+            </ListItem>
+        </Wrapper>
     );
 }
 

@@ -22,6 +22,7 @@ const result = await sdk.analytics.getManyAnalytics(Body: { collection, organiza
       "organization": "0x123...",
       "value": 4,
       "date": "2020-07-24",
+      "created_at": 1234567890,
       "resolved": true
     }
   ],
@@ -51,6 +52,7 @@ const result = await sdk.analytics.getOneAnalytic({ collection, organization, ty
      "organization": "0x123...",
      "value": 4,
      "date": "2020-07-24",
+     "created_at": 1234567890,
      "resolved": true
   },
   "meta": {

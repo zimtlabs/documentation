@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import Link from 'next/link';
 
-import { Typography, Icon, CodeSnippet, Button } from '../../';
+import { Typography, Icon, CodeSnippet, Button, Wrapper } from '../../';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -67,44 +67,48 @@ export default function Quick(props) {
     };
 
     return (
-        <div
-            className={classes.root}
-        >
-            <Typography
-                variant='h5'
-                className={classes.title}
+        <Wrapper>
+            <div
+                className={classes.root}
             >
-                {props.titleIcon && (
-                    <Icon
-                        color='primary'
-                        fontSize='large'
-                        className={classes.titleIcon}
-                    >
-                        {props.titleIcon}
-                    </Icon>
-                )}
-                {props.title}
-            </Typography>
-            <div className={classes.content}>
-                {props.content.map((item, index) => (
-                    <React.Fragment key={index}>
-                        {getItem(item)}
-                    </React.Fragment>
-                ))}
-            </div>
-            <Link href={props.to}>
-                <a
-                    style={{ marginTop: 8, alignSelf: 'flex-start' }}
+                <Typography
+                    variant='h5'
+                    className={classes.title}
                 >
-                    <Button
-                        variant='text'
-                        color='default'
-                        align='flex-start'
+                    {props.titleIcon && (
+                        <Icon
+                            color='primary'
+                            fontSize='large'
+                            className={classes.titleIcon}
+                        >
+                            {props.titleIcon}
+                        </Icon>
+                    )}
+                    {props.title}
+                </Typography>
+
+                <div className={classes.content}>
+                    {props.content.map((item, index) => (
+                        <React.Fragment key={index}>
+                            {getItem(item)}
+                        </React.Fragment>
+                    ))}
+                </div>
+
+                <Link href={props.to}>
+                    <a
+                        style={{ marginTop: 8, alignSelf: 'flex-start' }}
                     >
-                        Read the docs
-                    </Button>
-                </a>
-            </Link>
-        </div>
+                        <Button
+                            variant='text'
+                            color='default'
+                            align='flex-start'
+                        >
+                            Read the docs
+                        </Button>
+                    </a>
+                </Link>
+            </div>
+        </Wrapper>
     );
 }

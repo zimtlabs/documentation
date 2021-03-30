@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { Typography, FormGroup, FormControl, InputLabel, Select, MenuItem } from '../../../../';
+import { Typography, FormGroup, FormControl, InputLabel, Select, MenuItem, Wrapper } from '../../../../';
 import { StorageService } from '../../../../../services';
 import { DEFAULT_THEME, FONT_FAMILY } from '../../../../../utils';
 
@@ -44,44 +44,46 @@ function SidebarMenu() {
     };
 
     return (
-        <div
-            className={classes.root}
-        >
-            <Typography
-                variant='body1'
-                className={classes.title}
+        <Wrapper>
+            <div
+                className={classes.root}
             >
-                Settings
-            </Typography>
-
-            {/* Menu */}
-            <FormGroup>
-                <FormControl
-                    variant='outlined'
-                    className={classes.formControl}
+                <Typography
+                    variant='body1'
+                    className={classes.title}
                 >
-                    <InputLabel>
-                        Theme *
-                    </InputLabel>
-                    <Select
-                        name='type'
+                    Settings
+                </Typography>
+
+                {/* Menu */}
+                <FormGroup>
+                    <FormControl
                         variant='outlined'
-                        value={userTheme || ''}
-                        onChange={onThemeChange}
-                        labelWidth={54}
+                        className={classes.formControl}
                     >
-                        {THEME_MODE_OPTIONS.map((item, i) => (
-                            <MenuItem
-                                value={item.value}
-                                key={i}
-                            >
-                                {item.label}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-            </FormGroup>
-        </div>
+                        <InputLabel>
+                            Theme *
+                        </InputLabel>
+                        <Select
+                            name='type'
+                            variant='outlined'
+                            value={userTheme || ''}
+                            onChange={onThemeChange}
+                            labelWidth={54}
+                        >
+                            {THEME_MODE_OPTIONS.map((item, i) => (
+                                <MenuItem
+                                    value={item.value}
+                                    key={i}
+                                >
+                                    {item.label}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </FormGroup>
+            </div>
+        </Wrapper>
     );
 }
 

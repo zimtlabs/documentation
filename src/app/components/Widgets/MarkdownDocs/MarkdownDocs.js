@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 
-import { MarkdownElement, Button } from '../../';
+import { MarkdownElement, Button, Wrapper } from '../../';
 import { getMarkdownContents, getGithubFileURL } from '../../../utils';
 
 const useStyles = makeStyles(theme => ({
@@ -39,34 +39,36 @@ export default function MarkdownDocs(props) {
     titles.foldersString = titles.folders.reduce((url, folder) => url += `/${folder}`, '');
 
     return (
-        <div
-            className={classes.root}
-        >
-            <div className={classes.header}>
-                <Button
-                    variant='text'
-                    color='default'
-                    component='a'
-                    target='_blank'
-                    rel='noopener nofollow'
-                    href={getGithubFileURL(titles.folders, titles.file)}
-                    className={classes.button}
-                >
-                    EDIT THIS PAGE
-                </Button>
-            </div>
-
+        <Wrapper>
             <div
-                className={classes.content}
+                className={classes.root}
             >
-                {getMarkdownContents(markdown).map((value, index) => (
-                    <MarkdownElement
-                        key={index}
-                        text={value}
-                        titles={titles}
-                    />
-                ))}
+                <div className={classes.header}>
+                    <Button
+                        variant='text'
+                        color='default'
+                        component='a'
+                        target='_blank'
+                        rel='noopener nofollow'
+                        href={getGithubFileURL(titles.folders, titles.file)}
+                        className={classes.button}
+                    >
+                        EDIT THIS PAGE
+                    </Button>
+                </div>
+
+                <div
+                    className={classes.content}
+                >
+                    {getMarkdownContents(markdown).map((value, index) => (
+                        <MarkdownElement
+                            key={index}
+                            text={value}
+                            titles={titles}
+                        />
+                    ))}
+                </div>
             </div>
-        </div>
+        </Wrapper>
     );
 }

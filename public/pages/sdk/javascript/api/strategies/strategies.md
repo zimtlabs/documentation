@@ -78,7 +78,7 @@ const result = await sdk.strategies.create(Strategy object);
     "object_hash": "0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5",
     "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
     "uploader_address": "0x911b3c5090B25b3a63120CF0218750886e37A969",
-    "received_at": 1579278115000,
+    "received_at": 1579278115,
     "organization": "0x123..."
   }
 }
@@ -118,7 +118,7 @@ const result = await sdk.strategies.getMany(Pagination);
         }
       },
       "receipt": {
-        "received_at": 1583935613732,
+        "received_at": 1583935613,
         "uploader_address": "0x01cd343654000255761Eca17e5178cc803749A13"
       }
     }
@@ -168,7 +168,7 @@ const result = await sdk.strategies.get(id);
       }
     },
     "receipt": {
-      "received_at": 1583935613732,
+      "received_at": 1583935613,
       "uploader_address": "0x01cd343654000255761Eca17e5178cc803749A13"
     }
   },

@@ -36,7 +36,7 @@ const result = await sdk.organizations.getMany(Pagination);
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -99,7 +99,7 @@ const result = await sdk.organizations.search(Query);
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -148,7 +148,7 @@ const result = await sdk.organizations.get(id);
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -181,7 +181,7 @@ const result = await sdk.organizations.getOrganizationPublicDetails(Options);
       }
     },
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -224,7 +224,7 @@ const result = await sdk.organizations.me();
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -274,7 +274,7 @@ const result = await sdk.organizations.update(id, Organization data);
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -321,7 +321,7 @@ const result = await sdk.organizations.planUpdate(id, plan_id);
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -376,7 +376,7 @@ const result = await sdk.organizations.create(Request data);
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -415,7 +415,7 @@ const result = await sdk.organizations.searchOrganizationAccountsPublic(organiza
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -464,7 +464,7 @@ const result = await sdk.organizations.searchOrganizationTeamsPublic(organizatio
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -499,7 +499,7 @@ const result = await sdk.organizations.searchPublic(Query);
         "name": "My organization"
       },
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -544,7 +544,7 @@ const result = await sdk.organizations.getOrganizationCollectionObjects(organiza
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -588,7 +588,7 @@ const result = await sdk.organizations.getOrganizationCollectionObject(organizat
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -627,7 +627,7 @@ const result = await sdk.organizations.searchOrganizationCollectionObjects(organ
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -688,7 +688,7 @@ const result = await sdk.organizations.createOrganizationAccount(organization_id
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -727,7 +727,7 @@ const result = await sdk.organizations.publicSignup(organization_id: string, Acc
   "receipt": {
     "object_hash": "0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5",
     "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
-    "received_at": 1579278115000,
+    "received_at": 15792781150
     "organization": "0x123..."
   }
 }
@@ -761,7 +761,7 @@ const result = await sdk.organizations.getManyOrganizationApps(Organization ID, 
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -805,7 +805,7 @@ const result = await sdk.organizations.searchOrganizationApps(Organization ID, Q
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -849,7 +849,7 @@ const result = await sdk.organizations.getManyActiveOrganizationApps(Organizatio
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -893,7 +893,7 @@ const result = await sdk.organizations.searchActiveOrganizationApps(Organization
       },
       "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
-        "received_at": 1579967810000
+        "received_at": 1579967810
       }
     }
   ],
@@ -936,7 +936,7 @@ const result = await sdk.organizations.getActiveOrganizationApp(Organization ID,
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -973,7 +973,7 @@ const result = await sdk.organizations.getOrganizationApp(Organization ID, Organ
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -1010,7 +1010,7 @@ const result = await sdk.organizations.updateOrganizationApp(Organization ID, Or
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -1110,7 +1110,7 @@ const result = await sdk.organizations.budget(Organization ID);
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {
@@ -1149,7 +1149,7 @@ const result = await sdk.organizations.credit(Organization ID);
     },
     "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810000
+      "received_at": 1579967810
     }
   },
   "meta": {

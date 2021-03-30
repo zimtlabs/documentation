@@ -4,47 +4,44 @@
  * Proprietary and confidential
  * Contact: tech@zimt.co
  */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { CssBaseline } from '@material-ui/core';
 import * as Sentry from '@sentry/browser';
-import { DefaultSeo } from 'next-seo';
 import Router from 'next/router';
+import { DefaultSeo } from 'next-seo';
 
 import 'prismjs/themes/prism.css';
 import 'prismjs/themes/prism-okaidia.css';
 
-import { ErrorBoundry } from './components';
-import { ScreenLoader, Privacy } from '../../';
-import { appSetup, semverGreaterThan, GAInit, GAPageView } from '../../../utils';
+import { ScreenLoader, Privacy, ErrorBoundary } from '../../';
+import { GAInit, GAPageView, semverGreaterThan, getMeta } from '../../../utils';
 import Config from '../../../config';
 
 import pkg from '../../../../../package.json';
 
 global.appVersion = pkg.version;
 
+let interval;
+export let setLoader;
+
 export default function Middleware(props) {
-    const [loading, setLoading] = useState(true);
-    const [isLatestVersion, setIsLatestVersion] = useState(false);
-    const [loaded, setLoaded] = useState(false);
+    const [loaded, setLoaded] = useState();
+    const [loading, setLoading] = useState();
+    const [isLatestVersion, setIsLatestVersion] = useState();
+    const meta = useRef();
+
+    setLoader = setLoading;
 
     useEffect(() => {
         init();
     }, []);
 
     useEffect(() => {
-        if (isLatestVersion && !loaded) initApp();
+        if (isLatestVersion === false) refreshCacheAndReload();
+        // eslint-disable-next-line
     }, [isLatestVersion]);
 
-    const track = () => {
-        GAInit();
-
-        Router.events.on('routeChangeComplete', GAPageView);
-
-        GAPageView();
-        // recordVisitor();
-    };
-
-    const initApp = async () => {
+    const init = async () => {
         // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side');
         if (jssStyles) jssStyles.parentElement.removeChild(jssStyles);
@@ -59,61 +56,76 @@ export default function Middleware(props) {
         // Service worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
-                navigator.serviceWorker.register('/sw.js', { scope: '/' })
-                    .then(registration => console.log('SW registered: ', registration))
-                    .catch(error => console.log('SW registration failed: ', error));
+                navigator.serviceWorker.register('/service-worker.js', { scope: '/' })
+                    .then(registration => console.log('Service worker registered: ', registration))
+                    .catch(error => console.log('Service worker registration failed: ', error));
             });
         }
 
-        await appSetup();
-
         setLoaded(true);
+
+        // Check version + reload if is old app version
+        checkVersion();
+    };
+
+    const track = () => {
+        GAInit();
+
+        Router.events.on('routeChangeComplete', GAPageView);
+
+        GAPageView();
     };
 
     const refreshCacheAndReload = () => {
         console.log('Clearing cache and hard reloading...');
 
         if (caches) {
-            // Service worker cache should be cleared with caches.delete()
-            caches.keys().then(function (names) {
+            caches.keys().then(names => {
                 for (let name of names) caches.delete(name);
             });
         }
 
-        // Delete browser cache and hard reload
+        // Delete browser cache + hard reload
         window.location.reload();
     };
 
-    const init = () => {
-        const headers = new Headers();
+    const checkVersion = async () => {
+        const _meta = await getMeta();
 
-        headers.append('pragma', 'no-cache');
-        headers.append('cache-control', 'no-store');
+        meta.current = _meta;
 
-        fetch('/meta.json', { headers })
-            .then(res => res.json())
-            .then(async meta => {
-                console.log('Meta.json: ', meta);
+        checkMeta(_meta);
 
-                // Wait for spam
-                if (!meta) await wait(1500);
+        if (!_meta) {
+            console.log('No meta: ', _meta);
 
-                const latestVersion = meta.version;
-                const currentVersion = global.appVersion;
-                const shouldForceRefresh = semverGreaterThan(latestVersion, currentVersion);
+            interval = setInterval(async () => {
+                meta.current = await getMeta();
 
-                console.log(`Meta.json new: ${latestVersion} current: ${currentVersion} should refresh: ${shouldForceRefresh}`);
+                checkMeta(meta.current);
+            }, 1500);
+        }
+    };
 
-                if (shouldForceRefresh) {
-                    console.log(`We have a new version - ${latestVersion}. Should force refresh.`);
-                    setIsLatestVersion(false);
-                } else {
-                    console.log(`You already have the latest version - ${latestVersion}. No cache refresh needed.`);
-                    setIsLatestVersion(true);
-                }
+    const checkMeta = _meta => {
+        if (!_meta || !window.navigator.onLine) setIsLatestVersion(true);
+        else {
+            const latestVersion = _meta.version;
+            const currentVersion = global.appVersion;
+            const shouldForceRefresh = semverGreaterThan(latestVersion, currentVersion);
 
-                setLoading(false);
-            });
+            console.log(`Meta.json new: ${latestVersion} current: ${currentVersion} should refresh: ${shouldForceRefresh}`);
+
+            if (shouldForceRefresh) {
+                console.log(`We have a new version - ${latestVersion}. Should force refresh.`);
+                setIsLatestVersion(false);
+            } else {
+                console.log(`You already have the latest version - ${latestVersion}. No cache refresh needed.`);
+                setIsLatestVersion(true);
+            }
+
+            clearInterval(interval);
+        }
     };
 
     const onPrivacySuccess = () => {
@@ -121,10 +133,8 @@ export default function Middleware(props) {
         track();
     };
 
-    if (!loading && !isLatestVersion) refreshCacheAndReload();
-
     return (
-        <ErrorBoundry>
+        <ErrorBoundary>
             <DefaultSeo
                 openGraph={{
                     type: 'website',
@@ -139,9 +149,9 @@ export default function Middleware(props) {
                 onSuccess={onPrivacySuccess}
             />
 
-            {(loading || !loaded || (!loading && !isLatestVersion)) && <ScreenLoader />}
+            {(!loaded || loading) && <ScreenLoader />}
 
             {props.children}
-        </ErrorBoundry>
+        </ErrorBoundary>
     );
 }

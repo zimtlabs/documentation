@@ -12,7 +12,7 @@ import IconThemeDark from '@material-ui/icons/Brightness4Outlined';
 
 import Logo from '../../../../../public/assets/svg/logo.svg';
 
-import { AppBar, Toolbar, IconButton, Typography, Breadcrumbs, useSidebarOpen, Tooltip } from '../../';
+import { AppBar, Toolbar, IconButton, Typography, Breadcrumbs, useSidebarOpen, Tooltip, Wrapper } from '../../';
 import { StorageService } from '../../../services';
 import { normalize, rgbToRGBA, DEFAULT_THEME } from '../../../utils';
 
@@ -62,12 +62,11 @@ const useStyles = makeStyles(theme => ({
     },
     appBar: {
         color: '#fff',
-        'box-shadow': 'none',
-        'backdrop-filter': 'blur(15px)',
+        boxShadow: 'none',
         transition: 'background-color .2s, box-shadow .2s',
 
         '&.notTop': {
-            'background-color': rgbToRGBA(theme.palette.primary[theme.palette.type === 'dark' ? 'dark' : 'main'], 84),
+            backgroundColor: rgbToRGBA(theme.palette.primary[theme.palette.type === 'dark' ? 'dark' : 'main'], 98),
         },
     },
     appBarShift: {
@@ -80,16 +79,14 @@ const useStyles = makeStyles(theme => ({
     },
     breadcrumbs: {
         borderBottom: 'none',
-        'backdrop-filter': 'blur(15px)',
-        transition: 'background-color .2s, box-shadow .2s',
 
         '& li:last-child': {
             paddingRight: 24,
         },
 
         '&.notTop': {
-            'box-shadow': '0px -1px 7px rgba(0, 0, 0, 0.1)',
-            'background-color': rgbToRGBA(theme.palette.background.secondary, 84),
+            boxShadow: '0px -1px 7px rgba(0, 0, 0, 0.1)',
+            backgroundColor: rgbToRGBA(theme.palette.background.secondary, 98),
         },
     },
     breadcrumbsShift: {
@@ -171,15 +168,15 @@ export default function Header(props) {
                     </a>
                 </NLink>
             ) : (
-                    <Typography
-                        variant='body2'
-                        className={clsx(classes.link, classes.linkText)}
-                        key={index}
-                    >
-                        {!index && <HomeIcon className={classes.icon} />}
-                        {normalize(crumb.label)}
-                    </Typography>
-                ))}
+                <Typography
+                    variant='body2'
+                    className={clsx(classes.link, classes.linkText)}
+                    key={index}
+                >
+                    {!index && <HomeIcon className={classes.icon} />}
+                    {normalize(crumb.label)}
+                </Typography>
+            ))}
         </Breadcrumbs>
     );
 
@@ -188,50 +185,53 @@ export default function Header(props) {
     };
 
     return (
-        <div
-            className={classes.root}
-        >
-            <AppBar
-                className={clsx(classes.appBar, { [classes.appBarShift]: sidebarOpen, notTop: !!trigger })}
-                position='relative'
+        <Wrapper>
+            <div
+                className={classes.root}
             >
-                <Toolbar>
-                    {!sidebarOpen && (
-                        <IconButton
-                            edge='start'
-                            className={classes.menuButton}
-                            color='inherit'
-                            onClick={sidebarToggle}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                    )}
-                    <div className={classes.title}>
-                        <NLink href='/'>
-                            <a className={classes.logo}>
-                                <Logo />
-                            </a>
-                        </NLink>
-                    </div>
-
-                    <Tooltip
-                        title={`${normalize(userTheme)} theme`}
-                    >
-                        <span>
+                <AppBar
+                    className={clsx(classes.appBar, { [classes.appBarShift]: sidebarOpen, notTop: !!trigger })}
+                    position='relative'
+                >
+                    <Toolbar>
+                        {!sidebarOpen && (
                             <IconButton
-                                onClick={onThemeChange}
+                                edge='start'
+                                className={classes.menuButton}
                                 color='inherit'
-                                size='small'
+                                onClick={sidebarToggle}
                             >
-                                <Icon
-                                    className={classes.iconTheme}
-                                />
+                                <MenuIcon />
                             </IconButton>
-                        </span>
-                    </Tooltip>
-                </Toolbar>
-            </AppBar>
-            {breadcrumbs}
-        </div>
+                        )}
+                        <div className={classes.title}>
+                            <NLink href='/'>
+                                <a className={classes.logo}>
+                                    <Logo />
+                                </a>
+                            </NLink>
+                        </div>
+
+                        <Tooltip
+                            title={`${normalize(userTheme)} theme`}
+                        >
+                            <span>
+                                <IconButton
+                                    onClick={onThemeChange}
+                                    color='inherit'
+                                    size='small'
+                                >
+                                    <Icon
+                                        className={classes.iconTheme}
+                                    />
+                                </IconButton>
+                            </span>
+                        </Tooltip>
+                    </Toolbar>
+                </AppBar>
+
+                {breadcrumbs}
+            </div>
+        </Wrapper>
     );
 }

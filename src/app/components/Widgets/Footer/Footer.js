@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 
-import { Typography, Link, useSidebarOpen } from '../../';
+import { Typography, Link, useSidebarOpen, Wrapper } from '../../';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -56,33 +56,35 @@ export default function Footer(props) {
     const sidebarOpen = useSidebarOpen();
 
     return (
-        <footer
-            className={clsx(classes.root, {
-                [classes.rootShift]: sidebarOpen,
-            })}
-        >
-            <div className={classes.wrapper}>
-                <Typography
-                    variant='caption'
-                    className={classes.copyright}
-                >
-                    Copyright © 2020
+        <Wrapper>
+            <footer
+                className={clsx(classes.root, {
+                    [classes.rootShift]: sidebarOpen,
+                })}
+            >
+                <div className={classes.wrapper}>
+                    <Typography
+                        variant='caption'
+                        className={classes.copyright}
+                    >
+                        Copyright © 2020
 
                     <span style={{ margin: '0 9px' }}>·</span>
 
-                    <Link
-                        href='https://zimt.co'
-                        target='_blank'
-                        style={{ fontSize: 11, fontWeight: 600 }}
-                    >
-                        ZIMT
+                        <Link
+                            href='https://zimt.co'
+                            target='_blank'
+                            style={{ fontSize: 11, fontWeight: 600 }}
+                        >
+                            ZIMT
                     </Link>
-                </Typography>
+                    </Typography>
 
-                <Typography variant='body2' className={classes.version}>
-                    v{global.appVersion}
-                </Typography>
-            </div>
-        </footer>
+                    <Typography variant='body2' className={classes.version}>
+                        v{global.appVersion}
+                    </Typography>
+                </div>
+            </footer>
+        </Wrapper>
     );
 }

@@ -115,25 +115,6 @@ export const getPublicFileUrl = (folders, file, name = null) => {
     return url;
 };
 
-export const appSetup = async () => {
-    try {
-        console.log('App setup start');
-
-        console.log('Removing stale cache');
-        if (window && window.caches) {
-            const names = await window.caches.keys();
-            for (const name of names) {
-                if (name.indexOf('document') > -1) await window.caches.delete(name);
-            }
-        }
-
-        console.log('App is ready');
-    } catch (error) {
-        console.log('App setup failed: ', error);
-        throw error;
-    }
-};
-
 export const semverGreaterThan = (versionA, versionB) => {
     const versionsA = versionA.split(/\./g);
 
@@ -148,4 +129,20 @@ export const semverGreaterThan = (versionA, versionB) => {
         return a > b || isNaN(b);
     }
     return false;
+};
+
+export const getMeta = async () => {
+    try {
+        const headers = new Headers();
+
+        headers.append('pragma', 'no-cache');
+        headers.append('cache-control', 'no-store');
+
+        let meta = await fetch('/meta.json', { headers });
+        meta = await meta.json();
+
+        return meta;
+    } catch (error) {
+        console.log(error);
+    }
 };

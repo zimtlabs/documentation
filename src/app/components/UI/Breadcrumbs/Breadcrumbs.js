@@ -21,7 +21,14 @@ export default function ZIMTBreadcrumbs(props) {
 
     return (
         <Breadcrumbs
-            separator={<NavigateNextIcon fontSize='small' />}
+            separator={(
+                <NavigateNextIcon
+                    fontSize='small'
+                    style={{
+                        fontSize: 11,
+                    }}
+                />
+            )}
             classes={{
                 root: classes.root,
                 ol: classes.ol,

@@ -115,7 +115,7 @@ function Home() {
       },
       "signature": "0xe633051fc76ae...",
       "receipt": {
-        "received_at": 1579278115000
+        "received_at": 1579278115
       }
     }
   ],
@@ -174,7 +174,7 @@ const assets = await sdk.assets.getMany();
       },
       "signature": "0xe633051fc76ae...",
       "receipt": {
-        "received_at": 1579278115000
+        "received_at": 1579278115
       }
     }
   ],

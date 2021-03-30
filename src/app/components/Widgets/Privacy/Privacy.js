@@ -8,7 +8,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
 
-import { Button } from '../../';
+import { Button, Wrapper } from '../../';
 import { CookieService } from '../../../services';
 
 const useStyles = makeStyles(theme => ({
@@ -52,37 +52,39 @@ export default function Privacy(props) {
     };
 
     return (
-        <Dialog
-            open={show}
-            maxWidth='sm'
-            fullWidth
-            className={classes.root}
-        >
-            <DialogTitle>We use cookies</DialogTitle>
+        <Wrapper>
+            <Dialog
+                open={show}
+                maxWidth='sm'
+                fullWidth
+                className={classes.root}
+            >
+                <DialogTitle>We use cookies</DialogTitle>
 
-            <DialogContent>
-                <DialogContentText>We use cookies to improve your experience using our apps. By choosing <b>I Agree</b>, you consent to our use of cookies and other tracking technologies across all ZIMT apps.</DialogContentText>
-            </DialogContent>
+                <DialogContent>
+                    <DialogContentText>We use cookies to improve your experience using our apps. By choosing <b>I Agree</b>, you consent to our use of cookies and other tracking technologies across all ZIMT apps.</DialogContentText>
+                </DialogContent>
 
-            <DialogActions>
-                <Button
-                    component='a'
-                    target='_blank'
-                    href='https://zimt.co/privacy-policy'
-                    variant='text'
-                    color='default'
-                >
-                    Learn More
+                <DialogActions>
+                    <Button
+                        component='a'
+                        target='_blank'
+                        href='https://zimt.co/privacy-policy'
+                        variant='text'
+                        color='default'
+                    >
+                        Learn More
                 </Button>
 
-                <Button
-                    variant='contained'
-                    color='primary'
-                    onClick={agree}
-                >
-                    I Agree
-                </Button>
-            </DialogActions>
-        </Dialog>
+                    <Button
+                        variant='contained'
+                        color='primary'
+                        onClick={agree}
+                    >
+                        I Agree
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </Wrapper>
     );
 }

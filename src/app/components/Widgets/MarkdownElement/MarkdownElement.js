@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import marked from 'marked/lib/marked';
 
-import { Prism, AppElement, ApiElement } from '../../';
+import { Prism, AppElement, ApiElement, Wrapper } from '../../';
 import { textToHash } from '../../../utils';
 
 // Monkey patch to preserve non-breaking spaces
@@ -332,5 +332,9 @@ export default function MarkdownElement(props) {
         );
     }
 
-    return Element;
+    return (
+        <Wrapper>
+            {Element}
+        </Wrapper>
+    );
 }

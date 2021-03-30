@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Collapse } from '@material-ui/core';
 import { ToggleButtonGroup, ToggleButton } from '@material-ui/lab';
+import clsx from 'clsx';
 
 import GithubIcon from '@material-ui/icons/GitHub';
 import CodeIcon from '@material-ui/icons/Code';
@@ -9,10 +10,9 @@ import CodeIcon from '@material-ui/icons/Code';
 import JsIcon from '../../../../../public/assets/svg/js.svg';
 import TsIcon from '../../../../../public/assets/svg/ts.svg';
 
-import { parseMarkdownFileReference, getGithubFileURL } from '../../../utils';
+import { IconButton, CodeSnippet, Wrapper } from '../../';
 import { RequestService } from '../../../services';
-import { IconButton, CodeSnippet } from '../../';
-import clsx from 'clsx';
+import { parseMarkdownFileReference, getGithubFileURL } from '../../../utils';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -124,65 +124,67 @@ export default function AppElement(props) {
     };
 
     return (
-        <div
-            className={clsx(classes.root, other.className)}
-        >
-            {/* Demo */}
-            <div className={classes.demo}>
-                {element}
-            </div>
+        <Wrapper>
+            <div
+                className={clsx(classes.root, other.className)}
+            >
+                {/* Demo */}
+                <div className={classes.demo}>
+                    {element}
+                </div>
 
-            {/* Options */}
-            <div className={classes.options}>
-                {/* Left */}
-                <div className={classes.optionsLeft}>
-                    {open && !!files.length && (
-                        <ToggleButtonGroup
-                            size='small'
+                {/* Options */}
+                <div className={classes.options}>
+                    {/* Left */}
+                    <div className={classes.optionsLeft}>
+                        {open && !!files.length && (
+                            <ToggleButtonGroup
+                                size='small'
+                            >
+                                {files.map((f, index) => (
+                                    <ToggleButton
+                                        key={index}
+                                        value={f.name}
+                                        selected={(selectedFile && selectedFile.name) === f.name}
+                                        onClick={() => setSelectedFile(f)}
+                                        className={classes.toggleButton}
+                                    >
+                                        {getIcon(f.ext)}
+                                    </ToggleButton>
+                                ))}
+                            </ToggleButtonGroup>
+                        )}
+                    </div>
+                    {/* Right */}
+                    <div className={classes.optionsRight}>
+                        <IconButton
+                            color='inherit'
+                            onClick={() => setOpen(!open)}
                         >
-                            {files.map((f, index) => (
-                                <ToggleButton
-                                    key={index}
-                                    value={f.name}
-                                    selected={(selectedFile && selectedFile.name) === f.name}
-                                    onClick={() => setSelectedFile(f)}
-                                    className={classes.toggleButton}
-                                >
-                                    {getIcon(f.ext)}
-                                </ToggleButton>
-                            ))}
-                        </ToggleButtonGroup>
+                            <CodeIcon />
+                        </IconButton>
+                        <IconButton
+                            color='inherit'
+                            href={getGithubFileURL(titles.folder, titles.file, selectedFile && selectedFile.name)}
+                            target='_blank'
+                        >
+                            <GithubIcon />
+                        </IconButton>
+                    </div>
+                </div>
+
+                {/* Demo code */}
+                <Collapse in={open} timeout='auto' unmountOnExit>
+                    {selectedFile && (
+                        <CodeSnippet
+                            code={selectedFile.code}
+                            language={selectedFile.ext}
+                        />
                     )}
-                </div>
-                {/* Right */}
-                <div className={classes.optionsRight}>
-                    <IconButton
-                        color='inherit'
-                        onClick={() => setOpen(!open)}
-                    >
-                        <CodeIcon />
-                    </IconButton>
-                    <IconButton
-                        color='inherit'
-                        href={getGithubFileURL(titles.folder, titles.file, selectedFile && selectedFile.name)}
-                        target='_blank'
-                    >
-                        <GithubIcon />
-                    </IconButton>
-                </div>
+                </Collapse>
+
+                {error && <div className={classes.error}>{error}</div>}
             </div>
-
-            {/* Demo code */}
-            <Collapse in={open} timeout='auto' unmountOnExit>
-                {selectedFile && (
-                    <CodeSnippet
-                        code={selectedFile.code}
-                        language={selectedFile.ext}
-                    />
-                )}
-            </Collapse>
-
-            {error && <div className={classes.error}>{error}</div>}
-        </div>
+        </Wrapper>
     );
 }

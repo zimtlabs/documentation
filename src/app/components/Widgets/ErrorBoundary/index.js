@@ -4,4 +4,4 @@
  * Proprietary and confidential
  * Contact: tech@zimt.co
  */
-export { default as ErrorBoundry } from './ErrorBoundry';
+export { default as ErrorBoundary } from './ErrorBoundary';
