@@ -21,11 +21,23 @@ if (typeof importScripts === 'function') {
 
         // Recipes
 
-        workbox.recipes.pageCache();
-
         workbox.recipes.googleFontsCache();
 
-        workbox.recipes.staticResourceCache();
+        workbox.recipes.pageCache({
+            plugins: [
+                new workbox.cacheableResponse.CacheableResponsePlugin({
+                    statuses: [0, 200],
+                }),
+            ],
+        });
+
+        workbox.recipes.staticResourceCache({
+            plugins: [
+                new workbox.cacheableResponse.CacheableResponsePlugin({
+                    statuses: [0, 200],
+                }),
+            ],
+        });
 
         // Custom
 
