@@ -62,6 +62,10 @@
       "description": "Strategy management."
     },
     {
+      "name": "Certificates",
+      "description": "Certificate management."
+    },
+    {
       "name": "Bundles",
       "description": "Bundle management."
     },
@@ -145,6 +149,12 @@
       "name": "Strategies",
       "tags": [
         "Strategies"
+      ]
+    },
+    {
+      "name": "Certificates",
+      "tags": [
+        "Certificates"
       ]
     },
     {
@@ -2798,7 +2808,201 @@
           "403": { "$ref": "base.json#/components/responses/Authorization" }
         }
       }
+    },
+
+
+    "/certificates": {
+      "get": {
+        "summary": "Get certificates",
+        "description": "Returns a list of certificates.",
+        "tags": [
+          "Certificates"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificates" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create certificate",
+        "description": "Creates an certificate.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Certificates"
+        ],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/for_organization" }
+        ],
+        "requestBody": {
+          "$ref": "certificates.json#/components/requestBodies/Certificate-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/certificates/search": {
+      "post": {
+        "summary": "Search certificates",
+        "description": "Returns a list of certificates.",
+        "tags": [
+          "Certificates"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "certificates.json#/components/requestBodies/search-certificate"
+        },
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificates" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/certificates/sources": {
+      "post": {
+        "summary": "Search certificate sources",
+        "description": "Returns a list of certificates.",
+        "tags": [
+          "Certificates"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "certificates.json#/components/requestBodies/search-certificate"
+        },
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificates" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/certificates/instances": {
+      "post": {
+        "summary": "Search certificate instances",
+        "description": "Returns a list of certificates.",
+        "tags": [
+          "Certificates"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "certificates.json#/components/requestBodies/search-certificate"
+        },
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificates" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/certificates/{id}": {
+      "get": {
+        "summary": "Get certificate",
+        "description": "Returns a certificate.",
+        "tags": [
+          "Certificates"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "certificates.json#/components/parameters/id-certificate" }
+        ],
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificate" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update certificate",
+        "description": "Updates a certificate.",
+        "tags": [
+          "Certificates"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "certificates.json#/components/requestBodies/Certificate-update"
+        },
+        "parameters": [
+          { "$ref": "certificates.json#/components/parameters/id-certificate" }
+        ],
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificate" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/certificates/{id}/public": {
+      "get": {
+        "summary": "Get certificate publicly",
+        "description": "Returns a certificate.",
+        "tags": [
+          "Certificates"
+        ],
+        "parameters": [
+          { "$ref": "certificates.json#/components/parameters/id-certificate" }
+        ],
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificate" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
     }
+
   },
 
   "components": {
