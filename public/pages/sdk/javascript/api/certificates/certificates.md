@@ -9,9 +9,9 @@ Returns signed certificate object.
 Used for create certificate method.
 
 ```javascript
-const result = sdk.certificates.generateCertificate(Certificate Object, Certificate Data, Namespace);
-// sdk.certificates.generateCertificate(
-//     {
+const result = sdk.certificates.generateCertificate(body: { body, data, namespace, ownership });
+// sdk.certificates.generateCertificate({
+//     object: {
 //         // Meta is not required
 //         meta: {
 //             // Valid ISO data, max 24h in the future
@@ -23,13 +23,13 @@ const result = sdk.certificates.generateCertificate(Certificate Object, Certific
 //             category: 'type',
 //         },
 //     },
-//     {
+//     data: {
 //         name: 'Eco Safety certificate type',
 //         active: true,
 //         private: true,
 //         verified: true
 //     }
-// );
+// });
 
 // result
 {
