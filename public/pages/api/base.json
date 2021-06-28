@@ -24,6 +24,13 @@
       "cursor": {
         "type": "string"
       },
+    "ownership": {
+        "type": "object",
+        "properties": {
+            "organization": {"type": "string"}
+        },
+        "required": ["organization"]
+    },
       "meta-response": {
         "type": "object",
         "properties": {

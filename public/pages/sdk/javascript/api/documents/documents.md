@@ -9,9 +9,9 @@ Returns signed document object.
 Used for create document method.
 
 ```javascript
-const result = sdk.documents.generateDocument(Document data, Namespace);
-//  sdk.documents.generateDocument(
-//     {
+const result = sdk.documents.generateDocument(body: { object, namespace, ownership });
+// sdk.documents.generateDocument({
+//     object:  {
 //         // Meta is not required
 //         "meta": {
 //             // Valid ISO data, max 24h in the future
@@ -30,8 +30,8 @@ const result = sdk.documents.generateDocument(Document data, Namespace);
 //             }
 //         }
 //     },
-//     { "app": true }
-// );
+//     namespace: { "app": true }
+// });
 
 // result
 {
