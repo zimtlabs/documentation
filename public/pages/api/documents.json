@@ -150,14 +150,24 @@
           "id": {
             "$ref": "base.json#/components/schemas/id"
           },
-          "meta": {
-            "$ref": "#/components/schemas/Document-meta"
-          },
-          "data": {
-            "$ref": "#/components/schemas/Document-data-one"
-          },
-          "signature": {
-            "$ref": "base.json#/components/schemas/signature"
+          "object": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "$ref": "#/components/schemas/Document-meta"
+                },
+                "data": {
+                    "$ref": "#/components/schemas/Document-data-one"
+                },
+                "signature": {
+                    "$ref": "base.json#/components/schemas/signature"
+                }
+            },
+            "required": [
+                "meta",
+                "data",
+                "signature"
+            ]
           },
           "receipt": {
             "$ref": "base.json#/components/schemas/receipt"
@@ -177,14 +187,24 @@
           "id": {
             "$ref": "base.json#/components/schemas/id"
           },
-          "meta": {
-            "$ref": "#/components/schemas/Document-meta"
-          },
-          "data": {
-            "$ref": "#/components/schemas/Document-data-many"
-          },
-          "signature": {
-            "$ref": "base.json#/components/schemas/signature"
+          "object": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "$ref": "#/components/schemas/Document-meta"
+                },
+                "data": {
+                    "$ref": "#/components/schemas/Document-data-many"
+                },
+                "signature": {
+                    "$ref": "base.json#/components/schemas/signature"
+                }
+            },
+            "required": [
+                "meta",
+                "data",
+                "signature"
+            ]
           },
           "receipt": {
             "$ref": "base.json#/components/schemas/receipt"
@@ -260,22 +280,24 @@
       "Document-one": {
         "response": {
           "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-          "meta": {
-            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "timestamp": "2020-02-10T19:16:13Z",
-            "data_hash": "0x123..."
-          },
-          "data": {
-            "type": "image/png",
-            "name": "Image",
-            "content": {
-                "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd"
+            "object": {
+                "meta": {
+                    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                    "timestamp": "2020-02-10T19:16:13Z",
+                    "data_hash": "0x123..."
+                },
+                "data": {
+                    "type": "image/png",
+                    "name": "Image",
+                    "content": {
+                        "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd"
+                    },
+                    "properties": {
+                        "prop": 7
+                    }
+                },
+                "signature": "0xe633051fc76ae..."
             },
-            "properties": {
-              "prop": 7
-            }
-          },
-          "signature": "0xe633051fc76ae...",
           "receipt": {
             "received_at": 1579278115
           }
@@ -287,19 +309,24 @@
       },
       "Document-many": {
         "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-        "meta": {
-          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-          "timestamp": "2020-02-10T19:16:13Z",
-          "data_hash": "0x123..."
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "data": {
+                "type": "image/png",
+                "name": "Image",
+                "content": {
+                    "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd"
+                },
+                "properties": {
+                    "prop": 7
+                }
+            },
+            "signature": "0xe633051fc76ae..."
         },
-        "data": {
-          "type": "image/png",
-          "name": "Image",
-          "properties": {
-            "prop": 7
-          }
-        },
-        "signature": "0xe633051fc76ae...",
         "receipt": {
           "received_at": 1579278115
         }
@@ -307,19 +334,24 @@
       "Documents": {
         "response": [{
           "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-          "meta": {
-            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "timestamp": "2020-02-10T19:16:13Z",
-            "data_hash": "0x123..."
-          },
-          "data": {
-            "type": "image/png",
-            "name": "Image",
-            "properties": {
-              "prop": 7
-            }
-          },
-          "signature": "0xe633051fc76ae...",
+            "object": {
+                "meta": {
+                    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                    "timestamp": "2020-02-10T19:16:13Z",
+                    "data_hash": "0x123..."
+                },
+                "data": {
+                    "type": "image/png",
+                    "name": "Image",
+                    "content": {
+                        "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd"
+                    },
+                    "properties": {
+                        "prop": 7
+                    }
+                },
+                "signature": "0xe633051fc76ae..."
+            },
           "receipt": {
             "received_at": 1579278115
           }

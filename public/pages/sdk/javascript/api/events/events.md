@@ -108,17 +108,19 @@ const result = await sdk.events.getEvents(asset_id: string, Pagination);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-        "timestamp": "2020-02-10T19:16:13Z",
-        "asset_id": "0x123...",
-        "data_hash": "0x123..."
-      },
-      "data": {
-        "type ": "info",
-        "name": "Info event"
-      },
-      "signature": "0xe633051fc76ae...",
+     "object": {
+          "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "asset_id": "0x123...",
+                "data_hash": "0x123..."
+            },
+            "data": {
+                "type ": "info",
+                "name": "Info event"
+            },
+            "signature": "0xe633051fc76ae...",
+     },
       "receipt": {
         "received_at": 1579278110
       }
@@ -165,17 +167,19 @@ const result = await sdk.events.searchEvents(asset_id: string, Query);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-        "timestamp": "2020-02-10T19:16:13Z",
-        "asset_id": "0x123...",
-        "data_hash": "0x123..."
-      },
-      "data": {
-        "type ": "info",
-        "name": "Info event"
-      },
-      "signature": "0xe633051fc76ae...",
+     "object": {
+          "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "asset_id": "0x123...",
+                "data_hash": "0x123..."
+            },
+            "data": {
+                "type ": "info",
+                "name": "Info event"
+            },
+            "signature": "0xe633051fc76ae...",
+     },
       "receipt": {
         "received_at": 1579278110
       }
@@ -207,17 +211,19 @@ const result = await sdk.events.getEvent(asset_id: string, event_id: string);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-      "timestamp": "2020-02-10T19:16:13Z",
-      "asset_id": "0x123...",
-      "data_hash": "0x123..."
-    },
-    "data": {
-      "type ": "info",
-      "name": "Info event"
-    },
-    "signature": "0xe633051fc76ae...",
+     "object": {
+          "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "asset_id": "0x123...",
+                "data_hash": "0x123..."
+            },
+            "data": {
+                "type ": "info",
+                "name": "Info event"
+            },
+            "signature": "0xe633051fc76ae...",
+     },
     "receipt": {
       "received_at": 1579278110
     }

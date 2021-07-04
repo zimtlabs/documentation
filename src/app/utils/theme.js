@@ -6,9 +6,8 @@
  */
 export const FONT_FAMILY = {
     primary: [
-        'Zilla Slab',
-        'Merriweather',
         'Lora',
+        'Merriweather',
         'Georgia',
         "PT Serif",
         "Palatino Linotype",
@@ -17,6 +16,8 @@ export const FONT_FAMILY = {
         'serif'
     ].join(','),
     secondary: [
+        'Mukta',
+        'Roboto',
         'Montserrat',
         'Helvetica',
         '"Helvetica Neue"',
@@ -31,23 +32,21 @@ export const FONT_FAMILY = {
         'sans-serif',
     ].join(','),
     tertiary: [
+        'Space Mono',
         'Roboto Mono',
-        'Montserrat',
-        'Helvetica',
-        '"Helvetica Neue"',
-        '-apple-system',
-        'Arial',
-        'sans-serif',
+        'monospace',
     ].join(','),
 };
 
 export const PALETTE = {
-    primary: '#ab9363',
-    secondary: '#6ded5a',
-    error: '#d63815',
-    warning: '#ffbdD2f',
-    success: '#15D675',
-    info: '#2fbfff',
+    primary: '#007AFF',
+    secondary: '#5856D6',
+    tertiary: '#AF52DE',
+    error: '#FF3B30',
+    warning: '#FF9500',
+    success: '#34C759',
+    info: '#5AC8FA',
+    zimt: '#007AFF',
 };
 
 export const BREAKPOINTS = {
@@ -57,8 +56,8 @@ export const BREAKPOINTS = {
         form: 768,
         md: 960,
         lg: 1280,
-        lg2: 1440,
-        xl: 1920
+        xl: 1440,
+        xxl: 1920
     },
 };
 
@@ -79,17 +78,24 @@ export const ALLOWED_THEMES = ['light', 'dark', 'auto'];
 
 export const DEFAULT_THEME = 'light';
 
-export const GetTheme = (options = { theme: 'light' }) => {
+export const GetTheme = (options = { theme: 'light', primary: '', secondary: '', fontPrimary: '', fontSecondary: '' }) => {
     const { theme } = options;
+
+    const FONT_PRIMARY = options.fontPrimary || FONT_FAMILY.primary;
+    const FONT_SECONDARY = options.fontSecondary || FONT_FAMILY.secondary;
+
+    const COLOR_PRIMARY = options.primary || PALETTE.primary;
+    const COLOR_SECONDARY = options.secondary || PALETTE.secondary;
 
     return {
         palette: {
             type: theme,
-            primary: { main: PALETTE.primary },
-            secondary: { main: PALETTE.secondary },
+            primary: { main: COLOR_PRIMARY },
+            secondary: { main: COLOR_SECONDARY },
             error: { main: PALETTE.error },
             warning: { main: PALETTE.warning },
             info: { main: PALETTE.info },
+            zimt: PALETTE.zimt,
             background: {
                 'primary': colors.background['primary'][theme],
                 'secondary': colors.background['secondary'][theme],
@@ -100,69 +106,104 @@ export const GetTheme = (options = { theme: 'light' }) => {
         },
         breakpoints: BREAKPOINTS,
         typography: {
-            fontFamily: FONT_FAMILY.secondary,
-            fontSize: 13,
+            fontFamily: FONT_SECONDARY,
+            fontSize: 14,
+            htmlFontSize: 16,
             fontWeightLight: 300,
             fontWeightRegular: 400,
             fontWeightMedium: 500,
             fontWeightBold: 700,
 
-            h1: {
-                fontFamily: FONT_FAMILY.primary,
+            d1: {
+                fontFamily: FONT_PRIMARY,
                 fontWeight: 700,
-                fontSize: 30,
+                fontSize: 34,
                 lineHeight: 1.25,
+
+                [`@media only screen and (min-width: ${BREAKPOINTS.values.md}px)`]: {
+                    fontSize: 40,
+                },
+            },
+            h1: {
+                fontFamily: FONT_PRIMARY,
+                fontWeight: 400,
+                fontSize: 31,
+                lineHeight: 1.25,
+
+                [`@media only screen and (max-width: ${BREAKPOINTS.values.md}px)`]: {
+                    fontSize: [31, '!important'],
+                },
             },
             h2: {
-                fontFamily: FONT_FAMILY.secondary,
-                fontWeight: 300,
-                fontSize: 22,
-                lineHeight: 1.55,
+                fontFamily: FONT_PRIMARY,
+                fontWeight: 400,
+                fontSize: 27,
+                lineHeight: 1.25,
+
+                [`@media only screen and (max-width: ${BREAKPOINTS.values.md}px)`]: {
+                    fontSize: [27, '!important'],
+                },
             },
             h3: {
-                fontFamily: FONT_FAMILY.primary,
+                fontFamily: FONT_PRIMARY,
                 fontWeight: 700,
-                fontSize: 26,
+                fontSize: 23,
                 lineHeight: 1.25,
+
+                [`@media only screen and (max-width: ${BREAKPOINTS.values.md}px)`]: {
+                    fontSize: [23, '!important'],
+                },
             },
             h4: {
-                fontFamily: FONT_FAMILY.primary,
-                fontWeight: 700,
-                fontSize: 25,
-                lineHeight: 1.25,
-            },
-            h5: {
-                fontFamily: FONT_FAMILY.primary,
-                fontWeight: 700,
-                fontSize: 24,
-                lineHeight: 1.25,
-            },
-            h6: {
-                fontFamily: FONT_FAMILY.primary,
+                fontFamily: FONT_PRIMARY,
                 fontWeight: 700,
                 fontSize: 19,
+                lineHeight: 1.25,
+
+                [`@media only screen and (max-width: ${BREAKPOINTS.values.md}px)`]: {
+                    fontSize: [19, '!important'],
+                },
+            },
+            h5: {
+                fontFamily: FONT_PRIMARY,
+                fontWeight: 700,
+                fontSize: 17,
+                lineHeight: 1.25,
+
+                [`@media only screen and (max-width: ${BREAKPOINTS.values.md}px)`]: {
+                    fontSize: [17, '!important'],
+                },
+            },
+            h6: {
+                fontFamily: FONT_PRIMARY,
+                fontWeight: 700,
+                fontSize: 15,
                 lineHeight: 1.3,
+
+                [`@media only screen and (max-width: ${BREAKPOINTS.values.md}px)`]: {
+                    fontSize: [15, '!important'],
+                },
             },
             body1: {
-                fontFamily: FONT_FAMILY.secondary,
+                fontFamily: FONT_SECONDARY,
+                fontWeight: 400,
+                fontSize: 14,
+                lineHeight: 1.55,
+            },
+            body2: {
+                fontFamily: FONT_SECONDARY,
                 fontWeight: 400,
                 fontSize: 13,
                 lineHeight: 1.55,
             },
-            body2: {
-                fontFamily: FONT_FAMILY.secondary,
-                fontWeight: 400,
-                fontSize: 12,
-                lineHeight: 1.55,
-            },
             caption: {
-                fontFamily: FONT_FAMILY.secondary,
+                fontFamily: FONT_SECONDARY,
                 fontWeight: 400,
                 fontSize: 11,
                 lineHeight: 1.05,
             },
             button: {
-                fontFamily: FONT_FAMILY.secondary,
+                fontFamily: FONT_SECONDARY,
                 fontWeight: 600,
                 fontSize: 16,
                 lineHeight: 1.15,
@@ -176,28 +217,25 @@ export const GetTheme = (options = { theme: 'light' }) => {
                 textTransform: "uppercase",
             },
             label: {
-                fontFamily: FONT_FAMILY.secondary,
+                fontFamily: FONT_SECONDARY,
                 fontWeight: 400,
                 fontSize: 12,
                 lineHeight: 1.15,
             },
             text_1: {
-                fontFamily: FONT_FAMILY.secondary,
+                fontFamily: FONT_SECONDARY,
                 fontWeight: 600,
                 fontSize: 14,
                 lineHeight: 1.25,
             },
-
-            // Label
             subtitle1: {
-                fontFamily: FONT_FAMILY.secondary,
+                fontFamily: FONT_SECONDARY,
                 fontWeight: 400,
                 fontSize: 12,
                 lineHeight: 1.15,
             },
-            // Data
             subtitle2: {
-                fontFamily: FONT_FAMILY.secondary,
+                fontFamily: FONT_SECONDARY,
                 fontWeight: 600,
                 fontSize: 15,
                 lineHeight: 1.55,
@@ -207,7 +245,19 @@ export const GetTheme = (options = { theme: 'light' }) => {
         overrides: {
             MuiInputBase: {
                 root: {
-                    fontSize: 13,
+                    width: '100%',
+                },
+            },
+            MuiFilledInput: {
+                inputAdornedEnd: {
+                    paddingRight: 12,
+                    marginRight: 12,
+                },
+            },
+            MuiSkeleton: {
+                root: {
+                    marginBottom: 24,
+                    borderRadius: 4,
                 },
             },
             MuiButton: {
@@ -220,9 +270,67 @@ export const GetTheme = (options = { theme: 'light' }) => {
                     opacity: 1,
                 },
             },
+            MuiTableSortLabel: {
+                root: {
+                    whiteSpace: 'nowrap',
+                },
+            },
+            MuiTableCell: {
+                head: {
+                    whiteSpace: 'nowrap',
+                },
+                body: {
+                    whiteSpace: 'nowrap',
+                    maxWidth: 240,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                },
+            },
             MuiPaper: {
                 elevation1: {
                     boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.14), 0px 1px 1px 0px rgba(0,0,0,0.08), 0px 2px 1px -1px rgba(0,0,0,0.05)',
+                },
+            },
+            MuiPickersToolbar: {
+                toolbar: {
+                    '& button': {
+                        color: '#fff',
+                    },
+                },
+            },
+            MuiPickersToolbarText: {
+                toolbarTxt: {
+                    color: '#fff',
+                },
+            },
+            MuiPickersCalendarHeader: {
+                switchHeader: {
+                    color: '#fff',
+                },
+            },
+            MuiPickersClockNumber: {
+                clockNumberSelected: {
+                    color: '#fff',
+                },
+            },
+            MuiPickersDay: {
+                daySelected: {
+                    color: '#fff',
+                },
+            },
+            MuiPickerDTTabs: {
+                tabs: {
+                    '& .MuiButtonBase-root': {
+                        color: '#fff',
+                    },
+                },
+            },
+            MuiPickersModal: {
+                withAdditionalAction: {
+                    '& button': {
+                        fontSize: 12,
+                        textTransform: 'none',
+                    },
                 },
             },
             MuiCssBaseline: {
@@ -240,11 +348,15 @@ export const GetTheme = (options = { theme: 'light' }) => {
                         background: 'transparent',
                         boxSizing: 'border-box',
                         touchAction: 'manipulation',
+
+                        '&[contenteditable]': {
+                            userSelect: 'text',
+                        },
                     },
 
                     body: {
-                        fontSize: '13px',
-                        fontFamily: FONT_FAMILY.secondary,
+                        fontSize: 14,
+                        fontFamily: FONT_SECONDARY,
                         fontWeight: 'normal',
                         fontStyle: 'normal',
                         position: 'relative',
@@ -265,6 +377,10 @@ export const GetTheme = (options = { theme: 'light' }) => {
                     a: {
                         textDecoration: 'none',
                         cursor: 'pointer',
+                    },
+
+                    form: {
+                        width: '100%',
                     },
 
                     span: {
@@ -294,21 +410,58 @@ export const GetTheme = (options = { theme: 'light' }) => {
         },
 
         mixins: {
+            error: {
+                padding: 16,
+                backgroundColor: '#fff',
+                color: 'red',
+                width: '100%',
+                maxWidth: 450,
+                margin: '25px auto 0',
+                textAlign: 'center',
+                boxShadow: 'none',
+            },
+            button: {
+                action: {
+                    flex: '0 0 auto',
+                    alignSelf: 'center',
+                },
+                submit: {
+                    backgroundColor: '#fff',
+                    color: '#333',
+                    marginTop: 16,
+                    justifySelf: 'center',
+                    alignSelf: 'center',
+                },
+            },
             body: {
                 width: '100%',
-                maxWidth: BREAKPOINTS.values.lg2,
+                maxWidth: 1280,
                 margin: '0 auto',
-                background: '#fff',
+            },
+            row: {
+                position: 'relative',
+                display: 'flex',
+            },
+            root: {
+                width: '100%',
+                flex: 1,
                 display: 'flex',
                 flexDirection: 'column',
-                flex: '1 1 auto',
-                paddingTop: 105,
+                paddingTop: 91,
+
+                [`@media only screen and (min-width: ${BREAKPOINTS.values.lg + 80}px)`]: {
+                    paddingTop: 121,
+                },
             },
             main: {
-                flex: '1 1 auto',
-                width: '100%',
                 display: 'flex',
+                flex: '1 1 auto',
                 flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'flex-start',
+                width: '100%',
+                maxWidth: BREAKPOINTS.values.xl,
+                margin: '0 auto',
             },
         },
 

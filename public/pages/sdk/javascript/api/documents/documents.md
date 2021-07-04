@@ -130,19 +130,24 @@ const result = await sdk.documents.getMany(Pagination);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-        "timestamp": "2020-02-10T19:16:13Z",
-        "data_hash": "0x123..."
-      },
-      "data": {
-        "type ": "image/png",
-        "name": "Image",
-        "properties": {
-          "prop": 7
-        }
-      },
-      "signature": "0xe633051fc76ae...",
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13+02:00",
+                "data_hash": "0x123..."
+            },
+            "data": {
+                "type ": "image/png",
+                "name": "Image",
+                "content": {
+                    "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
+                },
+                "properties": {
+                "prop": 7
+                }
+            },
+            "signature": "0xe633051fc76ae..."
+        },
       "receipt": {
         "received_at": 1579278110
       }
@@ -188,19 +193,24 @@ const result = await sdk.documents.search(Query);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-        "timestamp": "2020-02-10T19:16:13Z",
-        "data_hash": "0x123..."
-      },
-      "data": {
-        "type ": "image/png",
-        "name": "Image",
-        "properties": {
-          "prop": 7
-        }
-      },
-      "signature": "0xe633051fc76ae...",
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13+02:00",
+                "data_hash": "0x123..."
+            },
+            "data": {
+                "type ": "image/png",
+                "name": "Image",
+                "content": {
+                    "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
+                },
+                "properties": {
+                "prop": 7
+                }
+            },
+            "signature": "0xe633051fc76ae..."
+        },
       "receipt": {
         "received_at": 1579278110
       }
@@ -232,22 +242,24 @@ const result = await sdk.documents.get(id);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-      "timestamp": "2020-02-10T19:16:13Z",
-      "data_hash": "0x123..."
+    "object": {
+        "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13+02:00",
+            "data_hash": "0x123..."
+        },
+        "data": {
+            "type ": "image/png",
+            "name": "Image",
+            "content": {
+                "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
+            },
+            "properties": {
+            "prop": 7
+            }
+        },
+        "signature": "0xe633051fc76ae..."
     },
-    "data": {
-      "type ": "image/png",
-      "name": "Image",
-      "content": {
-        "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
-      },
-      "properties": {
-        "prop": 7
-      }
-    },
-    "signature": "0xe633051fc76ae...",
     "receipt": {
       "received_at": 1579278110
     }
