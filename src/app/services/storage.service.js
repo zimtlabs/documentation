@@ -1,7 +1,7 @@
 import { Subject, BehaviorSubject } from 'rxjs';
 
 export class StorageService {
-    namespace = 'ZIMT__';
+    namespace = 'ZIMT_DOCUMENTATION__';
     storage;
     crumbSub = new Subject();
     currentOrganizationSub = new Subject();
@@ -84,9 +84,7 @@ export class StorageService {
         if (this.storage) {
             const items = this.getAll();
 
-            for (const item of items) {
-                this.storage.removeItem(item.key);
-            }
+            for (const item of items) this.storage.removeItem(item.key);
         }
     }
 

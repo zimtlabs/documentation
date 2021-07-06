@@ -6,20 +6,24 @@ import { CircularProgress } from '../../';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        fontWeight: 600,
-        lineHeight: 1.75,
-        borderRadius: 24,
+        fontWeight: 700,
+        lineHeight: 1,
+        borderRadius: 0,
         letterSpacing: '0.06em',
         fontSize: 13,
         textTransform: 'none',
         alignSelf: 'center',
+        padding: '10px 20px',
     },
     sizeLarge: {
         minWidth: 153,
-        padding: '9px 24px',
+        padding: '30px 50px',
     },
     sizeSmall: {
-        padding: '4px 12px',
+        padding: '5px 10px',
+    },
+    outlined: {
+        borderWidth: 2,
     },
     contained: {
         color: '#fff',
@@ -40,7 +44,14 @@ export default function ZIMTButton(props) {
             disabled={disabled || loading}
             {...other}
         >
-            {children} {loading && <CircularProgress style={{ marginLeft: 12, color: theme.palette.text.disabled }} size={20} />}
+            {children}
+
+            {loading && (
+                <CircularProgress
+                    style={{ marginLeft: 12, color: theme.palette.text.disabled }}
+                    size={20}
+                />
+            )}
         </Button>
     );
 }

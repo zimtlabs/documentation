@@ -7,11 +7,7 @@ const emptyRegExp = /^\s*$/;
 export function getMarkdownHeaders(markdown) {
     let header = markdown.match(headerRegExp);
 
-    if (!header) {
-        return {
-            components: [],
-        };
-    }
+    if (!header) return { components: [] };
 
     header = header[1];
 
@@ -19,18 +15,15 @@ export function getMarkdownHeaders(markdown) {
     const headers = {};
 
     // eslint-disable-next-line no-cond-assign
-    while ((regexMatches = headerKeyValueRegExp.exec(header)) !== null) {
-        headers[regexMatches[1]] = regexMatches[2];
-    }
+    while ((regexMatches = headerKeyValueRegExp.exec(header)) !== null) headers[regexMatches[1]] = regexMatches[2];
 
     if (headers.components) {
         headers.components = headers.components
             .split(',')
             .map(x => x.trim())
             .sort();
-    } else {
-        headers.components = [];
     }
+    else headers.components = [];
 
     return headers;
 }
@@ -47,9 +40,7 @@ export function getMarkdownContents(markdown) {
 export function getMarkdownTitle(markdown) {
     const matches = markdown.match(titleRegExp);
 
-    if (!matches || !matches[1]) {
-        throw new Error('Missing title in the page');
-    }
+    if (!matches || !matches[1]) throw new Error('Missing title in the page');
 
     return matches[1];
 }
@@ -57,16 +48,14 @@ export function getMarkdownTitle(markdown) {
 export function getMarkdownDescription(markdown) {
     const matches = markdown.match(descriptionRegExp);
 
-    if (!matches || !matches[1]) {
-        throw new Error('Missing description in the page');
-    }
+    if (!matches || !matches[1]) throw new Error('Missing description in the page');
 
     return matches[1];
 }
 
-const parseString = s => {
+const parseString = string => {
     try {
-        return JSON.parse(s);
+        return JSON.parse(string);
     } catch (error) {
         return null;
     }
@@ -74,6 +63,7 @@ const parseString = s => {
 
 export const parseMarkdownFileReference = text => {
     const object = {};
+
     text = text.split(',');
 
     text.forEach(item => {

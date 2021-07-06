@@ -22,6 +22,9 @@ const useStyles = makeStyles(theme => ({
     text: {
         justifyContent: 'flex-start',
         fontSize: 12,
+        lineHeight: 1.75,
+        letterSpacing: '0.06em',
+        textTransform: 'none',
 
         '&.active': {
             color: theme.palette.primary.main,

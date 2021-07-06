@@ -3,9 +3,12 @@ import { makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 
 import { Prism } from '../../';
+import { FONT_FAMILY } from '../../../utils';
 
 const useStyles = makeStyles(theme => ({
     root: {
+        fontFamily: `${FONT_FAMILY.tertiary} !important`,
+        fontSize: `13px !important`,
         overflowX: 'auto',
         width: '100%',
 
