@@ -53,6 +53,8 @@ export const is = (value, type = 'email', options = { element: false }) => {
                 [undefined, null].indexOf(value) > -1 ||
                 (isElement && options.element)
             );
+        case 'localhost':
+            return process.browser && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
         case 'email':
             pattern = /\S+@\S+\.\S+/;
 

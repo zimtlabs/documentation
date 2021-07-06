@@ -34,6 +34,7 @@ export class StorageService {
 
     init(storage) {
         this.storage = storage;
+        this.namespace = is('', 'localhost') ? 'ZIMT_VIEWER__' : 'ZIMT__';
     }
 
     // localStorage wrapper
