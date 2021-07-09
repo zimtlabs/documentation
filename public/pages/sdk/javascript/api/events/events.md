@@ -58,8 +58,8 @@ Creates an event.
 [API reference](/api#tag/Events/paths/~1assets~1{asset_id}~1events/post).
 
 ```javascript
-const result = await sdk.events.createEvent(Event object);
-// sdk.events.createEvent(sdk.events.generateEvent('0x123...', {
+const result = await sdk.events.createEvent(Asset ID, Event object);
+// sdk.events.createEvent('0x123...', sdk.events.generateEvent('0x123...', {
 //     "type ": "info",
 //     "name": "Info event",
 // }));

@@ -88,12 +88,12 @@ Updates an asset.
 [API reference](/api#tag/Assets/paths/~1assets~1{asset_id}/put).
 
 ```javascript
-const result = await sdk.assets.update(Asset data);
-sdk.assets.update({ data: { name: 'New name' } });
+const result = await sdk.assets.update(Asset ID, Asset data);
+sdk.assets.update('0x123...', { data: { name: 'New name' } });
 
 or
 
-// sdk.assets.update({
+// sdk.assets.update('0x123...', {
 //   "data": {
 //       "name": "New name"
 //   }
