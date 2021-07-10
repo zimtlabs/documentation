@@ -1,7 +1,6 @@
 import { Subject, BehaviorSubject } from 'rxjs';
 
 export class StorageService {
-    namespace = 'ZIMT_DOCUMENTATION__';
     storage;
     crumbSub = new Subject();
     currentOrganizationSub = new Subject();
@@ -13,6 +12,10 @@ export class StorageService {
         },
         pages: [],
     });
+
+    get namespace() {
+        return is('', 'localhost') ? 'ZIMT_DOCUMENTATION__' : 'ZIMT__';
+    }
 
     resetNav = () => {
         this.sidebarOpenedPathSub.next({
