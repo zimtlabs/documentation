@@ -5,7 +5,7 @@ import prism from 'prismjs';
 import clsx from 'clsx';
 
 import { Wrapper } from '../../';
-import { parseMarkdownFileReference, getPublicFileUrl, FONT_FAMILY } from '../../../utils';
+import { parseMarkdownFileReference, getPublicFileUrl, FONT_FAMILY, rgbToRGBA } from '../../../utils';
 import { StorageService } from '../../../services';
 
 const useStyles = makeStyles(theme => {
@@ -14,6 +14,15 @@ const useStyles = makeStyles(theme => {
     return ({
         root: {
             width: '100%',
+
+            '& *': {
+                fontFamily: [FONT_FAMILY.secondary, '!important'],
+            },
+
+            '& .redoc-json *, code, code *': {
+                fontFamily: [FONT_FAMILY.tertiary, '!important'],
+                fontSize: '12px !important',
+            },
 
             '& h3': {
                 marginTop: 15,
@@ -25,7 +34,7 @@ const useStyles = makeStyles(theme => {
             },
 
             '& label[type=group]': {
-                display: 'none',
+                display: 'none !important',
             },
 
             '& a[href*=redoc]': {
@@ -37,14 +46,51 @@ const useStyles = makeStyles(theme => {
             },
 
             '& label[role=menuitem]': {
-                fontWeight: 500,
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: 14,
+                fontWeight: 400,
+
+                '& span[title]': {
+                    color: theme.palette.text.primary,
+                },
+
+                '& > span[type]': {
+                    fontSize: 9,
+                },
+
+                '& > span:nth-child(2)': {
+                    fontSize: 13,
+                    marginLeft: theme.spacing(1),
+                },
+
+                '& > svg': {
+                    height: 14,
+                    width: 14,
+
+                    '& *': {
+                        fill: theme.palette.text.primary,
+                    },
+                },
             },
 
             '& label[type=section], label[type=tag], h1, h2': {
-                fontWeight: 600,
+                fontWeight: 400,
+                fontFamily: FONT_FAMILY.secondary,
             },
 
             '& .redoc-wrap': {
+                [`& pre[class*='language-']`]: {
+                    padding: 32,
+                    margin: '32px 0',
+                    backgroundColor: theme.palette.type !== 'dark' ? '#000' : rgbToRGBA(theme.palette.text.primary, 10),
+                    borderRadius: 0,
+                },
+
+                '& pre > code': {
+                    backgroundColor: theme.palette.type !== 'dark' ? '#000' : rgbToRGBA(theme.palette.text.primary, 0),
+                },
+
                 '& code': {
                     fontWeight: isWin ? 800 : 400,
                 },

@@ -117,15 +117,16 @@ const useStyles = makeStyles(theme => ({
             marginTop: -96, // Offset for the anchor.
             position: 'absolute',
         },
+
         '& pre': {
-            margin: '24px 0',
-            padding: '12px 18px',
-            backgroundColor: '#272c34',
+            margin: '32px 0',
+            padding: 32,
+            backgroundColor: '#000',
             direction: 'ltr',
-            borderRadius: theme.shape.borderRadius,
             overflow: 'auto',
             WebkitOverflowScrolling: 'touch', // iOS momentum scrolling.
         },
+
         '& code': {
             display: 'inline-block',
             fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
@@ -136,50 +137,62 @@ const useStyles = makeStyles(theme => ({
             fontSize: 13,
             borderRadius: 2,
         },
+
         '& code[class*="language-"]': {
-            backgroundColor: '#272c34',
+            backgroundColor: '#000',
             color: '#fff',
         },
+
         '& p code, & ul code, & pre code': {
             fontSize: 13,
         },
+
         '& .token.operator': {
             background: 'transparent',
         },
+
         '& h1': {
             ...theme.typography.h3,
             fontSize: 40,
             margin: '16px 0',
         },
+
         '& .description': {
             ...theme.typography.h5,
             margin: '0 0 40px',
         },
+
         '& h2': {
             ...theme.typography.h4,
             fontSize: 30,
             margin: '40px 0 16px',
         },
+
         '& h3': {
             ...theme.typography.h5,
             margin: '40px 0 16px',
         },
+
         '& h4': {
             ...theme.typography.h6,
             margin: '32px 0 16px',
         },
+
         '& h5': {
             ...theme.typography.subtitle2,
             margin: '32px 0 16px',
         },
+
         '& p, & ul, & ol': {
             lineHeight: 1.6,
             marginTop: 0,
             marginBottom: '16px',
         },
+
         '& ul': {
             paddingLeft: 30,
         },
+
         '& h1, & h2, & h3, & h4': {
             '& code': {
                 fontSize: 13,
@@ -204,6 +217,7 @@ const useStyles = makeStyles(theme => ({
                 },
             },
         },
+
         '& table': {
             // Trade display table for scroll overflow
             display: 'block',
@@ -233,16 +247,19 @@ const useStyles = makeStyles(theme => ({
                 borderBottom: `1px dotted ${theme.palette.text.hint}`,
             },
         },
+
         '& td': {
             ...theme.typography.body2,
             borderBottom: `1px solid ${theme.palette.divider}`,
             padding: 16,
             color: theme.palette.text.primary,
         },
+
         '& td code': {
             fontSize: 13,
             lineHeight: 1.6,
         },
+
         '& th': {
             fontSize: 13,
             lineHeight: theme.typography.pxToRem(24),
@@ -252,6 +269,7 @@ const useStyles = makeStyles(theme => ({
             borderBottom: `1px solid ${theme.palette.divider}`,
             padding: 16,
         },
+
         '& blockquote': {
             borderLeft: '5px solid #ffe564',
             backgroundColor: 'rgba(255,229,100,0.2)',
@@ -261,6 +279,7 @@ const useStyles = makeStyles(theme => ({
                 marginTop: '16px',
             },
         },
+
         '& a, & a code': {
             // Style taken from the Link component
             color: theme.palette.primary.main,
@@ -269,10 +288,12 @@ const useStyles = makeStyles(theme => ({
                 textDecoration: 'underline',
             },
         },
+
         '& img': {
             maxWidth: '100%',
             boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.074)',
         },
+
         '& hr': {
             height: 1,
             margin: theme.spacing(6, 0),
@@ -280,6 +301,7 @@ const useStyles = makeStyles(theme => ({
             flexShrink: 0,
             backgroundColor: theme.palette.divider,
         },
+
         '& ol': {
             'list-style-position': 'inside',
 

@@ -175,8 +175,7 @@
         },
         "required": [
           "id",
-          "meta",
-          "signature",
+          "object",
           "receipt"
         ],
         "additionalProperties": false
@@ -212,8 +211,7 @@
         },
         "required": [
           "id",
-          "meta",
-          "signature",
+          "object",
           "receipt"
         ],
         "additionalProperties": false

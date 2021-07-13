@@ -36,9 +36,6 @@ const useStyles = makeStyles(theme => ({
             marginBottom: 15,
         },
     },
-    code: {
-        marginBottom: '15px !important',
-    },
 }), { name: 'Quick' });
 
 export default function Quick(props) {
@@ -57,7 +54,7 @@ export default function Quick(props) {
 
         return (
             <Typography
-                variant={item.type}
+                variant={item.variant || 'h5'}
                 className={classes.text}
             >
                 {item.text}
@@ -71,7 +68,7 @@ export default function Quick(props) {
                 className={classes.root}
             >
                 <Typography
-                    variant='h5'
+                    variant='h4'
                     className={classes.title}
                 >
                     {props.titleIcon && (
@@ -83,6 +80,7 @@ export default function Quick(props) {
                             {props.titleIcon}
                         </Icon>
                     )}
+
                     {props.title}
                 </Typography>
 

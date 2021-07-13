@@ -3,16 +3,31 @@ import { Breadcrumbs, makeStyles } from '@material-ui/core';
 
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
+import { rgbToRGBA } from '../../../utils';
+
 const useStyles = makeStyles(theme => ({
     root: {
-        background: theme.palette.background.secondary,
+        background: rgbToRGBA(theme.palette.background.primary, 70),
         width: '100%',
-        borderBottom: '1px solid #eee',
     },
     ol: {
-        padding: '7px 24px',
+        padding: '16px 24px',
         flexWrap: 'nowrap',
         overflowY: 'auto',
+    },
+    li: {
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        maxWidth: 140,
+
+        '& > a': {
+            color: theme.palette.text.primary,
+        },
+
+        [`@media only screen and (min-width: ${theme.breakpoints.values.md}px)`]: {
+            maxWidth: 'initial',
+        },
     },
 }), { name: 'ZIMTBreadcrumbs' });
 
@@ -29,10 +44,13 @@ export default function ZIMTBreadcrumbs(props) {
                     }}
                 />
             )}
+
             classes={{
                 root: classes.root,
                 ol: classes.ol,
+                li: classes.li,
             }}
+
             {...props}
         />
     );

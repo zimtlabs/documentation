@@ -7,25 +7,30 @@ import Link from 'next/link';
 import { List, Divider, Typography, useSidebarOpen, noSidebarRoutes, Wrapper } from '../../';
 import { StorageService } from '../../../services';
 
-import Menu from '../../../Menu';
 import { AppDrawerNavItem } from './components';
+import Menu from '../../../Menu';
 
 const useStyles = makeStyles(theme => ({
     root: {
         zIndex: '1300 !important',
         flexShrink: 0,
+        overflow: 'hidden',
 
         '& .MuiPaper-root': {
             width: theme.CONST.sidebar.width,
+            flexDirection: 'column',
+            boxShadow: '5px 0 17px rgb(0 0 0 / 3%)',
+            border: 'none',
         },
     },
     header: {
-        height: 64,
+        minHeight: 64,
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        lineHeight: 0,
         flex: '0 0 auto',
+        padding: '34px 24px',
     },
     version: {
         fontSize: '0.75rem',
@@ -33,15 +38,29 @@ const useStyles = makeStyles(theme => ({
         letterSpacing: '0.03333em',
         color: theme.palette.text.secondary,
     },
+    name: {
+        whiteSpace: 'nowrap',
+        maxWidth: '100%',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        color: theme.palette.text.primary,
+        fontSize: 16,
+    },
     list: {
         marginTop: 15,
+    },
+    divider: {
+        margin: '14px 0',
+
+        '& hr': {
+            background: 'none',
+        },
     },
 }), { name: 'Sidebar' });
 
 export default function Sidebar(props) {
     const classes = useStyles(props);
     const [open, setOpen] = useState(false);
-    const up600 = useMediaQuery('(min-width: 600px');
     const theme = useTheme();
     const desktop = useMediaQuery(theme.breakpoints.up('lg'));
     const shouldBeOpen = useSidebarOpen();
@@ -81,7 +100,12 @@ export default function Sidebar(props) {
 
     function reduceChildRoutes({ props, items, page, depth }) {
         if (page.type === 'divider') {
-            items.push(<Divider key={new Date().getTime() + items.length} style={{ margin: '15px 0' }} />);
+            items.push((
+                <Divider
+                    key={new Date().getTime() + items.length}
+                    className={classes.divider}
+                />
+            ));
 
             return items;
         }
@@ -142,13 +166,12 @@ export default function Sidebar(props) {
             >
                 <div
                     className={classes.header}
-                    style={{ height: up600 ? 64 : 56 }}
                 >
                     <Link href='/'>
                         <a>
                             <Typography
-                                variant='body1'
-                                style={{ color: theme.palette.text.primary, fontWeight: 600 }}
+                                variant='h6'
+                                className={classes.name}
                             >
                                 Documentation
                             </Typography>
@@ -159,7 +182,6 @@ export default function Sidebar(props) {
                 <Divider style={{ marginBottom: 24 }} />
 
                 {renderNavItems({ pages: Menu, depth: 0 })}
-
             </SwipeableDrawer>
         </Wrapper>
     );

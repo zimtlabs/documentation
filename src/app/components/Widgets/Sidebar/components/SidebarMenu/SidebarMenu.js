@@ -64,6 +64,7 @@ function SidebarMenu() {
                         <InputLabel>
                             Theme *
                         </InputLabel>
+
                         <Select
                             name='type'
                             variant='outlined'

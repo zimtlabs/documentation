@@ -243,6 +243,11 @@ export const GetTheme = (options = { theme: 'light', primary: '', secondary: '',
         },
 
         overrides: {
+            MuiDivider: {
+                root: {
+                    backgroundColor: 'rgb(0 0 0 / 5%)',
+                },
+            },
             MuiInputBase: {
                 root: {
                     width: '100%',
@@ -462,6 +467,18 @@ export const GetTheme = (options = { theme: 'light', primary: '', secondary: '',
                 width: '100%',
                 maxWidth: BREAKPOINTS.values.xl,
                 margin: '0 auto',
+            },
+            dialog: {
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                position: 'relative',
+                padding: '70px 40px',
+                zIndex: 1,
+
+                [`@media only screen and (min-width: ${BREAKPOINTS.values.md}px)`]: {
+                    padding: '95px 115px',
+                },
             },
         },
 

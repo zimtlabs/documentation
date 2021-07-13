@@ -243,8 +243,7 @@
         },
         "required": [
           "id",
-          "meta",
-          "signature",
+          "object",
           "receipt"
         ],
         "additionalProperties": false

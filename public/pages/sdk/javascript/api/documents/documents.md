@@ -66,7 +66,7 @@ Creates a document.
 [API reference](/api#tag/Documents/paths/~1documents/post).
 
 ```javascript
-const result = await sdk.documents.create({ document, file });
+const result = await sdk.documents.create({ object, namespace, file });
 // sdk.documents.create({ object: sdk.documents.generateDocument({
 //     "type ": "image/png",
 //     "name": "Image",
@@ -130,24 +130,24 @@ const result = await sdk.documents.getMany(Pagination);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-        "object": {
-            "meta": {
-                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-                "timestamp": "2020-02-10T19:16:13+02:00",
-                "data_hash": "0x123..."
-            },
-            "data": {
-                "type ": "image/png",
-                "name": "Image",
-                "content": {
-                    "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
-                },
-                "properties": {
-                "prop": 7
-                }
-            },
-            "signature": "0xe633051fc76ae..."
+      "object": {
+        "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13+02:00",
+            "data_hash": "0x123..."
         },
+        "data": {
+            "type ": "image/png",
+            "name": "Image",
+            "content": {
+                "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
+            },
+            "properties": {
+            "prop": 7
+            }
+        },
+        "signature": "0xe633051fc76ae..."
+      },
       "receipt": {
         "received_at": 1579278110
       }
@@ -193,24 +193,24 @@ const result = await sdk.documents.search(Query);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-        "object": {
-            "meta": {
-                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-                "timestamp": "2020-02-10T19:16:13+02:00",
-                "data_hash": "0x123..."
-            },
-            "data": {
-                "type ": "image/png",
-                "name": "Image",
-                "content": {
-                    "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
-                },
-                "properties": {
-                "prop": 7
-                }
-            },
-            "signature": "0xe633051fc76ae..."
+      "object": {
+        "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13+02:00",
+            "data_hash": "0x123..."
         },
+        "data": {
+            "type ": "image/png",
+            "name": "Image",
+            "content": {
+                "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
+            },
+            "properties": {
+            "prop": 7
+            }
+        },
+        "signature": "0xe633051fc76ae..."
+      },
       "receipt": {
         "received_at": 1579278110
       }

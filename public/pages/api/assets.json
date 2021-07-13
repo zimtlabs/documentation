@@ -161,8 +161,7 @@
         },
         "required": [
           "id",
-          "meta",
-          "signature",
+          "object",
           "receipt"
         ],
         "additionalProperties": false
@@ -238,59 +237,61 @@
       "Asset": {
         "response": {
           "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-          "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
-          },
-            "data": {
-            "type": "zimt/lot",
-            "name": "Palette of fruit",
-            "documents": [{
-                "name": "photo-457882-1-1587129086010",
-                "type": "image/jpeg",
-                "id": "0xb4d0f01d79e420ff4ff5edaabd49df2d677b1b01fd6d83801cd..."
+          "object": {
+              "meta": {
+                    "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                    "timestamp": "2020-02-10T19:16:13Z"
                 },
-                {
-                "name": "text-file-1-1587129090597",
-                "type": "text/plain",
-                "id": "0xb78321b49fbf5df5387f696a4d2c174ce0f01b7443f896030e1..."
-                }
-            ],
-            "identifiers": {
-                "AAB": [
-                "123",
-                "12345"
-                ],
-                "EEC": [
-                "asd"
-                ]
+                "signature": "0xe633051fc76ae..."
             },
-            "location": {
-                "type": "Feature",
-                "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    21.8808406,
-                    14.333475399999998
-                ]
+            "data": {
+                "type": "zimt/lot",
+                "name": "Palette of fruit",
+                "documents": [{
+                    "name": "photo-457882-1-1587129086010",
+                    "type": "image/jpeg",
+                    "id": "0xb4d0f01d79e420ff4ff5edaabd49df2d677b1b01fd6d83801cd..."
+                    },
+                    {
+                    "name": "text-file-1-1587129090597",
+                    "type": "text/plain",
+                    "id": "0xb78321b49fbf5df5387f696a4d2c174ce0f01b7443f896030e1..."
+                    }
+                ],
+                "identifiers": {
+                    "AAB": [
+                    "123",
+                    "12345"
+                    ],
+                    "EEC": [
+                    "asd"
+                    ]
+                },
+                "location": {
+                    "type": "Feature",
+                    "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        21.8808406,
+                        14.333475399999998
+                    ]
+                    },
+                    "properties": {
+                    "name": "Street, Town, Country",
+                    "city": "Town",
+                    "country": "US",
+                    "route": "Street",
+                    "street_number": "Street number"
+                    }
                 },
                 "properties": {
-                "name": "Street, Town, Country",
-                "city": "Town",
-                "country": "US",
-                "route": "Street",
-                "street_number": "Street number"
+                    "Custom property 1": "123",
+                    "Custom property 2": "1234",
+                    "Nested custom prop": {
+                    "asd": 123
+                    }
                 }
             },
-            "properties": {
-                "Custom property 1": "123",
-                "Custom property 2": "1234",
-                "Nested custom prop": {
-                "asd": 123
-                }
-            }
-            },
-          "signature": "0xe633051fc76ae...",
           "receipt": {
             "received_at": 1579278110
           }

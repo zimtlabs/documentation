@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { useScrollTrigger } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/styles';
+import { useScrollTrigger, useMediaQuery } from '@material-ui/core';
 import NLink from 'next/link';
 import clsx from 'clsx';
 
-import MenuIcon from '@material-ui/icons/Menu';
-import HomeIcon from '@material-ui/icons/HomeWorkOutlined';
+import IconMenu from '@material-ui/icons/Menu';
 import IconThemeAuto from '@material-ui/icons/Brightness6Outlined';
 import IconThemeLight from '@material-ui/icons/Brightness5Outlined';
 import IconThemeDark from '@material-ui/icons/Brightness4Outlined';
 
-import Logo from '../../../../../public/assets/svg/logo.svg';
+import IconLogoSymbol from '../../../../../public/assets/svg/v2/logo-symbol.svg';
+import IconLogoTypography from '../../../../../public/assets/svg/v2/logo-typography.svg';
 
 import { AppBar, Toolbar, IconButton, Typography, Breadcrumbs, useSidebarOpen, Tooltip, Wrapper } from '../../';
 import { StorageService } from '../../../services';
-import { normalize, rgbToRGBA, DEFAULT_THEME } from '../../../utils';
+import { normalize, DEFAULT_THEME } from '../../../utils';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -23,79 +23,89 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         top: 0,
         left: 0,
+        transition: theme.transitions.create(['box-shadow']),
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
+    shift: {
+        width: `calc(100% - ${theme.CONST.sidebar.width}px)`,
+        marginLeft: theme.CONST.sidebar.width,
+        transition: theme.transitions.create(['margin', 'width'], { easing: 'none', duration: 'none' }),
     },
-    title: {
-        flexGrow: 1,
-        display: 'inline-flex',
-        alignItems: 'center',
+    appBar: {
+        boxShadow: 'none',
+        backgroundColor: theme.palette.background.primary,
+        color: theme.palette.text.primary,
+
+        '&.notTop': {
+            boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.04)',
+        },
     },
     logo: {
-        lineHeight: 0,
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+
+        '&.mobile': {
+            position: 'absolute',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            lineHeight: 0,
+        },
 
         '& > svg': {
-            width: 'auto',
-            height: 27,
-            marginRight: 7,
-            fill: '#fff',
+            fill: theme.palette.text.primary,
         },
+
+        '&.organization': {
+            '& > svg': {
+                width: 'auto',
+                maxWidth: '45vw',
+                maxHeight: 64,
+            },
+
+            '& > img': {
+                width: 'auto',
+                maxWidth: '45vw',
+                maxHeight: 64,
+            },
+        },
+    },
+    zimtLogo: {
+        width: 'auto',
+        maxWidth: '45vw',
+        height: 40,
+        fill: 'currentColor',
+
+        transition: theme.transitions.create(['fill'], {
+            duration: '.2s',
+        }),
+
+        '&.desktop': {
+            height: 15,
+        },
+    },
+    logoImage: {
+        cursor: 'pointer',
+    },
+    toolbar: {
+        padding: 25,
+        margin: '0 auto',
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        height: 91,
+
+        [`@media only screen and (min-width: ${theme.breakpoints.values.md}px)`]: {
+            height: 121,
+        },
+    },
+    left: {
+        display: 'flex',
+        alignItems: 'center',
     },
     avatar: {
         backgroundColor: theme.palette.secondary.main,
         color: '#fff',
-    },
-    link: {
-        display: 'flex',
-        alignItems: 'center',
-        color: theme.palette.primary.main,
-        whiteSpace: 'nowrap',
-    },
-    linkText: {
-        color: theme.palette.text.primary,
-    },
-    icon: {
-        marginRight: theme.spacing(1),
-        width: 20,
-        height: 20,
-    },
-    appBar: {
-        color: '#fff',
-        boxShadow: 'none',
-        transition: 'background-color .2s, box-shadow .2s',
-
-        '&.notTop': {
-            backgroundColor: rgbToRGBA(theme.palette.primary[theme.palette.type === 'dark' ? 'dark' : 'main'], 98),
-        },
-    },
-    appBarShift: {
-        width: `calc(100% - ${theme.CONST.sidebar.width}px)`,
-        marginLeft: theme.CONST.sidebar.width,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: 'none',
-            duration: 'none',
-        }),
-    },
-    breadcrumbs: {
-        borderBottom: 'none',
-
-        '& li:last-child': {
-            paddingRight: 24,
-        },
-
-        '&.notTop': {
-            boxShadow: '0px -1px 7px rgba(0, 0, 0, 0.1)',
-            backgroundColor: rgbToRGBA(theme.palette.background.secondary, 98),
-        },
-    },
-    breadcrumbsShift: {
-        width: `calc(100% - ${theme.CONST.sidebar.width}px)`,
-        marginLeft: theme.CONST.sidebar.width,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: 'none',
-            duration: 'none',
-        }),
     },
     iconTheme: {
         fontSize: '1.6rem',
@@ -115,8 +125,12 @@ export default function Header(props) {
         disableHysteresis: true,
         threshold: 0,
     });
+    const theme = useTheme();
     const sidebarOpen = useSidebarOpen();
+    const desktop = useMediaQuery(theme.breakpoints.up('lg'));
     const [userTheme, setUserTheme] = useState(DEFAULT_THEME);
+
+    const mobile = !desktop;
 
     useEffect(() => {
         const crumbSub = StorageService.crumbSub.subscribe(c => setCrumbs(c));
@@ -148,37 +162,23 @@ export default function Header(props) {
     if (userTheme === 'light') Icon = IconThemeLight;
     if (userTheme === 'dark') Icon = IconThemeDark;
 
-    const breadcrumbs = (
-        <Breadcrumbs
-            className={clsx(classes.breadcrumbs, { [classes.breadcrumbsShift]: sidebarOpen, notTop: !!trigger })}
-        >
-            {crumbs.map((crumb, index) => crumb.to ? (
-                <NLink
-                    href={crumb.to}
-                    key={index}
-                >
-                    <a>
-                        <Typography
-                            variant='body2'
-                            className={classes.link}
-                        >
-                            {!index && <HomeIcon className={classes.icon} />}
-                            {normalize(crumb.label)}
-                        </Typography>
-                    </a>
-                </NLink>
-            ) : (
-                <Typography
-                    variant='body2'
-                    className={clsx(classes.link, classes.linkText)}
-                    key={index}
-                >
-                    {!index && <HomeIcon className={classes.icon} />}
-                    {normalize(crumb.label)}
-                </Typography>
-            ))}
-        </Breadcrumbs>
-    );
+    const LogoImage = () => {
+        if (props.logo) return (
+            <img
+                src={getDocumentURL(props.logo)} alt='logo'
+                className={classes.logoImage}
+                id='logo-custom'
+            />
+        );
+
+        const LogoDefault = mobile ? IconLogoSymbol : IconLogoTypography;
+
+        return (
+            <LogoDefault
+                className={clsx(classes.zimtLogo, desktop && 'desktop')}
+            />
+        );
+    };
 
     const sidebarToggle = () => {
         StorageService.sidebarSub.next(!StorageService.sidebarSub.getValue());
@@ -187,27 +187,32 @@ export default function Header(props) {
     return (
         <Wrapper>
             <div
-                className={classes.root}
+                className={clsx(classes.root, { [classes.shift]: sidebarOpen, notTop: !!trigger })}
             >
                 <AppBar
-                    className={clsx(classes.appBar, { [classes.appBarShift]: sidebarOpen, notTop: !!trigger })}
+                    className={clsx(classes.appBar, { notTop: !!trigger })}
                     position='relative'
                 >
-                    <Toolbar>
-                        {!sidebarOpen && (
-                            <IconButton
-                                edge='start'
-                                className={classes.menuButton}
-                                color='inherit'
-                                onClick={sidebarToggle}
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                        )}
-                        <div className={classes.title}>
+                    <Toolbar className={classes.toolbar}>
+                        <div
+                            className={classes.left}
+                        >
+                            {!sidebarOpen && (
+                                <IconButton
+                                    edge='start'
+                                    color='inherit'
+                                    onClick={sidebarToggle}
+                                    style={{
+                                        marginRight: 12,
+                                    }}
+                                >
+                                    <IconMenu />
+                                </IconButton>
+                            )}
+
                             <NLink href='/'>
                                 <a className={classes.logo}>
-                                    <Logo />
+                                    {LogoImage()}
                                 </a>
                             </NLink>
                         </div>
@@ -230,7 +235,31 @@ export default function Header(props) {
                     </Toolbar>
                 </AppBar>
 
-                {breadcrumbs}
+                <Breadcrumbs>
+                    {crumbs.map((crumb, index) => crumb.to ?
+                        <NLink
+                            href={crumb.to}
+                            key={index}
+                        >
+                            <a>
+                                <Typography
+                                    variant='body2'
+                                    className={classes.link}
+                                >
+                                    {normalize(crumb.label)}
+                                </Typography>
+                            </a>
+                        </NLink> :
+
+                        <Typography
+                            variant='body2'
+                            className={clsx(classes.link, classes.linkText)}
+                            key={index}
+                        >
+                            {normalize(crumb.label)}
+                        </Typography>
+                    )}
+                </Breadcrumbs>
             </div>
         </Wrapper>
     );

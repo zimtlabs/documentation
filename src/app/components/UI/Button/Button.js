@@ -14,16 +14,19 @@ const useStyles = makeStyles(theme => ({
         textTransform: 'none',
         alignSelf: 'center',
         padding: '10px 20px',
+        height: theme.spacing(4),
+        whiteSpace: 'nowrap',
     },
     sizeLarge: {
-        minWidth: 153,
-        padding: '30px 50px',
+        padding: '14px 34px',
+        height: theme.spacing(5),
     },
     sizeSmall: {
         padding: '5px 10px',
+        height: theme.spacing(3),
     },
     outlined: {
-        borderWidth: 2,
+        borderWidth: '2px !important',
     },
     contained: {
         color: '#fff',

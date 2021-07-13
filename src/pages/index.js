@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NextSeo } from 'next-seo';
-import { makeStyles, useTheme } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
 import IconSDK from '@material-ui/icons/Code';
@@ -12,7 +12,7 @@ import { Title, Typography, Quick } from '../app/components';
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
-        maxWidth: theme.breakpoints.values['xl'],
+        maxWidth: theme.breakpoints.values['xxl'],
         margin: '0 auto',
         padding: '44px 24px',
     },
@@ -39,10 +39,10 @@ const useStyles = makeStyles(theme => ({
 
 function Home() {
     const classes = useStyles();
-    const theme = useTheme();
 
     useEffect(() => {
         StorageService.sidebarSub.next(false);
+
         StorageService.crumbSub.next([
             { label: 'Home' },
         ]);
@@ -64,9 +64,9 @@ function Home() {
             />
             <div className={classes.root}>
                 <Title
-                    title='Documentation'
-                    size='small'
-                    image={`/assets/svg/logo${theme.palette.type === 'dark' ? '-light' : ''}.svg`}
+                    title='ZIMT Documentation'
+
+                    align='center'
                 />
 
                 <div
@@ -86,8 +86,8 @@ function Home() {
                                 titleIcon={<IconAPI fontSize='large' />}
                                 to={'/api'}
                                 content={[
-                                    { type: 'h5', text: `Examples` },
-                                    { type: 'h6', text: `Health` },
+                                    { text: `Examples` },
+                                    { text: `Health` },
                                     {
                                         type: 'code', format: 'bash', text: `curl -X GET {Hub API URL}
 
@@ -99,7 +99,7 @@ function Home() {
   }
 }
 ` },
-                                    { type: 'h6', text: `Get assets` },
+                                    { text: `Get assets` },
                                     {
                                         type: 'code', format: 'bash', text: `curl -X GET {Hub API URL}/assets \\
 -H 'Authorization: ZIMT_TOKEN eaw3123...'
@@ -139,19 +139,19 @@ function Home() {
                                 titleIcon={<IconSDK fontSize='large' />}
                                 to={'/sdk/javascript/getting-started/installation'}
                                 content={[
-                                    { type: 'h6', text: `Install` },
+                                    { text: `Install` },
                                     {
                                         type: 'code', format: 'bash', text: `// yarn
 yarn add @zimt/sdk
 
 // npm
 npm install @zimt/sdk` },
-                                    { type: 'h6', text: `Import` },
+                                    { text: `Import` },
                                     {
                                         type: 'code', format: 'javascript', text: `import ZIMTHubSDK from '@zimt/sdk';`
                                     },
 
-                                    { type: 'h6', text: `Use` },
+                                    { text: `Use` },
                                     {
                                         type: 'code', format: 'javascript', text: `const sdk = new ZIMTHubSDK({
     api: {
