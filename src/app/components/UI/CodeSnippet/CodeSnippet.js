@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 
 import { Prism } from '../../';
-import { FONT_FAMILY } from '../../../utils';
+import { FONT_FAMILY, rgbToRGBA } from '../../../utils';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '0 !important',
         margin: '32px 0 !important',
         padding: '32px !important',
-        backgroundColor: '#000 !important',
+        backgroundColor: [theme.palette.type !== 'dark' ? '#000' : rgbToRGBA(theme.palette.text.primary, 10), '!important'],
 
         '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
             background: 'none',

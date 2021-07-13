@@ -85,13 +85,6 @@ const Menu = [
                     { title: 'Display in Viewer', pathname: '/tutorials/create-viewer-app/display-in-viewer' },
                 ],
             },
-            {
-                title: 'Postman',
-                pathname: '/tutorials/postman',
-                children: [
-                    { title: 'Getting started', pathname: '/tutorials/postman/getting-started' }
-                ],
-            },
         ],
     },
 

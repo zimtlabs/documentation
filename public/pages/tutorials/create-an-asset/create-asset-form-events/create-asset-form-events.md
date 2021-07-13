@@ -8,9 +8,7 @@
 - Explanation:
     - Add type
     - Add name
-    - Add custom properties. Click + icon in properties title to add a new property.
-        - Add properties:
-            - Key: _type; Value: public
+    - Any other data...
 
 ### Select one or many assets
 ![Assets select](/pages/tutorials/assets/images/select-assets.png)

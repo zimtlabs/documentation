@@ -1,6 +1,6 @@
 {
   "name": "documentation",
-  "version": "1.3.21",
+  "version": "1.3.24",
   "private": true,
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development nodemon ./src",

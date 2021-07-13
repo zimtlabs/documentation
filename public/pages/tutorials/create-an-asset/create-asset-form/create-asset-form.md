@@ -15,10 +15,10 @@ We will:
         - Add properties:
             - Key: type; Value: zimt.sku
             - Key: description; Value: ...
-            - Key: Weight (grams); Value: 80
+            - Any other properties...
     - Add/upload documents.
         - Add/upload a document. You can choose existing document you previously uploaded and/or upload a new one.
-        - For the document to be visible by the viewer it MUST be public, to make it so you have to add the property _type : public BEFORE uploading the document, click the + button on the properties section in the document tab.
+        - For the document to be visible by the Viewer, to make it so you have to add the property (click on properties + icon) `type` that starts with `zimt.`, as we added such a permission in previous step that allows Viewer app to only display documents of such data.
     - Add identifiers, one or more by clicking + icon in identifiers title.
 
 ### Create asset form

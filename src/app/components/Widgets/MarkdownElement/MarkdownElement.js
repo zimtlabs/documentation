@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import marked from 'marked/lib/marked';
 
 import { Prism, AppElement, ApiElement, Wrapper } from '../../';
-import { textToHash } from '../../../utils';
+import { FONT_FAMILY, rgbToRGBA, textToHash } from '../../../utils';
 
 // Monkey patch to preserve non-breaking spaces
 // https://github.com/chjj/marked/blob/6b0416d10910702f73da9cb6bb3d4c8dcb7dead7/lib/marked.js#L142-L150
@@ -104,8 +104,7 @@ const markedOptions = {
 
 const useStyles = makeStyles(theme => ({
     root: {
-        fontFamily: theme.typography.fontFamily,
-        fontSize: 13,
+        ...theme.typography.body1,
         color: theme.palette.text.primary,
         wordBreak: 'break-word',
 
@@ -121,26 +120,26 @@ const useStyles = makeStyles(theme => ({
         '& pre': {
             margin: '32px 0',
             padding: 32,
-            backgroundColor: '#000',
+            backgroundColor: theme.palette.type !== 'dark' ? '#000' : rgbToRGBA(theme.palette.text.primary, 10),
             direction: 'ltr',
             overflow: 'auto',
             WebkitOverflowScrolling: 'touch', // iOS momentum scrolling.
+
+            '& code': {
+                backgroundColor: 'transparent !important',
+                color: '#fff',
+            },
         },
 
         '& code': {
             display: 'inline-block',
-            fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
+            fontFamily: FONT_FAMILY.tertiary,
             WebkitFontSmoothing: 'subpixel-antialiased',
             padding: '2px 6px',
             color: theme.palette.text.primary,
-            backgroundColor: theme.palette.type === 'dark' ? 'rgba(255,229,100,0.2)' : 'rgba(255,229,100,0.1)',
-            fontSize: 13,
-            borderRadius: 2,
-        },
-
-        '& code[class*="language-"]': {
-            backgroundColor: '#000',
-            color: '#fff',
+            backgroundColor: theme.palette.type !== 'dark' ? rgbToRGBA(theme.palette.text.primary, 3) : rgbToRGBA(theme.palette.text.primary, 14),
+            fontSize: 12,
+            borderRadius: 0,
         },
 
         '& p code, & ul code, & pre code': {
@@ -229,21 +228,25 @@ const useStyles = makeStyles(theme => ({
             marginBottom: '16px',
             borderSpacing: 0,
             overflow: 'hidden',
+
             '& .prop-name': {
                 fontSize: 13,
-                fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
+                fontFamily: FONT_FAMILY.tertiary,
             },
+
             '& .required': {
                 color: theme.palette.type === 'light' ? '#006500' : '#a5ffa5',
             },
+
             '& .prop-type': {
                 fontSize: 13,
-                fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
+                fontFamily: FONT_FAMILY.tertiary,
                 color: theme.palette.type === 'light' ? '#932981' : '#ffb6ec',
             },
+
             '& .prop-default': {
                 fontSize: 13,
-                fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
+                fontFamily: FONT_FAMILY.tertiary,
                 borderBottom: `1px dotted ${theme.palette.text.hint}`,
             },
         },
