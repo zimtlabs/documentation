@@ -32,8 +32,14 @@ const useStyles = makeStyles(theme => ({
         },
     },
     content: {
+        marginTop: 34,
         marginBottom: 24,
         textAlign: 'center',
+    },
+    description: {
+        alignSelf: 'center',
+        marginTop: 32,
+        fontSize: 15,
     },
 }), { name: 'Home' });
 
@@ -62,23 +68,23 @@ function Home() {
                     site_name: 'ZIMT',
                 }}
             />
+
             <div className={classes.root}>
                 <Title
                     title='ZIMT Documentation'
 
                     align='center'
-                />
+                >
+                    <Typography
+                        className={classes.description}
+                    >
+                        Documentation for the ZIMT Hub API and SDKs.
+                    </Typography>
+                </Title>
 
                 <div
                     className={classes.content}
                 >
-                    <Typography
-                        variant='body1'
-                        style={{ marginBottom: 24 }}
-                    >
-                        Documentation for the ZIMT Hub API and SDKs.
-                    </Typography>
-
                     <Grid container spacing={3} direction='row' style={{ textAlign: 'left' }}>
                         <Grid item xs={12} lg={6}>
                             <Quick
@@ -109,11 +115,13 @@ function Home() {
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-        "timestamp": "2020-02-10T19:16:13Z"
+      "object": {
+          "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xe633051fc76ae...",
       },
-      "signature": "0xe633051fc76ae...",
       "receipt": {
         "received_at": 1579278115
       }
@@ -168,11 +176,13 @@ const assets = await sdk.assets.getMany();
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-        "timestamp": "2020-02-10T19:16:13Z"
+      "object": {
+          "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xe633051fc76ae...",
       },
-      "signature": "0xe633051fc76ae...",
       "receipt": {
         "received_at": 1579278115
       }
