@@ -89,7 +89,7 @@ function Home() {
                 <div
                     className={classes.content}
                 >
-                    <Grid container spacing={4} direction='row' style={{ textAlign: 'left' }}>
+                    <Grid container spacing={5} direction='row' style={{ textAlign: 'left' }}>
                         <Grid item xs={12} lg={6}>
                             <Quick
                                 title='Hub API'
