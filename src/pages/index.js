@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         maxWidth: theme.breakpoints.values['xxl'],
         margin: '0 auto',
-        padding: '44px 24px',
+        padding: '94px 32px',
     },
     text: {
         color: theme.palette.text.primary,
@@ -32,11 +32,15 @@ const useStyles = makeStyles(theme => ({
         },
     },
     content: {
-        marginTop: 34,
-        marginBottom: 24,
         textAlign: 'center',
+        marginTop: 54,
+
+        [`@media only screen and (min-width: ${theme.breakpoints.values.md}px)`]: {
+            marginTop: 95,
+        },
     },
     description: {
+        textAlign: 'center',
         alignSelf: 'center',
         marginTop: 32,
         fontSize: 15,
@@ -85,7 +89,7 @@ function Home() {
                 <div
                     className={classes.content}
                 >
-                    <Grid container spacing={3} direction='row' style={{ textAlign: 'left' }}>
+                    <Grid container spacing={7} direction='row' style={{ textAlign: 'left' }}>
                         <Grid item xs={12} lg={6}>
                             <Quick
                                 title='Hub API'
@@ -141,6 +145,7 @@ function Home() {
                                 ]}
                             />
                         </Grid>
+
                         <Grid item xs={12} lg={6}>
                             <Quick
                                 title='SDK JavaScript'

@@ -9,7 +9,6 @@ const useStyles = makeStyles(theme => ({
         display: 'inline-flex',
         flex: '1 1 auto',
         flexDirection: 'column',
-        padding: 25,
         margin: '24px 0',
         borderLeftWidth: 8,
         borderRightWidth: 8,
@@ -33,7 +32,7 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
 
         '& > *': {
-            marginBottom: 15,
+            marginBottom: theme.spacing(2),
         },
     },
 }), { name: 'Quick' });

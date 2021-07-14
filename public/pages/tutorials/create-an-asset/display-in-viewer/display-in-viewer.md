@@ -7,7 +7,7 @@ Finally, we can view our asset and its events in ZIMT Viewer.
 2. We created an asset and 2 events using asset form, and created another asset with 2 events using JSON input.
 
 ## Asset in the Viewer
-- Open the [Viewer prod app](https://zi.mt).
+- Open the [Viewer app](https://zi.mt).
 - In the search input enter asset_id of asset you want to view.
 - Or scan the QR code of an asset from the dashboard.
     - In dashboard click on a title of an asset in assets table.

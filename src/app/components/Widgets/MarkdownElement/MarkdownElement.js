@@ -18,6 +18,7 @@ marked.Lexer.prototype.lex = function lex(src) {
 };
 
 const renderer = new marked.Renderer();
+
 renderer.heading = (text, level) => {
     // Small title. No need for an anchor.
     // It's reducing the risk of duplicated id and it's fewer elements in the DOM.
@@ -39,18 +40,10 @@ renderer.heading = (text, level) => {
     ].join('');
 };
 
-const externs = [
-    'https://material.io/',
-];
-
 renderer.link = (href, title, text) => {
     let more = '';
 
-    if (externs.some(domain => href.indexOf(domain) !== -1)) {
-        more = ' target="_blank" rel="noopener nofollow"';
-    }
-
-    return `<a href="${href}"${more}>${text}</a>`;
+    return `<a href="${href}" target="_blank" rel="noopener nofollow${more}>${text}</a>`;
 };
 
 const markedOptions = {
@@ -318,7 +311,7 @@ const useStyles = makeStyles(theme => ({
         },
     },
     padding: {
-        padding: '0px 44px',
+        padding: '0px 32px',
     },
 }), { name: 'MarkdownElement' });
 

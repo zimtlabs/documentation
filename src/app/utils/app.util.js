@@ -4,9 +4,11 @@
  * Proprietary and confidential
  * Contact: tech@zimt.co
  */
+import Config from '../config';
 
 export const getGithubFileURL = (folders, file, name) => {
-    let url = `https://github.com/zimtlabs/documentation/blob/master/public/pages`;
+    let url = `${Config.config.services.github}/public/pages`;
+
     name = name || `${file || folders[folders.length - 1]}.md`;
 
     if (folders) folders.forEach(folder => url += `/${folder}`);
