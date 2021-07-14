@@ -43,7 +43,7 @@ renderer.heading = (text, level) => {
 renderer.link = (href, title, text) => {
     let more = '';
 
-    return `<a href="${href}" target="_blank" rel="noopener nofollow${more}>${text}</a>`;
+    return `<a href="${href}"${more}>${text}</a>`;
 };
 
 const markedOptions = {
