@@ -46,10 +46,13 @@ export default function App(props) {
         <Wrapper fallback>
             <div className={classes.root}>
                 <Sidebar />
+
                 <Header />
+
                 <main className={clsx(classes.main, { [classes.shift]: sidebarOpen })}>
                     {props.children}
                 </main>
+
                 <Footer />
             </div>
         </Wrapper>

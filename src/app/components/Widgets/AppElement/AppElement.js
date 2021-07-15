@@ -86,15 +86,15 @@ export default function AppElement(props) {
 
             // Download the syntax for main and all extensions, and add it as state array to loop and make tabs of
             let codeFiles = new Set([options.main]);
-            if (options.other) {
-                options.other.forEach(option => codeFiles.add(option));
-            }
+
+            if (options.other) options.other.forEach(option => codeFiles.add(option));
 
             const _files = [];
 
             for (const file of Array.from(codeFiles)) {
                 try {
                     const _file = await RequestService.getPage(titles.folder, titles.file, file);
+
                     let ext = file.split('.');
                     ext = ext[ext.length - 1];
 
@@ -110,7 +110,6 @@ export default function AppElement(props) {
 
             setFiles(_files);
             setSelectedFile(_files[0]);
-
         } catch (error) {
             setError('No demo found');
         }
@@ -155,6 +154,7 @@ export default function AppElement(props) {
                             </ToggleButtonGroup>
                         )}
                     </div>
+
                     {/* Right */}
                     <div className={classes.optionsRight}>
                         <IconButton
@@ -163,6 +163,7 @@ export default function AppElement(props) {
                         >
                             <CodeIcon />
                         </IconButton>
+
                         <IconButton
                             color='inherit'
                             href={getGithubFileURL(titles.folder, titles.file, selectedFile && selectedFile.name)}

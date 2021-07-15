@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import Link from 'next/link';
+import clsx from 'clsx';
 
 import ArrowBack from '@material-ui/icons/KeyboardBackspace';
 
 import { Typography, IconButton, Tooltip, Wrapper } from '../../../components';
-import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
         position: 'relative',
         alignItems: 'flex-start',
         textAlign: 'left',
+        marginBottom: theme.spacing(4),
     },
     title: props => ({
         ...(theme.typography[(props.titleProps && props.titleProps.variant) || 'd1'] || {}),
