@@ -402,8 +402,20 @@ export const GetTheme = (options = { theme: 'light', primary: '', secondary: '',
                     },
 
                     code: {
+                        lineHeight: 1.6,
+                        WebkitFontSmoothing: 'subpixel-antialiased',
+                        fontFamily: [FONT_FAMILY.tertiary, '!important'],
+                        fontSize: [13, '!important'],
+
                         '& span': {
                             whiteSpace: 'pre-wrap',
+                        },
+
+                        '& *': {
+                            lineHeight: 1.6,
+                            WebkitFontSmoothing: 'subpixel-antialiased',
+                            fontFamily: [FONT_FAMILY.tertiary, '!important'],
+                            fontSize: [13, '!important'],
                         },
                     },
 

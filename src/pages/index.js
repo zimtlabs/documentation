@@ -138,7 +138,11 @@ function Home() {
   "pagination": {
     "total": 445,
     "limit": 30,
-    "skip": 0
+    "skip": 0,
+    "next": "0x123...",
+    "previous": "0x123...",
+    "hasNext": true,
+    "hasPrevious": false
   }
 }
 ` },
@@ -200,7 +204,11 @@ const assets = await sdk.assets.getMany();
   "pagination": {
     "total": 445,
     "limit": 30,
-    "skip": 0
+    "skip": 0,
+    "next": "0x123...",
+    "previous": "0x123...",
+    "hasNext": true,
+    "hasPrevious": false
   }
 }
 ` },
