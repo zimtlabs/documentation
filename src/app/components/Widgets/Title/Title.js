@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
         position: 'relative',
         alignItems: 'flex-start',
         textAlign: 'left',
-        marginBottom: theme.spacing(4),
+        marginBottom: theme.spacing(9),
     },
     title: props => ({
         ...(theme.typography[(props.titleProps && props.titleProps.variant) || 'd1'] || {}),
