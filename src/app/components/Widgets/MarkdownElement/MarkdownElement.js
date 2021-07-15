@@ -100,6 +100,7 @@ const useStyles = makeStyles(theme => ({
         ...theme.typography.body1,
         color: theme.palette.text.primary,
         wordBreak: 'break-word',
+        fontSize: 15,
 
         '& > *': {
             position: 'relative',
@@ -126,17 +127,10 @@ const useStyles = makeStyles(theme => ({
 
         '& code': {
             display: 'inline-block',
-            fontFamily: FONT_FAMILY.tertiary,
-            WebkitFontSmoothing: 'subpixel-antialiased',
             padding: '2px 6px',
             color: theme.palette.text.primary,
             backgroundColor: theme.palette.type !== 'dark' ? rgbToRGBA(theme.palette.text.primary, 3) : rgbToRGBA(theme.palette.text.primary, 14),
-            fontSize: 12,
             borderRadius: 0,
-        },
-
-        '& p code, & ul code, & pre code': {
-            fontSize: 13,
         },
 
         '& .token.operator': {
@@ -176,9 +170,8 @@ const useStyles = makeStyles(theme => ({
         },
 
         '& p, & ul, & ol': {
-            lineHeight: 1.6,
+            lineHeight: 1.54,
             marginTop: 0,
-            marginBottom: '16px',
         },
 
         '& ul': {
@@ -187,7 +180,6 @@ const useStyles = makeStyles(theme => ({
 
         '& h1, & h2, & h3, & h4': {
             '& code': {
-                fontSize: 13,
                 // Remove scroll on small screens.
                 wordBreak: 'break-all',
             },
@@ -223,7 +215,7 @@ const useStyles = makeStyles(theme => ({
             overflow: 'hidden',
 
             '& .prop-name': {
-                fontSize: 13,
+                fontSize: 14,
                 fontFamily: FONT_FAMILY.tertiary,
             },
 
@@ -232,13 +224,13 @@ const useStyles = makeStyles(theme => ({
             },
 
             '& .prop-type': {
-                fontSize: 13,
+                fontSize: 14,
                 fontFamily: FONT_FAMILY.tertiary,
                 color: theme.palette.type === 'light' ? '#932981' : '#ffb6ec',
             },
 
             '& .prop-default': {
-                fontSize: 13,
+                fontSize: 14,
                 fontFamily: FONT_FAMILY.tertiary,
                 borderBottom: `1px dotted ${theme.palette.text.hint}`,
             },
@@ -251,13 +243,8 @@ const useStyles = makeStyles(theme => ({
             color: theme.palette.text.primary,
         },
 
-        '& td code': {
-            fontSize: 13,
-            lineHeight: 1.6,
-        },
-
         '& th': {
-            fontSize: 13,
+            fontSize: 14,
             lineHeight: theme.typography.pxToRem(24),
             fontWeight: theme.typography.fontWeightMedium,
             color: theme.palette.text.primary,
@@ -280,6 +267,7 @@ const useStyles = makeStyles(theme => ({
             // Style taken from the Link component
             color: theme.palette.primary.main,
             textDecoration: 'none',
+
             '&:hover': {
                 textDecoration: 'underline',
             },
@@ -300,14 +288,6 @@ const useStyles = makeStyles(theme => ({
 
         '& ol': {
             'list-style-position': 'inside',
-
-            '& li': {
-                marginBottom: 4,
-
-                '&:last-of-type': {
-                    marginBottom: 0,
-                },
-            },
         },
     },
     padding: {

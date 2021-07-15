@@ -17,11 +17,21 @@ const useStyles = makeStyles(theme => {
 
             '& *': {
                 fontFamily: [FONT_FAMILY.secondary, '!important'],
+                fontSize: 15,
             },
 
-            '& .redoc-json *, code, code *': {
+            '& code': {
+                lineHeight: 1.6,
+                WebkitFontSmoothing: 'subpixel-antialiased',
                 fontFamily: [FONT_FAMILY.tertiary, '!important'],
-                fontSize: '12px !important',
+                fontSize: [13, '!important'],
+
+                '& *': {
+                    lineHeight: 1.6,
+                    WebkitFontSmoothing: 'subpixel-antialiased',
+                    fontFamily: [FONT_FAMILY.tertiary, '!important'],
+                    fontSize: [13, '!important'],
+                },
             },
 
             '& h3': {
@@ -89,10 +99,6 @@ const useStyles = makeStyles(theme => {
 
                 '& pre > code': {
                     backgroundColor: theme.palette.type !== 'dark' ? '#000' : rgbToRGBA(theme.palette.text.primary, 0),
-                },
-
-                '& code': {
-                    fontWeight: isWin ? 800 : 400,
                 },
 
                 '& button:focus': {

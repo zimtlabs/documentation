@@ -71,9 +71,13 @@ const assets = await sdk.assets.getMany();
     "message": "Ok"
   },
   "pagination": {
+    "total": 445,
     "limit": 30,
-    "skip": 30,
-    "total": 120
+    "skip": 0,
+    "next": "0x123...",
+    "previous": "0x123...",
+    "hasNext": true,
+    "hasPrevious": false
   }
 }
 ```
