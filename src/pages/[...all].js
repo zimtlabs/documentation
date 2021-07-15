@@ -49,6 +49,7 @@ function All() {
                 (file && ['about', 'contact'].indexOf(file) === -1)
             ) {
                 const page = await RequestService.getPage(folders, file);
+
                 if (page.error) throw new Error('No file found');
 
                 setTitles({ folders, file, hash: hash.slice(1) });
@@ -61,9 +62,11 @@ function All() {
     };
 
     let title = normalize(titles.file ? `${titles.file}` : '');
+
     if (title) title += ' - ';
 
     let description = (titles.folders && titles.folders.length) ? normalize(titles.folders.join(' ')) : '';
+
     if (description) description += '. ';
 
     return (
@@ -81,6 +84,7 @@ function All() {
                     site_name: 'ZIMT',
                 }}
             />
+
             <div className={classes.root}>
                 {loaded && (
                     <MarkdownDocs

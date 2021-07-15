@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { NextSeo } from 'next-seo';
-import { makeStyles, useTheme } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 
 import IconSDK from '@material-ui/icons/Code';
@@ -12,9 +12,9 @@ import { Title, Typography, Quick } from '../app/components';
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
-        maxWidth: theme.breakpoints.values['xl'],
+        maxWidth: theme.breakpoints.values['xxl'],
         margin: '0 auto',
-        padding: '44px 24px',
+        padding: '94px 32px',
     },
     text: {
         color: theme.palette.text.primary,
@@ -32,17 +32,27 @@ const useStyles = makeStyles(theme => ({
         },
     },
     content: {
-        marginBottom: 24,
         textAlign: 'center',
+        marginTop: 54,
+
+        [`@media only screen and (min-width: ${theme.breakpoints.values.md}px)`]: {
+            marginTop: 95,
+        },
+    },
+    description: {
+        textAlign: 'center',
+        alignSelf: 'center',
+        marginTop: 32,
+        fontSize: 15,
     },
 }), { name: 'Home' });
 
 function Home() {
     const classes = useStyles();
-    const theme = useTheme();
 
     useEffect(() => {
         StorageService.sidebarSub.next(false);
+
         StorageService.crumbSub.next([
             { label: 'Home' },
         ]);
@@ -62,32 +72,32 @@ function Home() {
                     site_name: 'ZIMT',
                 }}
             />
+
             <div className={classes.root}>
                 <Title
-                    title='Documentation'
-                    size='small'
-                    image={`/assets/svg/logo${theme.palette.type === 'dark' ? '-light' : ''}.svg`}
-                />
+                    title='ZIMT Documentation'
+
+                    align='center'
+                >
+                    <Typography
+                        className={classes.description}
+                    >
+                        Documentation for the ZIMT Hub API and SDKs.
+                    </Typography>
+                </Title>
 
                 <div
                     className={classes.content}
                 >
-                    <Typography
-                        variant='body1'
-                        style={{ marginBottom: 24 }}
-                    >
-                        Documentation for the ZIMT Hub API and SDKs.
-                    </Typography>
-
-                    <Grid container spacing={3} direction='row' style={{ textAlign: 'left' }}>
+                    <Grid container spacing={5} direction='row' style={{ textAlign: 'left' }}>
                         <Grid item xs={12} lg={6}>
                             <Quick
                                 title='Hub API'
                                 titleIcon={<IconAPI fontSize='large' />}
                                 to={'/api'}
                                 content={[
-                                    { type: 'h5', text: `Examples` },
-                                    { type: 'h6', text: `Health` },
+                                    { text: `Examples` },
+                                    { text: `Health` },
                                     {
                                         type: 'code', format: 'bash', text: `curl -X GET {Hub API URL}
 
@@ -99,7 +109,7 @@ function Home() {
   }
 }
 ` },
-                                    { type: 'h6', text: `Get assets` },
+                                    { text: `Get assets` },
                                     {
                                         type: 'code', format: 'bash', text: `curl -X GET {Hub API URL}/assets \\
 -H 'Authorization: ZIMT_TOKEN eaw3123...'
@@ -109,11 +119,13 @@ function Home() {
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-        "timestamp": "2020-02-10T19:16:13Z"
+      "object": {
+          "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xe633051fc76ae...",
       },
-      "signature": "0xe633051fc76ae...",
       "receipt": {
         "received_at": 1579278115
       }
@@ -133,25 +145,26 @@ function Home() {
                                 ]}
                             />
                         </Grid>
+
                         <Grid item xs={12} lg={6}>
                             <Quick
                                 title='SDK JavaScript'
                                 titleIcon={<IconSDK fontSize='large' />}
                                 to={'/sdk/javascript/getting-started/installation'}
                                 content={[
-                                    { type: 'h6', text: `Install` },
+                                    { text: `Install` },
                                     {
                                         type: 'code', format: 'bash', text: `// yarn
 yarn add @zimt/sdk
 
 // npm
 npm install @zimt/sdk` },
-                                    { type: 'h6', text: `Import` },
+                                    { text: `Import` },
                                     {
                                         type: 'code', format: 'javascript', text: `import ZIMTHubSDK from '@zimt/sdk';`
                                     },
 
-                                    { type: 'h6', text: `Use` },
+                                    { text: `Use` },
                                     {
                                         type: 'code', format: 'javascript', text: `const sdk = new ZIMTHubSDK({
     api: {
@@ -168,11 +181,13 @@ const assets = await sdk.assets.getMany();
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-        "timestamp": "2020-02-10T19:16:13Z"
+      "object": {
+          "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xe633051fc76ae...",
       },
-      "signature": "0xe633051fc76ae...",
       "receipt": {
         "received_at": 1579278115
       }

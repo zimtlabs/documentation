@@ -9,11 +9,9 @@ const useStyles = makeStyles(theme => ({
         display: 'inline-flex',
         flex: '1 1 auto',
         flexDirection: 'column',
-        backgroundColor: theme.palette.background.secondary,
-        padding: 25,
         margin: '24px 0',
-        'border-left-width': 8,
-        'border-right-width': 8,
+        borderLeftWidth: 8,
+        borderRightWidth: 8,
         width: '100%',
         alignSelf: 'flex-start',
     },
@@ -34,11 +32,8 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
 
         '& > *': {
-            marginBottom: 15,
+            marginBottom: theme.spacing(2),
         },
-    },
-    code: {
-        marginBottom: '15px !important',
     },
 }), { name: 'Quick' });
 
@@ -58,7 +53,7 @@ export default function Quick(props) {
 
         return (
             <Typography
-                variant={item.type}
+                variant={item.variant || 'h5'}
                 className={classes.text}
             >
                 {item.text}
@@ -72,7 +67,7 @@ export default function Quick(props) {
                 className={classes.root}
             >
                 <Typography
-                    variant='h5'
+                    variant='h4'
                     className={classes.title}
                 >
                     {props.titleIcon && (
@@ -84,6 +79,7 @@ export default function Quick(props) {
                             {props.titleIcon}
                         </Icon>
                     )}
+
                     {props.title}
                 </Typography>
 

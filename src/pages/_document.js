@@ -13,8 +13,8 @@ export default class CustomDocument extends Document {
                     <meta httpEquiv="Pragma" content="no-cache" />
                     <meta httpEquiv="cache-control" content="no-cache, no-store, must-revalidate" />
 
-                    <link rel='preconnect' href='https://fonts.gstatic.com' />
-                    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Roboto+Mono&family=Zilla+Slab:wght@400;700&display=auto' rel='stylesheet' />
+                    <link rel="preconnect" href="https://fonts.gstatic.com" />
+                    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Mukta:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
                     <link rel='manifest' href='/manifest.json' />
 

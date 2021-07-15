@@ -2,8 +2,7 @@ import React from 'react';
 import { Link, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-    },
+    root: {},
 }), { name: 'ZIMTLink' });
 
 export default function ZIMTLink(props) {
@@ -14,7 +13,10 @@ export default function ZIMTLink(props) {
             classes={{
                 root: classes.root,
             }}
+
             {...props}
+
+            underline='none'
         />
     );
 }

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import marked from 'marked/lib/marked';
 
 import { Prism, AppElement, ApiElement, Wrapper } from '../../';
-import { textToHash } from '../../../utils';
+import { FONT_FAMILY, rgbToRGBA, textToHash } from '../../../utils';
 
 // Monkey patch to preserve non-breaking spaces
 // https://github.com/chjj/marked/blob/6b0416d10910702f73da9cb6bb3d4c8dcb7dead7/lib/marked.js#L142-L150
@@ -18,6 +18,7 @@ marked.Lexer.prototype.lex = function lex(src) {
 };
 
 const renderer = new marked.Renderer();
+
 renderer.heading = (text, level) => {
     // Small title. No need for an anchor.
     // It's reducing the risk of duplicated id and it's fewer elements in the DOM.
@@ -39,16 +40,8 @@ renderer.heading = (text, level) => {
     ].join('');
 };
 
-const externs = [
-    'https://material.io/',
-];
-
 renderer.link = (href, title, text) => {
     let more = '';
-
-    if (externs.some(domain => href.indexOf(domain) !== -1)) {
-        more = ' target="_blank" rel="noopener nofollow"';
-    }
 
     return `<a href="${href}"${more}>${text}</a>`;
 };
@@ -104,8 +97,7 @@ const markedOptions = {
 
 const useStyles = makeStyles(theme => ({
     root: {
-        fontFamily: theme.typography.fontFamily,
-        fontSize: 13,
+        ...theme.typography.body1,
         color: theme.palette.text.primary,
         wordBreak: 'break-word',
 
@@ -117,69 +109,82 @@ const useStyles = makeStyles(theme => ({
             marginTop: -96, // Offset for the anchor.
             position: 'absolute',
         },
+
         '& pre': {
-            margin: '24px 0',
-            padding: '12px 18px',
-            backgroundColor: '#272c34',
+            margin: '32px 0',
+            padding: 32,
+            backgroundColor: theme.palette.type !== 'dark' ? '#000' : rgbToRGBA(theme.palette.text.primary, 10),
             direction: 'ltr',
-            borderRadius: theme.shape.borderRadius,
             overflow: 'auto',
             WebkitOverflowScrolling: 'touch', // iOS momentum scrolling.
+
+            '& code': {
+                backgroundColor: 'transparent !important',
+                color: '#fff',
+            },
         },
+
         '& code': {
             display: 'inline-block',
-            fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
+            fontFamily: FONT_FAMILY.tertiary,
             WebkitFontSmoothing: 'subpixel-antialiased',
             padding: '2px 6px',
             color: theme.palette.text.primary,
-            backgroundColor: theme.palette.type === 'dark' ? 'rgba(255,229,100,0.2)' : 'rgba(255,229,100,0.1)',
-            fontSize: 13,
-            borderRadius: 2,
+            backgroundColor: theme.palette.type !== 'dark' ? rgbToRGBA(theme.palette.text.primary, 3) : rgbToRGBA(theme.palette.text.primary, 14),
+            fontSize: 12,
+            borderRadius: 0,
         },
-        '& code[class*="language-"]': {
-            backgroundColor: '#272c34',
-            color: '#fff',
-        },
+
         '& p code, & ul code, & pre code': {
             fontSize: 13,
         },
+
         '& .token.operator': {
             background: 'transparent',
         },
+
         '& h1': {
             ...theme.typography.h3,
             fontSize: 40,
             margin: '16px 0',
         },
+
         '& .description': {
             ...theme.typography.h5,
             margin: '0 0 40px',
         },
+
         '& h2': {
             ...theme.typography.h4,
             fontSize: 30,
             margin: '40px 0 16px',
         },
+
         '& h3': {
             ...theme.typography.h5,
             margin: '40px 0 16px',
         },
+
         '& h4': {
             ...theme.typography.h6,
             margin: '32px 0 16px',
         },
+
         '& h5': {
             ...theme.typography.subtitle2,
             margin: '32px 0 16px',
         },
+
         '& p, & ul, & ol': {
             lineHeight: 1.6,
             marginTop: 0,
             marginBottom: '16px',
         },
+
         '& ul': {
             paddingLeft: 30,
         },
+
         '& h1, & h2, & h3, & h4': {
             '& code': {
                 fontSize: 13,
@@ -204,6 +209,7 @@ const useStyles = makeStyles(theme => ({
                 },
             },
         },
+
         '& table': {
             // Trade display table for scroll overflow
             display: 'block',
@@ -215,34 +221,41 @@ const useStyles = makeStyles(theme => ({
             marginBottom: '16px',
             borderSpacing: 0,
             overflow: 'hidden',
+
             '& .prop-name': {
                 fontSize: 13,
-                fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
+                fontFamily: FONT_FAMILY.tertiary,
             },
+
             '& .required': {
                 color: theme.palette.type === 'light' ? '#006500' : '#a5ffa5',
             },
+
             '& .prop-type': {
                 fontSize: 13,
-                fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
+                fontFamily: FONT_FAMILY.tertiary,
                 color: theme.palette.type === 'light' ? '#932981' : '#ffb6ec',
             },
+
             '& .prop-default': {
                 fontSize: 13,
-                fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',
+                fontFamily: FONT_FAMILY.tertiary,
                 borderBottom: `1px dotted ${theme.palette.text.hint}`,
             },
         },
+
         '& td': {
             ...theme.typography.body2,
             borderBottom: `1px solid ${theme.palette.divider}`,
             padding: 16,
             color: theme.palette.text.primary,
         },
+
         '& td code': {
             fontSize: 13,
             lineHeight: 1.6,
         },
+
         '& th': {
             fontSize: 13,
             lineHeight: theme.typography.pxToRem(24),
@@ -252,6 +265,7 @@ const useStyles = makeStyles(theme => ({
             borderBottom: `1px solid ${theme.palette.divider}`,
             padding: 16,
         },
+
         '& blockquote': {
             borderLeft: '5px solid #ffe564',
             backgroundColor: 'rgba(255,229,100,0.2)',
@@ -261,6 +275,7 @@ const useStyles = makeStyles(theme => ({
                 marginTop: '16px',
             },
         },
+
         '& a, & a code': {
             // Style taken from the Link component
             color: theme.palette.primary.main,
@@ -269,10 +284,12 @@ const useStyles = makeStyles(theme => ({
                 textDecoration: 'underline',
             },
         },
+
         '& img': {
             maxWidth: '100%',
             boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.074)',
         },
+
         '& hr': {
             height: 1,
             margin: theme.spacing(6, 0),
@@ -280,6 +297,7 @@ const useStyles = makeStyles(theme => ({
             flexShrink: 0,
             backgroundColor: theme.palette.divider,
         },
+
         '& ol': {
             'list-style-position': 'inside',
 
@@ -293,7 +311,7 @@ const useStyles = makeStyles(theme => ({
         },
     },
     padding: {
-        padding: '0px 44px',
+        padding: '0px 32px',
     },
 }), { name: 'MarkdownElement' });
 

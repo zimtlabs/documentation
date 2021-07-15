@@ -1,5 +1,6 @@
 
 # Display in Viewer
+
 Finally, we can view our asset and its events in our Viewer app.
 
 ## Recap
@@ -8,7 +9,7 @@ Finally, we can view our asset and its events in our Viewer app.
 
 ## Create an asset
 Now we need to create an asset described in permission we previously created, so we can display it in the viewer app. \
-You can follow this [Create asset tutorial](https://dev.zi.mt/tutorials/create-an-asset/getting-started).
+You can follow this [Create asset tutorial](/tutorials/create-an-asset/getting-started).
 
 ## Viewer app
 - You can download our very simple HTML, CSS, JS [viewer app](https://github.com/zimtlabs/zimt-view).
@@ -19,7 +20,7 @@ You can follow this [Create asset tutorial](https://dev.zi.mt/tutorials/create-a
 - Open index.html in your browser.
 - In the search input enter ID of an asset you want to view.
 - If Viewer has permission to view requested asset, it will display the asset information, otherwise display an error.
-- In the page image, verification status, title, description, properties and events are displayed.
+- In the page image, title, description, properties and events are displayed.
 - You can open the browser console to view asset blockchain verification result.
 
 App is using [ZIMT JavaScript SDK](https://www.npmjs.com/package/@zimt/sdk) for fetching ZIMT Hub API assets and events. \

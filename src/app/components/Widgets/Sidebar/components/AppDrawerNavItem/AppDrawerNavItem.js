@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import { ListItem, Button, noSidebarRoutes, Wrapper } from '../../../../';
 import { StorageService } from '../../../../../services';
-import { copy } from '../../../../../utils';
+import { copy, FONT_FAMILY } from '../../../../../utils';
 
 const useStyles = makeStyles(theme => ({
     item: {
@@ -21,24 +21,37 @@ const useStyles = makeStyles(theme => ({
     },
     text: {
         justifyContent: 'flex-start',
-        fontSize: 12,
 
         '&.active': {
             color: theme.palette.primary.main,
         },
     },
     buttonText: {
-        padding: '7px 0',
-        fontWeight: theme.typography.fontWeightBold,
-    },
-    linkText: {
-        fontWeight: theme.typography.fontWeightRegular,
-        padding: '7px 0',
+        padding: '18px 0',
+        fontWeight: 600,
+        fontSize: 14,
 
         '&.depth-0': {
-            fontWeight: theme.typography.fontWeightMedium,
+            fontSize: 14,
+            padding: '24px 0',
+            fontFamily: FONT_FAMILY.primary,
+            fontWeight: 600,
         },
-    }
+    },
+    linkText: {
+        fontWeight: 400,
+        padding: '18px 0',
+
+        '&.depth-0': {
+            fontSize: 14,
+            padding: '24px 0',
+            fontFamily: FONT_FAMILY.primary,
+        },
+    },
+    listItemIcon: {
+        minWidth: 'auto',
+        marginRight: theme.spacing(2.5),
+    },
 }));
 
 function AppDrawerNavItem(props) {

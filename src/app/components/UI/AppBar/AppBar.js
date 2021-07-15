@@ -3,7 +3,6 @@ import { AppBar, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        background: theme.palette.primary[theme.palette.type === 'dark' ? 'dark' : 'main'],
     },
 }), { name: 'ZIMTAppBar' });
 

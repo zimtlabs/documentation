@@ -58,8 +58,12 @@ const result = await sdk.apiKeys.getMany(Pagination);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+      "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
       },
       "data": {
         "name": "Developer key",
@@ -77,7 +81,6 @@ const result = await sdk.apiKeys.getMany(Pagination);
         },
         "active": true
       },
-      "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
         "received_at": 1579967810
       }
@@ -110,8 +113,12 @@ const result = await sdk.apiKeys.getPublic(Pagination);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+      "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
       },
       "data": {
         "name": "Developer key",
@@ -130,7 +137,6 @@ const result = await sdk.apiKeys.getPublic(Pagination);
         "active": true,
         "private": false
       },
-      "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
         "received_at": 1579967810
       }
@@ -176,8 +182,12 @@ const result = await sdk.apiKeys.search(Query);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+      "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
       },
       "data": {
         "name": "Developer key",
@@ -195,7 +205,6 @@ const result = await sdk.apiKeys.search(Query);
         },
         "active": true
       },
-      "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
         "received_at": 1579967810
       }
@@ -227,36 +236,29 @@ const result = await sdk.apiKeys.get(id);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
-      },
-      "data": {
         "name": "Developer key",
         "description": "Developer API key",
         "rules": {
-          "http_referrers": [
+            "http_referrers": [
             {
-              "value": "website.com"
+                "value": "website.com"
             }
-          ]
+            ]
         },
         "keys": {
-          "address": "0x4DC2f66Ea6f7Cd898342378e514cBDAD9dE5CC1B",
-          "private_key": "0x14fbd74c7b5bed4109496f7df98a61ea11775edbac3bf203ac1f6cfc8daa999f"
+            "address": "0x4DC2f66Ea6f7Cd898342378e514cBDAD9dE5CC1B",
+            "private_key": "0x14fbd74c7b5bed4109496f7df98a61ea11775edbac3bf203ac1f6cfc8daa999f"
         },
         "active": true
-      },
-      "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
-      "receipt": {
-        "received_at": 1579967810
-      }
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
       "received_at": 1579967810
     }
@@ -289,8 +291,12 @@ const result = await sdk.apiKeys.update(apiKey_id: string, API key data);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
       "name": "Developer key",
@@ -308,7 +314,6 @@ const result = await sdk.apiKeys.update(apiKey_id: string, API key data);
       },
       "active": false
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
       "received_at": 1579967810
     }

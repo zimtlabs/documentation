@@ -1,20 +1,23 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles, useTheme } from '@material-ui/styles';
+import { useMediaQuery } from '@material-ui/core';
 import clsx from 'clsx';
 
-import { Typography, Link, useSidebarOpen, Wrapper } from '../../';
+import LinkIcon from '@material-ui/icons/CallMadeRounded';
+
+import IconLogoSymbol from '../../../../../public/assets/svg/v2/logo-symbol.svg';
+
+import { Typography, useSidebarOpen, Link as ZLink, Wrapper, ActiveLink } from '../../';
+import { rgbToRGBA } from '../../../utils';
 
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         flex: '0 0 auto',
-        backgroundColor: theme.palette.background.primary,
+        backgroundColor: props => props.background || rgbToRGBA(theme.palette.background.primary, 3),
+        backdropFilter: 'blur(80px)',
         zIndex: '700 !important',
-        marginTop: 24,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: 'none',
-            duration: 'none',
-        }),
+        color: theme.palette.text.secondary,
     },
     rootShift: {
         width: `calc(100% - ${theme.CONST.sidebar.width}px)`,
@@ -25,64 +28,130 @@ const useStyles = makeStyles(theme => ({
         }),
     },
     wrapper: {
-        width: '100%',
-        maxWidth: 1200,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        padding: '34px 25px',
+        width: '100%',
+        maxWidth: theme.breakpoints.values.lg,
         margin: '0 auto',
+        padding: '80px 50px',
+
+        [`@media only screen and (min-width: ${theme.breakpoints.values.md}px)`]: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            padding: '60px 50px',
+        },
+
+        [`@media only screen and (min-width: ${theme.breakpoints.values.lg + 100}px)`]: {
+            padding: '60px 0',
+        },
     },
-    copyright: {
-        fontSize: 12,
-        fontWeight: 500,
-        letterSpacing: '0.03em',
-        color: theme.palette.text.secondary,
-        userSelect: 'none',
-        textAlign: 'center',
+    menu: {
+        display: 'grid',
+        gridAutoFlow: 'row',
+        gridGap: 20,
+        marginBottom: 50,
+
+        [`@media only screen and (min-width: ${theme.breakpoints.values.md}px)`]: {
+            gridAutoFlow: 'column',
+            justifyContent: 'flex-start',
+            marginBottom: 0,
+        },
     },
-    version: {
-        fontFamily: 'monospace',
+    link: {
+        display: 'flex',
+        alignItems: 'center',
         lineHeight: 1,
-        fontSize: 11,
-        marginTop: 11,
-        color: theme.palette.text.disabled,
+        justifySelf: 'center',
+        cursor: 'pointer',
+        color: 'inherit',
+        fontWeight: 400,
+
+        [`@media only screen and (min-width: ${theme.breakpoints.values.md}px)`]: {
+            justifySelf: 'flex-start',
+        },
+    },
+    symbol: {
+        fill: 'currentColor',
+        height: 21,
+        width: 21,
+        marginBottom: 30,
+    },
+    poweredBy: {
+        color: 'inherit',
     },
 }), { name: 'Footer' });
 
 export default function Footer(props) {
     const classes = useStyles(props);
+    const theme = useTheme();
+    const desktop = useMediaQuery(`(min-width:${theme.breakpoints.values.md}px)`);
+    const mobile = !desktop;
     const sidebarOpen = useSidebarOpen();
+
+    const MENU = [
+        { label: 'Privacy Policy', href: 'https://zimt.co/privacy-policy' },
+    ];
 
     return (
         <Wrapper>
             <footer
-                className={clsx(classes.root, {
-                    [classes.rootShift]: sidebarOpen,
-                })}
+                className={clsx(classes.root, { [classes.rootShift]: sidebarOpen })}
             >
                 <div className={classes.wrapper}>
-                    <Typography
-                        variant='caption'
-                        className={classes.copyright}
+                    <div className={classes.menu}>
+                        {MENU.map((item, index) => (
+                            <React.Fragment key={index}>
+                                {item.to ? (
+                                    <ActiveLink
+                                        href={item.to}
+                                        activeClassName='active'
+                                    >
+                                        <Typography
+                                            className={classes.link}
+                                            component='a'
+                                            variant='body2'
+                                        >
+                                            {item.label}
+                                        </Typography>
+                                    </ActiveLink>
+                                ) : (
+                                    <ZLink
+                                        href={item.href}
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                        className={clsx(classes.link, classes.linkExternal)}
+                                    >
+                                        {item.label}
+
+                                        <LinkIcon
+                                            style={{
+                                                marginLeft: 7,
+                                                fontSize: 'inherit',
+                                            }}
+                                        />
+                                    </ZLink>
+                                )}
+                            </React.Fragment>
+                        ))}
+                    </div>
+
+                    {mobile && (
+                        <IconLogoSymbol
+                            className={classes.symbol}
+                        />
+                    )}
+
+                    <ZLink
+                        href='https://zimt.co'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        variant='body2'
+                        className={classes.poweredBy}
                     >
-                        Copyright © 2020
-
-                    <span style={{ margin: '0 9px' }}>·</span>
-
-                        <Link
-                            href='https://zimt.co'
-                            target='_blank'
-                            style={{ fontSize: 11, fontWeight: 600 }}
-                        >
-                            ZIMT
-                    </Link>
-                    </Typography>
-
-                    <Typography variant='body2' className={classes.version}>
-                        v{global.appVersion}
-                    </Typography>
+                        Powered by ZIMT
+                    </ZLink>
                 </div>
             </footer>
         </Wrapper>

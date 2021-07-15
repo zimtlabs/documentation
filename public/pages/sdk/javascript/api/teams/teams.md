@@ -60,8 +60,12 @@ const result = await sdk.teams.getMany(Pagination);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+      "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
       },
       "data": {
         "name": "Team 1",
@@ -76,7 +80,6 @@ const result = await sdk.teams.getMany(Pagination);
           }
         ]
       },
-      "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
         "received_at": 1579967810
       }
@@ -122,8 +125,12 @@ const result = await sdk.teams.search(Query);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "meta": {
-        "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+      "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
       },
       "data": {
         "name": "Team 1",
@@ -138,7 +145,6 @@ const result = await sdk.teams.search(Query);
           }
         ]
       },
-      "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
       "receipt": {
         "received_at": 1579967810
       }

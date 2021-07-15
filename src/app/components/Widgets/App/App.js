@@ -11,7 +11,11 @@ const useStyles = makeStyles(theme => ({
         minHeight: '100vh',
         backgroundColor: theme.palette.background.primary,
         position: 'relative',
-        paddingTop: () => process.browser && window.location.pathname.indexOf('/api') === 0 ? 0 : 91,
+        paddingTop: () => process.browser && window.location.pathname.indexOf('/api') === 0 ? 0 : 144,
+
+        [`@media only screen and (min-width: ${theme.breakpoints.values.md}px)`]: {
+            paddingTop: () => process.browser && window.location.pathname.indexOf('/api') === 0 ? 0 : 174,
+        },
     },
     main: {
         flex: '1 1 auto',
@@ -24,7 +28,7 @@ const useStyles = makeStyles(theme => ({
             duration: 'none',
         }),
     },
-    mainShift: {
+    shift: {
         width: `calc(100% - ${theme.CONST.sidebar.width}px)`,
         marginLeft: theme.CONST.sidebar.width,
         transition: theme.transitions.create(['margin', 'width'], {
@@ -42,10 +46,13 @@ export default function App(props) {
         <Wrapper fallback>
             <div className={classes.root}>
                 <Sidebar />
+
                 <Header />
-                <main className={clsx(classes.main, { [classes.mainShift]: sidebarOpen })}>
+
+                <main className={clsx(classes.main, { [classes.shift]: sidebarOpen })}>
                     {props.children}
                 </main>
+
                 <Footer />
             </div>
         </Wrapper>
