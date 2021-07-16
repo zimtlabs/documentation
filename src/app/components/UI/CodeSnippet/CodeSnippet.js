@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '0 !important',
         margin: '32px 0 !important',
         padding: '32px !important',
-        backgroundColor: [theme.palette.type !== 'dark' ? '#000' : rgbToRGBA(theme.palette.text.primary, 10), '!important'],
+        backgroundColor: [theme.palette.type !== 'dark' ? '#000' : rgbToRGBA(theme.palette.text.primary, 14), '!important'],
 
         '& .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string': {
             background: 'none',

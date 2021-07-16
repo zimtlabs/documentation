@@ -42,10 +42,6 @@ const useStyles = makeStyles(theme => ({
             justifyContent: 'space-between',
             padding: '60px 50px',
         },
-
-        [`@media only screen and (min-width: ${theme.breakpoints.values.lg + 100}px)`]: {
-            padding: '60px 0',
-        },
     },
     menu: {
         display: 'grid',

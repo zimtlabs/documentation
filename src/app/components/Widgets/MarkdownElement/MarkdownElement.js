@@ -114,7 +114,7 @@ const useStyles = makeStyles(theme => ({
         '& pre': {
             margin: '32px 0',
             padding: 32,
-            backgroundColor: theme.palette.type !== 'dark' ? '#000' : rgbToRGBA(theme.palette.text.primary, 10),
+            backgroundColor: theme.palette.type !== 'dark' ? '#000' : rgbToRGBA(theme.palette.text.primary, 14),
             direction: 'ltr',
             overflow: 'auto',
             WebkitOverflowScrolling: 'touch', // iOS momentum scrolling.
@@ -289,6 +289,8 @@ const useStyles = makeStyles(theme => ({
         '& ol': {
             'list-style-position': 'inside',
         },
+
+        ...theme.mixins.all,
     },
     padding: {
         padding: '0px 32px',
