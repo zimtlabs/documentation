@@ -9,14 +9,13 @@ import { parseMarkdownFileReference, getPublicFileUrl, FONT_FAMILY, rgbToRGBA } 
 import { StorageService } from '../../../services';
 
 const useStyles = makeStyles(theme => {
-    const isWin = /(win)/i.test(navigator.platform);
-
     return ({
         root: {
             width: '100%',
 
             '& *': {
                 fontFamily: [FONT_FAMILY.secondary, '!important'],
+                lineHeight: 1.75,
                 fontSize: 15,
             },
 
@@ -31,6 +30,20 @@ const useStyles = makeStyles(theme => {
                     WebkitFontSmoothing: 'subpixel-antialiased',
                     fontFamily: [FONT_FAMILY.tertiary, '!important'],
                     fontSize: [13, '!important'],
+                },
+            },
+
+            '& p > code, li > code, div > code': {
+                borderRadius: 0,
+                backgroundColor: 'transparent',
+                fontSize: [12, '!important'],
+            },
+
+            [`& [kind='field']`]: {
+                fontSize: [14, '!important'],
+
+                '& *': {
+                    fontSize: [14, '!important'],
                 },
             },
 
@@ -63,6 +76,7 @@ const useStyles = makeStyles(theme => {
 
                 '& span[title]': {
                     color: theme.palette.text.primary,
+                    lineHeight: 1.54,
                 },
 
                 '& > span[type]': {
@@ -70,7 +84,7 @@ const useStyles = makeStyles(theme => {
                 },
 
                 '& > span:nth-child(2)': {
-                    fontSize: 13,
+                    fontSize: 14,
                     marginLeft: theme.spacing(1),
                 },
 
@@ -135,7 +149,6 @@ const useStyles = makeStyles(theme => {
 
                     '& > div > div > div > div > button + div > div > div > div': {
                         fontFamily: FONT_FAMILY.tertiary,
-                        fontSize: 12,
                         background: '#444',
                         border: '1px solid #555',
                     },
@@ -165,7 +178,6 @@ const useStyles = makeStyles(theme => {
                 '& .api-content': {
                     '& > div > div > div > div > div > div > div > div': {
                         fontFamily: FONT_FAMILY.tertiary,
-                        fontSize: 12,
                     },
                 },
             }),
