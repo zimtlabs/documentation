@@ -149,23 +149,23 @@ const useStyles = makeStyles(theme => ({
         },
 
         '& h2': {
-            ...theme.typography.h4,
-            fontSize: 30,
+            ...theme.typography.h2,
+            fontWeight: 600,
             margin: '40px 0 16px',
         },
 
         '& h3': {
-            ...theme.typography.h5,
+            ...theme.typography.h3,
             margin: '40px 0 16px',
         },
 
         '& h4': {
-            ...theme.typography.h6,
+            ...theme.typography.h4,
             margin: '32px 0 16px',
         },
 
         '& h5': {
-            ...theme.typography.subtitle2,
+            ...theme.typography.h5,
             margin: '32px 0 16px',
         },
 
