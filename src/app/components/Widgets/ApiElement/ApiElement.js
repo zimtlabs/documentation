@@ -19,26 +19,6 @@ const useStyles = makeStyles(theme => {
                 fontSize: 15,
             },
 
-            '& code': {
-                lineHeight: 1.6,
-                WebkitFontSmoothing: 'subpixel-antialiased',
-                fontFamily: [FONT_FAMILY.tertiary, '!important'],
-                fontSize: [13, '!important'],
-
-                '& *': {
-                    lineHeight: 1.6,
-                    WebkitFontSmoothing: 'subpixel-antialiased',
-                    fontFamily: [FONT_FAMILY.tertiary, '!important'],
-                    fontSize: [13, '!important'],
-                },
-            },
-
-            '& p > code, li > code, div > code': {
-                borderRadius: 0,
-                backgroundColor: 'transparent',
-                fontSize: [12, '!important'],
-            },
-
             [`& [kind='field']`]: {
                 fontSize: [14, '!important'],
 
@@ -107,7 +87,7 @@ const useStyles = makeStyles(theme => {
                 [`& pre[class*='language-']`]: {
                     padding: 32,
                     margin: '32px 0',
-                    backgroundColor: theme.palette.type !== 'dark' ? '#000' : rgbToRGBA(theme.palette.text.primary, 10),
+                    backgroundColor: theme.palette.type !== 'dark' ? '#000' : rgbToRGBA(theme.palette.text.primary, 14),
                     borderRadius: 0,
                 },
 
@@ -119,6 +99,8 @@ const useStyles = makeStyles(theme => {
                     outline: 'none',
                 },
             },
+
+            ...theme.mixins.all,
         },
         theme: () => theme.palette.type === 'dark' ?
             ({

@@ -492,6 +492,34 @@ export const GetTheme = (options = { theme: 'light', primary: '', secondary: '',
                     padding: '95px 115px',
                 },
             },
+            all: {
+                '& code': {
+                    lineHeight: 1.6,
+                    border: 'none',
+                    WebkitFontSmoothing: 'subpixel-antialiased',
+                    fontFamily: [FONT_FAMILY.tertiary, '!important'],
+                    fontSize: [13, '!important'],
+
+                    '& *': {
+                        lineHeight: 1.6,
+                        WebkitFontSmoothing: 'subpixel-antialiased',
+                        fontFamily: [FONT_FAMILY.tertiary, '!important'],
+                        fontSize: [13, '!important'],
+                    },
+                },
+
+                '& p > code, li > code': {
+                    borderRadius: 0,
+                    backgroundColor: 'transparent',
+                    fontSize: [12, '!important'],
+                    color: '#e53935',
+                    border: 'none',
+                    padding: '0 5px',
+                    fontSize: 13,
+                    fontWeight: 400,
+                    wordBreak: 'break-word',
+                },
+            },
         },
 
         CONST: {
