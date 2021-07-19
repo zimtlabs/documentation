@@ -21,7 +21,16 @@
         "type": "integer",
         "minimum": 0
       },
-      "cursor": {
+      "hasNext": {
+        "type": "boolean"
+      },
+      "hasPrevious": {
+        "type": "boolean"
+      },
+      "next": {
+        "type": "string"
+      },
+      "previous": {
         "type": "string"
       },
     "ownership": {
@@ -59,12 +68,28 @@
           },
           "total": {
             "$ref": "#/components/schemas/total"
+          },
+          "next": {
+            "$ref": "#/components/schemas/next"
+          },
+          "previous": {
+            "$ref": "#/components/schemas/previous"
+          },
+          "hasNext": {
+            "$ref": "#/components/schemas/hasNext"
+          },
+          "hasPrevious": {
+            "$ref": "#/components/schemas/hasPrevious"
           }
         },
         "required": [
           "limit",
           "skip",
-          "total"
+          "total",
+          "next",
+          "previous",
+          "hasNext",
+          "hasPrevious"
         ]
       },
       "anyValue": {
@@ -403,6 +428,12 @@
       "receipt": {
         "type": "object",
         "properties": {
+          "signed_at": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Hub sign date and time in millisecond format",
+            "example": 1581420369123
+          },
           "received_at": {
             "type": "integer",
             "format": "int32",
@@ -500,6 +531,7 @@
         "receipt": {
           "object_hash": "0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5",
           "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+          "signed_at": 1579278115123,
           "received_at": 1579278115,
           "organization": "0x123..."
         }
