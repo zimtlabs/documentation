@@ -275,7 +275,6 @@ const useStyles = makeStyles(theme => ({
 
         '& img': {
             maxWidth: '100%',
-            boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.074)',
         },
 
         '& hr': {
