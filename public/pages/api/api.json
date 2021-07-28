@@ -447,6 +447,24 @@
         }
       }
     },
+    "/accounts/settings": {
+      "get": {
+        "summary": "My account settings",
+        "description": "Returns an account settings based on ZIMT token in request headers.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Account-settings" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" }
+        }
+      }
+    },
     "/accounts/token": {
       "post": {
         "summary": "Get token",
@@ -1030,6 +1048,24 @@
         }],
         "responses": {
           "200": { "$ref": "organizations.json#/components/responses/Organization" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" }
+        }
+      }
+    },
+    "/organizations/settings": {
+      "get": {
+        "summary": "My organization settings",
+        "description": "Returns organization settings based on ZIMT token in request headers.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization-settings" },
           "401": { "$ref": "base.json#/components/responses/Authentication" }
         }
       }
@@ -2699,16 +2735,18 @@
       }
     },
 
-    "/strategies": {
+     "/strategies": {
       "get": {
         "summary": "Get strategies",
-        "description": "Returns all strategies.",
+        "description": "Returns a list of strategies.",
         "tags": [
           "Strategies"
         ],
         "security": [{
           "ZIMT Token": [
-            "Hub admin"
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
           ]
         }],
         "parameters": [
@@ -2717,26 +2755,51 @@
         ],
         "responses": {
           "200": { "$ref": "strategies.json#/components/responses/Strategies" },
-          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
         }
       },
       "post": {
         "summary": "Create strategy",
         "description": "Creates a strategy.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Strategies"
+        ],
+        "requestBody": {
+          "$ref": "strategies.json#/components/requestBodies/Strategy-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/strategies/search": {
+      "post": {
+        "summary": "Search strategies",
+        "description": "Returns a list of strategies.",
         "tags": [
           "Strategies"
         ],
         "security": [{
           "ZIMT Token": [
-            "Hub admin"
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
           ]
         }],
         "requestBody": {
-          "$ref": "strategies.json#/components/requestBodies/Strategy-Create"
+          "$ref": "strategies.json#/components/requestBodies/search-strategy"
         },
         "responses": {
-          "200": { "$ref": "strategies.json#/components/responses/Strategy-Created" },
+          "200": { "$ref": "strategies.json#/components/responses/Strategies" },
           "400": { "$ref": "base.json#/components/responses/Validation" },
           "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
@@ -2752,7 +2815,9 @@
         ],
         "security": [{
           "ZIMT Token": [
-            "Hub admin"
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
           ]
         }],
         "parameters": [
@@ -2761,50 +2826,31 @@
         "responses": {
           "200": { "$ref": "strategies.json#/components/responses/Strategy" },
           "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
         }
-      }
-    },
-    "/strategies/{id}/activate": {
+      },
       "put": {
-        "summary": "Activate strategy",
-        "description": "Activates deactivated strategy",
+        "summary": "Update strategy",
+        "description": "Updates a strategy.",
         "tags": [
           "Strategies"
         ],
         "security": [{
           "ZIMT Token": [
-            "Hub admin"
+            "All"
           ]
         }],
+        "requestBody": {
+          "$ref": "strategies.json#/components/requestBodies/Strategy-update"
+        },
         "parameters": [
           { "$ref": "strategies.json#/components/parameters/id-strategy" }
         ],
         "responses": {
-          "200": { "$ref": "strategies.json#/components/responses/Activated" },
+          "200": { "$ref": "strategies.json#/components/responses/Strategy" },
           "400": { "$ref": "base.json#/components/responses/Not found" },
-          "403": { "$ref": "base.json#/components/responses/Authorization" }
-        }
-      }
-    },
-    "/strategies/{id}/deactivate": {
-      "put": {
-        "summary": "Deactivate strategy",
-        "description": "Deactivates active strategy.",
-        "tags": [
-          "Strategies"
-        ],
-        "security": [{
-          "ZIMT Token": [
-            "Hub admin"
-          ]
-        }],
-        "parameters": [
-          { "$ref": "strategies.json#/components/parameters/id-strategy" }
-        ],
-        "responses": {
-          "200": { "$ref": "strategies.json#/components/responses/Deactivated" },
-          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
           "403": { "$ref": "base.json#/components/responses/Authorization" }
         }
       }
@@ -2845,9 +2891,6 @@
         }],
         "tags": [
           "Certificates"
-        ],
-        "parameters": [
-          { "$ref": "base.json#/components/parameters/for_organization" }
         ],
         "requestBody": {
           "$ref": "certificates.json#/components/requestBodies/Certificate-Create"

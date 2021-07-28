@@ -240,6 +240,35 @@ const result = await sdk.organizations.me();
 }
 ```
 
+## Get My organization settings
+
+Returns organization settings based on ZIMT_TOKEN in the request headers.
+
+[API reference](/api#tag/Organizations/paths/~1organizations~1settings/get).
+
+```javascript
+const result = await sdk.organizations.settings();
+// sdk.organizations.settings();
+
+// result
+{
+  "response": {
+    "location": {},
+    "contact": {},
+    "images": {},
+    "properties": {},
+    "branding": {},
+    "apps": {},
+    "privacy": {},
+    "strategies": []
+  },
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  }
+}
+```
+
 ## Update organization
 
 Updates an organization.

@@ -249,7 +249,7 @@
       "Permissions-me": {
         "type": "object",
         "properties": {
-          "data": {
+          "response": {
             "type": "array",
             "minItems": 0,
             "maxItems": 50,

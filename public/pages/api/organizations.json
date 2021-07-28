@@ -117,8 +117,6 @@
       "Organization-data-settings": {
         "type": "object",
         "properties": {
-          "time_zone": {"type": "string"},
-          "legal_address": {"type": "string"},
           "allow_public_signup": {"type": "boolean"},
           "branding": { "$ref": "#/components/schemas/Organization-data-settings-branding" },
           "apps": { "$ref": "#/components/schemas/Organization-data-settings-apps" },
@@ -655,6 +653,22 @@
           "message": "Ok"
         }
       },
+      "Organization-settings": {
+        "response": {
+            "location": {},
+            "contact": {},
+            "images": {},
+            "properties": {},
+            "branding": {},
+            "apps": {},
+            "privacy": {},
+            "strategies": []
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
       "Organization-update": {
         "data": {
           "name": "My organization"
@@ -986,6 +1000,19 @@
             },
             "example": {
               "$ref": "#/components/examples/Organization"
+            }
+          }
+        }
+      },
+      "Organization-settings": {
+        "description": "My organization settings",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organization-data-settings"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organization-settings"
             }
           }
         }

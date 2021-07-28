@@ -184,6 +184,31 @@ const result = await sdk.accounts.me();
 }
 ```
 
+## Get My account settings
+
+Returns account settings based on ZIMT_TOKEN in the request headers.
+
+[API reference](/api#tag/Accounts/paths/~1accounts~1settings/get).
+
+```javascript
+const result = await sdk.accounts.settings();
+// sdk.accounts.settings();
+
+// result
+{
+  "response": {
+    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "time_zone": "Europe/London",
+    "apps": {},
+    "notifications": {}
+  },
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  }
+}
+```
+
 ## Update account
 
 Updates an account.

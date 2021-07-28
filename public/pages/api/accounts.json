@@ -234,7 +234,7 @@
       "Accounts": {
         "type": "object",
         "properties": {
-          "data": {
+          "response": {
             "type": "array",
             "minItems": 0,
             "maxItems": 50,
@@ -336,6 +336,18 @@
           "message": "Ok"
         }
       },
+      "Account-settings": {
+        "response": {
+            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "time_zone": "Europe/London",
+            "apps": {},
+            "notifications": {}
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
       "Accounts": {
         "response": [{
           "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
@@ -391,7 +403,7 @@
     "responses": {
 
       "Account": {
-        "description": "Account result",
+        "description": "Account",
         "content": {
           "application/json": {
             "schema": {
@@ -404,7 +416,7 @@
         }
       },
       "Account-me": {
-        "description": "Account result",
+        "description": "Account",
         "content": {
           "application/json": {
             "schema": {
@@ -412,6 +424,19 @@
             },
             "example": {
               "$ref": "#/components/examples/Account-me"
+            }
+          }
+        }
+      },
+      "Account-settings": {
+        "description": "Account settings",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Account-data-settings"
+            },
+            "example": {
+              "$ref": "#/components/examples/Account-settings"
             }
           }
         }
