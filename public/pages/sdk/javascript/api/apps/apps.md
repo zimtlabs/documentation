@@ -39,32 +39,45 @@ const result = await sdk.apps.getMany(Pagination);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "App",
-        "description": "Description",
-        "tags": [
-          "tag1",
-          "tag2"
-        ],
-        "verified": true,
-        "active": true,
-        "private": true,
-        "private_for": [
-            { "id": "0x123..", "name": "Organization" },
-        ],
-        "content": {}
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "data": {
+            "name": "App",
+            "description": "Description",
+            "tags": [
+                "tag1",
+                "tag2"
+            ],
+            "verified": true,
+            "active": true,
+            "private": true,
+            "private_for": [
+                { "id": "0x123..", "name": "Organization" },
+            ],
+            "content": {}
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -93,32 +106,45 @@ const result = await sdk.apps.search(Pagination);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "App",
-        "description": "Description",
-        "tags": [
-          "tag1",
-          "tag2"
-        ],
-        "verified": true,
-        "active": true,
-        "private": true,
-        "private_for": [
-            { "id": "0x123..", "name": "Organization" },
-        ],
-        "content": {}
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "data": {
+            "name": "App",
+            "description": "Description",
+            "tags": [
+                "tag1",
+                "tag2"
+            ],
+            "verified": true,
+            "active": true,
+            "private": true,
+            "private_for": [
+                { "id": "0x123..", "name": "Organization" },
+            ],
+            "content": {}
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -145,32 +171,45 @@ const result = await sdk.apps.get(App ID);
 
 // result
 {
-  "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-  "object": {
-    "meta": {
-        "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-        "timestamp": "2020-02-10T19:16:13Z"
+    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-  },
-  "data": {
-    "name": "App",
-    "description": "Description",
-    "tags": [
-      "tag1",
-      "tag2"
-    ],
-    "verified": true,
-    "active": true,
-    "private": true,
-    "private_for": [
-        { "id": "0x123..", "name": "Organization" },
-    ],
-    "content": {}
-  },
-  "receipt": {
-    "received_at": 1579967810
-  }
+    "data": {
+        "name": "App",
+        "description": "Description",
+        "tags": [
+            "tag1",
+            "tag2"
+        ],
+        "verified": true,
+        "active": true,
+        "private": true,
+        "private_for": [
+            { "id": "0x123..", "name": "Organization" },
+        ],
+        "content": {}
+    },
+    "receipt": {
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
 }
 ```
 
@@ -186,32 +225,45 @@ const result = await sdk.apps.update(App ID, Data);
 
 // result
 {
-  "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-  "object": {
-    "meta": {
-        "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-        "timestamp": "2020-02-10T19:16:13Z"
+    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-  },
-  "data": {
-    "name": "App",
-    "description": "Description",
-    "tags": [
-      "tag1",
-      "tag2"
-    ],
-    "verified": true,
-    "active": true,
-    "private": true,
-    "private_for": [
-        { "id": "0x123..", "name": "Organization" },
-    ],
-    "content": {}
-  },
-  "receipt": {
-    "received_at": 1579967810
-  }
+    "data": {
+        "name": "App",
+        "description": "Description",
+        "tags": [
+            "tag1",
+            "tag2"
+        ],
+        "verified": true,
+        "active": true,
+        "private": true,
+        "private_for": [
+            { "id": "0x123..", "name": "Organization" },
+        ],
+        "content": {}
+    },
+    "receipt": {
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
 }
 ```
 
@@ -229,32 +281,45 @@ const result = await sdk.apps.getManyMarket(Pagination);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "App",
-        "description": "Description",
-        "tags": [
-          "tag1",
-          "tag2"
-        ],
-        "verified": true,
-        "active": true,
-        "private": true,
-        "private_for": [
-            { "id": "0x123..", "name": "Organization" },
-        ],
-        "content": {}
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "data": {
+            "name": "App",
+            "description": "Description",
+            "tags": [
+                "tag1",
+                "tag2"
+            ],
+            "verified": true,
+            "active": true,
+            "private": true,
+            "private_for": [
+                { "id": "0x123..", "name": "Organization" },
+            ],
+            "content": {}
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -283,32 +348,45 @@ const result = await sdk.apps.searchMarket(Pagination);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "App",
-        "description": "Description",
-        "tags": [
-          "tag1",
-          "tag2"
-        ],
-        "verified": true,
-        "active": true,
-        "private": true,
-        "private_for": [
-            { "id": "0x123..", "name": "Organization" },
-        ],
-        "content": {}
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "data": {
+            "name": "App",
+            "description": "Description",
+            "tags": [
+                "tag1",
+                "tag2"
+            ],
+            "verified": true,
+            "active": true,
+            "private": true,
+            "private_for": [
+                { "id": "0x123..", "name": "Organization" },
+            ],
+            "content": {}
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -335,33 +413,46 @@ const result = await sdk.apps.getOneMarket(App ID);
 
 // result
 {
-  "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-  "object": {
-    "meta": {
-        "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-        "timestamp": "2020-02-10T19:16:13Z"
+    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-  },
-  "data": {
-    "name": "App",
-    "description": "Description",
-    "tags": [
-      "tag1",
-      "tag2"
-    ],
-    "verified": true,
-    "active": true,
-    "private": true,
-    "private_for": [
-        { "id": "0x123..", "name": "Organization" },
-    ],
-    "content": {},
-    "installed": false
-  },
-  "receipt": {
-    "received_at": 1579967810
-  }
+    "data": {
+        "name": "App",
+        "description": "Description",
+        "tags": [
+            "tag1",
+            "tag2"
+        ],
+        "verified": true,
+        "active": true,
+        "private": true,
+        "private_for": [
+            { "id": "0x123..", "name": "Organization" },
+        ],
+        "content": {},
+        "installed": false
+    },
+    "receipt": {
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
 }
 ```
 
@@ -379,6 +470,7 @@ const result = await sdk.apps.install(App ID);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
     "object": {
         "meta": {
             "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
@@ -387,16 +479,28 @@ const result = await sdk.apps.install(App ID);
         "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "name": "Organization app",
-      "active": true,
-      "app": {
-          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-          "name": "App",
-      },
+        "name": "Organization app",
+        "active": true,
+        "app": {
+            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "name": "App",
+        }
     },
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,

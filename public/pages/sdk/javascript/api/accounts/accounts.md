@@ -17,22 +17,35 @@ const result = await sdk.accounts.getMany(Pagination);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+      "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
       "object": {
         "meta": {
             "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
             "timestamp": "2020-02-10T19:16:13Z"
         },
         "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
+    },
+    "data": {
         "full_name": "John Doe",
         "email": "john@gmail.com",
         "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
         "settings": { }
-      },
-      "receipt": {
+    },
+    "receipt": {
         "received_at": 1579967810
-      }
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+      ]
     }
   ],
   "meta": {
@@ -74,23 +87,36 @@ const result = await sdk.accounts.search(Query);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "full_name": "John Doe",
-        "email": "john@gmail.com",
-        "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-        "settings": { }
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "data": {
+            "full_name": "John Doe",
+            "email": "john@gmail.com",
+            "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "settings": { }
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -98,9 +124,9 @@ const result = await sdk.accounts.search(Query);
     "message": "Ok"
   },
   "pagination": {
-          "limit": 30,
-          "skip": 30,
-          "total": 120
+    "limit": 30,
+    "skip": 30,
+    "total": 120
   }
 }
 ```
@@ -119,6 +145,7 @@ const result = await sdk.accounts.get(id);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
     "object": {
         "meta": {
             "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
@@ -127,14 +154,26 @@ const result = await sdk.accounts.get(id);
         "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "full_name": "John Doe",
-      "email": "john@gmail.com",
-      "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-      "settings": {  }
+        "full_name": "John Doe",
+        "email": "john@gmail.com",
+        "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+        "settings": {  }
     },
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -157,6 +196,7 @@ const result = await sdk.accounts.me();
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
     "object": {
         "meta": {
             "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
@@ -165,17 +205,29 @@ const result = await sdk.accounts.me();
         "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "full_name": "John Doe",
-      "email": "john@gmail.com",
-      "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-      "settings": { },
-      "owner": true,
-      "admin": true,
-      "super_admin": true
+        "full_name": "John Doe",
+        "email": "john@gmail.com",
+        "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+        "settings": { },
+        "owner": true,
+        "admin": true,
+        "super_admin": true
     },
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -230,6 +282,7 @@ const result = await sdk.accounts.update(id, Account data);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
     "object": {
         "meta": {
             "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
@@ -238,13 +291,13 @@ const result = await sdk.accounts.update(id, Account data);
         "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "full_name": "John Doe (updated)",
-      "email": "john@gmail.com",
-      "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-      "settings": { }
+        "full_name": "John Doe (updated)",
+        "email": "john@gmail.com",
+        "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+        "settings": { }
     },
     "receipt": {
-      "received_at": 1579967810
+        "received_at": 1579967810
     }
   },
   "meta": {
@@ -308,16 +361,16 @@ const result = await sdk.accounts.getOrganizations({ email: string });
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "data": {
-        "name": "My organization",
-        "settings": {
-          "branding": "..."
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "data": {
+            "name": "My organization",
+            "settings": {
+                "branding": "..."
+            }
+        },
+        "receipt": {
+            "received_at": 1579967810
         }
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
     }
   ],
   "meta": {

@@ -69,40 +69,53 @@ const result = await sdk.hooks.getMany(Pagination);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Hook 1",
-        "services": [
-          {
-            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-            "name": "Service 1"
-          }
-        ],
-        "settings": {
-          "object": "event",
-          "action": "create",
-          "send": "id",
-          "rules": {
-            "events": [
-              {
-                "field": "object.data.tag",
-                "operator": "equal",
-                "value": "tag1"
-              }
-            ]
-          }
-        }
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "data": {
+            "name": "Hook 1",
+            "services": [
+                {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Service 1"
+                }
+            ],
+            "settings": {
+                "object": "event",
+                "action": "create",
+                "send": "id",
+                "rules": {
+                    "events": [
+                        {
+                            "field": "object.data.tag",
+                            "operator": "equal",
+                            "value": "tag1"
+                        }
+                    ]
+                }
+            }
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -144,40 +157,53 @@ const result = await sdk.hooks.search(Query);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Hook 1",
-        "services": [
-          {
-            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-            "name": "Service 1"
-          }
-        ],
-        "settings": {
-          "object": "event",
-          "action": "create",
-          "send": "id",
-          "rules": {
-            "events": [
-              {
-                "field": "object.data.tag",
-                "operator": "equal",
-                "value": "tag1"
-              }
-            ]
-          }
-        }
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "data": {
+            "name": "Hook 1",
+            "services": [
+                {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Service 1"
+                }
+            ],
+            "settings": {
+                "object": "event",
+                "action": "create",
+                "send": "id",
+                "rules": {
+                    "events": [
+                        {
+                            "field": "object.data.tag",
+                            "operator": "equal",
+                            "value": "tag1"
+                        }
+                    ]
+                }
+            }
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -205,45 +231,58 @@ const result = await sdk.hooks.get(id);
 // result
 {
   "response": {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Hook 1",
-        "services": [
-          {
-            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-            "name": "Service 1"
-          }
-        ],
-        "settings": {
-          "object": "event",
-          "action": "create",
-          "send": "id",
-          "rules": {
-            "events": [
-              {
-                "field": "object.data.tag",
-                "operator": "equal",
-                "value": "tag1"
-              }
-            ]
-          }
-        }
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "data": {
+            "name": "Hook 1",
+            "services": [
+                {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Service 1"
+                }
+            ],
+            "settings": {
+                "object": "event",
+                "action": "create",
+                "send": "id",
+                "rules": {
+                    "events": [
+                        {
+                            "field": "object.data.tag",
+                            "operator": "equal",
+                            "value": "tag1"
+                        }
+                    ]
+                }
+            }
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     },
-  "meta": {
-    "code": 200,
-    "message": "Ok"
-  },
+    "meta": {
+        "code": 200,
+        "message": "Ok"
+    },
 }
 ```
 
@@ -267,45 +306,58 @@ const result = await sdk.hooks.update(hook_id: string, Hook data);
 // result
 {
   "response": {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Hook 1",
-        "services": [
-          {
-            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-            "name": "Service 1"
-          }
-        ],
-        "settings": {
-          "object": "event",
-          "action": "create",
-          "send": "id",
-          "rules": {
-            "events": [
-              {
-                "field": "object.data.tag",
-                "operator": "equal",
-                "value": "tag1"
-              }
-            ]
-          }
-        }
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "data": {
+            "name": "Hook 1",
+            "services": [
+                {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Service 1"
+                }
+            ],
+            "settings": {
+                "object": "event",
+                "action": "create",
+                "send": "id",
+                "rules": {
+                    "events": [
+                        {
+                            "field": "object.data.tag",
+                            "operator": "equal",
+                            "value": "tag1"
+                        }
+                    ]
+                }
+            }
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     },
-  "meta": {
-    "code": 200,
-    "message": "Ok"
-  },
+    "meta": {
+        "code": 200,
+        "message": "Ok"
+    },
 }
 ```
 

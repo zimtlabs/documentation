@@ -104,9 +104,9 @@ const result = sdk.strategies.generateStrategy(body: { body, data });
               "value": "zimt."
             }
           ]
-        }
-      },
-      "proof": {
+       }
+    },
+    "proof": {
         "storage": [
           {
             "id": "0x123",
@@ -125,9 +125,9 @@ const result = sdk.strategies.generateStrategy(body: { body, data });
               "asd": 123
             }
           }
-        ]
-      },
-      "properties": {
+       ]
+    },
+    "properties": {
         "asd": 123
       }
     }
@@ -268,75 +268,88 @@ or
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
     "object": {
-      "meta": {
-        "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-        "timestamp": "2020-02-10T19:16:13Z",
-        "data_hash": "0x123..."
-      },
-      "signature": "0xe633051fc76ae...",
-      "data": {
-        "name": "Strategy request",
-        "description": "Asd",
-        "version": "1.4.1",
-        "interval": 1000,
-        "bundle": {
-          "objects": [
-            "assets",
-            "events",
-            "documents",
-            "strategies",
-            "logs"
-          ],
-          "all": false,
-          "filters": {
-            "assets": [
-              {
-                "field": "data.type",
-                "operator": "starts-with",
-                "value": "zimt."
-              }
-            ]
-          }
+        "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13Z",
+            "data_hash": "0x123..."
         },
-        "proof": {
-          "storage": [
-            {
-              "id": "0x123",
-              "type ": "cloud",
-              "provider": "aws",
-              "name": "S3 proof storage",
-              "environment": "test",
-              "location": {
-                "url": "https://google.com"
-              },
-              "properties": {
+        "signature": "0xe633051fc76ae...",
+        "data": {
+            "name": "Strategy request",
+            "description": "Asd",
+            "version": "1.4.1",
+            "interval": 1000,
+            "bundle": {
+                "objects": [
+                    "assets",
+                    "events",
+                    "documents",
+                    "strategies",
+                    "logs"
+                ],
+                "all": false,
+                "filters": {
+                    "assets": [
+                        {
+                            "field": "data.type",
+                            "operator": "starts-with",
+                            "value": "zimt."
+                        }
+                    ]
+                }
+            },
+            "proof": {
+                "storage": [
+                    {
+                        "id": "0x123",
+                        "type ": "cloud",
+                        "provider": "aws",
+                        "name": "S3 proof storage",
+                        "environment": "test",
+                        "location": {
+                            "url": "https://google.com"
+                        },
+                        "properties": {
+                            "asd": 123
+                        }
+                    }
+                ]
+            },
+            "properties": {
                 "asd": 123
-              }
             }
-          ]
-        },
-        "properties": {
-          "asd": 123
         }
-      }
     },
     "data": {
-      "active": true,
-      "private": false,
-      "default": true,
-      "all": false,
-      "plans": [
-        {
-          "id": "0x123...",
-          "name": "premium"
-        }
-      ],
-      "dedicated": false
+        "active": true,
+        "private": false,
+        "default": true,
+        "all": false,
+        "plans": [
+            {
+                "id": "0x123...",
+                "name": "premium"
+            }
+        ],
+        "dedicated": false
     },
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -359,76 +372,89 @@ const result = await sdk.strategies.getMany(Pagination, Strategy options);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-          "timestamp": "2020-02-10T19:16:13Z",
-          "data_hash": "0x123..."
-        },
-        "signature": "0xe633051fc76ae...",
-        "data": {
-          "name": "Strategy request",
-          "description": "Asd",
-          "version": "1.4.1",
-          "interval": 1000,
-          "bundle": {
-            "objects": [
-              "assets",
-              "events",
-              "documents",
-              "strategies",
-              "logs"
-            ],
-            "all": false,
-            "filters": {
-              "assets": [
-                {
-                  "field": "data.type",
-                  "operator": "starts-with",
-                  "value": "zimt."
-                }
-              ]
-            }
-          },
-          "proof": {
-            "storage": [
-              {
-                "id": "0x123",
-                "type ": "cloud",
-                "provider": "aws",
-                "name": "S3 proof storage",
-                "environment": "test",
-                "location": {
-                  "url": "https://google.com"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "signature": "0xe633051fc76ae...",
+            "data": {
+                "name": "Strategy request",
+                "description": "Asd",
+                "version": "1.4.1",
+                "interval": 1000,
+                "bundle": {
+                    "objects": [
+                        "assets",
+                        "events",
+                        "documents",
+                        "strategies",
+                        "logs"
+                    ],
+                    "all": false,
+                    "filters": {
+                        "assets": [
+                            {
+                                "field": "data.type",
+                                "operator": "starts-with",
+                                "value": "zimt."
+                            }
+                        ]
+                    }
+                },
+                "proof": {
+                    "storage": [
+                        {
+                            "id": "0x123",
+                            "type ": "cloud",
+                            "provider": "aws",
+                            "name": "S3 proof storage",
+                            "environment": "test",
+                            "location": {
+                                "url": "https://google.com"
+                            },
+                            "properties": {
+                                "asd": 123
+                            }
+                        }
+                    ]
                 },
                 "properties": {
-                  "asd": 123
+                    "asd": 123
                 }
-              }
-            ]
-          },
-          "properties": {
-            "asd": 123
-          }
-        }
-      },
-      "data": {
-        "active": true,
-        "private": false,
-        "default": true,
-        "all": false,
-        "plans": [
-          {
-            "id": "0x123...",
-            "name": "premium"
-          }
-        ],
-        "dedicated": false
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+            }
+        },
+        "data": {
+            "active": true,
+            "private": false,
+            "default": true,
+            "all": false,
+            "plans": [
+                {
+                    "id": "0x123...",
+                    "name": "premium"
+                }
+            ],
+            "dedicated": false
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -474,76 +500,89 @@ const result = await sdk.strategies.search(Query, Strategy options);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-          "timestamp": "2020-02-10T19:16:13Z",
-          "data_hash": "0x123..."
-        },
-        "signature": "0xe633051fc76ae...",
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "signature": "0xe633051fc76ae...",
         "data": {
-          "name": "Strategy request",
-          "description": "Asd",
-          "version": "1.4.1",
-          "interval": 1000,
-          "bundle": {
-            "objects": [
-              "assets",
-              "events",
-              "documents",
-              "strategies",
-              "logs"
-            ],
-            "all": false,
-            "filters": {
-              "assets": [
-                {
-                  "field": "data.type",
-                  "operator": "starts-with",
-                  "value": "zimt."
+            "name": "Strategy request",
+            "description": "Asd",
+            "version": "1.4.1",
+            "interval": 1000,
+            "bundle": {
+                "objects": [
+                    "assets",
+                    "events",
+                    "documents",
+                    "strategies",
+                    "logs"
+                ],
+                "all": false,
+                "filters": {
+                    "assets": [
+                        {
+                            "field": "data.type",
+                            "operator": "starts-with",
+                            "value": "zimt."
+                        }
+                    ]
                 }
-              ]
+            },
+            "proof": {
+                "storage": [
+                    {
+                        "id": "0x123",
+                        "type ": "cloud",
+                        "provider": "aws",
+                        "name": "S3 proof storage",
+                        "environment": "test",
+                        "location": {
+                            "url": "https://google.com"
+                        },
+                        "properties": {
+                            "asd": 123
+                        }
+                    }
+                ]
+            },
+            "properties": {
+                "asd": 123
             }
-          },
-          "proof": {
-            "storage": [
-              {
-                "id": "0x123",
-                "type ": "cloud",
-                "provider": "aws",
-                "name": "S3 proof storage",
-                "environment": "test",
-                "location": {
-                  "url": "https://google.com"
-                },
-                "properties": {
-                  "asd": 123
-                }
-              }
-            ]
-          },
-          "properties": {
-            "asd": 123
-          }
         }
-      },
-      "data": {
-        "active": true,
-        "private": false,
-        "default": true,
-        "all": false,
-        "plans": [
-          {
-            "id": "0x123...",
-            "name": "premium"
-          }
-        ],
-        "dedicated": false
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        },
+        "data": {
+            "active": true,
+            "private": false,
+            "default": true,
+            "all": false,
+            "plans": [
+                {
+                    "id": "0x123...",
+                    "name": "premium"
+                }
+            ],
+            "dedicated": false
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -576,79 +615,92 @@ const result = await sdk.strategies.get(id, Strategy options);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
     "object": {
-      "meta": {
-        "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-        "timestamp": "2020-02-10T19:16:13Z",
-        "data_hash": "0x123..."
-      },
-      "signature": "0xe633051fc76ae...",
-      "data": {
-        "name": "Strategy request",
-        "description": "Asd",
-        "version": "1.4.1",
-        "interval": 1000,
-        "bundle": {
-          "objects": [
-            "assets",
-            "events",
-            "documents",
-            "strategies",
-            "logs"
-          ],
-          "all": false,
-          "filters": {
-            "assets": [
-              {
-                "field": "data.type",
-                "operator": "starts-with",
-                "value": "zimt."
-              }
-            ]
-          }
+        "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13Z",
+            "data_hash": "0x123..."
         },
-        "proof": {
-          "storage": [
-            {
-              "id": "0x123",
-              "type ": "cloud",
-              "provider": "aws",
-              "name": "S3 proof storage",
-              "environment": "test",
-              "location": {
-                "url": "https://google.com"
-              },
-              "access": {
-                "access_key": "123",
-                "secret_key": "123"
-              },
-              "properties": {
+        "signature": "0xe633051fc76ae...",
+        "data": {
+            "name": "Strategy request",
+            "description": "Asd",
+            "version": "1.4.1",
+            "interval": 1000,
+            "bundle": {
+                "objects": [
+                    "assets",
+                    "events",
+                    "documents",
+                    "strategies",
+                    "logs"
+                ],
+                "all": false,
+                "filters": {
+                    "assets": [
+                        {
+                            "field": "data.type",
+                            "operator": "starts-with",
+                            "value": "zimt."
+                        }
+                    ]
+                }
+            },
+            "proof": {
+                "storage": [
+                    {
+                        "id": "0x123",
+                        "type ": "cloud",
+                        "provider": "aws",
+                        "name": "S3 proof storage",
+                        "environment": "test",
+                        "location": {
+                            "url": "https://google.com"
+                        },
+                        "access": {
+                            "access_key": "123",
+                            "secret_key": "123"
+                        },
+                        "properties": {
+                            "asd": 123
+                        }
+                    }
+                ]
+            },
+            "properties": {
                 "asd": 123
-              }
             }
-          ]
-        },
-        "properties": {
-          "asd": 123
         }
-      }
     },
     "data": {
-      "active": true,
-      "private": false,
-      "default": true,
-      "all": false,
-      "plans": [
-        {
-          "id": "0x123...",
-          "name": "premium"
-        }
-      ],
-      "dedicated": false
+        "active": true,
+        "private": false,
+        "default": true,
+        "all": false,
+        "plans": [
+            {
+                "id": "0x123...",
+                "name": "premium"
+            }
+        ],
+        "dedicated": false
     },
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,

@@ -48,7 +48,7 @@ const result = sdk.documents.generateDocument(body: { object, namespace, ownersh
                 "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
             },
             "properties": {
-            "prop": 7
+                "prop": 7
             }
         },
         "signature": "0xe633051fc76ae..."
@@ -130,6 +130,7 @@ const result = await sdk.documents.getMany(Pagination);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+      "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
       "object": {
         "meta": {
             "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
@@ -143,14 +144,26 @@ const result = await sdk.documents.getMany(Pagination);
                 "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
             },
             "properties": {
-            "prop": 7
+                "prop": 7
             }
         },
         "signature": "0xe633051fc76ae..."
-      },
-      "receipt": {
+    },
+    "receipt": {
         "received_at": 1579278110
-      }
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+      ]
     }
   ],
   "meta": {
@@ -193,6 +206,7 @@ const result = await sdk.documents.search(Query);
   "response": [
     {
       "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+      "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
       "object": {
         "meta": {
             "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
@@ -206,14 +220,26 @@ const result = await sdk.documents.search(Query);
                 "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
             },
             "properties": {
-            "prop": 7
+                "prop": 7
             }
         },
         "signature": "0xe633051fc76ae..."
-      },
-      "receipt": {
+    },
+    "receipt": {
         "received_at": 1579278110
-      }
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+      ]
     }
   ],
   "meta": {
@@ -242,6 +268,7 @@ const result = await sdk.documents.get(id);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
     "object": {
         "meta": {
             "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
@@ -255,14 +282,26 @@ const result = await sdk.documents.get(id);
                 "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd",
             },
             "properties": {
-            "prop": 7
+                "prop": 7
             }
         },
         "signature": "0xe633051fc76ae..."
     },
     "receipt": {
-      "received_at": 1579278110
-    }
+        "received_at": 1579278110
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,

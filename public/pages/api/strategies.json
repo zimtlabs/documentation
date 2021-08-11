@@ -76,6 +76,7 @@
                 "enum": ["cloud", "blockchain"]
             },
             "provider": { "type": "string" },
+            "service": { "type": "string" },
 
             "name": { "type": "string" },
             "environment": {
@@ -109,7 +110,7 @@
 
             "properties": { "type": "object" }
         },
-        "required": ["type", "provider", "name", "environment", "location", "access"],
+        "required": ["type", "provider", "service", "name", "environment", "location", "access"],
         "additionalProperties": false
       },
       "Strategy-object-data-proof": {
@@ -221,13 +222,17 @@
           },
           "receipt": {
             "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
           }
         },
         "required": [
           "id",
           "object",
           "data",
-          "receipt"
+          "receipt",
+          "proof_locations"
         ],
         "additionalProperties": false
       },
@@ -312,6 +317,7 @@
 
                                 "type": "cloud",
                                 "provider": "aws",
+                                "service": "s3",
 
                                 "name": "S3 proof storage",
                                 "environment": "test",
@@ -352,7 +358,19 @@
             },
           "receipt": {
             "received_at": 1579967810
-          }
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         },
         "meta": {
           "code": 200,
@@ -395,6 +413,7 @@
 
                                 "type": "cloud",
                                 "provider": "aws",
+                                "service": "s3",
 
                                 "name": "S3 proof storage",
                                 "environment": "test",
@@ -477,6 +496,7 @@
 
                                 "type": "cloud",
                                 "provider": "aws",
+                                "service": "s3",
 
                                 "name": "S3 proof storage",
                                 "environment": "test",
@@ -512,7 +532,19 @@
             },
           "receipt": {
             "received_at": 1579967810
-          }
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         }],
         "meta": {
           "code": 200,

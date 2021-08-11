@@ -59,30 +59,43 @@ const result = await sdk.teams.getMany(Pagination);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Team 1",
-        "description": "Our main team",
-        "active": true,
-        "private": false,
-        "members": [
-          {
-            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-            "full_name": "John Doe",
-            "role": "maintainer"
-          }
+        "data": {
+            "name": "Team 1",
+            "description": "Our main team",
+            "active": true,
+            "private": false,
+            "members": [
+                {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "full_name": "John Doe",
+                    "role": "maintainer"
+                }
+            ]
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
         ]
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
     }
   ],
   "meta": {
@@ -124,30 +137,43 @@ const result = await sdk.teams.search(Query);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Team 1",
-        "description": "Our main team",
-        "active": true,
-        "private": false,
-        "members": [
-          {
-            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-            "full_name": "John Doe",
-            "role": "maintainer"
-          }
+        "data": {
+            "name": "Team 1",
+            "description": "Our main team",
+            "active": true,
+            "private": false,
+            "members": [
+                {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "full_name": "John Doe",
+                    "role": "maintainer"
+                }
+            ]
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
         ]
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
     }
   ],
   "meta": {
@@ -176,26 +202,42 @@ const result = await sdk.teams.get(id);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "name": "Team 1",
-      "description": "Our main team",
-      "active": true,
-      "private": false,
-      "members": [
-        {
-          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-          "full_name": "John Doe",
-          "role": "maintainer"
-        }
-      ]
+        "name": "Team 1",
+        "description": "Our main team",
+        "active": true,
+        "private": false,
+        "members": [
+            {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "full_name": "John Doe",
+                "role": "maintainer"
+            }
+        ]
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -225,26 +267,42 @@ const result = await sdk.teams.update(team_id: string, Team data);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "name": "Team (edited)",
-      "description": "Our main team",
-      "active": true,
-      "private": false,
-      "members": [
-        {
-          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-          "full_name": "John Doe",
-          "role": "maintainer"
-        }
-      ]
+        "name": "Team (edited)",
+        "description": "Our main team",
+        "active": true,
+        "private": false,
+        "members": [
+            {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "full_name": "John Doe",
+                "role": "maintainer"
+            }
+        ]
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -265,10 +323,10 @@ const result = await sdk.teams.delete(id);
 
 // result
 {
-  "response": "Removed",
-  "meta": {
-    "code": 200,
-    "message": "Ok"
-  }
+    "response": "Removed",
+    "meta": {
+        "code": 200,
+        "message": "Ok"
+    }
 }
 ```
