@@ -366,7 +366,7 @@ Returns list of strategies.
 
 ```javascript
 const result = await sdk.strategies.getMany(Pagination, Strategy options);
-// sdk.strategies.getMany({ limit: 5, skip: 30 }, { info: true, parse: true ));
+// sdk.strategies.getMany({ limit: 5, skip: 30 });
 
 // result
 {
@@ -609,7 +609,7 @@ Returns a strategy.
 
 ```javascript
 const result = await sdk.strategies.get(id, Strategy options);
-// sdk.strategies.get('0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951', { info: true });
+// sdk.strategies.get('0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951');
 
 // result
 {

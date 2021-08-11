@@ -2734,6 +2734,23 @@
         }
       }
     },
+    "/bundles/{id}/proof/storage/{storage_id}/proof": {
+      "get": {
+        "summary": "Get bundle proof storage proof",
+        "description": "Returns bundle's proof storage proof.",
+        "tags": [
+          "Bundles"
+        ],
+        "parameters": [
+          { "$ref": "bundles.json#/components/parameters/id-bundle" },
+          { "$ref": "bundles.json#/components/parameters/id-storage" }
+        ],
+        "responses": {
+          "200": { "$ref": "bundles.json#/components/responses/Bundle-proof-storage-proof" },
+          "400": { "$ref": "base.json#/components/responses/Not found" }
+        }
+      }
+    },
 
      "/strategies": {
       "get": {
