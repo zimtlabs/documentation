@@ -117,8 +117,6 @@
       "Organization-data-settings": {
         "type": "object",
         "properties": {
-          "time_zone": {"type": "string"},
-          "legal_address": {"type": "string"},
           "allow_public_signup": {"type": "boolean"},
           "branding": { "$ref": "#/components/schemas/Organization-data-settings-branding" },
           "apps": { "$ref": "#/components/schemas/Organization-data-settings-apps" },
@@ -328,12 +326,16 @@
           },
           "receipt": {
             "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
           }
         },
         "required": [
           "id",
           "data",
-          "receipt"
+          "receipt",
+          "proof_locations"
         ],
         "additionalProperties": false
       },
@@ -346,12 +348,16 @@
           },
           "receipt": {
             "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
           }
         },
         "required": [
           "id",
           "data",
-          "receipt"
+          "receipt",
+          "proof_locations"
         ],
         "additionalProperties": false
       },
@@ -401,13 +407,17 @@
           },
           "receipt": {
             "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
           }
         },
         "required": [
           "id",
           "object",
           "data",
-          "receipt"
+          "receipt",
+          "proof_locations"
         ],
         "additionalProperties": false
       },
@@ -418,29 +428,24 @@
             "$ref": "base.json#/components/schemas/id"
           },
           "object": {
-              "type": "object",
-              "properties": {
-                  "meta": {
-                        "$ref": "base.json#/components/schemas/object-meta-simple"
-                    },
-                    "signature": {
-                        "$ref": "base.json#/components/schemas/signature"
-                    }
-              },
-              "additionalProperties": false
+            "$ref": "base.json#/components/schemas/object-simple"
           },
           "data": {
             "$ref": "#/components/schemas/Organization-App-data"
           },
           "receipt": {
             "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
           }
         },
         "required": [
           "id",
           "object",
           "data",
-          "receipt"
+          "receipt",
+          "proof_locations"
         ],
         "additionalProperties": false
       },
@@ -648,7 +653,35 @@
           },
           "receipt": {
             "received_at": 1579967810
-          }
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Organization-settings": {
+        "response": {
+            "location": {},
+            "contact": {},
+            "images": {},
+            "properties": {},
+            "branding": {},
+            "apps": {},
+            "privacy": {},
+            "strategies": []
         },
         "meta": {
           "code": 200,
@@ -732,7 +765,19 @@
           },
           "receipt": {
             "received_at": 1579967810
-          }
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         }],
         "meta": {
           "code": 200,
@@ -779,7 +824,19 @@
           },
           "receipt": {
             "received_at": 1579967810
-          }
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         },
         "meta": {
           "code": 200,
@@ -808,7 +865,19 @@
           },
           "receipt": {
             "received_at": 1579967810
-          }
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         },
         "meta": {
           "code": 200,
@@ -835,7 +904,19 @@
           },
           "receipt": {
             "received_at": 1579967810
-          }
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         },
         "meta": {
           "code": 200,
@@ -862,7 +943,19 @@
           },
           "receipt": {
             "received_at": 1579967810
-          }
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         }],
         "meta": {
           "code": 200,
@@ -986,6 +1079,19 @@
             },
             "example": {
               "$ref": "#/components/examples/Organization"
+            }
+          }
+        }
+      },
+      "Organization-settings": {
+        "description": "My organization settings",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organization-data-settings"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organization-settings"
             }
           }
         }

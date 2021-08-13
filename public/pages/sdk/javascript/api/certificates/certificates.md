@@ -38,7 +38,7 @@ const result = sdk.certificates.generateCertificate(body: { body, data, namespac
       "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
       "timestamp": "2020-02-10T19:16:13Z",
       "data_hash": "0x123..."
-    },
+  },
     "signature": "0xe633051fc76ae...",
     "data": {
       "type": "eco.safety",
@@ -125,7 +125,7 @@ or
       "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
       "timestamp": "2020-02-10T19:16:13Z",
       "data_hash": "0x123..."
-    },
+  },
     "signature": "0xe633051fc76ae...",
     "data": {
       "type": "eco.safety",
@@ -155,28 +155,41 @@ const result = await sdk.certificates.getMany(Pagination, Certificate options);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-          "timestamp": "2020-02-10T19:16:13Z",
-          "data_hash": "0x123..."
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "signature": "0xe633051fc76ae...",
+            "data": {
+                "type": "eco.safety",
+                "category": "type"
+            }
         },
-        "signature": "0xe633051fc76ae...",
         "data": {
-          "type": "eco.safety",
-          "category": "type"
-        }
-      },
-      "data": {
-        "name": "Eco Safety certificate type",
-        "active": true,
-        "private": true,
-        "verified": true
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+            "name": "Eco Safety certificate type",
+            "active": true,
+            "private": true,
+            "verified": true
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -218,28 +231,41 @@ const result = await sdk.certificates.search(Query, Certificate options);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-          "timestamp": "2020-02-10T19:16:13Z",
-          "data_hash": "0x123..."
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "signature": "0xe633051fc76ae...",
+            "data": {
+                "type": "eco.safety",
+                "category": "type"
+            }
         },
-        "signature": "0xe633051fc76ae...",
         "data": {
-          "type": "eco.safety",
-          "category": "type"
-        }
-      },
-      "data": {
-        "name": "Certificate Eco Safety",
-        "active": true,
-        "private": true,
-        "verified": true
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+            "name": "Certificate Eco Safety",
+            "active": true,
+            "private": true,
+            "verified": true
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -281,28 +307,41 @@ const result = await sdk.certificates.sources(Query, Certificate options);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-          "timestamp": "2020-02-10T19:16:13Z",
-          "data_hash": "0x123..."
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "signature": "0xe633051fc76ae...",
+            "data": {
+                "type": "eco.safety",
+                "category": "type"
+            }
         },
-        "signature": "0xe633051fc76ae...",
         "data": {
-          "type": "eco.safety",
-          "category": "type"
-        }
-      },
-      "data": {
-        "name": "Certificate Eco Safety",
-        "active": true,
-        "private": true,
-        "verified": true
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+            "name": "Certificate Eco Safety",
+            "active": true,
+            "private": true,
+            "verified": true
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -344,28 +383,41 @@ const result = await sdk.certificates.instances(Query, Certificate options);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-          "timestamp": "2020-02-10T19:16:13Z",
-          "data_hash": "0x123..."
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "signature": "0xe633051fc76ae...",
+            "data": {
+                "type": "eco.safety",
+                "category": "type"
+            }
         },
-        "signature": "0xe633051fc76ae...",
         "data": {
-          "type": "eco.safety",
-          "category": "type"
-        }
-      },
-      "data": {
-        "name": "Certificate Eco Safety",
-        "active": true,
-        "private": true,
-        "verified": true
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+            "name": "Certificate Eco Safety",
+            "active": true,
+            "private": true,
+            "verified": true
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -394,27 +446,40 @@ const result = await sdk.certificates.get(id, Certificate options);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
     "object": {
-      "meta": {
-        "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-        "timestamp": "2020-02-10T19:16:13Z",
-        "data_hash": "0x123..."
-      },
-      "signature": "0xe633051fc76ae...",
-      "data": {
-        "type": "eco.safety",
-        "category": "type"
-      }
+        "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13Z",
+            "data_hash": "0x123..."
+        },
+        "signature": "0xe633051fc76ae...",
+        "data": {
+            "type": "eco.safety",
+            "category": "type"
+        }
     },
     "data": {
-      "name": "Eco Safety certificate type",
-      "active": true,
-      "private": true,
-      "verified": true
+        "name": "Eco Safety certificate type",
+        "active": true,
+        "private": true,
+        "verified": true
     },
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -437,27 +502,40 @@ const result = await sdk.certificates.get(id, Certificate options);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
     "object": {
-      "meta": {
-        "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-        "timestamp": "2020-02-10T19:16:13Z",
-        "data_hash": "0x123..."
-      },
-      "signature": "0xe633051fc76ae...",
-      "data": {
-        "type": "eco.safety",
-        "category": "type"
-      }
+        "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13Z",
+            "data_hash": "0x123..."
+        },
+        "signature": "0xe633051fc76ae...",
+        "data": {
+            "type": "eco.safety",
+            "category": "type"
+        }
     },
     "data": {
-      "name": "Eco Safety certificate type",
-      "active": true,
-      "private": true,
-      "verified": true
+        "name": "Eco Safety certificate type",
+        "active": true,
+        "private": true,
+        "verified": true
     },
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,

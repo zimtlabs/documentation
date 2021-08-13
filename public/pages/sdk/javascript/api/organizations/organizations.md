@@ -16,31 +16,44 @@ const result = await sdk.organizations.getMany(Pagination);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "My organization",
-        "owner": {
-            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "full_name": "John Doe"
+        "data": {
+            "name": "My organization",
+            "owner": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "full_name": "John Doe"
+            },
+            "plan": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "Free"
+            },
+            "settings": {
+                "time_zone": "Europe/London"
+            }
         },
-        "plan": {
-            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "name": "Free"
+        "receipt": {
+            "received_at": 1579967810
         },
-        "settings": {
-          "time_zone": "Europe/London"
-        }
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -82,31 +95,44 @@ const result = await sdk.organizations.search(Query);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "My organization",
-        "owner": {
-            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "full_name": "John Doe"
+        "data": {
+            "name": "My organization",
+            "owner": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "full_name": "John Doe"
+            },
+            "plan": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "Free"
+            },
+            "settings": {
+                "time_zone": "Europe/London"
+            }
         },
-        "plan": {
-            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "name": "Free"
+        "receipt": {
+            "received_at": 1579967810
         },
-        "settings": {
-          "time_zone": "Europe/London"
-        }
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -134,28 +160,44 @@ const result = await sdk.organizations.get(id);
 // result
 {
   "response": {
-    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
-    },
-    "data": {
-      "name": "My organization",
-        "owner": {
-            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "full_name": "John Doe"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+                "timestamp": "25-05-2021T14:14:24Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "plan": {
-            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "name": "Free"
+        "data": {
+            "name": "My organization",
+            "owner": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "full_name": "John Doe"
+            },
+            "plan": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "Free"
+            },
+            "settings": {
+                "time_zone": "Europe/London"
+            }
         },
-      "settings": {
-        "time_zone": "Europe/London"
-      }
-    },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
-    "receipt": {
-      "received_at": 1579967810
-    }
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
   },
   "meta": {
     "code": 200,
@@ -176,19 +218,19 @@ const result = await sdk.organizations.getOrganizationPublicDetails(Options);
 
 // result
 {
-  "response": {
-    "data": {
-      "name": "My organization",
-      "settings": {
-        "branding": {
-            "logo": {},
-            "colors": {}
+    "response": {
+        "data": {
+            "name": "My organization",
+            "settings": {
+                "branding": {
+                    "logo": {},
+                    "colors": {}
+                }
+            }
+        },
+        "receipt": {
+            "received_at": 1579967810
         }
-      }
-    },
-    "receipt": {
-      "received_at": 1579967810
-    }
   },
   "meta": {
     "code": 200,
@@ -211,11 +253,16 @@ const result = await sdk.organizations.me();
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+            "timestamp": "25-05-2021T14:14:24Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "name": "My organization",
+        "name": "My organization",
         "owner": {
             "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "full_name": "John Doe"
@@ -224,14 +271,42 @@ const result = await sdk.organizations.me();
             "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "name": "Free"
         },
-      "settings": {
-        "time_zone": "Europe/London"
-      }
+        "settings": {
+            "time_zone": "Europe/London"
+        }
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
+        "received_at": 1579967810
     }
+  },
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  }
+}
+```
+
+## Get My organization settings
+
+Returns organization settings based on ZIMT_TOKEN in the request headers.
+
+[API reference](/api#tag/Organizations/paths/~1organizations~1settings/get).
+
+```javascript
+const result = await sdk.organizations.settings();
+// sdk.organizations.settings();
+
+// result
+{
+  "response": {
+    "location": {},
+    "contact": {},
+    "images": {},
+    "properties": {},
+    "branding": {},
+    "apps": {},
+    "privacy": {},
+    "strategies": []
   },
   "meta": {
     "code": 200,
@@ -261,11 +336,16 @@ const result = await sdk.organizations.update(id, Organization data);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+            "timestamp": "25-05-2021T14:14:24Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "name": "My organization (updated)",
+        "name": "My organization (updated)",
         "owner": {
             "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "full_name": "John Doe"
@@ -274,13 +354,12 @@ const result = await sdk.organizations.update(id, Organization data);
             "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "name": "Free"
         },
-      "settings": {
-        "time_zone": "Europe/London"
-      }
+        "settings": {
+            "time_zone": "Europe/London"
+        }
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
+        "received_at": 1579967810
     }
   },
   "meta": {
@@ -307,11 +386,16 @@ const result = await sdk.organizations.planUpdate(id, plan_id);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+            "timestamp": "25-05-2021T14:14:24Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "name": "My organization",
+        "name": "My organization",
         "owner": {
             "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "full_name": "John Doe"
@@ -320,14 +404,13 @@ const result = await sdk.organizations.planUpdate(id, plan_id);
             "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "name": "Premium"
         },
-      "settings": {
-        "time_zone": "Europe/London"
-      },
-      "active": true
+        "settings": {
+            "time_zone": "Europe/London"
+        },
+        "active": true
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
+        "received_at": 1579967810
     }
   },
   "meta": {
@@ -363,11 +446,16 @@ const result = await sdk.organizations.create(Request data);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+            "timestamp": "25-05-2021T14:14:24Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "name": "Johns Organization",
+        "name": "Johns Organization",
         "owner": {
             "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "full_name": "John Doe"
@@ -376,14 +464,25 @@ const result = await sdk.organizations.create(Request data);
             "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "name": "Free"
         },
-      "settings": {
-        "time_zone": "Europe/London"
-      }
+        "settings": {
+            "time_zone": "Europe/London"
+        }
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -406,26 +505,39 @@ const result = await sdk.organizations.searchOrganizationAccountsPublic(organiza
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "full_name": "John Doe",
-        "email": "john@gmail.com",
-        "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-        "settings": {
-          "time_zone": "Europe/London"
+        "data": {
+            "full_name": "John Doe",
+            "email": "john@gmail.com",
+            "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "settings": {
+                "time_zone": "Europe/London"
+            },
+            "active": true
         },
-        "active": true
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -454,30 +566,43 @@ const result = await sdk.organizations.searchOrganizationTeamsPublic(organizatio
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Team 1",
-        "description": "Our main team",
-        "active": true,
-        "private": false,
-        "members": [
-          {
-            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-            "full_name": "John Doe",
-            "role": "maintainer"
-          }
+        "data": {
+            "name": "Team 1",
+            "description": "Our main team",
+            "active": true,
+            "private": false,
+            "members": [
+                {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "full_name": "John Doe",
+                    "role": "maintainer"
+                }
+            ]
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
         ]
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
     }
   ],
   "meta": {
@@ -506,13 +631,13 @@ const result = await sdk.organizations.searchPublic(Query);
 {
   "response": [
     {
-      "id": "0x123...",
-      "data": {
-        "name": "My organization"
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "id": "0x123...",
+        "data": {
+            "name": "My organization"
+        },
+        "receipt": {
+            "received_at": 1579967810
+        }
     }
   ],
   "meta": {
@@ -541,26 +666,39 @@ const result = await sdk.organizations.getOrganizationCollectionObjects(organiza
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "full_name": "John Doe",
-        "email": "john@gmail.com",
-        "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-        "settings": {
-          "time_zone": "Europe/London"
+        "data": {
+            "full_name": "John Doe",
+            "email": "john@gmail.com",
+            "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "settings": {
+                "time_zone": "Europe/London"
+            },
+            "active": true
         },
-        "active": true
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -588,23 +726,39 @@ const result = await sdk.organizations.getOrganizationCollectionObject(organizat
 // result
 {
   "response": {
-    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
-    },
-    "data": {
-      "full_name": "John Doe",
-      "email": "john@gmail.com",
-      "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-      "settings": {
-        "time_zone": "Europe/London"
-      },
-      "active": true
-    },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
-    "receipt": {
-      "received_at": 1579967810
-    }
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+        },
+        "data": {
+            "full_name": "John Doe",
+            "email": "john@gmail.com",
+            "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "settings": {
+                "time_zone": "Europe/London"
+            },
+            "active": true
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
   },
   "meta": {
     "code": 200,
@@ -627,26 +781,39 @@ const result = await sdk.organizations.searchOrganizationCollectionObjects(organ
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "full_name": "John Doe",
-        "email": "john@gmail.com",
-        "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-        "settings": {
-          "time_zone": "Europe/London"
+        "data": {
+            "full_name": "John Doe",
+            "email": "john@gmail.com",
+            "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "settings": {
+                "time_zone": "Europe/London"
+            },
+            "active": true
         },
-        "active": true
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -693,21 +860,37 @@ const result = await sdk.organizations.createOrganizationAccount(organization_id
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "full_name": "John Doe",
-      "email": "john@gmail.com",
-      "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-      "settings": {
-        "time_zone": "Europe/London"
-      }
+        "full_name": "John Doe",
+        "email": "john@gmail.com",
+        "address": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+        "settings": {
+            "time_zone": "Europe/London"
+        }
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -765,25 +948,38 @@ const result = await sdk.organizations.getManyOrganizationApps(Organization ID, 
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Organization app",
-        "active": true,
-        "app": {
-            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "name": "App"
+        "data": {
+            "name": "Organization app",
+            "active": true,
+            "app": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "App"
+            },
         },
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -812,25 +1008,38 @@ const result = await sdk.organizations.searchOrganizationApps(Organization ID, Q
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Organization app",
-        "active": true,
-        "app": {
-            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "name": "App"
+        "data": {
+            "name": "Organization app",
+            "active": true,
+            "app": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "App"
+            },
         },
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -859,25 +1068,38 @@ const result = await sdk.organizations.getManyActiveOrganizationApps(Organizatio
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Organization app",
-        "active": true,
-        "app": {
-            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "name": "App"
+        "data": {
+            "name": "Organization app",
+            "active": true,
+            "app": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "App"
+            },
         },
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -906,25 +1128,38 @@ const result = await sdk.organizations.searchActiveOrganizationApps(Organization
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Organization app",
-        "active": true,
-        "app": {
-            "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-            "name": "App"
+        "data": {
+            "name": "Organization app",
+            "active": true,
+            "app": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "App"
+            }
         },
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -953,21 +1188,37 @@ const result = await sdk.organizations.getActiveOrganizationApp(Organization ID,
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "name": "Organization app",
-      "active": true,
+        "name": "Organization app",
+        "active": true,
         "app": {
             "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "name": "App"
         },
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -990,21 +1241,37 @@ const result = await sdk.organizations.getOrganizationApp(Organization ID, Organ
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "name": "Organization app",
-      "active": true,
+        "name": "Organization app",
+        "active": true,
         "app": {
             "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "name": "App"
         },
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -1027,20 +1294,24 @@ const result = await sdk.organizations.updateOrganizationApp(Organization ID, Or
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "name": "Organization app",
-      "active": false,
+        "name": "Organization app",
+        "active": false,
         "app": {
             "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
             "name": "App"
         },
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
+        "received_at": 1579967810
     }
   },
   "meta": {
@@ -1116,32 +1387,48 @@ const result = await sdk.organizations.budget(Organization ID);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "type ": "plan",
-      "value": {
-        "tokens": 14000
-      },
-      "active": {
-        "date": {
-          "month": "2020-01"
+        "type ": "plan",
+        "value": {
+            "tokens": 14000
         },
-        "plan": {
-          "id": "0x123...",
-          "name": "Free"
+        "active": {
+            "date": {
+                "month": "2020-01"
+            },
+            "plan": {
+                "id": "0x123...",
+                "name": "Free"
+            }
+        },
+        "organization": {
+            "id": "0x123...",
+            "name": "Organization 1"
         }
-      },
-      "organization": {
-        "id": "0x123...",
-        "name": "Organization 1"
-      }
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -1164,22 +1451,26 @@ const result = await sdk.organizations.credit(Organization ID);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "type ": "plan",
-      "value": {
-        "tokens": 7000
-      },
-      "organization": {
-        "id": "0x123...",
-        "name": "Organization 1"
-      }
+        "type ": "plan",
+        "value": {
+            "tokens": 7000
+        },
+        "organization": {
+            "id": "0x123...",
+            "name": "Organization 1"
+        }
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
+        "received_at": 1579967810
     }
   },
   "meta": {

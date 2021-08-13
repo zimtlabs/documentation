@@ -59,8 +59,8 @@ const assets = await sdk.assets.getMany();
       "meta": {
         "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
         "timestamp": "2020-02-10T19:16:13Z"
-      },
-      "signature": "0xe633051fc76ae...",
+    },
+    "signature": "0xe633051fc76ae...",
       "receipt": {
         "received_at": 1579278115
       }

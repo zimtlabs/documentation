@@ -13,20 +13,13 @@ const useStyles = makeStyles(theme => ({
     ol: {
         padding: '16px 24px',
         flexWrap: 'nowrap',
-        overflowY: 'auto',
+        overflowX: 'auto',
     },
     li: {
         whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        maxWidth: 140,
 
         '& > a': {
             color: theme.palette.text.primary,
-        },
-
-        [`@media only screen and (min-width: ${theme.breakpoints.values.md}px)`]: {
-            maxWidth: 'initial',
         },
     },
 }), { name: 'ZIMTBreadcrumbs' });

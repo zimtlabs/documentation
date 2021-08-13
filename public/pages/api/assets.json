@@ -157,12 +157,16 @@
           },
           "namespace": {
             "$ref": "base.json#/components/schemas/namespace"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
           }
         },
         "required": [
           "id",
           "object",
-          "receipt"
+          "receipt",
+          "proof_locations"
         ],
         "additionalProperties": false
       },
@@ -294,7 +298,19 @@
             },
           "receipt": {
             "received_at": 1579278110
-          }
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         },
         "meta": {
           "code": 200,
@@ -359,7 +375,19 @@
           "signature": "0xe633051fc76ae...",
           "receipt": {
             "received_at": 1579278110
-          }
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         }],
         "meta": {
           "code": 200,

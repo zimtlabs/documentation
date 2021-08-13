@@ -9,35 +9,142 @@ Returns signed strategy object.
 Used for create strategy method.
 
 ```javascript
-const result = sdk.strategies.generateStrategy(Strategy data);
+const result = sdk.strategies.generateStrategy(body: { body, data });
 // sdk.strategies.generateStrategy({
-//     "type ": "EVM_BLOCKCHAIN",
-//     "interval": 2000,
-//     "config": {
-//       "proxy_url": "https://kovan.infura.io/v3"
+//     object: {
+//         // Meta is not required
+//         meta: {
+//             // Valid ISO data, max 24h in the future
+//             // Default is now
+//             timestamp: '2020-02-10T19:16:13+02:00',
+//         },
+//         data: {
+//             name: 'Strategy request',
+//             description: 'Asd',
+//             version: '1.4.1',
+//             interval: 1000,
+//             bundle: {
+//                 objects: [
+//                     'assets',
+//                     'events',
+//                     'documents',
+//                     'strategies',
+//                     'logs'
+//                 ],
+//                 all: false,
+//                 filters: {
+//                     assets: [
+//                         {
+//                             field: 'data.type',
+//                             operator: 'starts-with',
+//                             value: 'zimt.'
+//                         }
+//                     ]
+//                 }
+//             },
+//             proof: {
+//                 storage: [
+//                     {
+//                         id: '0x123',
+//                         type: 'cloud',
+//                         provider: 'aws',
+//                         name: 'S3 proof storage',
+//                         environment: 'test',
+//                         location: {
+//                             url: 'https://google.com'
+//                         },
+//                         access: {
+//                             access_key: '123',
+//                             secret_key: '123'
+//                         },
+//                         properties: {
+//                             asd: '123'
+//                         }
+//                     }
+//                 ]
+//             },
+//             properties: {
+//                 asd: '123'
+//             }
+//         },
+//     },
+//     data: {
+//         active: true
 //     }
 // });
 
 // result
 {
-  "meta": {
-    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-    "timestamp": "2020-02-10T19:16:13Z",
-    "data_hash": "0x6279..."
-  },
-  "data": {
-    "name": "Strategy 1",
-    "type ": "EVM_BLOCKCHAIN",
-    "interval": 2000,
-    "config": {
-      "proxy_url": "https://kovan.infura.io/v3"
+  "object": {
+    "meta": {
+      "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+      "timestamp": "2020-02-10T19:16:13Z",
+      "data_hash": "0x123..."
     },
-    "info": {
-      "name": "Kovan",
-      "environment": "test",
+    "signature": "0xe633051fc76ae...",
+    "data": {
+      "name": "Strategy request",
+      "description": "Asd",
+      "version": "1.4.1",
+      "interval": 1000,
+      "bundle": {
+        "objects": [
+          "assets",
+          "events",
+          "documents",
+          "strategies",
+          "logs"
+        ],
+        "all": false,
+        "filters": {
+          "assets": [
+            {
+              "field": "data.type",
+              "operator": "starts-with",
+              "value": "zimt."
+            }
+          ]
+       }
+    },
+    "proof": {
+        "storage": [
+          {
+            "id": "0x123",
+            "type ": "cloud",
+            "provider": "aws",
+            "name": "S3 proof storage",
+            "environment": "test",
+            "location": {
+              "url": "https://google.com"
+            },
+            "access": {
+              "access_key": "123",
+              "secret_key": "123"
+            },
+            "properties": {
+              "asd": 123
+            }
+          }
+       ]
+    },
+    "properties": {
+        "asd": 123
+      }
     }
   },
-  "signature": "0xe633051fc76ae..."
+  "data": {
+    "active": true,
+    "private": false,
+    "default": true,
+    "all": false,
+    "plans": [
+      {
+        "id": "0x123...",
+        "name": "premium"
+      }
+    ],
+    "dedicated": false
+  }
 }
 ```
 
@@ -49,25 +156,81 @@ Creates a strategy.
 
 ```javascript
 const result = await sdk.strategies.create(Strategy object);
+sdk.strategies.create(sdk.strategies.generateStrategy());
+
+or
+
 // sdk.strategies.create({
-//   "meta": {
-//     "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-//     "timestamp": "2020-02-10T19:16:13Z",
-//     "data_hash": "0x6279..."
-//   },
-//   "data": {
-//     "name": "Strategy 1",
-//     "type ": "EVM_BLOCKCHAIN",
-//     "interval": 2000,
-//     "config": {
-//       "proxy_url": "https://kovan.infura.io/v3"
+//     "object": {
+//         "meta": {
+//         "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+//         "timestamp": "2020-02-10T19:16:13Z",
+//         "data_hash": "0x123..."
+//         },
+//         "signature": "0xe633051fc76ae...",
+//         "data": {
+//         "name": "Strategy request",
+//         "description": "Asd",
+//         "version": "1.4.1",
+//         "interval": 1000,
+//         "bundle": {
+//             "objects": [
+//             "assets",
+//             "events",
+//             "documents",
+//             "strategies",
+//             "logs"
+//             ],
+//             "all": false,
+//             "filters": {
+//             "assets": [
+//                 {
+//                 "field": "data.type",
+//                 "operator": "starts-with",
+//                 "value": "zimt."
+//                 }
+//             ]
+//             }
+//         },
+//         "proof": {
+//             "storage": [
+//             {
+//                 "id": "0x123",
+//                 "type ": "cloud",
+//                 "provider": "aws",
+//                 "name": "S3 proof storage",
+//                 "environment": "test",
+//                 "location": {
+//                 "url": "https://google.com"
+//                 },
+//                 "access": {
+//                 "access_key": "123",
+//                 "secret_key": "123"
+//                 },
+//                 "properties": {
+//                 "asd": 123
+//                 }
+//             }
+//             ]
+//         },
+//         "properties": {
+//             "asd": 123
+//         }
+//         }
 //     },
-//     "info": {
-//       "name": "Kovan",
-//       "environment": "test",
+//     "data": {
+//         "active": true,
+//         "private": false,
+//         "default": true,
+//         "all": false,
+//         "plans": [
+//         {
+//             "id": "0x123...",
+//             "name": "premium"
+//         }
+//         ],
+//         "dedicated": false
 //     }
-//   },
-//   "signature": "0xe633051fc76ae..."
 // });
 
 // result
@@ -77,9 +240,120 @@ const result = await sdk.strategies.create(Strategy object);
   "receipt": {
     "object_hash": "0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5",
     "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
-    "uploader_address": "0x911b3c5090B25b3a63120CF0218750886e37A969",
     "received_at": 1579278115,
     "organization": "0x123..."
+  }
+}
+```
+
+## Update strategy
+
+Updates an strategy.
+
+[API reference](/api#tag/Strategies/paths/~1strategies~1{id}/put).
+
+```javascript
+const result = await sdk.strategies.update(Strategy data);
+sdk.strategies.update({ data: { active: true } });
+
+or
+
+// sdk.strategies.update({
+//   "data": {
+//       "active": true
+//   }
+// });
+
+// result
+{
+  "response": {
+    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13Z",
+            "data_hash": "0x123..."
+        },
+        "signature": "0xe633051fc76ae...",
+        "data": {
+            "name": "Strategy request",
+            "description": "Asd",
+            "version": "1.4.1",
+            "interval": 1000,
+            "bundle": {
+                "objects": [
+                    "assets",
+                    "events",
+                    "documents",
+                    "strategies",
+                    "logs"
+                ],
+                "all": false,
+                "filters": {
+                    "assets": [
+                        {
+                            "field": "data.type",
+                            "operator": "starts-with",
+                            "value": "zimt."
+                        }
+                    ]
+                }
+            },
+            "proof": {
+                "storage": [
+                    {
+                        "id": "0x123",
+                        "type ": "cloud",
+                        "provider": "aws",
+                        "name": "S3 proof storage",
+                        "environment": "test",
+                        "location": {
+                            "url": "https://google.com"
+                        },
+                        "properties": {
+                            "asd": 123
+                        }
+                    }
+                ]
+            },
+            "properties": {
+                "asd": 123
+            }
+        }
+    },
+    "data": {
+        "active": true,
+        "private": false,
+        "default": true,
+        "all": false,
+        "plans": [
+            {
+                "id": "0x123...",
+                "name": "premium"
+            }
+        ],
+        "dedicated": false
+    },
+    "receipt": {
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
+  },
+  "meta": {
+    "code": 200,
+    "message": "Ok"
   }
 }
 ```
@@ -91,36 +365,96 @@ Returns list of strategies.
 [API reference](/api#tag/Strategies/paths/~1strategies/get).
 
 ```javascript
-const result = await sdk.strategies.getMany(Pagination);
+const result = await sdk.strategies.getMany(Pagination, Strategy options);
 // sdk.strategies.getMany({ limit: 5, skip: 30 });
 
 // result
 {
   "response": [
     {
-      "id": "0x867e088491c5e205b5c3e154e05e51a5d2d5766c8c7692deea62df9bf94df76f",
-      "meta": {
-        "created_by": "0x5F501a3aeBc7617B965F877A245F1E19Da043121",
-        "timestamp": "2020-03-11T14:06:52.440Z",
-        "data_hash": "0xb8229d6a4d7cc3273664a8a138ec42efa2402ad105e636ed7b0ccc5ccb74cfb3"
-      },
-      "signature": "0xd5210b57bac5e710e08ee0f7be90d83538855204a4696dc87996e5ed64247b5944cf0cc7851ebf8190991f7f63e1e04f0e3a183c0ee2544b0ad512ac808ec1961c",
-      "data": {
-        "name": "Strategy 1",
-        "type ": "EVM_BLOCKCHAIN",
-        "interval": 2000,
-        "config": {
-          "proxy_url": "https://kovan.infura.io/v3"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "signature": "0xe633051fc76ae...",
+            "data": {
+                "name": "Strategy request",
+                "description": "Asd",
+                "version": "1.4.1",
+                "interval": 1000,
+                "bundle": {
+                    "objects": [
+                        "assets",
+                        "events",
+                        "documents",
+                        "strategies",
+                        "logs"
+                    ],
+                    "all": false,
+                    "filters": {
+                        "assets": [
+                            {
+                                "field": "data.type",
+                                "operator": "starts-with",
+                                "value": "zimt."
+                            }
+                        ]
+                    }
+                },
+                "proof": {
+                    "storage": [
+                        {
+                            "id": "0x123",
+                            "type ": "cloud",
+                            "provider": "aws",
+                            "name": "S3 proof storage",
+                            "environment": "test",
+                            "location": {
+                                "url": "https://google.com"
+                            },
+                            "properties": {
+                                "asd": 123
+                            }
+                        }
+                    ]
+                },
+                "properties": {
+                    "asd": 123
+                }
+            }
         },
-        "info": {
-          "name": "Kovan",
-          "environment": "test",
-        }
-      },
-      "receipt": {
-        "received_at": 1583935613,
-        "uploader_address": "0x01cd343654000255761Eca17e5178cc803749A13"
-      }
+        "data": {
+            "active": true,
+            "private": false,
+            "default": true,
+            "all": false,
+            "plans": [
+                {
+                    "id": "0x123...",
+                    "name": "premium"
+                }
+            ],
+            "dedicated": false
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
     }
   ],
   "meta": {
@@ -130,7 +464,139 @@ const result = await sdk.strategies.getMany(Pagination);
   "pagination": {
     "limit": 30,
     "skip": 30,
-    "total": 120
+    "total": 120,
+    "next": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+    "previous": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+    "hasNext": true,
+    "hasPrevious": false
+  }
+}
+```
+
+## Search strategies
+
+Returns list of strategies.
+
+[API reference](/api#tag/Strategies/paths/~1strategies~1search/post).
+
+```javascript
+const result = await sdk.strategies.search(Query, Strategy options);
+// sdk.strategies.search(
+//     {
+//       query: {
+//         strategies: [
+//           {
+//             field: 'object.data.name',
+//             operator: 'starts-with',
+//             value: 'Strategy',
+//           },
+//         ],
+//       },
+//       limit: 5
+//     },
+// );
+
+// result
+{
+  "response": [
+    {
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "signature": "0xe633051fc76ae...",
+        "data": {
+            "name": "Strategy request",
+            "description": "Asd",
+            "version": "1.4.1",
+            "interval": 1000,
+            "bundle": {
+                "objects": [
+                    "assets",
+                    "events",
+                    "documents",
+                    "strategies",
+                    "logs"
+                ],
+                "all": false,
+                "filters": {
+                    "assets": [
+                        {
+                            "field": "data.type",
+                            "operator": "starts-with",
+                            "value": "zimt."
+                        }
+                    ]
+                }
+            },
+            "proof": {
+                "storage": [
+                    {
+                        "id": "0x123",
+                        "type ": "cloud",
+                        "provider": "aws",
+                        "name": "S3 proof storage",
+                        "environment": "test",
+                        "location": {
+                            "url": "https://google.com"
+                        },
+                        "properties": {
+                            "asd": 123
+                        }
+                    }
+                ]
+            },
+            "properties": {
+                "asd": 123
+            }
+        }
+        },
+        "data": {
+            "active": true,
+            "private": false,
+            "default": true,
+            "all": false,
+            "plans": [
+                {
+                    "id": "0x123...",
+                    "name": "premium"
+                }
+            ],
+            "dedicated": false
+        },
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+        ]
+    }
+  ],
+  "meta": {
+    "code": 200,
+    "message": "Ok"
+  },
+  "pagination": {
+    "limit": 30,
+    "skip": 30,
+    "total": 120,
+    "next": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+    "previous": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+    "hasNext": true,
+    "hasPrevious": false
   }
 }
 ```
@@ -142,77 +608,103 @@ Returns a strategy.
 [API reference](/api#tag/Strategies/paths/~1strategies~1{id}/get).
 
 ```javascript
-const result = await sdk.strategies.get(id);
+const result = await sdk.strategies.get(id, Strategy options);
 // sdk.strategies.get('0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951');
 
 // result
 {
   "response": {
-    "id": "0x867e088491c5e205b5c3e154e05e51a5d2d5766c8c7692deea62df9bf94df76f",
-    "meta": {
-      "created_by": "0x5F501a3aeBc7617B965F877A245F1E19Da043121",
-      "timestamp": "2020-03-11T14:06:52.440Z",
-      "data_hash": "0xb8229d6a4d7cc3273664a8a138ec42efa2402ad105e636ed7b0ccc5ccb74cfb3"
+    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+            "timestamp": "2020-02-10T19:16:13Z",
+            "data_hash": "0x123..."
+        },
+        "signature": "0xe633051fc76ae...",
+        "data": {
+            "name": "Strategy request",
+            "description": "Asd",
+            "version": "1.4.1",
+            "interval": 1000,
+            "bundle": {
+                "objects": [
+                    "assets",
+                    "events",
+                    "documents",
+                    "strategies",
+                    "logs"
+                ],
+                "all": false,
+                "filters": {
+                    "assets": [
+                        {
+                            "field": "data.type",
+                            "operator": "starts-with",
+                            "value": "zimt."
+                        }
+                    ]
+                }
+            },
+            "proof": {
+                "storage": [
+                    {
+                        "id": "0x123",
+                        "type ": "cloud",
+                        "provider": "aws",
+                        "name": "S3 proof storage",
+                        "environment": "test",
+                        "location": {
+                            "url": "https://google.com"
+                        },
+                        "access": {
+                            "access_key": "123",
+                            "secret_key": "123"
+                        },
+                        "properties": {
+                            "asd": 123
+                        }
+                    }
+                ]
+            },
+            "properties": {
+                "asd": 123
+            }
+        }
     },
-    "signature": "0xd5210b57bac5e710e08ee0f7be90d83538855204a4696dc87996e5ed64247b5944cf0cc7851ebf8190991f7f63e1e04f0e3a183c0ee2544b0ad512ac808ec1961c",
     "data": {
-      "name": "Strategy 1",
-      "type ": "EVM_BLOCKCHAIN",
-      "interval": 2000,
-      "config": {
-        "proxy_url": "https://kovan.infura.io/v3"
-      },
-      "info": {
-        "name": "Kovan",
-        "environment": "test",
-      }
+        "active": true,
+        "private": false,
+        "default": true,
+        "all": false,
+        "plans": [
+            {
+                "id": "0x123...",
+                "name": "premium"
+            }
+        ],
+        "dedicated": false
     },
     "receipt": {
-      "received_at": 1583935613,
-      "uploader_address": "0x01cd343654000255761Eca17e5178cc803749A13"
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
     "message": "Ok"
-  }
-}
-```
-
-## Activate strategy
-
-Activates a strategy.
-
-[API reference](/api#tag/Strategies/paths/~1strategies~1{id}~1activate/put).
-
-```javascript
-const result = await sdk.strategies.activate(id);
-// sdk.strategies.activate('0x123...');
-
-// result
-{
-  "response": "Ok",
-  "meta": {
-    "code": 200
-  }
-}
-```
-
-## Deactivate strategy
-
-Deactivates a strategy.
-
-[API reference](/api#tag/Strategies/paths/~1strategies~1{id}~1deactivate/put).
-
-```javascript
-const result = await sdk.strategies.deactivate(id);
-// sdk.strategies.deactivate('0x123...');
-
-// result
-{
-  "response": "Ok",
-  "meta": {
-    "code": 200
   }
 }
 ```

@@ -91,62 +91,75 @@ const result = await sdk.permissions.getMany(Pagination);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
-        "actions": [
-          "asset:GetObject"
-        ],
-        "resources": {
-          "assets": [
-            {
-              "field": "object.meta.created_by",
-              "operator": "not-equal",
-              "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
+        "data": {
+            "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
+            "actions": [
+                "asset:GetObject"
+            ],
+            "resources": {
+                "assets": [
+                    {
+                        "field": "object.meta.created_by",
+                        "operator": "not-equal",
+                        "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
+                    }
+                ],
+                "events": [
+                    {
+                        "field": "object.data.tag",
+                        "operator": "equal",
+                        "value": "tag1"
+                    }
+                ]
+            },
+            "users": {
+                "api_keys": [
+                    {
+                        "id": "0x123...",
+                        "name": "API key"
+                    }
+                ],
+                "api_keys_only": false,
+                "organizations": [
+                    {
+                        "id": "0x123...",
+                        "name": "Organization 1",
+                        "all": false,
+                        "teams": [],
+                        "accounts": [
+                            {
+                                "id": "0x123...",
+                                "full_name": "John Doe"
+                            }
+                        ]
+                    }
+                ]
             }
-          ],
-          "events": [
-            {
-              "field": "object.data.tag",
-              "operator": "equal",
-              "value": "tag1"
-            }
-          ]
         },
-        "users": {
-          "api_keys": [
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
             {
-              "id": "0x123...",
-              "name": "API key"
-            }
-          ],
-          "api_keys_only": false,
-          "organizations": [
-            {
-              "id": "0x123...",
-              "name": "Organization 1",
-              "all": false,
-              "teams": [],
-              "accounts": [
-                {
-                  "id": "0x123...",
-                  "full_name": "John Doe"
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
                 }
-              ]
             }
-          ]
-        }
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        ]
     }
   ],
   "meta": {
@@ -188,62 +201,75 @@ const result = await sdk.permissions.search(Query);
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
-        "actions": [
-          "asset:GetObject"
-        ],
-        "resources": {
-          "assets": [
-            {
-              "field": "object.meta.created_by",
-              "operator": "not-equal",
-              "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
+        "data": {
+            "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
+            "actions": [
+                "asset:GetObject"
+            ],
+            "resources": {
+                "assets": [
+                    {
+                        "field": "object.meta.created_by",
+                        "operator": "not-equal",
+                        "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
+                    }
+                ],
+                "events": [
+                    {
+                        "field": "object.data.tag",
+                        "operator": "equal",
+                        "value": "tag1"
+                    }
+                ]
+            },
+            "users": {
+                "api_keys": [
+                    {
+                        "id": "0x123...",
+                        "name": "API key"
+                    }
+                ],
+                "api_keys_only": false,
+                "organizations": [
+                    {
+                        "id": "0x123...",
+                        "name": "Organization 1",
+                        "all": false,
+                        "teams": [],
+                        "accounts": [
+                            {
+                                "id": "0x123...",
+                                "full_name": "John Doe"
+                            }
+                        ]
+                    }
+                ]
             }
-          ],
-          "events": [
-            {
-              "field": "object.data.tag",
-              "operator": "equal",
-              "value": "tag1"
-            }
-          ]
         },
-        "users": {
-          "api_keys": [
+        "receipt": {
+            "received_at": 1579967810
+        },
+        "proof_locations": [
             {
-              "id": "0x123...",
-              "name": "API key"
-            }
-          ],
-          "api_keys_only": false,
-          "organizations": [
-            {
-              "id": "0x123...",
-              "name": "Organization 1",
-              "all": false,
-              "teams": [],
-              "accounts": [
-                {
-                  "id": "0x123...",
-                  "full_name": "John Doe"
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
                 }
-              ]
             }
-          ]
-        }
-      },
-      "receipt": {
-        "received_at": 1579967810
-      }
+        ]
     }
   ],
   "meta": {
@@ -272,58 +298,74 @@ const result = await sdk.permissions.get(id);
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
-      "actions": [
-        "asset:GetObject"
-      ],
-      "resources": {
-        "assets": [
-          {
-            "field": "object.meta.created_by",
-            "operator": "not-equal",
-            "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
-          }
+        "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
+        "actions": [
+            "asset:GetObject"
         ],
-        "events": [
-          {
-            "field": "object.data.tag",
-            "operator": "equal",
-            "value": "tag1"
-          }
-        ]
-      },
-      "users": {
-        "api_keys": [
-          {
-            "id": "0x123...",
-            "name": "API key"
-          }
-        ],
-        "api_keys_only": false,
-        "organizations": [
-          {
-            "id": "0x123...",
-            "name": "Organization 1",
-            "all": false,
-            "teams": [],
-            "accounts": [
-              {
-                "id": "0x123...",
-                "full_name": "John Doe"
-              }
+        "resources": {
+            "assets": [
+                {
+                    "field": "object.meta.created_by",
+                    "operator": "not-equal",
+                    "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
+                }
+            ],
+            "events": [
+                {
+                    "field": "object.data.tag",
+                    "operator": "equal",
+                    "value": "tag1"
+                }
             ]
-          }
-        ]
-      }
+        },
+        "users": {
+            "api_keys": [
+                {
+                    "id": "0x123...",
+                    "name": "API key"
+                }
+            ],
+            "api_keys_only": false,
+            "organizations": [
+                {
+                    "id": "0x123...",
+                    "name": "Organization 1",
+                    "all": false,
+                    "teams": [],
+                    "accounts": [
+                        {
+                            "id": "0x123...",
+                            "full_name": "John Doe"
+                        }
+                    ]
+                }
+            ]
+        }
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -356,58 +398,74 @@ const result = await sdk.permissions.update(permission_id: string, Permission da
 {
   "response": {
     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-    "meta": {
-      "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+    "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+    "object": {
+        "meta": {
+            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+            "timestamp": "2020-02-10T19:16:13Z"
+        },
+        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
     },
     "data": {
-      "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
-      "actions": [
-        "asset:GetObject"
-      ],
-      "resources": {
-        "assets": [
-          {
-            "field": "object.meta.created_by",
-            "operator": "not-equal",
-            "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
-          }
+        "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
+        "actions": [
+            "asset:GetObject"
         ],
-        "events": [
-          {
-            "field": "object.data.tag",
-            "operator": "equal",
-            "value": "tag1"
-          }
-        ]
-      },
-      "users": {
-        "api_keys": [
-          {
-            "id": "0x123...",
-            "name": "API key"
-          }
-        ],
-        "api_keys_only": false,
-        "organizations": [
-          {
-            "id": "0x123...",
-            "name": "Organization 1",
-            "all": false,
-            "teams": [],
-            "accounts": [
-              {
-                "id": "0x123...",
-                "full_name": "John Doe"
-              }
+        "resources": {
+            "assets": [
+                {
+                    "field": "object.meta.created_by",
+                    "operator": "not-equal",
+                    "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
+                }
+            ],
+            "events": [
+                {
+                    "field": "object.data.tag",
+                    "operator": "equal",
+                    "value": "tag1"
+                }
             ]
-          }
-        ]
-      }
+        },
+        "users": {
+            "api_keys": [
+                {
+                    "id": "0x123...",
+                    "name": "API key"
+                }
+            ],
+            "api_keys_only": false,
+            "organizations": [
+                {
+                    "id": "0x123...",
+                    "name": "Organization 1",
+                    "all": false,
+                    "teams": [],
+                    "accounts": [
+                        {
+                            "id": "0x123...",
+                            "full_name": "John Doe"
+                        }
+                    ]
+                }
+            ]
+        }
     },
-    "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e...",
     "receipt": {
-      "received_at": 1579967810
-    }
+        "received_at": 1579967810
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+    ]
   },
   "meta": {
     "code": 200,
@@ -430,62 +488,75 @@ const result = await sdk.permissions.me();
 {
   "response": [
     {
-      "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-      "object": {
-        "meta": {
-            "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
-            "timestamp": "2020-02-10T19:16:13Z"
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "proof": "0x6898ee14679ad61cc5293c626b4b28a7c1624b2e438d98b043927cea164ed8c123d088f59bf9938a2fbef676ac33948af49051b78df98a622e9c5175c746bfb71b",
+        "object": {
+            "meta": {
+                "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                "timestamp": "2020-02-10T19:16:13Z"
+            },
+            "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
         },
-        "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
-      },
-      "data": {
-        "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
-        "actions": [
-          "asset:GetObject"
-        ],
-        "resources": {
-          "assets": [
-            {
-              "field": "object.meta.created_by",
-              "operator": "not-equal",
-              "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
-            }
-          ],
-          "events": [
-            {
-              "field": "object.data.tag",
-              "operator": "equal",
-              "value": "tag1"
-            }
-          ]
-        },
-        "users": {
-          "api_keys": [
-            {
-              "id": "0x123...",
-              "name": "API key"
-            }
-          ],
-          "api_keys_only": false,
-          "organizations": [
-            {
-              "id": "0x123...",
-              "name": "Organization 1",
-              "all": false,
-              "teams": [],
-              "accounts": [
+        "data": {
+            "name": "Asset view, not from account-5 and whos info event contains tag1 in tag property",
+            "actions": [
+                "asset:GetObject"
+            ],
+            "resources": {
+                "assets": [
+                    {
+                        "field": "object.meta.created_by",
+                        "operator": "not-equal",
+                        "value": "0x8752F61635543a870826D9F4CA20a9D1F3934079"
+                    }
+                ],
+                "events": [
+                    {
+                        "field": "object.data.tag",
+                        "operator": "equal",
+                        "value": "tag1"
+                    }
+                ]
+            },
+            "users": {
+            "api_keys": [
                 {
-                  "id": "0x123...",
-                  "full_name": "John Doe"
+                    "id": "0x123...",
+                    "name": "API key"
                 }
-              ]
-            }
-          ]
+            ],
+            "api_keys_only": false,
+            "organizations": [
+                {
+                    "id": "0x123...",
+                    "name": "Organization 1",
+                    "all": false,
+                    "teams": [],
+                    "accounts": [
+                        {
+                            "id": "0x123...",
+                            "full_name": "John Doe"
+                        }
+                    ]
+                }
+            ]
         }
-      },
-      "receipt": {
+    },
+    "receipt": {
         "received_at": 1579967810
-      }
+    },
+    "proof_locations": [
+        {
+            "type": "bundle",
+            "bundle": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+            },
+            "strategy": {
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "name": "Default all global"
+            }
+        }
+      ]
     }
   ],
   "meta": {

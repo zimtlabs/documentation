@@ -171,12 +171,16 @@
           },
           "receipt": {
             "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
           }
         },
         "required": [
           "id",
           "object",
-          "receipt"
+          "receipt",
+          "proof_locations"
         ],
         "additionalProperties": false
       },
@@ -207,12 +211,16 @@
           },
           "receipt": {
             "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
           }
         },
         "required": [
           "id",
           "object",
-          "receipt"
+          "receipt",
+          "proof_locations"
         ],
         "additionalProperties": false
       },
@@ -298,7 +306,19 @@
             },
           "receipt": {
             "received_at": 1579278115
-          }
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         },
         "meta": {
           "code": 200,
@@ -327,7 +347,19 @@
         },
         "receipt": {
           "received_at": 1579278115
-        }
+        },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
       },
       "Documents": {
         "response": [{
@@ -352,7 +384,19 @@
             },
           "receipt": {
             "received_at": 1579278115
-          }
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         }],
         "meta": {
           "code": 200,

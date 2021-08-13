@@ -338,7 +338,7 @@
       "documents": {
         "type": "array",
         "uniqueItems": true,
-        "minItems": 1,
+        "minItems": 0,
         "items": {
           "$ref": "#/components/schemas/document"
         },
@@ -423,6 +423,35 @@
           "meta",
           "signature"
         ]
+      },
+
+      "proof_locations": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string" ,
+                    "enum": ["bundle"]
+                },
+                "bundle": {
+                    "type": "object",
+                    "properties": {
+                        "id": { "type": "string" },
+                        "name": { "type": "string" }
+                    }
+                },
+                "strategy": {
+                    "type": "object",
+                    "properties": {
+                        "id": { "type": "string" }
+                    }
+                },
+                "created_at": { "type": "number" }
+            },
+            "additionalProperties": false
+        },
+        "additionalItems": false
       },
 
       "receipt": {

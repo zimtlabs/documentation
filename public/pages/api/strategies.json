@@ -3,85 +3,28 @@
 
     "schemas": {
 
-      "strategy-receipt": {
+      "query-strategy": {
         "type": "object",
         "properties": {
-          "received_at": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Database insertion date and time in epoch format",
-            "example": 1581420369
-          },
-          "uploader_address": {
-            "$ref": "base.json#/components/schemas/address"
-          }
-        }
-      },
-      "Strategy": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "$ref": "base.json#/components/schemas/id"
-          },
-          "meta": {
-            "$ref": "#/components/schemas/Strategy-meta"
-          },
-          "data": {
-            "$ref": "#/components/schemas/Strategy-data"
-          },
-          "signature": {
-            "$ref": "base.json#/components/schemas/signature"
-          },
-          "receipt": {
-            "$ref": "#/components/schemas/strategy-receipt"
-          }
-        },
-        "required": [
-          "id",
-          "meta",
-          "signature",
-          "receipt"
-        ],
-        "additionalProperties": false
-      },
-      "Strategies": {
-        "type": "object",
-        "properties": {
-          "response": {
-            "type": "array",
-            "minItems": 0,
-            "maxItems": 50,
-            "items": {
-              "$ref": "#/components/schemas/Strategy"
+          "query": {
+            "type": "object",
+            "properties": {
+              "strategies": {
+                "type": "array",
+                "items": {
+                  "$ref": "base.json#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
             }
           },
-          "meta": {
-            "$ref": "base.json#/components/schemas/meta-response"
+          "limit": {
+            "$ref": "base.json#/components/schemas/limit"
           },
-          "pagination": {
-            "$ref": "base.json#/components/schemas/pagination-response"
+          "skip": {
+            "$ref": "base.json#/components/schemas/skip"
           }
         }
-      },
-      "Strategy-Created": {
-        "type": "object",
-        "properties": {
-          "proof": {
-            "$ref": "base.json#/components/schemas/proof"
-          },
-          "id": {
-            "$ref": "base.json#/components/schemas/id"
-          },
-          "receipt": {
-            "$ref": "#/components/schemas/strategy-receipt"
-          }
-        },
-        "required": [
-          "proof",
-          "id",
-          "receipt"
-        ],
-        "additionalProperties": false
       },
       "Strategy-meta": {
         "type": "object",
@@ -103,198 +46,505 @@
           "data_hash"
         ]
       },
+      "Strategy-object-data-bundle": {
+        "type": "object",
+        "properties": {
+            "objects": {
+                "type": "array",
+                "item": {
+                    "type": "string",
+                    "enum": ["assets", "events", "documents", "organizations", "accounts", "teams", "permissions", "settings", "apiKeys", "apps", "organizationApps", "services", "hooks", "plans", "defaults", "modules", "logs", "bundles", "strategies", "certificates"]
+                },
+                "minItems": 1,
+                "additionalItems": false
+            },
+            "all": { "type": "boolean" },
+            "filters": {
+                "$ref": "base.json#/components/schemas/filters"
+            }
+        },
+        "required": ["objects"],
+        "additionalProperties": false
+      },
+      "Strategy-object-data-proof-storage": {
+        "type": "object",
+        "properties": {
+            "id": { "type": "string" },
+
+            "type": {
+                "type": "string",
+                "enum": ["cloud", "blockchain"]
+            },
+            "provider": { "type": "string" },
+            "service": { "type": "string" },
+
+            "name": { "type": "string" },
+            "environment": {
+                "type": "string",
+                "enum": ["development", "test", "production"]
+            },
+
+            "location": {
+                "type": "object",
+                "properties": {
+                    "url": { "type": "string" },
+
+                    "endpoint": { "type": "string" },
+                    "region": { "type": "string" },
+                    "bucket_name": { "type": "string" }
+                },
+                "additionalProperties": false
+            },
+
+            "access": {
+                "type": "object",
+                "properties": {
+                    "address": { "type": "string" },
+                    "private_key": { "type": "string" },
+
+                    "access_key": { "type": "string" },
+                    "secret_key": { "type": "string" }
+                },
+                "additionalProperties": false
+            },
+
+            "properties": { "type": "object" }
+        },
+        "required": ["type", "provider", "service", "name", "environment", "location", "access"],
+        "additionalProperties": false
+      },
+      "Strategy-object-data-proof": {
+        "type": "object",
+        "properties": {
+            "storage": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/Strategy-object-data-proof-storage"
+                },
+                "additionalItems": false
+            }
+        },
+        "additionalProperties": false
+      },
+      "Strategy-object-data": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "description": { "type": "string" },
+
+            "version": { "type": "string" },
+            "interval": {
+              "type": "number",
+              "minimum": 1000
+            },
+
+            "bundle": {
+                "$ref": "#/components/schemas/Strategy-object-data-bundle"
+            },
+
+            "proof": {
+                "$ref": "#/components/schemas/Strategy-object-data-proof"
+            },
+
+            "properties": { "type": "object" }
+          },
+          "additionalProperties": false,
+          "required": ["version", "interval", "bundle", "proof"]
+      },
       "Strategy-data": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of persistent storage"
-          },
-          "interval": {
-            "type": "number",
-            "description": "Bundling interval expressed in milliseconds."
-          },
-          "config": {
-            "$ref": "#/components/schemas/Strategy-config"
-          },
-          "info": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "environment": {
-                "type": "string"
-              },
-              "documents": {
+            "active": { "type": "boolean" },
+            "private": { "type": "boolean" },
+
+            "default": { "type": "boolean" },
+            "all": { "type": "boolean" },
+
+            "plans": {
                 "type": "array",
-                "uniqueItems": true,
-                "minItems": 1,
                 "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "name": {
-                      "type": "string"
-                    },
-                    "type": {
-                      "type": "string"
-                    },
+                    "type": "object",
                     "properties": {
-                      "type": "object"
-                    }
-                  },
-                  "additionalProperties": false,
-                  "required": [
-                    "id",
-                    "name",
-                    "type"
-                  ]
+                        "id": { "type": "string" },
+                        "name": { "type": "string" }
+                    },
+                    "additionalProperties": false
                 },
                 "additionalItems": false
-              }
             },
-            "additionalProperties": false,
-            "required": [
-              "name",
-              "environment"
-            ]
-          },
-          "properties": {
-            "type": "string"
-          }
+
+            "dedicated": { "type": "boolean" }
         },
-        "additionalProperties": false,
-        "required": [
-          "name",
-          "type",
-          "interval",
-          "config",
-          "info"
-        ]
+        "additionalProperties": false
       },
-      "Strategy-config": {
+      "Strategy-object": {
         "type": "object",
         "properties": {
-          "proxy_rul": {
-            "$ref": "bundles.json#/components/schemas/upload-url"
-          }
+            "meta": {
+                "$ref": "#/components/schemas/Strategy-meta"
+            },
+            "data": {
+                "$ref": "#/components/schemas/Strategy-object-data"
+            },
+            "signature": {
+                "$ref": "base.json#/components/schemas/signature"
+            }
         },
-        "additionalProperties": false,
-        "required": [
-          "proxy_url"
-        ]
+        "required": ["meta", "data", "signature"],
+        "additionalProperties": false
       },
       "Strategy-Create": {
         "type": "object",
         "properties": {
-          "meta": {
-            "$ref": "#/components/schemas/Strategy-meta"
+          "object": {
+            "$ref": "#/components/schemas/Strategy-object"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Strategy-data"
+          }
+        },
+        "required": [
+          "object",
+          "data"
+        ]
+      },
+      "Strategy": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "object": {
+            "$ref": "#/components/schemas/Strategy-object"
           },
           "data": {
             "$ref": "#/components/schemas/Strategy-data"
           },
-          "signature": {
-            "$ref": "base.json#/components/schemas/signature"
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
           }
         },
         "required": [
-          "meta",
+          "id",
+          "object",
           "data",
-          "signature"
-        ]
+          "receipt",
+          "proof_locations"
+        ],
+        "additionalProperties": false
       },
-      "Activated": {
+      "Strategy-update": {
         "type": "object",
         "properties": {
           "data": {
-            "type": "string"
-          },
-          "meta": {
-            "$ref": "base.json#/components/schemas/meta-response"
+            "$ref": "#/components/schemas/Strategy-data"
           }
-        }
+        },
+        "additionalProperties": false
       },
-      "Deactivated": {
+      "Strategies": {
         "type": "object",
         "properties": {
           "response": {
-            "type": "string"
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Strategy"
+            }
           },
           "meta": {
             "$ref": "base.json#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "base.json#/components/schemas/pagination-response"
           }
         }
       }
 
     },
-
     "examples": {
 
+      "query-strategy": {
+        "query": {
+          "strategies": [{
+            "field": "object.data.name",
+            "operator": "starts-with",
+            "value": "Strategy"
+          }]
+        },
+        "limit": 45,
+        "skip": "30"
+      },
       "Strategy": {
         "response": {
-          "id": "0x867e088491c5e205b5c3e154e05e51a5d2d5766c8c7692deea62df9bf94df76f",
-          "meta": {
-            "created_by": "0x5F501a3aeBc7617B965F877A245F1E19Da043121",
-            "timestamp": "2020-03-11T14:06:52.440Z",
-            "data_hash": "0xb8229d6a4d7cc3273664a8a138ec42efa2402ad105e636ed7b0ccc5ccb74cfb3"
-          },
-          "signature": "0xd5210b57bac5e710e08ee0f7be90d83538855204a4696dc87996e5ed64247b5944cf0cc7851ebf8190991f7f63e1e04f0e3a183c0ee2544b0ad512ac808ec1961c",
-          "data": {
-            "name": "Strategy 1",
-            "type": "EVM_BLOCKCHAIN",
-            "interval": 2000,
-            "config": {
-              "proxy_url": "https://kovan.infura.io/v3"
+            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "object": {
+                "meta": {
+                    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                    "timestamp": "2020-02-10T19:16:13Z",
+                    "data_hash": "0x123..."
+                },
+                "signature": "0xe633051fc76ae...",
+                "data": {
+                    "name": "Strategy request",
+                    "description": "Asd",
+
+                    "version": "1.4.1",
+                    "interval": 1000,
+
+                    "bundle": {
+                        "objects": ["assets", "events", "documents", "strategies", "logs"],
+                        "all": false,
+                        "filters": {
+                            "assets": [
+                                {
+                                    "field": "data.type",
+                                    "operator": "starts-with",
+                                    "value": "zimt."
+                                }
+                            ]
+                        }
+                    },
+
+                    "proof": {
+                        "storage": [
+                            {
+                                "id": "0x123",
+
+                                "type": "cloud",
+                                "provider": "aws",
+                                "service": "s3",
+
+                                "name": "S3 proof storage",
+                                "environment": "test",
+
+                                "location": {
+                                    "url": "https://google.com"
+                                },
+
+                                "access": {
+                                    "access_key": "123",
+                                    "secret_key": "123"
+                                },
+
+                                "properties": {
+                                    "asd": 123
+                                }
+                            }
+                        ]
+                    },
+
+                    "properties": {
+                        "asd": 123
+                    }
+                }
             },
-            "info": {
-              "name": "Kovan",
-              "environment": "test"
-            }
-          },
+            "data": {
+                "active": true,
+                "private": false,
+
+                "default": true,
+                "all": false,
+
+                "plans": [
+                    { "id": "0x123...", "name": "premium" }
+                ],
+
+                "dedicated": false
+            },
           "receipt": {
-            "received_at": 1583935613,
-            "uploader_address": "0x01cd343654000255761Eca17e5178cc803749A13"
-          }
+            "received_at": 1579967810
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         },
         "meta": {
           "code": 200,
           "message": "Ok"
         }
       },
+      "Strategy-Create": {
+            "object": {
+                "meta": {
+                    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                    "timestamp": "2020-02-10T19:16:13Z",
+                    "data_hash": "0x123..."
+                },
+                "signature": "0xe633051fc76ae...",
+                "data": {
+                    "name": "Strategy request",
+                    "description": "Asd",
+
+                    "version": "1.4.1",
+                    "interval": 1000,
+
+                    "bundle": {
+                        "objects": ["assets", "events", "documents", "strategies", "logs"],
+                        "all": false,
+                        "filters": {
+                            "assets": [
+                                {
+                                    "field": "data.type",
+                                    "operator": "starts-with",
+                                    "value": "zimt."
+                                }
+                            ]
+                        }
+                    },
+
+                    "proof": {
+                        "storage": [
+                            {
+                                "id": "0x123",
+
+                                "type": "cloud",
+                                "provider": "aws",
+                                "service": "s3",
+
+                                "name": "S3 proof storage",
+                                "environment": "test",
+
+                                "location": {
+                                    "url": "https://google.com"
+                                },
+
+                                "access": {
+                                    "access_key": "123",
+                                    "secret_key": "123"
+                                },
+
+                                "properties": {
+                                    "asd": 123
+                                }
+                            }
+                        ]
+                    },
+
+                    "properties": {
+                        "asd": 123
+                    }
+                }
+            },
+            "data": {
+                "active": true,
+                "private": false,
+
+                "default": true,
+                "all": false,
+
+                "plans": [
+                    { "id": "0x123...", "name": "premium" }
+                ],
+
+                "dedicated": false
+            }
+        },
+      "Strategy-update": {
+        "data": {
+          "active": false
+        }
+      },
       "Strategies": {
         "response": [{
-          "id": "0x867e088491c5e205b5c3e154e05e51a5d2d5766c8c7692deea62df9bf94df76f",
-          "meta": {
-            "created_by": "0x5F501a3aeBc7617B965F877A245F1E19Da043121",
-            "timestamp": "2020-03-11T14:06:52.440Z",
-            "data_hash": "0xb8229d6a4d7cc3273664a8a138ec42efa2402ad105e636ed7b0ccc5ccb74cfb3"
-          },
-          "signature": "0xd5210b57bac5e710e08ee0f7be90d83538855204a4696dc87996e5ed64247b5944cf0cc7851ebf8190991f7f63e1e04f0e3a183c0ee2544b0ad512ac808ec1961c",
-          "data": {
-            "name": "Strategy 1",
-            "type": "EVM_BLOCKCHAIN",
-            "interval": 2000,
-            "config": {
-              "proxy_url": "https://kovan.infura.io/v3"
+            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "object": {
+                "meta": {
+                    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                    "timestamp": "2020-02-10T19:16:13Z",
+                    "data_hash": "0x123..."
+                },
+                "signature": "0xe633051fc76ae...",
+                "data": {
+                    "name": "Strategy request",
+                    "description": "Asd",
+
+                    "version": "1.4.1",
+                    "interval": 1000,
+
+                    "bundle": {
+                        "objects": ["assets", "events", "documents", "strategies", "logs"],
+                        "all": false,
+                        "filters": {
+                            "assets": [
+                                {
+                                    "field": "data.type",
+                                    "operator": "starts-with",
+                                    "value": "zimt."
+                                }
+                            ]
+                        }
+                    },
+
+                    "proof": {
+                        "storage": [
+                            {
+                                "id": "0x123",
+
+                                "type": "cloud",
+                                "provider": "aws",
+                                "service": "s3",
+
+                                "name": "S3 proof storage",
+                                "environment": "test",
+
+                                "location": {
+                                    "url": "https://google.com"
+                                },
+
+                                "properties": {
+                                    "asd": 123
+                                }
+                            }
+                        ]
+                    },
+
+                    "properties": {
+                        "asd": 123
+                    }
+                }
             },
-            "info": {
-              "name": "Kovan",
-              "environment": "test"
-            }
-          },
+            "data": {
+                "active": true,
+                "private": false,
+
+                "default": true,
+                "all": false,
+
+                "plans": [
+                    { "id": "0x123...", "name": "premium" }
+                ],
+
+                "dedicated": false
+            },
           "receipt": {
-            "received_at": 1583935613,
-            "uploader_address": "0x01cd343654000255761Eca17e5178cc803749A13"
-          }
+            "received_at": 1579967810
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
         }],
         "meta": {
           "code": 200,
@@ -309,58 +559,14 @@
           "hasNext": true,
           "hasPrevious": false
         }
-      },
-      "Strategy-Created": {
-        "proof": "0x0192cbd1c59b40ea97f7bc102a16c325a3066bb6b68c9c16bae447d8bb38565a66da29...",
-        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
-        "receipt": {
-          "object_hash": "0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5",
-          "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
-          "uploader_address": "0x911b3c5090B25b3a63120CF0218750886e37A969",
-          "received_at": 1579278115,
-          "organization": "0x123..."
-        }
-      },
-      "Strategy-Create": {
-        "meta": {
-          "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
-          "timestamp": "2020-02-10T19:16:13Z",
-          "data_hash": "0x6279..."
-        },
-        "data": {
-          "name": "Strategy 1",
-          "type": "EVM_BLOCKCHAIN",
-          "interval": 2000,
-          "config": {
-            "proxy_url": "https://kovan.infura.io/v3"
-          },
-          "info": {
-            "name": "Kovan",
-            "environment": "test"
-          }
-        },
-        "signature": "0xe633051fc76ae..."
-      },
-      "Activated": {
-        "response": "Ok",
-        "meta": {
-          "code": 200
-        }
-      },
-      "Deactivated": {
-        "response": "Ok",
-        "meta": {
-          "code": 200
-        }
       }
 
     },
-
     "parameters": {
 
       "id-strategy": {
         "name": "id",
-        "description": "ID of a strategy",
+        "description": "ID of an strategy",
         "in": "path",
         "schema": {
           "$ref": "base.json#/components/schemas/id"
@@ -385,7 +591,7 @@
         }
       },
       "Strategies": {
-        "description": "Strategy results",
+        "description": "Strategies results",
         "content": {
           "application/json": {
             "schema": {
@@ -396,53 +602,26 @@
             }
           }
         }
-      },
-      "Strategy-Created": {
-        "description": "Created",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Strategy-Created"
-            },
-            "example": {
-              "$ref": "#/components/examples/Strategy-Created"
-            }
-          }
-        }
-      },
-      "Activated": {
-        "description": "Ok",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Activated"
-            },
-            "example": {
-              "$ref": "#/components/examples/Activated"
-            }
-          }
-        }
-      },
-      "Deactivated": {
-        "description": "Ok",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Deactivated"
-            },
-            "example": {
-              "$ref": "#/components/examples/Deactivated"
-            }
-          }
-        }
       }
 
     },
-
     "requestBodies": {
 
+      "search-strategy": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-strategy"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-strategy"
+            }
+          }
+        }
+      },
       "Strategy-Create": {
-        "description": "Strategy create",
+        "description": "Strategy Create",
         "content": {
           "application/json": {
             "schema": {
@@ -450,6 +629,19 @@
             },
             "example": {
               "$ref": "#/components/examples/Strategy-Create"
+            }
+          }
+        }
+      },
+      "Strategy-update": {
+        "description": "Strategy update",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Strategy-update"
+            },
+            "example": {
+              "$ref": "#/components/examples/Strategy-update"
             }
           }
         }
