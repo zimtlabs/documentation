@@ -41,7 +41,7 @@ const result = sdk.certificates.generateCertificate(body: { body, data, namespac
   },
     "signature": "0xe633051fc76ae...",
     "data": {
-      "type": "eco.safety",
+      "type ": "eco.safety",
       "category": "type"
     }
   },
@@ -75,7 +75,7 @@ or
 //     },
 //     "signature": "0xe633051fc76ae...",
 //     "data": {
-//       "type": "eco.safety",
+//       "type ": "eco.safety",
 //       "category": "type"
 //     }
 //   },
@@ -128,7 +128,7 @@ or
   },
     "signature": "0xe633051fc76ae...",
     "data": {
-      "type": "eco.safety",
+      "type ": "eco.safety",
       "category": "type"
     }
   },
@@ -165,7 +165,7 @@ const result = await sdk.certificates.getMany(Pagination, Certificate options);
             },
             "signature": "0xe633051fc76ae...",
             "data": {
-                "type": "eco.safety",
+                "type ": "eco.safety",
                 "category": "type"
             }
         },
@@ -180,7 +180,7 @@ const result = await sdk.certificates.getMany(Pagination, Certificate options);
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -241,7 +241,7 @@ const result = await sdk.certificates.search(Query, Certificate options);
             },
             "signature": "0xe633051fc76ae...",
             "data": {
-                "type": "eco.safety",
+                "type ": "eco.safety",
                 "category": "type"
             }
         },
@@ -256,7 +256,7 @@ const result = await sdk.certificates.search(Query, Certificate options);
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -317,7 +317,7 @@ const result = await sdk.certificates.sources(Query, Certificate options);
             },
             "signature": "0xe633051fc76ae...",
             "data": {
-                "type": "eco.safety",
+                "type ": "eco.safety",
                 "category": "type"
             }
         },
@@ -332,7 +332,7 @@ const result = await sdk.certificates.sources(Query, Certificate options);
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -393,7 +393,7 @@ const result = await sdk.certificates.instances(Query, Certificate options);
             },
             "signature": "0xe633051fc76ae...",
             "data": {
-                "type": "eco.safety",
+                "type ": "eco.safety",
                 "category": "type"
             }
         },
@@ -408,7 +408,7 @@ const result = await sdk.certificates.instances(Query, Certificate options);
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -455,7 +455,7 @@ const result = await sdk.certificates.get(id, Certificate options);
         },
         "signature": "0xe633051fc76ae...",
         "data": {
-            "type": "eco.safety",
+            "type ": "eco.safety",
             "category": "type"
         }
     },
@@ -470,7 +470,7 @@ const result = await sdk.certificates.get(id, Certificate options);
     },
     "proof_locations": [
         {
-            "type": "bundle",
+            "type ": "bundle",
             "bundle": {
                 "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
             },
@@ -511,7 +511,7 @@ const result = await sdk.certificates.get(id, Certificate options);
         },
         "signature": "0xe633051fc76ae...",
         "data": {
-            "type": "eco.safety",
+            "type ": "eco.safety",
             "category": "type"
         }
     },
@@ -526,7 +526,7 @@ const result = await sdk.certificates.get(id, Certificate options);
     },
     "proof_locations": [
         {
-            "type": "bundle",
+            "type ": "bundle",
             "bundle": {
                 "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
             },
