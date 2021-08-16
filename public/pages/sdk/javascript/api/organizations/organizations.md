@@ -44,7 +44,7 @@ const result = await sdk.organizations.getMany(Pagination);
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -123,7 +123,7 @@ const result = await sdk.organizations.search(Query);
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -188,7 +188,7 @@ const result = await sdk.organizations.get(id);
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -473,7 +473,7 @@ const result = await sdk.organizations.create(Request data);
     },
     "proof_locations": [
         {
-            "type": "bundle",
+            "type ": "bundle",
             "bundle": {
                 "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
             },
@@ -528,7 +528,7 @@ const result = await sdk.organizations.searchOrganizationAccountsPublic(organiza
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -593,7 +593,7 @@ const result = await sdk.organizations.searchOrganizationTeamsPublic(organizatio
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -689,7 +689,7 @@ const result = await sdk.organizations.getOrganizationCollectionObjects(organiza
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -749,7 +749,7 @@ const result = await sdk.organizations.getOrganizationCollectionObject(organizat
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -804,7 +804,7 @@ const result = await sdk.organizations.searchOrganizationCollectionObjects(organ
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -881,7 +881,7 @@ const result = await sdk.organizations.createOrganizationAccount(organization_id
     },
     "proof_locations": [
         {
-            "type": "bundle",
+            "type ": "bundle",
             "bundle": {
                 "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
             },
@@ -970,7 +970,7 @@ const result = await sdk.organizations.getManyOrganizationApps(Organization ID, 
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -1030,7 +1030,7 @@ const result = await sdk.organizations.searchOrganizationApps(Organization ID, Q
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -1090,7 +1090,7 @@ const result = await sdk.organizations.getManyActiveOrganizationApps(Organizatio
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -1150,7 +1150,7 @@ const result = await sdk.organizations.searchActiveOrganizationApps(Organization
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -1209,7 +1209,7 @@ const result = await sdk.organizations.getActiveOrganizationApp(Organization ID,
     },
     "proof_locations": [
         {
-            "type": "bundle",
+            "type ": "bundle",
             "bundle": {
                 "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
             },
@@ -1262,7 +1262,7 @@ const result = await sdk.organizations.getOrganizationApp(Organization ID, Organ
     },
     "proof_locations": [
         {
-            "type": "bundle",
+            "type ": "bundle",
             "bundle": {
                 "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
             },
@@ -1419,7 +1419,7 @@ const result = await sdk.organizations.budget(Organization ID);
     },
     "proof_locations": [
         {
-            "type": "bundle",
+            "type ": "bundle",
             "bundle": {
                 "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
             },

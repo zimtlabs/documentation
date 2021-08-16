@@ -36,7 +36,7 @@ const result = await sdk.accounts.getMany(Pagination);
     },
     "proof_locations": [
         {
-            "type": "bundle",
+            "type ": "bundle",
             "bundle": {
                 "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
             },
@@ -107,7 +107,7 @@ const result = await sdk.accounts.search(Query);
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -164,7 +164,7 @@ const result = await sdk.accounts.get(id);
     },
     "proof_locations": [
         {
-            "type": "bundle",
+            "type ": "bundle",
             "bundle": {
                 "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
             },
@@ -218,7 +218,7 @@ const result = await sdk.accounts.me();
     },
     "proof_locations": [
         {
-            "type": "bundle",
+            "type ": "bundle",
             "bundle": {
                 "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
             },

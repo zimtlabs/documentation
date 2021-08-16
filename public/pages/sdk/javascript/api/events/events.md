@@ -131,7 +131,7 @@ const result = await sdk.events.getEvents(asset_id: string, Pagination);
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -203,7 +203,7 @@ const result = await sdk.events.searchEvents(asset_id: string, Query);
         },
         "proof_locations": [
             {
-                "type": "bundle",
+                "type ": "bundle",
                 "bundle": {
                     "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
                 },
@@ -260,7 +260,7 @@ const result = await sdk.events.getEvent(asset_id: string, event_id: string);
     },
     "proof_locations": [
         {
-            "type": "bundle",
+            "type ": "bundle",
             "bundle": {
                 "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
             },
