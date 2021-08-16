@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { useMediaQuery, ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { useMediaQuery, ThemeProvider, createTheme } from '@material-ui/core';
 import NextNprogress from 'nextjs-progressbar';
 
-import { GetTheme, DEFAULT_THEME } from '../app/utils';
+import { GetTheme, DEFAULT_THEME, checkVersion } from '../app/utils';
 import { Middleware, App } from '../app/components';
 import { StorageService } from '../app/services';
 
@@ -22,6 +22,8 @@ export default function _App(props) {
 
         const userThemeSub = StorageService.userTheme.subscribe(value => setUserTheme(value));
 
+        checkVersion();
+
         return () => {
             userThemeSub.unsubscribe();
         };
@@ -33,7 +35,7 @@ export default function _App(props) {
     const theme = React.useMemo(() => {
         const object = GetTheme({ theme: themeType });
 
-        return createMuiTheme(object);
+        return createTheme(object);
     }, [themeType]);
 
     return <>

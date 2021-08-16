@@ -6,4 +6,5 @@ export * from './color.util';
 export * from './markdown.util';
 export * from './validation.util';
 export * from './file.util';
+export * from './ops.util';
 export * from './other.util';
