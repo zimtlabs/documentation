@@ -1,73 +1,108 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { TextField, makeStyles } from '@material-ui/core';
 
-import { rgbToRGBA } from '../../../utils';
+import { FormLabel, Typography } from '../../';
+import { debounce } from '../../../utils';
 
 const useStyles = makeStyles(theme => ({
     root: {
+        width: '100%',
+    },
+    input: {
         fontSize: '0.91rem',
-        background: theme.palette.background.primary,
         margin: 0,
+        width: '100%',
     },
-    filled: {
-        borderRadius: 0,
-        border: `1px solid ${rgbToRGBA(theme.palette.text.primary, 14)}`,
-        background: theme.palette.background.primary,
-
-        '&$focused': {
-            background: 'none',
-            color: theme.palette.text.primary,
-        },
-
-        '&:hover': {
-            background: 'none',
-        },
+    formHelperTextRoot: {
+        marginTop: 11,
     },
-    filledInputLabel: {
-        '&$filledInputLabelFocused': {
-            color: theme.palette.text.secondary,
-        },
+    title: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        margin: 0,
+        marginBottom: theme.spacing(0.5),
     },
-    filledInputLabelFocused: {},
-    focused: {
-        color: theme.palette.text.secondary,
-        background: 'none',
+    header: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        width: '100%',
+        marginBottom: props => (props.title || props.description) ? theme.spacing(1.5) : 0,
     },
 }), { name: 'ZIMTTextField' });
 
 export default function ZIMTTextField(props) {
-    const classes = useStyles();
+    const classes = useStyles(props);
+    const [value, setValue] = useState(props.value);
 
-    const { endAdornment, ...other } = props;
+    const { title, description, key, style, titleProps = {}, value: _value, onChange: _onChange, ...other } = props;
+
+    useEffect(() => {
+        if (value !== _value) setValue(_value);
+        // eslint-disable-next-line
+    }, [_value]);
+
+    // eslint-disable-next-line
+    const onUpdate = useCallback(
+        debounce(event => _onChange(event), 300),
+        []
+    );
+
+    const onChange = event => {
+        setValue(event.target.value);
+
+        onUpdate(event);
+    };
 
     return (
-        <TextField
-            variant='outlined'
-            color='primary'
-            margin='normal'
+        <div
+            key={key}
+            className={classes.root}
+            style={style}
+        >
+            <div className={classes.header}>
+                {title && (
+                    <FormLabel
+                        className={classes.title}
+                        {...titleProps}
+                    >
+                        {title}
+                    </FormLabel>
+                )}
 
-            classes={{
-                root: classes.root,
-            }}
+                {description && (
+                    <Typography
+                        variant='body2'
+                        className={classes.description}
+                    >
+                        {description}
+                    </Typography>
+                )}
+            </div>
 
-            InputLabelProps={{
-                classes: {
-                    filled: classes.filledInputLabel,
-                    focused: classes.filledInputLabelFocused,
-                },
-            }}
+            <TextField
+                variant='outlined'
+                color='primary'
+                margin='normal'
 
-            InputProps={{
-                classes: {
-                    root: classes[props.variant],
-                    focused: classes.focused,
-                },
-                disableUnderline: ['filled'].indexOf(props.variant) > -1,
-                endAdornment,
-            }}
+                value={value}
 
-            {...other}
-        />
+                onChange={onChange}
+
+                classes={{
+                    root: classes.input,
+                }}
+
+                {...other}
+
+                FormHelperTextProps={{
+                    classes: {
+                        root: classes.formHelperTextRoot,
+                    },
+                }}
+            />
+        </div>
     );
 }
-
