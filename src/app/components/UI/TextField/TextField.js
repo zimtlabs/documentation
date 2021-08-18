@@ -46,11 +46,13 @@ export default function ZIMTTextField(props) {
 
     // eslint-disable-next-line
     const onUpdate = useCallback(
-        debounce(event => _onChange(event), 300),
+        debounce(event => _onChange && _onChange(event), 300),
         []
     );
 
     const onChange = event => {
+        if (event.persist) event.persist();
+
         setValue(event.target.value);
 
         onUpdate(event);

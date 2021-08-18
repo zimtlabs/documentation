@@ -1,8 +1,7 @@
 import React from 'react';
 import { Button, makeStyles } from '@material-ui/core';
-import { useTheme } from '@material-ui/styles';
 
-import { CircularProgress } from '../../';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -35,7 +34,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function ZIMTButton(props) {
     const classes = useStyles();
-    const theme = useTheme();
     const { children, loading, disabled, ...other } = props;
 
     return (
@@ -47,14 +45,11 @@ export default function ZIMTButton(props) {
             disabled={disabled || loading}
             {...other}
         >
-            {children}
-
             {loading && (
-                <CircularProgress
-                    style={{ marginLeft: 12, color: theme.palette.text.disabled }}
-                    size={20}
-                />
+                <MoreHorizIcon />
             )}
+
+            {!loading && children}
         </Button>
     );
 }
