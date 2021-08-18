@@ -27,4 +27,5 @@ export * from './InputAdornment';
 export * from './Avatar';
 export * from './FormHelperText';
 export * from './Grid';
+export * from './FormLabel';
 export * from './ActiveLink';
