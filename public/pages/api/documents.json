@@ -1,0 +1,494 @@
+{
+  "components": {
+
+    "headers": {
+
+      "Document-Accept": {
+        "name": "Accept",
+        "description": "Adding this header param will instruct the API to return JSON version of the document, otherwise it will return the document in its original document type byte response.",
+        "in": "header",
+        "schema": {
+          "type": "string",
+          "enum": ["application/json"]
+        }
+      }
+
+    },
+
+    "schemas": {
+
+      "query-document": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "documents": {
+                "type": "array",
+                "items": {
+                  "$ref": "base.json#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "base.json#/components/schemas/limit"
+          },
+          "skip": {
+            "$ref": "base.json#/components/schemas/skip"
+          }
+        }
+      },
+      "content": {
+        "type": "object",
+        "properties": {
+          "file_hash": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "file_hash"
+        ]
+      },
+      "Document-meta": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "base.json#/components/schemas/address"
+          },
+          "timestamp": {
+            "$ref": "base.json#/components/schemas/date"
+          },
+          "data_hash": {
+            "$ref": "base.json#/components/schemas/data-hash"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "created_by",
+          "timestamp",
+          "data_hash"
+        ]
+      },
+      "Document-data-one": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "base.json#/components/schemas/type"
+          },
+          "name": {
+            "$ref": "base.json#/components/schemas/name"
+          },
+          "content": {
+            "$ref": "#/components/schemas/content"
+          },
+          "properties": {
+            "$ref": "base.json#/components/schemas/properties"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "name",
+          "content"
+        ]
+      },
+      "Document-data-many": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "base.json#/components/schemas/type"
+          },
+          "name": {
+            "$ref": "base.json#/components/schemas/name"
+          },
+          "properties": {
+            "$ref": "base.json#/components/schemas/properties"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "name",
+          "content"
+        ]
+      },
+      "Document-Create": {
+        "type": "object",
+        "properties": {
+          "object": {
+              "type": "object",
+              "properties": {
+                    "meta": {
+                        "$ref": "#/components/schemas/Document-meta"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/Document-data-one"
+                    },
+                    "signature": {
+                        "$ref": "base.json#/components/schemas/signature"
+                    }
+              }
+          },
+          "file": {
+              "type": "blob",
+              "format": "binary"
+          },
+          "namespace": {
+            "$ref": "base.json#/components/schemas/namespace"
+          }
+        },
+        "required": [
+          "object"
+        ]
+      },
+      "Document-one": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "object": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "$ref": "#/components/schemas/Document-meta"
+                },
+                "data": {
+                    "$ref": "#/components/schemas/Document-data-one"
+                },
+                "signature": {
+                    "$ref": "base.json#/components/schemas/signature"
+                }
+            },
+            "required": [
+                "meta",
+                "data",
+                "signature"
+            ]
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "receipt",
+          "proof_locations"
+        ],
+        "additionalProperties": false
+      },
+      "Document-many": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "object": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "$ref": "#/components/schemas/Document-meta"
+                },
+                "data": {
+                    "$ref": "#/components/schemas/Document-data-many"
+                },
+                "signature": {
+                    "$ref": "base.json#/components/schemas/signature"
+                }
+            },
+            "required": [
+                "meta",
+                "data",
+                "signature"
+            ]
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "receipt",
+          "proof_locations"
+        ],
+        "additionalProperties": false
+      },
+      "Documents": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Document-many"
+            }
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "base.json#/components/schemas/pagination-response"
+          }
+        }
+      }
+
+    },
+
+    "examples": {
+
+      "query-document": {
+        "query": {
+          "documents": [{
+            "field": "object.data.name",
+            "operator": "starts-with",
+            "value": "Document"
+          }]
+        },
+        "limit": 45,
+        "skip": 30
+      },
+      "Document-Create": {
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "data": {
+                "type": "image/png",
+                "name": "Image",
+                "content": {
+                    "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd"
+                },
+                "properties": {
+                    "prop": 7
+                }
+            },
+            "signature": "0xe633051fc76ae..."
+        },
+        "file": "A file (blob), from file system",
+        "namespace": {
+            "app": true
+        }
+      },
+      "Document-one": {
+        "response": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "object": {
+                "meta": {
+                    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                    "timestamp": "2020-02-10T19:16:13Z",
+                    "data_hash": "0x123..."
+                },
+                "data": {
+                    "type": "image/png",
+                    "name": "Image",
+                    "content": {
+                        "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd"
+                    },
+                    "properties": {
+                        "prop": 7
+                    }
+                },
+                "signature": "0xe633051fc76ae..."
+            },
+          "receipt": {
+            "received_at": 1579278115
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Document-many": {
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "data": {
+                "type": "image/png",
+                "name": "Image",
+                "content": {
+                    "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd"
+                },
+                "properties": {
+                    "prop": 7
+                }
+            },
+            "signature": "0xe633051fc76ae..."
+        },
+        "receipt": {
+          "received_at": 1579278115
+        },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+      },
+      "Documents": {
+        "response": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "object": {
+                "meta": {
+                    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                    "timestamp": "2020-02-10T19:16:13Z",
+                    "data_hash": "0x123..."
+                },
+                "data": {
+                    "type": "image/png",
+                    "name": "Image",
+                    "content": {
+                        "file_hash": "0x627969CD9Ef88bA7e61694947020540d7eD0001d12301230acd"
+                    },
+                    "properties": {
+                        "prop": 7
+                    }
+                },
+                "signature": "0xe633051fc76ae..."
+            },
+          "receipt": {
+            "received_at": 1579278115
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "limit": 30,
+          "skip": 30,
+          "total": 120,
+          "next": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "previous": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "hasNext": true,
+          "hasPrevious": false
+        }
+      }
+
+    },
+
+    "parameters": {
+
+      "id-document": {
+        "name": "id",
+        "description": "ID of a document",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      }
+
+    },
+
+    "responses": {
+
+      "Document": {
+        "description": "Document result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Document-one"
+            },
+            "example": {
+              "$ref": "#/components/examples/Document-one"
+            }
+          }
+        }
+      },
+      "Documents": {
+        "description": "Document results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Documents"
+            },
+            "example": {
+              "$ref": "#/components/examples/Documents"
+            }
+          }
+        }
+      }
+
+    },
+
+    "requestBodies": {
+
+      "search-document": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-document"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-document"
+            }
+          }
+        }
+      },
+      "Document-Create": {
+        "description": "Document create",
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "$ref": "#/components/schemas/Document-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/Document-Create"
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+}

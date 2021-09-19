@@ -1,0 +1,86 @@
+{
+  "asset": {
+    "object": {
+      "meta": {
+        "timestamp": "2021-07-13T16:38:40+02:00"
+      }
+    },
+    "data": {
+      "type": "zimt.sku",
+      "name": "Madagascar chocolate",
+      "documents": [
+        {
+          "name": "Chocolate",
+          "type": "image/png",
+          "id": "0x93a3d9f3b1e8414708463f5738e5faf6a339895e22270c85dfcec84f4ea0ee8b",
+          "properties": {
+            "type": "zimt.chocolate"
+          }
+        }
+      ],
+      "identifiers": {
+        "gcn": [
+          "123123412312412323412345",
+          "1234"
+        ]
+      },
+      "properties": {
+        "description": "Very tasty caramel chocolate"
+      }
+    }
+  },
+  "events": [
+    {
+      "object": {
+        "meta": {
+          "timestamp": "2021-07-13T16:57:08+02:00"
+        },
+        "data": {
+          "type": "zimt.manufactured",
+          "name": "Manufactured"
+        }
+      }
+    },
+    {
+      "object": {
+        "meta": {
+          "timestamp": "2021-07-13T16:56:48+02:00"
+        },
+        "data": {
+          "type": "zimt.harvested",
+          "name": "Harvested"
+        }
+      }
+    },
+    {
+      "object": {
+        "meta": {
+          "timestamp": "2021-07-13T14:38:41Z"
+        },
+        "data": {
+          "identifiers": {
+            "gcn": [
+              "123123412312412323412345",
+              "1234"
+            ]
+          },
+          "documents": [
+            {
+              "name": "Chocolate",
+              "type": "image/png",
+              "id": "0x93a3d9f3b1e8414708463f5738e5faf6a339895e22270c85dfcec84f4ea0ee8b",
+              "properties": {
+                "type": "zimt.chocolate"
+              }
+            }
+          ],
+          "properties": {
+            "description": "Very tasty caramel chocolate"
+          },
+          "type": "zimt.audit.asset.data.update",
+          "name": "Madagascar chocolate"
+        }
+      }
+    }
+  ]
+}

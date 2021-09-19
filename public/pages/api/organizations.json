@@ -1,0 +1,1291 @@
+{
+  "components": {
+
+    "schemas": {
+      "query-organization": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "organizations": {
+                "type": "array",
+                "items": {
+                  "$ref": "base.json#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "base.json#/components/schemas/limit"
+          },
+          "skip": {
+            "$ref": "base.json#/components/schemas/skip"
+          }
+        }
+      },
+      "query-organization-apps": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "organizationApps": {
+                "type": "array",
+                "items": {
+                  "$ref": "base.json#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "base.json#/components/schemas/limit"
+          },
+          "skip": {
+            "$ref": "base.json#/components/schemas/skip"
+          }
+        }
+      },
+      "Organization-data-settings-branding": {
+        "type": "object",
+        "properties": {
+          "logo": {
+            "type": "object",
+            "properties": {
+              "dark": {
+                "$ref": "base.json#/components/schemas/document"
+              },
+              "light": {
+                "$ref": "base.json#/components/schemas/document"
+              },
+              "symbol": {
+                "$ref": "base.json#/components/schemas/document"
+              }
+            },
+            "additionalProperties": false
+          },
+          "colors": {
+            "type": "object",
+            "properties": {
+              "primary": {
+                "type": "string"
+              },
+              "secondary": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "Organization-data-settings-privacy": {
+        "type": "object",
+        "properties": {
+          "organization_accounts_search": {
+            "type": "object",
+            "properties": {
+              "all": { "type": "boolean" },
+              "organizations": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type": "string", "description": "Organization ID" },
+                        "name": {"type": "string", "description": "Organization name" }
+                    },
+                    "required": ["id"]
+                },
+                "additionalItems": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "Organization-data-settings-apps": {
+        "type": "object",
+        "properties": {
+          "dashboard": { "type": "object" },
+          "viewer": { "type": "object" }
+        },
+        "additionalProperties": false
+      },
+      "Organization-data-settings": {
+        "type": "object",
+        "properties": {
+          "allow_public_signup": {"type": "boolean"},
+          "branding": { "$ref": "#/components/schemas/Organization-data-settings-branding" },
+          "apps": { "$ref": "#/components/schemas/Organization-data-settings-apps" },
+          "privacy": { "$ref": "#/components/schemas/Organization-data-settings-privacy" }
+        }
+      },
+      "Organization-data": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "description": "Account ID"},
+                "full_name": {"type": "string", "description": "Account full name"}
+            },
+            "required": ["id"]
+          },
+          "name": {
+            "type": "string"
+          },
+          "plan": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "description": "Plan ID"},
+                "name": {"type": "string", "description": "Plan name"}
+            },
+            "required": ["id"]
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Organization-data-settings"
+          },
+          "active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Organization-App-data": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "app": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "description": "App ID"},
+                "name": {"type": "string", "description": "App name"}
+            },
+            "required": ["id"]
+          }
+        }
+      },
+      "Organization-Create-data": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "Budget-data": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["plan"]
+          },
+          "value": {
+              "type": "object",
+              "properties": {
+                  "tokens": { "type": "number" }
+              }
+          },
+          "organization": {
+              "type": "object",
+              "properties": {
+                  "id": { "type": "string" },
+                  "name": { "type": "string" }
+              }
+          },
+          "active": {
+              "type": "object",
+              "properties": {
+                  "date": {
+                      "type": "object",
+                      "properties": {
+                          "month": { "type": "string" }
+                      }
+                   },
+                    "plan": {
+                        "type": "object",
+                        "properties": {
+                            "id": { "type": "string" },
+                            "name": { "type": "string" }
+                        }
+                    }
+              }
+          }
+        }
+      },
+      "Credit-data": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["plan"]
+          },
+          "value": {
+              "type": "object",
+              "properties": {
+                  "tokens": { "type": "number" }
+              }
+          },
+          "organization": {
+              "type": "object",
+              "properties": {
+                  "id": { "type": "string" },
+                  "name": { "type": "string" }
+              }
+          }
+        }
+      },
+      "Organization-Create": {
+        "type": "object",
+        "properties": {
+          "organization": {
+            "$ref": "#/components/schemas/Organization-Create-data"
+          },
+          "account": {
+            "$ref": "accounts.json#/components/schemas/Account-Create-data"
+          }
+        },
+        "required": [
+          "organization",
+          "account"
+        ]
+      },
+      "Organization-Create-Account": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "$ref": "base.json#/components/schemas/object-simple"
+          },
+          "data": {
+            "$ref": "accounts.json#/components/schemas/Account-Create-data"
+          }
+        },
+        "required": [
+          "object",
+          "data"
+        ]
+      },
+      "Organization-Signup": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "$ref": "accounts.json#/components/schemas/Account-Create-data"
+          }
+        },
+        "required": [
+          "account"
+        ]
+      },
+      "OrganizationPublicDetails": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "settings": {
+                "type": "object",
+                "properties": {
+                  "branding": {
+                    "$ref": "#/components/schemas/Organization-data-settings-branding"
+                  }
+                }
+              }
+            }
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "data",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "OrganizationBudget": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "data": {
+            "$ref": "#/components/schemas/Budget-data"
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
+          }
+        },
+        "required": [
+          "id",
+          "data",
+          "receipt",
+          "proof_locations"
+        ],
+        "additionalProperties": false
+      },
+      "OrganizationCredit": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "data": {
+            "$ref": "#/components/schemas/Credit-data"
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
+          }
+        },
+        "required": [
+          "id",
+          "data",
+          "receipt",
+          "proof_locations"
+        ],
+        "additionalProperties": false
+      },
+      "OrganizationsPublic": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "data",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Organization": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "object": {
+              "type": "object",
+              "properties": {
+                  "meta": {
+                        "$ref": "base.json#/components/schemas/object-meta-simple"
+                    },
+                    "signature": {
+                        "$ref": "base.json#/components/schemas/signature"
+                    }
+              },
+              "additionalProperties": false
+          },
+          "data": {
+            "$ref": "#/components/schemas/Organization-data"
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "data",
+          "receipt",
+          "proof_locations"
+        ],
+        "additionalProperties": false
+      },
+      "OrganizationApp": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "object": {
+            "$ref": "base.json#/components/schemas/object-simple"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Organization-App-data"
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "data",
+          "receipt",
+          "proof_locations"
+        ],
+        "additionalProperties": false
+      },
+      "Organization-update": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "settings": {
+                    "$ref": "#/components/schemas/Organization-data-settings"
+                }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data"
+        ]
+      },
+      "Organization-Analytics": {
+        "type": "object",
+        "properties": {
+            "assets or events or documents or accounts or permissions or apiKeys or hooks or services or organizationApps": {
+                "type": "array",
+                "items": {
+                    "$ref": "analytics.json#/components/schemas/Analytic"
+                },
+                "additionalItems": false
+            }
+        },
+        "additionalProperties": false
+      },
+      "Organization-App-update": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "active": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data"
+        ]
+      },
+      "Organizations": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Organization"
+            }
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "base.json#/components/schemas/pagination-response"
+          }
+        }
+      },
+      "OrganizationApps": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/OrganizationApp"
+            }
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "base.json#/components/schemas/pagination-response"
+          }
+        }
+      },
+      "OrganizationAppUpgrade": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          }
+        }
+      }
+
+    },
+
+    "examples": {
+
+      "query-organization": {
+        "query": {
+          "organizations": [{
+            "field": "data.name",
+            "operator": "starts-with",
+            "value": "My Org"
+          }]
+        },
+        "limit": 45,
+        "skip": 30
+      },
+      "query-organization-apps": {
+        "query": {
+          "organizationApps": [{
+            "field": "data.name",
+            "operator": "starts-with",
+            "value": "Organization app"
+          }]
+        },
+        "limit": 45,
+        "skip": 30
+      },
+      "OrganizationPublicDetails": {
+        "response": {
+          "id": "0x123...",
+          "data": {
+            "name": "My organization",
+            "settings": {
+              "time_zone": "Europe/London",
+              "branding": {
+                "logo": {},
+                "colors": {}
+              }
+            }
+          },
+          "receipt": {
+            "received_at": 1579967810
+          }
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "OrganizationsPublic": {
+        "response": [{
+          "id": "0x123...",
+          "data": {
+            "name": "My organization"
+          },
+          "receipt": {
+            "received_at": 1579967810
+          }
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "limit": 30,
+          "skip": 30,
+          "total": 120,
+          "next": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "previous": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "hasNext": true,
+          "hasPrevious": false
+        }
+      },
+      "Organization": {
+        "response": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "object": {
+              "meta": {
+                    "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                    "timestamp": "2020-02-10T19:16:13Z"
+                },
+                "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+          },
+          "data": {
+            "name": "My organization",
+            "owner": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "full_name": "John Doe"
+            },
+            "plan": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "Free"
+            },
+            "settings": {
+              "time_zone": "Europe/London"
+            },
+            "active": true
+          },
+          "receipt": {
+            "received_at": 1579967810
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Organization-settings": {
+        "response": {
+            "location": {},
+            "contact": {},
+            "images": {},
+            "properties": {},
+            "branding": {},
+            "apps": {},
+            "privacy": {},
+            "strategies": []
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Organization-update": {
+        "data": {
+          "name": "My organization"
+        }
+      },
+      "Organization-App-update": {
+        "data": {
+          "name": "My organization app"
+        }
+      },
+      "Organization-Create": {
+        "organization": {
+          "name": "Johns Organization"
+        },
+        "account": {
+          "full_name": "John Doe",
+          "email": "john@gmail.com",
+          "address": "0x4DC2f66Ea6f7Cd898342378e514cBDAD9dE5CC1B",
+          "security": {
+            "token": "a4123asuiasy4uay3iaisyu3oiasu3iaous34"
+          }
+        }
+      },
+      "Organization-Create-Account": {
+        "object": {
+          "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+          },
+          "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+        },
+        "data": {
+          "full_name": "John Doe",
+          "email": "john@gmail.com",
+          "address": "0x4DC2f66Ea6f7Cd898342378e514cBDAD9dE5CC1B",
+          "security": {
+            "token": "a4123asuiasy4uay3iaisyu3oiasu3iaous34"
+          },
+          "active": true
+        }
+      },
+      "Organization-Signup": {
+        "account": {
+          "full_name": "John Doe",
+          "email": "john@gmail.com",
+          "address": "0x4DC2f66Ea6f7Cd898342378e514cBDAD9dE5CC1B",
+          "security": {
+            "token": "a4123asuiasy4uay3iaisyu3oiasu3iaous34"
+          }
+        }
+      },
+      "Organizations": {
+        "response": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "object": {
+              "meta": {
+                    "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                    "timestamp": "2020-02-10T19:16:13Z"
+                },
+                "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+          },
+          "data": {
+            "name": "My organization",
+            "owner": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "full_name": "John Doe"
+            },
+            "plan": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "Free"
+            },
+            "settings": {
+              "time_zone": "Europe/London"
+            },
+            "active": true
+          },
+          "receipt": {
+            "received_at": 1579967810
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "limit": 30,
+          "skip": 30,
+          "total": 120,
+          "next": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "previous": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "hasNext": true,
+          "hasPrevious": false
+        }
+      },
+      "OrganizationBudget": {
+        "response": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "object": {
+              "meta": {
+                    "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                    "timestamp": "2020-02-10T19:16:13Z"
+                },
+                "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+          },
+          "data": {
+              "type": "plan",
+              "value": {
+                  "tokens": 14000
+              },
+              "active": {
+                  "date": {
+                      "month": "2020-01"
+                  },
+                  "plan": {
+                      "id": "0x123...",
+                      "name": "Free"
+                  }
+              },
+                "organization": {
+                    "id": "0x123...",
+                    "name": "Organization 1"
+                }
+          },
+          "receipt": {
+            "received_at": 1579967810
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "OrganizationCredit": {
+        "response": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "object": {
+              "meta": {
+                    "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                    "timestamp": "2020-02-10T19:16:13Z"
+                },
+                "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+          },
+          "data": {
+              "type": "plan",
+              "value": {
+                  "tokens": 7000
+              },
+                "organization": {
+                    "id": "0x123...",
+                    "name": "Organization 1"
+                }
+          },
+          "receipt": {
+            "received_at": 1579967810
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "OrganizationApp": {
+        "response": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "object": {
+              "meta": {
+                    "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                    "timestamp": "2020-02-10T19:16:13Z"
+                },
+                "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+          },
+          "data": {
+            "name": "Organization app",
+            "active": true,
+            "app": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "App"
+            }
+          },
+          "receipt": {
+            "received_at": 1579967810
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "OrganizationApps": {
+        "response": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "object": {
+              "meta": {
+                    "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                    "timestamp": "2020-02-10T19:16:13Z"
+                },
+                "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+          },
+          "data": {
+            "name": "Organization app",
+            "active": true,
+            "app": {
+                "id": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "name": "App"
+            }
+          },
+          "receipt": {
+            "received_at": 1579967810
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "limit": 30,
+          "skip": 30,
+          "total": 120,
+          "next": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "previous": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "hasNext": true,
+          "hasPrevious": false
+        }
+      },
+      "OrganizationAppUpgrade": {
+        "response": "Upgraded",
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Organization-Analytics": {
+        "response": {
+          "assets": [
+            {
+                "type": "day",
+                "action": "create",
+                "object": "assets",
+                "organization": "0x123...",
+                "value": 4,
+                "date": "2020-07-24",
+                "resolved": true
+            }
+          ]
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      }
+
+    },
+
+    "parameters": {
+
+      "id-organization": {
+        "name": "id",
+        "description": "ID of an organization",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      },
+      "id-plan": {
+        "name": "id",
+        "description": "ID of a plan",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      },
+      "id-organization-app": {
+        "name": "id",
+        "description": "ID of an organization app",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      },
+      "object-id": {
+        "name": "object_id",
+        "description": "Object ID",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      },
+      "collection": {
+        "name": "collection",
+        "description": "Allowed collections: accounts, teams, permissions, apiKeys, services, hooks, budgets, credits.",
+        "in": "path"
+      }
+
+    },
+
+    "responses": {
+
+      "OrganizationPublicDetails": {
+        "description": "Organization public details result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrganizationPublicDetails"
+            },
+            "example": {
+              "$ref": "#/components/examples/OrganizationPublicDetails"
+            }
+          }
+        }
+      },
+      "OrganizationsPublic": {
+        "description": "Organizations with public details",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrganizationsPublic"
+            },
+            "example": {
+              "$ref": "#/components/examples/OrganizationsPublic"
+            }
+          }
+        }
+      },
+      "Organization": {
+        "description": "Organization result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organization"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organization"
+            }
+          }
+        }
+      },
+      "Organization-settings": {
+        "description": "My organization settings",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organization-data-settings"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organization-settings"
+            }
+          }
+        }
+      },
+      "Organization-Analytics": {
+        "description": "Organization analytics",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organization-Analytics"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organization-Analytics"
+            }
+          }
+        }
+      },
+      "Organizations": {
+        "description": "Organization results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organizations"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organizations"
+            }
+          }
+        }
+      },
+
+      "OrganizationApp": {
+        "description": "Organization app result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrganizationApp"
+            },
+            "example": {
+              "$ref": "#/components/examples/OrganizationApp"
+            }
+          }
+        }
+      },
+      "OrganizationApps": {
+        "description": "Organization app results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrganizationApps"
+            },
+            "example": {
+              "$ref": "#/components/examples/OrganizationApps"
+            }
+          }
+        }
+      },
+      "OrganizationAppUpgrade": {
+        "description": "Organization app upgrade",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrganizationAppUpgrade"
+            },
+            "example": {
+              "$ref": "#/components/examples/OrganizationAppUpgrade"
+            }
+          }
+        }
+      },
+      "Organization-Budget": {
+        "description": "Organization budget",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrganizationBudget"
+            },
+            "example": {
+              "$ref": "#/components/examples/OrganizationBudget"
+            }
+          }
+        }
+      },
+      "Organization-Credit": {
+        "description": "Organization credit",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/OrganizationCredit"
+            },
+            "example": {
+              "$ref": "#/components/examples/OrganizationCredit"
+            }
+          }
+        }
+      }
+
+    },
+
+    "requestBodies": {
+
+      "search-organization": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-organization"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-organization"
+            }
+          }
+        }
+      },
+      "search-organization-apps": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-organization-apps"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-organization-apps"
+            }
+          }
+        }
+      },
+      "Organization-App-update": {
+        "description": "Organization app update",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organization-App-update"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organization-App-update"
+            }
+          }
+        }
+      },
+      "Organization-update": {
+        "description": "Organization update",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organization-update"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organization-update"
+            }
+          }
+        }
+      },
+      "Organization-Create": {
+        "description": "Organization create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organization-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organization-Create"
+            }
+          }
+        }
+      },
+      "Organization-Create-Account": {
+        "description": "Organization create account",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organization-Create-Account"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organization-Create-Account"
+            }
+          }
+        }
+      },
+      "Organization-Signup": {
+        "description": "Organization signup",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Organization-Signup"
+            },
+            "example": {
+              "$ref": "#/components/examples/Organization-Signup"
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+}

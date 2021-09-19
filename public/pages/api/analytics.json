@@ -1,0 +1,208 @@
+{
+  "components": {
+
+    "schemas": {
+
+      "organization": {
+        "type": "string",
+        "description": "Organization's ID"
+      },
+      "collection": {
+        "type": "string",
+        "description": "Collection name",
+        "enum": ["assets", "events", "documents", "accounts", "organizations", "permissions", "apiKeys", "apps", "organizationApps", "hooks", "services", "strategies", "bundles"]
+      },
+      "type": {
+        "type": "string",
+        "description": "Type of analytic",
+        "enum": ["hour", "day", "month", "year", "total"]
+      },
+      "action": {
+        "type": "string",
+        "description": "Action",
+        "enum": ["create"]
+      },
+      "date": {
+        "type": "string",
+        "description": "ISO 8601 date string, representing hour, day, month or year",
+        "example": "year: 2020; month: 2020-07; day: 2020-07-24; hour: 2020-07-24T14"
+      },
+      "value": {
+        "type": "number",
+        "description": "Amount created for this action, organization and date"
+      },
+      "resolved": {
+        "type": "boolean"
+      },
+      "meta": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "number",
+            "description": "Analytic created at"
+          },
+          "latest_timestamp": {
+            "type": "number",
+            "description": "Timestamp of latest object used for incrementing the value"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Analytic": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/type"
+          },
+          "action": {
+            "$ref": "#/components/schemas/action"
+          },
+          "object": {
+            "$ref": "#/components/schemas/collection"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/organization"
+          },
+          "date": {
+            "$ref": "#/components/schemas/date"
+          },
+          "value": {
+            "$ref": "#/components/schemas/value"
+          },
+          "resolved": {
+            "$ref": "#/components/schemas/resolved"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta"
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "signature",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Analytics": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Analytic"
+            }
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "base.json#/components/schemas/pagination-response"
+          }
+        }
+      }
+
+    },
+
+    "examples": {
+
+      "Analytic": {
+        "response": {
+          "type": "day",
+          "action": "create",
+          "object": "assets",
+          "organization": "0x123...",
+          "value": 4,
+          "date": "2020-07-24",
+          "resolved": true
+        },
+        "meta": {
+          "code": 200
+        }
+      },
+      "Analytics": {
+        "response": [{
+          "type": "day",
+          "action": "create",
+          "object": "assets",
+          "organization": "0x123...",
+          "value": 4,
+          "date": "2020-07-24",
+          "resolved": true
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      }
+
+    },
+
+    "parameters": {
+
+      "organization": {
+        "name": "Organization ID",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/organization"
+        }
+      },
+      "collection": {
+        "name": "Collection",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/collection"
+        }
+      },
+      "type": {
+        "name": "Type",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/type"
+        }
+      },
+      "date": {
+        "name": "Date",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/date"
+        }
+      }
+
+    },
+
+    "responses": {
+
+      "Analytic": {
+        "description": "Analytic",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Analytic"
+            },
+            "example": {
+              "$ref": "#/components/examples/Analytic"
+            }
+          }
+        }
+      },
+      "Analytics": {
+        "description": "Analytics",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Analytics"
+            },
+            "example": {
+              "$ref": "#/components/examples/Analytics"
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+}

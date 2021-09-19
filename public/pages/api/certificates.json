@@ -1,0 +1,495 @@
+{
+  "components": {
+
+    "schemas": {
+
+      "query-certificate": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "certificates": {
+                "type": "array",
+                "items": {
+                  "$ref": "base.json#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "base.json#/components/schemas/limit"
+          },
+          "skip": {
+            "$ref": "base.json#/components/schemas/skip"
+          }
+        }
+      },
+      "Certificate-meta": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "base.json#/components/schemas/address"
+          },
+          "timestamp": {
+            "$ref": "base.json#/components/schemas/date"
+          },
+          "data_hash": {
+            "$ref": "base.json#/components/schemas/data-hash"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "created_by",
+          "timestamp",
+          "data_hash"
+        ]
+      },
+      "Certificate-object-data": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "sub_instance": {
+            "type": "boolean"
+          },
+          "level": {
+            "type": "number",
+            "minimum": 1
+          },
+
+          "identifiers": {
+            "$ref": "base.json#/components/schemas/identifiers"
+          },
+
+            "organization": { "type": "boolean" },
+            "all": { "type": "boolean" },
+            "objects": {
+                "type": "array",
+                "item": ["assets", "documents"],
+                "minItems": 1,
+                "additionalItems": false
+            },
+            "filters": {
+                "$ref": "permissions.json#/components/schemas/Permission-data-resources"
+            },
+            "object_type": { "type": "string" },
+            "object_id": { "type": "string" },
+
+            "source": {
+              "type": "object",
+              "properties": {
+                "type": {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type": "string"}
+                    }
+                },
+                "instance": {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type": "string"}
+                    }
+                }
+              },
+              "additionalProperties": false,
+              "required": ["type"]
+            },
+
+          "properties": {
+            "$ref": "base.json#/components/schemas/properties"
+          }
+        },
+        "required": [
+          "type",
+          "category"
+        ]
+      },
+      "Certificate-data": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "transferable": {
+            "type": "boolean"
+          },
+          "instance_instantiable": {
+            "type": "boolean"
+          },
+
+          "active": {
+            "type": "boolean"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "private": {
+            "type": "boolean"
+          },
+            "private_for": {
+                "$ref": "apps.json#/components/schemas/App-data-private-for"
+            },
+
+          "documents": {
+            "$ref": "base.json#/components/schemas/documents"
+          },
+          "images": {
+            "$ref": "base.json#/components/schemas/documents"
+          },
+
+          "limit": {
+            "type": "number"
+          },
+          "instances_created": {
+            "type": "number"
+          },
+
+          "properties": {
+            "$ref": "base.json#/components/schemas/properties"
+          }
+        },
+        "required": [
+          "type",
+          "category"
+        ]
+      },
+      "Certificate-object": {
+        "type": "object",
+        "properties": {
+        "type": "object",
+            "properties": {
+                "meta": {
+                    "$ref": "#/components/schemas/Certificate-meta"
+                },
+                "data": {
+                    "$ref": "#/components/schemas/Certificate-object-data"
+                },
+                "signature": {
+                    "$ref": "base.json#/components/schemas/signature"
+                }
+            }
+        }
+      },
+      "Certificate-Create": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "$ref": "#/components/schemas/Certificate-meta"
+                },
+                "data": {
+                    "$ref": "#/components/schemas/Certificate-object-data"
+                },
+                "signature": {
+                    "$ref": "base.json#/components/schemas/signature"
+                }
+            },
+            "required": [
+                "meta",
+                "data",
+                "signature"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/Certificate-data"
+          },
+          "ownership": {
+            "$ref": "base.json#/components/schemas/ownership"
+          }
+        },
+        "required": [
+          "object"
+        ]
+      },
+      "Certificate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "object": {
+            "$ref": "#/components/schemas/Certificate-object"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Certificate-data"
+          },
+          "ownership": {
+            "$ref": "base.json#/components/schemas/ownership"
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "data",
+          "ownership",
+          "receipt",
+          "proof_locations"
+        ],
+        "additionalProperties": false
+      },
+      "Certificate-update": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Certificate-data"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Certificates": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Certificate"
+            }
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "base.json#/components/schemas/pagination-response"
+          }
+        }
+      }
+
+    },
+    "examples": {
+
+      "query-certificate": {
+        "query": {
+          "certificates": [{
+            "field": "object.data.type",
+            "operator": "starts-with",
+            "value": "eco."
+          }]
+        },
+        "limit": 45,
+        "skip": "30"
+      },
+      "Certificate": {
+        "response": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "object": {
+                "meta": {
+                    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                    "timestamp": "2020-02-10T19:16:13Z",
+                    "data_hash": "0x123..."
+                },
+                "signature": "0xe633051fc76ae...",
+                "data": {
+                    "type": "eco.safety",
+                    "category": "type"
+                }
+            },
+            "data": {
+                "name": "Eco Safety certificate type",
+                "active": true,
+                "private": true,
+                "verified": true
+            },
+          "receipt": {
+            "received_at": 1579967810
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Certificate-Create": {
+        "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "data_hash": "0x123..."
+            },
+            "signature": "0xe633051fc76ae...",
+            "data": {
+                "type": "eco.safety",
+                "category": "type"
+            }
+        },
+        "data": {
+            "name": "Eco Safety certificate type",
+            "active": true,
+            "private": true,
+            "verified": true
+        }
+        },
+      "Certificate-update": {
+        "data": {
+          "name": "Eco Safety updated"
+        }
+      },
+      "Certificates": {
+        "response": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "object": {
+                "meta": {
+                    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                    "timestamp": "2020-02-10T19:16:13Z",
+                    "data_hash": "0x123..."
+                },
+                "signature": "0xe633051fc76ae...",
+                "data": {
+                    "type": "eco.safety",
+                    "category": "type"
+                }
+            },
+            "data": {
+                "name": "Eco Safety certificate type",
+                "active": true,
+                "private": true,
+                "verified": true
+            },
+          "receipt": {
+            "received_at": 1579967810
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "limit": 30,
+          "skip": 30,
+          "total": 120,
+          "next": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "previous": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "hasNext": true,
+          "hasPrevious": false
+        }
+      }
+
+    },
+    "parameters": {
+
+      "id-certificate": {
+        "name": "id",
+        "description": "ID of an certificate",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      }
+
+    },
+
+    "responses": {
+
+      "Certificate": {
+        "description": "Certificate result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Certificate"
+            },
+            "example": {
+              "$ref": "#/components/examples/Certificate"
+            }
+          }
+        }
+      },
+      "Certificates": {
+        "description": "Certificate results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Certificates"
+            },
+            "example": {
+              "$ref": "#/components/examples/Certificates"
+            }
+          }
+        }
+      }
+
+    },
+    "requestBodies": {
+
+      "search-certificate": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-certificate"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-certificate"
+            }
+          }
+        }
+      },
+      "Certificate-Create": {
+        "description": "Certificate Create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Certificate-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/Certificate-Create"
+            }
+          }
+        }
+      },
+      "Certificate-update": {
+        "description": "Certificate update",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Certificate-update"
+            },
+            "example": {
+              "$ref": "#/components/examples/Certificate-update"
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+}

@@ -1,0 +1,805 @@
+{
+  "components": {
+    "headers": {},
+
+    "schemas": {
+      "limit": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 0,
+        "maximum": 50
+      },
+      "skip": {
+        "type": "integer",
+        "format": "int32",
+        "minimum": 0
+      },
+      "permissions": {
+        "type": "boolean"
+      },
+      "total": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "hasNext": {
+        "type": "boolean"
+      },
+      "hasPrevious": {
+        "type": "boolean"
+      },
+      "next": {
+        "type": "string"
+      },
+      "previous": {
+        "type": "string"
+      },
+    "ownership": {
+        "type": "object",
+        "properties": {
+            "organization": {"type": "string"}
+        },
+        "required": ["organization"]
+    },
+      "meta-response": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32",
+            "example": "200"
+          },
+          "message": {
+            "type": "string",
+            "example": "Ok"
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
+      "pagination-response": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "$ref": "#/components/schemas/limit"
+          },
+          "skip": {
+            "$ref": "#/components/schemas/skip"
+          },
+          "total": {
+            "$ref": "#/components/schemas/total"
+          },
+          "next": {
+            "$ref": "#/components/schemas/next"
+          },
+          "previous": {
+            "$ref": "#/components/schemas/previous"
+          },
+          "hasNext": {
+            "$ref": "#/components/schemas/hasNext"
+          },
+          "hasPrevious": {
+            "$ref": "#/components/schemas/hasPrevious"
+          }
+        },
+        "required": [
+          "limit",
+          "skip",
+          "total",
+          "next",
+          "previous",
+          "hasNext",
+          "hasPrevious"
+        ]
+      },
+      "anyValue": {
+        "description": "Any type of value"
+      },
+      "query-operator": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "example": "object.data.name"
+          },
+          "operator": {
+            "type": "string",
+            "enum": [
+              "equal",
+              "not-equal",
+              "equal-array",
+              "not-equal-array",
+              "greater-than",
+              "greater-than-equal",
+              "less-than",
+              "less-than-equal",
+              "inrange",
+              "starts-with",
+              "contains",
+              "array-some",
+              "array-all"
+            ]
+          },
+          "value": {
+            "$ref": "#/components/schemas/anyValue"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "field",
+          "operator",
+          "value"
+        ]
+      },
+      "filters": {
+        "type": "object",
+        "properties": {
+          "accounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "apps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "organizationApps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "apiKeys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "organizations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "hooks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "defaults": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "plans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/query-operator"
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "query": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/filters"
+          },
+          "limit": {
+            "$ref": "#/components/schemas/limit"
+          },
+          "skip": {
+            "$ref": "#/components/schemas/skip"
+          }
+        }
+      },
+
+      "id": {
+        "type": "string",
+        "description": "ID of an object.\n\nReceipt object signed with hub's private key.",
+        "example": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+      },
+      "proof": {
+        "type": "string"
+      },
+      "signature": {
+        "type": "string",
+        "description": "Meta object signed with account's private key.",
+        "example": "0xc0b987fa10a20d83948f8539e37499ba1a8be452fc1cf319c6204fc305bd1a746039239f2c8c38b70de6c4dc1bb9162fbc52eabdf379011c58a2dbb33fe9f5b43a"
+      },
+      "address": {
+        "type": "string",
+        "description": "Account's public address.",
+        "example": "0xb1eacA825D9dEEb576C8F9c6992785360dAC8a1f"
+      },
+      "strategy": {
+        "type": "string",
+        "description": "Strategy's id.",
+        "example": "0xb1eacA825D9dEEb576C8F9c6992785360dAC8a1f"
+      },
+      "organization": {
+        "type": "string",
+        "description": "Organization's id.",
+        "example": "0xb1eacA825D9dEEb576C8F9c6992785360dAC8a1f"
+      },
+      "private_key": {
+        "type": "string",
+        "description": "Account's private key.",
+        "example": "0x14fbd74c7b5bed4109496f7df98a61ea11775edbac3bf203ac1f6cfc8daa999f"
+      },
+      "date": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Creation date and time",
+        "example": "2020-02-01T20:00:00Z"
+      },
+      "timestamp": {
+        "type": "number",
+        "description": "Unix timestamp expressed in milliseconds",
+        "example": "1583853404123"
+      },
+      "data-hash": {
+        "type": "string",
+        "description": "Hash of data object"
+      },
+      "entries-hash": {
+        "type": "string",
+        "description": "Hash of entries array"
+      },
+      "type": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "asset_type": {
+        "type": "string"
+      },
+      "document": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "documents.json#/components/parameters/id-document"
+          },
+          "url": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "type"
+        ]
+      },
+      "documents": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 0,
+        "items": {
+          "$ref": "#/components/schemas/document"
+        },
+        "additionalItems": false
+      },
+      "location": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["Feature"]
+          },
+          "geometry": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["Point"]
+              },
+              "coordinates": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2,
+                "additionalItems": false
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "coordinates"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "geometry"
+        ]
+      },
+      "identifiers": {
+        "type": "object",
+        "properties": {
+          "Any property name": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "additionalItems": false
+          }
+        }
+      },
+      "properties": {
+        "type": "object"
+      },
+
+      "object-meta-simple": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "#/components/schemas/address"
+          }
+        },
+        "required": [
+          "created_by"
+        ]
+      },
+      "object-simple": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/object-meta-simple"
+          },
+          "signature": {
+            "$ref": "#/components/schemas/signature"
+          }
+        },
+        "required": [
+          "meta",
+          "signature"
+        ]
+      },
+
+      "proof_locations": {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string" ,
+                    "enum": ["bundle"]
+                },
+                "bundle": {
+                    "type": "object",
+                    "properties": {
+                        "id": { "type": "string" },
+                        "name": { "type": "string" }
+                    }
+                },
+                "strategy": {
+                    "type": "object",
+                    "properties": {
+                        "id": { "type": "string" }
+                    }
+                },
+                "created_at": { "type": "number" }
+            },
+            "additionalProperties": false
+        },
+        "additionalItems": false
+      },
+
+      "receipt": {
+        "type": "object",
+        "properties": {
+          "signed_at": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Hub sign date and time in millisecond format",
+            "example": 1581420369123
+          },
+          "received_at": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Database insertion date and time in epoch format",
+            "example": 1581420369
+          }
+        }
+      },
+      "namespace": {
+        "type": "object"
+      },
+      "Object-Created": {
+        "type": "object",
+        "properties": {
+          "proof": {
+            "$ref": "#/components/schemas/proof"
+          },
+          "id": {
+            "$ref": "#/components/schemas/id"
+          },
+          "receipt": {
+            "$ref": "#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "proof",
+          "id",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "getToken": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+
+      "Authentication": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+      "Not found": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+      "Validation": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+      "Authorization": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      },
+      "Object-Delete": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/meta-response"
+          }
+        }
+      }
+
+    },
+
+    "examples": {
+
+      "Object-Created": {
+        "proof": "0x0192cbd1c59b40ea97f7bc102a16c325a3066bb6b68c9c16bae447d8bb38565a66da29...",
+        "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+        "receipt": {
+          "object_hash": "0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5",
+          "received_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E",
+          "signed_at": 1579278115123,
+          "received_at": 1579278115,
+          "organization": "0x123..."
+        }
+      },
+
+      "Authentication": {
+        "meta": {
+          "code": 401,
+          "message": "Unauthorized"
+        }
+      },
+      "Not found": {
+        "meta": {
+          "code": 400,
+          "message": "Not found"
+        }
+      },
+      "Validation": {
+        "meta": {
+          "code": 400,
+          "message": "Specific validation error reason message..."
+        }
+      },
+      "Authorization": {
+        "meta": {
+          "code": 403,
+          "message": "Unauthorized"
+        }
+      },
+      "getToken": {
+        "organization_name": "My organization",
+        "email": "john@gmail.com"
+      },
+
+      "Object-Delete": {
+        "response": "Removed",
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      }
+
+    },
+
+    "parameters": {
+
+      "organization": {
+        "name": "organization",
+        "description": "Organization name",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "for_organization": {
+        "name": "for_organization",
+        "description": "Organization ID, if user is create a resource for an external organization.",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "limit-query": {
+        "name": "limit",
+        "description": "Number of results to return in the response",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/limit"
+        }
+      },
+      "skip-query": {
+        "name": "skip",
+        "description": "Number of results to skip",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/skip"
+        }
+      },
+      "next-query": {
+        "name": "next",
+        "description": "Base64 encoded string - cursor",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/cursor"
+        },
+        "example": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGJhIn0"
+      },
+      "permissions": {
+        "name": "permissions",
+        "description": "Evaluates permissions",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/permissions"
+        }
+      },
+      "previous-query": {
+        "name": "previous",
+        "description": "Base64 encoded string - cursor",
+        "in": "query",
+        "schema": {
+          "$ref": "#/components/schemas/cursor"
+        },
+        "example": "eyIkb2lkIjoiNTgwZmQxNmFjYTJhNmIyNzE1NjJkOGI5In0"
+      }
+
+    },
+    "responses": {
+
+      "Authentication": {
+        "description": "No authentication provided",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Authentication"
+            },
+            "example": {
+              "$ref": "#/components/examples/Authentication"
+            }
+          }
+        }
+      },
+      "Not found": {
+        "description": "Not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Not found"
+            },
+            "example": {
+              "$ref": "#/components/examples/Not found"
+            }
+          }
+        }
+      },
+      "Validation": {
+        "description": "Validation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Validation"
+            },
+            "example": {
+              "$ref": "#/components/examples/Validation"
+            }
+          }
+        }
+      },
+      "Authorization": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Authorization"
+            },
+            "example": {
+              "$ref": "#/components/examples/Authorization"
+            }
+          }
+        }
+      },
+
+      "Object-Created": {
+        "description": "Created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Object-Created"
+            },
+            "example": {
+              "$ref": "#/components/examples/Object-Created"
+            }
+          }
+        }
+      },
+
+      "Object-Delete": {
+        "description": "Object delete",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Object-Delete"
+            },
+            "example": {
+              "$ref": "#/components/examples/Object-Delete"
+            }
+          }
+        }
+      }
+
+    },
+
+    "requestBodies": {
+
+      "getToken": {
+        "description": "Get token",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "organization_name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                }
+              },
+              "required": [
+                "organization_name",
+                "email"
+              ]
+            },
+            "example": {
+              "$ref": "#/components/examples/getToken"
+            }
+          }
+        }
+      }
+
+    },
+
+    "securitySchemes": {
+
+      "ZIMT API key": {
+        "name": "ZIMT_API_KEY",
+        "description": "\n\n ### About\n\nZIMT API key is a key registered/provided by ZIMT hub. <br />It allows you to make requests to ZIMT hub, without it you can't authenticate.<br />It has to be attached to every request headers.<br />Key has to exist and be active.\n\nUsage format: `ZIMT_API_KEY <API key>`\n\nExample: `headers['ZIMT_API_KEY'] = 0xA3eC2FCcB4D79723D3A060Fc8254e9Ec1B23a259`",
+        "type": "apiKey",
+        "in": "header"
+      },
+      "ZIMT Token": {
+        "name": "ZIMT token",
+        "description": "\n\n ### About\n\nZIMT token is a private key signed object, which is then serialized and base64 encoded.\n\nUsage format: `ZIMT_TOKEN <Token>`\n\nExample: `headers['Authorization'] = ZIMT_TOKEN eyJpZERhdGEiOnsiY3JlYXRlZEJ5IjoiM...`\n\n### Create token\n\n <pre><code class='language-js'>base64url(\n\tserializeForHashing({\n\t\tmeta: {\n\t\t\t// Registered account's address\n\t\t\tcreated_by: '0x123...',\n\t\t\t// Lifetime of the token, how long it's valid\n\t\t\t// ISO 8601 date format\n\t\t\tvalid_until: '2020-02-11T09:14:51.276Z',\n\t\t},\n\t\t// Meta object signed with account's private key\n\t\tsignature: sign(meta, privateKey),\n\t})\n);</code></pre>",
+        "type": "http",
+        "scheme": "bearer",
+        "in": "header"
+      }
+    }
+
+  }
+
+}

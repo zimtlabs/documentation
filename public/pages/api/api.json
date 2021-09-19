@@ -1,0 +1,3084 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "contact": {
+      "name": "API Support",
+      "url": "https://zimt.co",
+      "email": "tech@zimt.co"
+    },
+    "description": "## Main concepts \n<br/> Assets, events and documents are main components of ZIMT Hub system. <br/><br/> Object data inside all of them is immutable data, as once hub receives that data from a client, it is hashed (`object_hash`) and put inside `receipt` object along side other details, like, hub's address (`received_by`), as a receiver of the data, `organization` resource belongs to and the timestamp (`received_at`) of receiption in milliseconds. <br/><br/> \n #### ID \n\n Receipt object is hashed, and that hash represents a unique `id` of that object. <br/><br/> \n #### Proof \n\n Unique ID string, is signed with hub's private key, which represents `proof` of that object. <br/><br/> \n <pre><code class='language-js'>{\n\tproof: '0x0192cbd1c59b40ea97f7bc102a16c325a3066bb6b68c9c16bae447d8bb38565a66da29...',\n\tid: '0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951',\n\treceipt: {\n\t\tobject_hash: '0xc0d7efb7eaa769f83a8ce2d41466d603af6ad308b5a8053676c4034d0369aec5',\n\t\treceived_by: '0x678b3c5090B25b3a63120CF0218750886e37A96E',\n\t\treceived_at: 1579278115,\n\t\torganization: '0x123...'\n\t}\n}</code></pre> <br/> \n #### Bundle \n\n Hub periodically creates bundles, where one of the bundles will contain object's proof string. Bundle then hashes its array of proofs into `entries_hash` property of a `meta` object, that also contains, hub address `created_by`, `created_at` timestamp, and `strategy` id of the strategy used for bundling. That meta object is then hashed into a unique `id` string, and same as above, bundle `id` string is then signed with hub's private key to generate unique bundle `proof` string. And finally, bundle unique proof string, is stored in a blockchain. Bundle, once put into a transaction in a blockchain, will contain blockchain `url` and transaction hash `tx_hash`.<br/><br/> \n #### Proving data integrity \n\n Having read concepts above, you can easily prove if data has/has not changed since it was initially created, in few steps: <br/><br/> <ol> <li>Get bundle that bundled the proof of an object you want to prove data integrity for.</li><li>Based on transaction hash, get the transaction from the blockchain.</li><li>Inside that transaction is bundle proof string. Having now bundle content (that contains object's proof string in `entries` array), you can do all the same process hashing of entries to get entries_hash, then hashing meta to get the bundle id, and having hub's public key (address), using ethers.js extracting (signed content (id)) from bundles proof string. If proof string is the same in fetched bundle and transaction, and id extracted from proof string is the same as bundle id you recalculated, proves that bundle hasn't changed since it was initially created.</li><li>Now that we proved bundle's data integrity, we have to do similar process to prove that object's proof contained in the bundle is valid.</li><li>Get the object (asset, event, document, etc.) from hub, and proceed with the same process as above, hashing the object to get object_hash, hashing receipt object, to get the object's id, and now having recalculated object's id and hub's public key (address), using again ethers.js method we can extract id that was initially signed from the proof string of the object contained in the bundle we just confirmed integrity for. If obect proof is same as object's proof string in the bundle, and extracted id from the proof string is the same as id we just recalculated, proves object hasn't change since it was initially created.</li></ol>"
+  },
+  "servers": [{
+      "url": "https://hub.test.zi.mt",
+      "description": "Hub core API - Test"
+    },
+    {
+      "url": "https://hub.zi.mt",
+      "description": "Hub core API - Production"
+    }
+  ],
+  "tags": [{
+      "name": "API keys",
+      "description": "API keys management."
+    },
+    {
+      "name": "Apps",
+      "description": "Apps management."
+    },
+    {
+      "name": "Accounts",
+      "description": "Account management."
+    },
+    {
+      "name": "Auth",
+      "description": "Auth management."
+    },
+    {
+      "name": "Analytics",
+      "description": "Analytics management."
+    },
+    {
+      "name": "Organizations",
+      "description": "Organization management."
+    },
+    {
+      "name": "Permissions",
+      "description": "Permission management."
+    },
+    {
+      "name": "Assets",
+      "description": "Asset management."
+    },
+    {
+      "name": "Events",
+      "description": "Event management."
+    },
+    {
+      "name": "Documents",
+      "description": "Document management."
+    },
+    {
+      "name": "Strategies",
+      "description": "Strategy management."
+    },
+    {
+      "name": "Certificates",
+      "description": "Certificate management."
+    },
+    {
+      "name": "Bundles",
+      "description": "Bundle management."
+    },
+    {
+      "name": "Services",
+      "description": "Service management."
+    },
+    {
+      "name": "Hooks",
+      "description": "Hook management."
+    },
+    {
+      "name": "Other",
+      "description": "Other than core endpoints."
+    },
+    {
+      "name": "Teams",
+      "description": "Team management."
+    }
+  ],
+  "x-tagGroups": [{
+      "name": "Auth",
+      "tags": [
+        "Auth"
+      ]
+    },
+    {
+      "name": "API keys",
+      "tags": [
+        "API keys"
+      ]
+    }, {
+      "name": "Apps",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "name": "Accounts",
+      "tags": [
+        "Accounts"
+      ]
+    },
+    {
+      "name": "Analytics",
+      "tags": [
+        "Analytics"
+      ]
+    },
+    {
+      "name": "Organizations",
+      "tags": [
+        "Organizations"
+      ]
+    },
+    {
+      "name": "Permissions",
+      "tags": [
+        "Permissions"
+      ]
+    },
+    {
+      "name": "Assets",
+      "tags": [
+        "Assets"
+      ]
+    },
+    {
+      "name": "Events",
+      "tags": [
+        "Events"
+      ]
+    },
+    {
+      "name": "Documents",
+      "tags": [
+        "Documents"
+      ]
+    },
+    {
+      "name": "Strategies",
+      "tags": [
+        "Strategies"
+      ]
+    },
+    {
+      "name": "Certificates",
+      "tags": [
+        "Certificates"
+      ]
+    },
+    {
+      "name": "Bundles",
+      "tags": [
+        "Bundles"
+      ]
+    },
+    {
+      "name": "Services",
+      "tags": [
+        "Services"
+      ]
+    },
+    {
+      "name": "Hooks",
+      "tags": [
+        "Hooks"
+      ]
+    },
+    {
+      "name": "Other",
+      "tags": [
+        "Other"
+      ]
+    },
+    {
+      "name": "Teams",
+      "tags": [
+        "Teams"
+      ]
+    }
+  ],
+
+  "paths": {
+
+    "/": {
+      "get": {
+        "summary": "Health /",
+        "description": "Returns 200 if server is alive and working.",
+        "tags": [
+          "Other"
+        ],
+        "responses": {
+          "200": { "$ref": "other.json#/components/responses/Health" }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health /health",
+        "description": "Returns 200 if server is alive and working.",
+        "tags": [
+          "Other"
+        ],
+        "responses": {
+          "200": { "$ref": "other.json#/components/responses/Health" }
+        }
+      }
+    },
+
+    "/auth/login": {
+      "post": {
+        "summary": "Login",
+        "description": "Returns an account authentication token. <br/><br/> If you are a developer creating an app that has a login / is used by hub accounts, you would first make a request in this endpoint just with the app's api_key, get a JWT token from the response that only represents your app without a user. Then, include it in next requests headers, and then ie. get account's encrypted token (POST /accounts/token), decrypt it using password, and then make another request to this login endpoint, but, second time around you have both app's api_key and now private key of the hub account using your app, now you can generate the token described below, and response will be JWT token that represents your app and hub account using your app, and then you can include that JWT token in headers instead of the first one, and make create asset requests or whatever your app needs.",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "$ref": "auth.json#/components/requestBodies/Login"
+        },
+        "responses": {
+          "200": { "$ref": "auth.json#/components/responses/Token" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/auth/token/refresh": {
+      "get": {
+        "summary": "Token refresh",
+        "description": "Returns a fresh new account authentication token.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": { "$ref": "auth.json#/components/responses/Token" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/analytics": {
+      "get": {
+        "summary": "Get many analytics",
+        "description": "Returns array of analytics.",
+        "tags": [
+          "Analytics"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "analytics.json#/components/parameters/organization" },
+          { "$ref": "analytics.json#/components/parameters/collection" },
+          { "$ref": "analytics.json#/components/parameters/type" },
+          { "$ref": "analytics.json#/components/parameters/date" }
+        ],
+        "responses": {
+          "200": { "$ref": "analytics.json#/components/responses/Analytics" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/analytics/analytic": {
+      "get": {
+        "summary": "Get one analytics",
+        "description": "Returns an analytic.",
+        "tags": [
+          "Analytics"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "analytics.json#/components/parameters/organization" },
+          { "$ref": "analytics.json#/components/parameters/collection" },
+          { "$ref": "analytics.json#/components/parameters/type" },
+          { "$ref": "analytics.json#/components/parameters/date" }
+        ],
+        "responses": {
+          "200": { "$ref": "analytics.json#/components/responses/Analytic" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/accounts": {
+      "get": {
+        "summary": "Get accounts",
+        "description": "Returns a list of accounts.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Accounts" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/accounts/search": {
+      "post": {
+        "summary": "Search accounts",
+        "description": "Returns a list of accounts.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "accounts.json#/components/requestBodies/search-account"
+        },
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Accounts" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/accounts/{id}": {
+      "get": {
+        "summary": "Get account",
+        "description": "Returns an account.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "accounts.json#/components/parameters/id-account" }
+        ],
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Account" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update account",
+        "description": "Updates an account.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "accounts.json#/components/requestBodies/Account-update"
+        },
+        "parameters": [
+          { "$ref": "accounts.json#/components/parameters/id-account" }
+        ],
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Account" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete account",
+        "description": "Deletes a account.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "accounts.json#/components/parameters/id-account" }
+        ],
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/accounts/me": {
+      "get": {
+        "summary": "My account",
+        "description": "Returns an account based on ZIMT token in request headers.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Account-me" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" }
+        }
+      }
+    },
+    "/accounts/settings": {
+      "get": {
+        "summary": "My account settings",
+        "description": "Returns an account settings based on ZIMT token in request headers.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Account-settings" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" }
+        }
+      }
+    },
+    "/accounts/token": {
+      "post": {
+        "summary": "Get token",
+        "description": "Returns the account token (account's private key encoded with account's password)",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "API key"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "base.json#/components/requestBodies/getToken"
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "base.json#/components/schemas/getToken"
+                },
+                "example": {
+                  "response": "as98d5385dc1f0b2b359098405fc182ba9e46fd99e8051cb92a8a58624388da29d0d17a8460eb3303c34a...",
+                  "meta": {
+                    "code": 200,
+                    "message": "Ok"
+                  }
+                }
+              }
+            }
+          },
+          "400": { "$ref": "base.json#/components/responses/Not found" }
+        }
+      }
+    },
+    "/accounts/exists": {
+      "post": {
+        "summary": "Check if account exists",
+        "description": "Returns true if account already exists with given address or email",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "API key"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "accounts.json#/components/requestBodies/accountExists"
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "accounts.json#/components/schemas/accountExists"
+                },
+                "example": {
+                  "response": true,
+                  "meta": {
+                    "code": 200,
+                    "message": "Ok"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/organizations": {
+      "get": {
+        "summary": "Get list of organizations account's email is apart of",
+        "description": "Get list of organizations with basic details, account's email is apart of.",
+        "tags": [
+          "Accounts"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "requestBody": {
+          "description": "Get organizations",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  }
+                },
+                "required": [
+                  "email"
+                ]
+              },
+              "example": {
+                "email": "john@gmail.com"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "$ref": "base.json#/components/schemas/id"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "settings": {
+                          "type": "object",
+                          "properties": {
+                            "branding": {
+                              "$ref": "organizations.json#/components/schemas/Organization-data-settings-branding"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "settings"
+                      ]
+                    },
+                    "receipt": {
+                      "$ref": "base.json#/components/schemas/receipt"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "meta",
+                    "signature",
+                    "data",
+                    "receipt"
+                  ],
+                  "additionalProperties": false
+                },
+                "example": {
+                  "response": [{
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "data": {
+                      "name": "My organization",
+                      "settings": {
+                        "branding": "..."
+                      }
+                    },
+                    "receipt": {
+                      "received_at": 1579967810
+                    }
+                  }],
+                  "meta": {
+                    "code": 200,
+                    "message": "Ok"
+                  }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/organizations": {
+      "get": {
+        "summary": "Get organizations",
+        "description": "Returns a list of organizations.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organizations" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create organization",
+        "description": "Creates an organization.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "API key"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "organizations.json#/components/requestBodies/Organization-Create"
+        },
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization" },
+          "400": { "$ref": "base.json#/components/responses/Validation" }
+        }
+      }
+    },
+    "/organizations/search": {
+      "post": {
+        "summary": "Search organizations",
+        "description": "Returns a list of organizations.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "organizations.json#/components/requestBodies/search-organization"
+        },
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organizations" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}": {
+      "get": {
+        "summary": "Get organization",
+        "description": "Returns an organization.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update organization",
+        "description": "Updates an organization.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "organizations.json#/components/requestBodies/Organization-update"
+        },
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/analytics": {
+      "get": {
+        "summary": "Get organization analytics",
+        "description": "Returns organization analytics.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization-Analytics" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/budget": {
+      "get": {
+        "summary": "Get organization budget",
+        "description": "Returns organization budget.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization-Budget" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/credit": {
+      "get": {
+        "summary": "Get organization credit",
+        "description": "Returns organization credit.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization-Credit" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/accounts": {
+      "post": {
+        "summary": "Create organization account",
+        "description": "Creates an organization account.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "requestBody": {
+          "$ref": "organizations.json#/components/requestBodies/Organization-Create-Account"
+        },
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Account" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/accounts/public": {
+      "post": {
+        "summary": "Search public organization accounts",
+        "description": "Returns public organization accounts.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "requestBody": {
+          "$ref": "accounts.json#/components/requestBodies/search-account"
+        },
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Accounts" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/teams/public": {
+      "post": {
+        "summary": "Search public organization teams",
+        "description": "Returns public organization teams.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "requestBody": {
+          "$ref": "teams.json#/components/requestBodies/search-team"
+        },
+        "responses": {
+          "200": { "$ref": "teams.json#/components/responses/Teams" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/{collection}": {
+      "get": {
+        "summary": "Get organization collection objects",
+        "description": "For hub admin to get specific organization collection objects.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/collection" },
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Accounts" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/{collection}/search": {
+      "post": {
+        "summary": "Search organization collection objects",
+        "description": "For hub admin to get specific organization collection objects.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/collection" }
+        ],
+        "requestBody": {
+          "$ref": "accounts.json#/components/requestBodies/search-account"
+        },
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Accounts" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/{collection}/{:object_id}": {
+      "get": {
+        "summary": "Get organization collection object",
+        "description": "For hub admin to get specific organization collection object.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/collection" },
+          { "$ref": "organizations.json#/components/parameters/object-id" }
+        ],
+        "responses": {
+          "200": { "$ref": "accounts.json#/components/responses/Account" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/signup": {
+      "post": {
+        "summary": "Organization signup",
+        "description": "Registers an organization account.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "API key"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "requestBody": {
+          "$ref": "organizations.json#/components/requestBodies/Organization-Signup"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" }
+        }
+      }
+    },
+    "/organizations/{id}/plan/{plan_id}": {
+      "put": {
+        "summary": "Organization plan update",
+        "description": "Updates organization's plan.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/id-plan" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" }
+        }
+      }
+    },
+    "/organizations/me": {
+      "get": {
+        "summary": "My organization",
+        "description": "Returns an organization based on ZIMT token in request headers.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" }
+        }
+      }
+    },
+    "/organizations/settings": {
+      "get": {
+        "summary": "My organization settings",
+        "description": "Returns organization settings based on ZIMT token in request headers.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/Organization-settings" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" }
+        }
+      }
+    },
+    "/organizations/public": {
+      "get": {
+        "summary": "Get organization public details",
+        "description": "Returns organization public details.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "API key"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/organization" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationPublicDetails" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/public/search": {
+      "post": {
+        "summary": "Get organizations with public details",
+        "description": "Returns organizations with public details.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "organizations.json#/components/requestBodies/search-organization"
+        },
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationsPublic" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/apps": {
+      "get": {
+        "summary": "Get organization apps",
+        "description": "Returns a list of organization apps.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationApps" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/apps/search": {
+      "post": {
+        "summary": "Search organization apps",
+        "description": "Returns a list of organization apps.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "requestBody": {
+          "$ref": "organizations.json#/components/requestBodies/search-organization-apps"
+        },
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationApps" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/apps/{organization-app-id}": {
+      "get": {
+        "summary": "Get organization app",
+        "description": "Returns an organization app.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/id-organization-app" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationApp" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update organization app",
+        "description": "Updates an organization app.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "organizations.json#/components/requestBodies/Organization-App-update"
+        },
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/id-organization-app" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationApp" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/apps/{organization-app-id}/upgrade": {
+      "get": {
+        "summary": "Upgrades organization app to newest hub app version.",
+        "description": "Upgrades an organization app to newest hub app version.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/id-organization-app" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationAppUpgrade" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/apps/active": {
+      "get": {
+        "summary": "Get active organization apps",
+        "description": "Returns a list of active organization apps.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin",
+            "Regular account"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationApps" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/apps/active/search": {
+      "post": {
+        "summary": "Search active organization apps",
+        "description": "Returns a list of active organization apps.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin",
+            "Regular account"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" }
+        ],
+        "requestBody": {
+          "$ref": "organizations.json#/components/requestBodies/search-organization-apps"
+        },
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationApps" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/organizations/{id}/apps/active/{organization-app-id}": {
+      "get": {
+        "summary": "Get active organization app",
+        "description": "Returns an active organization app.",
+        "tags": [
+          "Organizations"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin",
+            "Regular account"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "organizations.json#/components/parameters/id-organization" },
+          { "$ref": "organizations.json#/components/parameters/id-organization-app" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationApp" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/apps": {
+      "get": {
+        "summary": "Get apps",
+        "description": "Returns a list of apps.",
+        "tags": [
+          "Apps"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "apps.json#/components/responses/Apps" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create app",
+        "description": "Creates an app.",
+        "tags": [
+          "Apps"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "apps.json#/components/requestBodies/App-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/apps/search": {
+      "post": {
+        "summary": "Search apps",
+        "description": "Returns a list of apps.",
+        "tags": [
+          "Apps"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "apps.json#/components/requestBodies/search-apps"
+        },
+        "responses": {
+          "200": { "$ref": "apps.json#/components/responses/Apps" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/apps/{id}": {
+      "get": {
+        "summary": "Get app",
+        "description": "Returns an app.",
+        "tags": [
+          "Apps"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "apps.json#/components/parameters/id-app" }
+        ],
+        "responses": {
+          "200": { "$ref": "apps.json#/components/responses/App" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update app",
+        "description": "Updates an app.",
+        "tags": [
+          "Apps"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "apps.json#/components/requestBodies/App-update"
+        },
+        "parameters": [
+          { "$ref": "apps.json#/components/parameters/id-app" }
+        ],
+        "responses": {
+          "200": { "$ref": "apps.json#/components/responses/App" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete app",
+        "description": "Deletes a app.",
+        "tags": [
+          "Apps"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "apps.json#/components/parameters/id-app" }
+        ],
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/apps/market": {
+      "get": {
+        "summary": "Get market apps",
+        "description": "Returns a list of market apps.",
+        "tags": [
+          "Apps"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin",
+            "Regular account"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "apps.json#/components/responses/Apps" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/apps/market/search": {
+      "post": {
+        "summary": "Search market apps",
+        "description": "Returns a list of market apps.",
+        "tags": [
+          "Apps"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin",
+            "Regular account"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "apps.json#/components/requestBodies/search-apps"
+        },
+        "responses": {
+          "200": { "$ref": "apps.json#/components/responses/Apps" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/apps/market/{id}": {
+      "get": {
+        "summary": "Get market app",
+        "description": "Returns a market app.",
+        "tags": [
+          "Apps"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin",
+            "Regular account"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "apps.json#/components/parameters/id-app" }
+        ],
+        "responses": {
+          "200": { "$ref": "apps.json#/components/responses/App" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/apps/{id}/install": {
+      "get": {
+        "summary": "Installs market app",
+        "description": "Installs a market app in organization workspace.",
+        "tags": [
+          "Apps"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "apps.json#/components/parameters/id-app" }
+        ],
+        "responses": {
+          "200": { "$ref": "organizations.json#/components/responses/OrganizationApp" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/permissions": {
+      "get": {
+        "summary": "Get permissions",
+        "description": "Returns a list of permissions.",
+        "tags": [
+          "Permissions"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "permissions.json#/components/responses/Permissions" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create permission",
+        "description": "Creates a permission.",
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "tags": [
+          "Permissions"
+        ],
+        "requestBody": {
+          "$ref": "permissions.json#/components/requestBodies/Permission-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/permissions/search": {
+      "post": {
+        "summary": "Search permissions",
+        "description": "Returns a list of permissions.",
+        "tags": [
+          "Permissions"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "permissions.json#/components/requestBodies/search-permission"
+        },
+        "responses": {
+          "200": { "$ref": "permissions.json#/components/responses/Permissions" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/permissions/me": {
+      "get": {
+        "summary": "My permissions",
+        "description": "Returns permissions based on ZIMT token in request headers.",
+        "tags": [
+          "Permissions"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "responses": {
+          "200": { "$ref": "permissions.json#/components/responses/Permissions-me" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" }
+        }
+      }
+    },
+    "/permissions/{id}": {
+      "get": {
+        "summary": "Get permission",
+        "description": "Returns a permission.",
+        "tags": [
+          "Permissions"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "permissions.json#/components/parameters/id-permission" }
+        ],
+        "responses": {
+          "200": { "$ref": "permissions.json#/components/responses/Permission" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update permission",
+        "description": "Updates a permission.",
+        "tags": [
+          "Permissions"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "permissions.json#/components/requestBodies/Permission-update"
+        },
+        "parameters": [
+          { "$ref": "permissions.json#/components/parameters/id-permission" }
+        ],
+        "responses": {
+          "200": { "$ref": "permissions.json#/components/responses/Permission" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete permission",
+        "description": "Deletes a permission.",
+        "tags": [
+          "Permissions"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "permissions.json#/components/parameters/id-permission" }
+        ],
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/assets": {
+      "get": {
+        "summary": "Get assets",
+        "description": "Returns a list of assets.",
+        "tags": [
+          "Assets"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" },
+          { "$ref": "base.json#/components/parameters/permissions" }
+        ],
+        "responses": {
+          "200": { "$ref": "assets.json#/components/responses/Assets" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create asset",
+        "description": "Creates an asset.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Assets"
+        ],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/for_organization" }
+        ],
+        "requestBody": {
+          "$ref": "assets.json#/components/requestBodies/Asset-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/assets/empty": {
+      "get": {
+        "summary": "Get empty assets",
+        "description": "Returns a list of assets with no events (empty assets).",
+        "tags": [
+          "Assets"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" },
+          { "$ref": "base.json#/components/parameters/permissions" }
+        ],
+        "responses": {
+          "200": { "$ref": "assets.json#/components/responses/Assets" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/assets/search": {
+      "post": {
+        "summary": "Search assets",
+        "description": "Returns a list of assets.",
+        "tags": [
+          "Assets"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "assets.json#/components/requestBodies/search-asset"
+        },
+        "responses": {
+          "200": { "$ref": "assets.json#/components/responses/Assets" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/assets/search/events": {
+      "post": {
+        "summary": "Search assets based on asset's events",
+        "description": "Returns a list of assets.",
+        "tags": [
+          "Assets"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "events.json#/components/requestBodies/search-event"
+        },
+        "responses": {
+          "200": { "$ref": "assets.json#/components/responses/Assets" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/assets/{asset_id}": {
+      "get": {
+        "summary": "Get asset",
+        "description": "Returns an asset.",
+        "tags": [
+          "Assets"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "assets.json#/components/parameters/id-asset" },
+          { "$ref": "base.json#/components/parameters/permissions" }
+        ],
+        "responses": {
+          "200": { "$ref": "assets.json#/components/responses/Asset" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update asset",
+        "description": "Updates asset's data and/or ownership of the asset. Both data and ownership update creates an audit event that is verified and stored on chain, to keep track of any data change on the asset.",
+        "tags": [
+          "Assets"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "assets.json#/components/parameters/id-asset" }
+        ],
+        "requestBody": {
+          "$ref": "assets.json#/components/requestBodies/Asset-Update"
+        },
+        "responses": {
+          "200": { "$ref": "assets.json#/components/responses/Asset" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/assets/{asset_id}/events": {
+      "get": {
+        "summary": "Get asset events",
+        "description": "Returns a list of events.",
+        "tags": [
+          "Events"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "assets.json#/components/parameters/id-asset" },
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "events.json#/components/responses/Events" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create event",
+        "description": "Creates an event.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          { "$ref": "assets.json#/components/parameters/id-asset" },
+          { "$ref": "base.json#/components/parameters/for_organization" }
+        ],
+        "requestBody": {
+          "$ref": "events.json#/components/requestBodies/Event-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/assets/{asset_id}/events/search": {
+      "post": {
+        "summary": "Search asset events",
+        "description": "Returns a list of events.",
+        "tags": [
+          "Events"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "assets.json#/components/parameters/id-asset" }
+        ],
+        "requestBody": {
+          "$ref": "events.json#/components/requestBodies/search-event"
+        },
+        "responses": {
+          "200": { "$ref": "events.json#/components/responses/Events" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/assets/{asset_id}/events/{event_id}": {
+      "get": {
+        "summary": "Get event",
+        "description": "Returns an event.",
+        "tags": [
+          "Events"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "assets.json#/components/parameters/id-asset" },
+          { "$ref": "events.json#/components/parameters/id-event" }
+        ],
+        "responses": {
+          "200": { "$ref": "events.json#/components/responses/Event" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/documents": {
+      "servers": [{
+          "url": "https://documents.test.zi.mt",
+          "description": "Hub documents API - Test"
+        },
+        {
+          "url": "https://documents.zi.mt",
+          "description": "Hub documents API - Production"
+        }
+      ],
+      "get": {
+        "summary": "Get documents",
+        "description": "Returns a list of documents.",
+        "tags": [
+          "Documents"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "documents.json#/components/responses/Documents" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create document",
+        "description": "Creates a document.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Documents"
+        ],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/for_organization" }
+        ],
+        "requestBody": {
+          "$ref": "documents.json#/components/requestBodies/Document-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/documents/search": {
+      "servers": [{
+          "url": "https://documents.test.zi.mt",
+          "description": "Hub documents API - Test"
+        },
+        {
+          "url": "https://documents.zi.mt",
+          "description": "Hub documents API - Production"
+        }
+      ],
+      "post": {
+        "summary": "Search documents",
+        "description": "Returns a list of documents.",
+        "tags": [
+          "Documents"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "documents.json#/components/requestBodies/search-document"
+        },
+        "responses": {
+          "200": { "$ref": "documents.json#/components/responses/Documents" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/documents/{id}": {
+      "servers": [{
+          "url": "https://documents.test.zi.mt",
+          "description": "Hub documents API - Test"
+        },
+        {
+          "url": "https://documents.zi.mt",
+          "description": "Hub documents API - Production"
+        }
+      ],
+      "get": {
+        "summary": "Get document",
+        "description": "Returns a document.",
+        "tags": [
+          "Documents"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "documents.json#/components/headers/Document-Accept" },
+          { "$ref": "documents.json#/components/parameters/id-document" }
+        ],
+        "responses": {
+          "200": { "$ref": "documents.json#/components/responses/Document" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/api-keys": {
+      "get": {
+        "summary": "Get API keys",
+        "description": "Returns a list of API keys.",
+        "tags": [
+          "API keys"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "api-keys.json#/components/responses/APIkeys" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create API key",
+        "description": "Creates an API key.",
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin"
+          ]
+        }],
+        "tags": [
+          "API keys"
+        ],
+        "requestBody": {
+          "$ref": "api-keys.json#/components/requestBodies/APIkey-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/api-keys/public": {
+      "get": {
+        "summary": "Get public API keys",
+        "description": "Returns a list of public (private: false) API keys, and active API keys from your organization.",
+        "tags": [
+          "API keys"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "api-keys.json#/components/responses/APIkeys" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/api-keys/search": {
+      "post": {
+        "summary": "Search API keys",
+        "description": "Returns a list of API keys.",
+        "tags": [
+          "API keys"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "api-keys.json#/components/requestBodies/search-api-keys"
+        },
+        "responses": {
+          "200": { "$ref": "api-keys.json#/components/responses/APIkeys" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/api-keys/{id}": {
+      "get": {
+        "summary": "Get API key",
+        "description": "Returns an API key.",
+        "tags": [
+          "API keys"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "api-keys.json#/components/parameters/id-api-key" }
+        ],
+        "responses": {
+          "200": { "$ref": "api-keys.json#/components/responses/APIkey" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update API key",
+        "description": "Updates an API key.",
+        "tags": [
+          "API keys"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "api-keys.json#/components/requestBodies/APIkey-update"
+        },
+        "parameters": [
+          { "$ref": "api-keys.json#/components/parameters/id-api-key" }
+        ],
+        "responses": {
+          "200": { "$ref": "api-keys.json#/components/responses/APIkey" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete API key",
+        "description": "Deletes a API key.",
+        "tags": [
+          "API keys"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "api-keys.json#/components/parameters/id-api-key" }
+        ],
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/services": {
+      "get": {
+        "summary": "Get services",
+        "description": "Returns a list of services.",
+        "tags": [
+          "Services"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "services.json#/components/responses/Services" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create service",
+        "description": "Creates a service.",
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "tags": [
+          "Services"
+        ],
+        "requestBody": {
+          "$ref": "services.json#/components/requestBodies/Service-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/services/public": {
+      "get": {
+        "summary": "Get public services",
+        "description": "Returns a list of public (private: false) services, and active services from your organization.",
+        "tags": [
+          "Services"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "services.json#/components/responses/Services" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/services/search": {
+      "post": {
+        "summary": "Search services",
+        "description": "Returns a list of services.",
+        "tags": [
+          "Services"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "services.json#/components/requestBodies/search-services"
+        },
+        "responses": {
+          "200": { "$ref": "services.json#/components/responses/Services" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/services/{id}": {
+      "get": {
+        "summary": "Get service",
+        "description": "Returns a service.",
+        "tags": [
+          "Services"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "services.json#/components/parameters/id-service" }
+        ],
+        "responses": {
+          "200": { "$ref": "services.json#/components/responses/Service" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update service",
+        "description": "Updates a service.",
+        "tags": [
+          "Services"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "services.json#/components/requestBodies/Service-update"
+        },
+        "parameters": [
+          { "$ref": "services.json#/components/parameters/id-service" }
+        ],
+        "responses": {
+          "200": { "$ref": "services.json#/components/responses/Service" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete service",
+        "description": "Deletes a service.",
+        "tags": [
+          "Services"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "services.json#/components/parameters/id-service" }
+        ],
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/hooks": {
+      "get": {
+        "summary": "Get hooks",
+        "description": "Returns a list of hooks.",
+        "tags": [
+          "Hooks"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "hooks.json#/components/responses/Hooks" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create hook",
+        "description": "Creates a hook.",
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "tags": [
+          "Hooks"
+        ],
+        "requestBody": {
+          "$ref": "hooks.json#/components/requestBodies/Hook-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/hooks/search": {
+      "post": {
+        "summary": "Search hooks",
+        "description": "Returns a list of hooks.",
+        "tags": [
+          "Hooks"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "hooks.json#/components/requestBodies/search-hook"
+        },
+        "responses": {
+          "200": { "$ref": "hooks.json#/components/responses/Hooks" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/hooks/{id}": {
+      "get": {
+        "summary": "Get hook",
+        "description": "Returns a hook.",
+        "tags": [
+          "Hooks"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "hooks.json#/components/parameters/id-hook" }
+        ],
+        "responses": {
+          "200": { "$ref": "hooks.json#/components/responses/Hooks" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update hook",
+        "description": "Updates a hook.",
+        "tags": [
+          "Hooks"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "hooks.json#/components/requestBodies/Hook-update"
+        },
+        "parameters": [
+          { "$ref": "hooks.json#/components/parameters/id-hook" }
+        ],
+        "responses": {
+          "200": { "$ref": "hooks.json#/components/responses/Hook" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete hook",
+        "description": "Deletes a hook.",
+        "tags": [
+          "Hooks"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "hooks.json#/components/parameters/id-hook" }
+        ],
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/teams": {
+      "get": {
+        "summary": "Get teams",
+        "description": "Returns a list of teams.",
+        "tags": [
+          "Teams"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "teams.json#/components/responses/Teams" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create team",
+        "description": "Creates a team.",
+        "security": [{
+          "ZIMT Token": [
+            "Organization admin",
+            "Hub admin"
+          ]
+        }],
+        "tags": [
+          "Teams"
+        ],
+        "requestBody": {
+          "$ref": "teams.json#/components/requestBodies/Team-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/teams/search": {
+      "post": {
+        "summary": "Search teams",
+        "description": "Returns a list of teams.",
+        "tags": [
+          "Teams"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "teams.json#/components/requestBodies/search-team"
+        },
+        "responses": {
+          "200": { "$ref": "teams.json#/components/responses/Teams" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/teams/{id}": {
+      "get": {
+        "summary": "Get team",
+        "description": "Returns a team.",
+        "tags": [
+          "Teams"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "teams.json#/components/parameters/id-team" }
+        ],
+        "responses": {
+          "200": { "$ref": "teams.json#/components/responses/Team" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update team",
+        "description": "Updates a team.",
+        "tags": [
+          "Teams"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "teams.json#/components/requestBodies/Team-update"
+        },
+        "parameters": [
+          { "$ref": "teams.json#/components/parameters/id-team" }
+        ],
+        "responses": {
+          "200": { "$ref": "teams.json#/components/responses/Team" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "delete": {
+        "summary": "Delete team",
+        "description": "Deletes a team.",
+        "tags": [
+          "Teams"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "teams.json#/components/parameters/id-team" }
+        ],
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Delete" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+    "/bundles/{id}": {
+      "get": {
+        "summary": "Get bundle",
+        "description": "Returns a bundle.",
+        "tags": [
+          "Bundles"
+        ],
+        "parameters": [
+          { "$ref": "bundles.json#/components/parameters/id-bundle" }
+        ],
+        "responses": {
+          "200": { "$ref": "bundles.json#/components/responses/Bundle" },
+          "400": { "$ref": "base.json#/components/responses/Not found" }
+        }
+      }
+    },
+    "/bundles/{id}/proof/storage/{storage_id}/proof": {
+      "get": {
+        "summary": "Get bundle proof storage proof",
+        "description": "Returns bundle's proof storage proof.",
+        "tags": [
+          "Bundles"
+        ],
+        "parameters": [
+          { "$ref": "bundles.json#/components/parameters/id-bundle" },
+          { "$ref": "bundles.json#/components/parameters/id-storage" }
+        ],
+        "responses": {
+          "200": { "$ref": "bundles.json#/components/responses/Bundle-proof-storage-proof" },
+          "400": { "$ref": "base.json#/components/responses/Not found" }
+        }
+      }
+    },
+
+     "/strategies": {
+      "get": {
+        "summary": "Get strategies",
+        "description": "Returns a list of strategies.",
+        "tags": [
+          "Strategies"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "strategies.json#/components/responses/Strategies" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create strategy",
+        "description": "Creates a strategy.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Strategies"
+        ],
+        "requestBody": {
+          "$ref": "strategies.json#/components/requestBodies/Strategy-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/strategies/search": {
+      "post": {
+        "summary": "Search strategies",
+        "description": "Returns a list of strategies.",
+        "tags": [
+          "Strategies"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "strategies.json#/components/requestBodies/search-strategy"
+        },
+        "responses": {
+          "200": { "$ref": "strategies.json#/components/responses/Strategies" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/strategies/{id}": {
+      "get": {
+        "summary": "Get strategy",
+        "description": "Returns a strategy.",
+        "tags": [
+          "Strategies"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "strategies.json#/components/parameters/id-strategy" }
+        ],
+        "responses": {
+          "200": { "$ref": "strategies.json#/components/responses/Strategy" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update strategy",
+        "description": "Updates a strategy.",
+        "tags": [
+          "Strategies"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "strategies.json#/components/requestBodies/Strategy-update"
+        },
+        "parameters": [
+          { "$ref": "strategies.json#/components/parameters/id-strategy" }
+        ],
+        "responses": {
+          "200": { "$ref": "strategies.json#/components/responses/Strategy" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+
+
+    "/certificates": {
+      "get": {
+        "summary": "Get certificates",
+        "description": "Returns a list of certificates.",
+        "tags": [
+          "Certificates"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "base.json#/components/parameters/limit-query" },
+          { "$ref": "base.json#/components/parameters/skip-query" }
+        ],
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificates" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "post": {
+        "summary": "Create certificate",
+        "description": "Creates an certificate.",
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "tags": [
+          "Certificates"
+        ],
+        "requestBody": {
+          "$ref": "certificates.json#/components/requestBodies/Certificate-Create"
+        },
+        "responses": {
+          "200": { "$ref": "base.json#/components/responses/Object-Created" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/certificates/search": {
+      "post": {
+        "summary": "Search certificates",
+        "description": "Returns a list of certificates.",
+        "tags": [
+          "Certificates"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "certificates.json#/components/requestBodies/search-certificate"
+        },
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificates" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/certificates/sources": {
+      "post": {
+        "summary": "Search certificate sources",
+        "description": "Returns a list of certificates.",
+        "tags": [
+          "Certificates"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "certificates.json#/components/requestBodies/search-certificate"
+        },
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificates" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/certificates/instances": {
+      "post": {
+        "summary": "Search certificate instances",
+        "description": "Returns a list of certificates.",
+        "tags": [
+          "Certificates"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "certificates.json#/components/requestBodies/search-certificate"
+        },
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificates" },
+          "400": { "$ref": "base.json#/components/responses/Validation" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/certificates/{id}": {
+      "get": {
+        "summary": "Get certificate",
+        "description": "Returns a certificate.",
+        "tags": [
+          "Certificates"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "Hub admin",
+            "Organization super admin",
+            "Organization admin"
+          ]
+        }],
+        "parameters": [
+          { "$ref": "certificates.json#/components/parameters/id-certificate" }
+        ],
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificate" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      },
+      "put": {
+        "summary": "Update certificate",
+        "description": "Updates a certificate.",
+        "tags": [
+          "Certificates"
+        ],
+        "security": [{
+          "ZIMT Token": [
+            "All"
+          ]
+        }],
+        "requestBody": {
+          "$ref": "certificates.json#/components/requestBodies/Certificate-update"
+        },
+        "parameters": [
+          { "$ref": "certificates.json#/components/parameters/id-certificate" }
+        ],
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificate" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    },
+    "/certificates/{id}/public": {
+      "get": {
+        "summary": "Get certificate publicly",
+        "description": "Returns a certificate.",
+        "tags": [
+          "Certificates"
+        ],
+        "parameters": [
+          { "$ref": "certificates.json#/components/parameters/id-certificate" }
+        ],
+        "responses": {
+          "200": { "$ref": "certificates.json#/components/responses/Certificate" },
+          "400": { "$ref": "base.json#/components/responses/Not found" },
+          "401": { "$ref": "base.json#/components/responses/Authentication" },
+          "403": { "$ref": "base.json#/components/responses/Authorization" }
+        }
+      }
+    }
+
+  },
+
+  "components": {
+
+    "securitySchemes": {
+
+      "ZIMT Token": {
+        "name": "ZIMT token",
+        "description": "\n\n ### About\n\nZIMT token is a JWT token you receive using Hub login endpoint.\n\nUsage format: `ZIMT_TOKEN <Token>`\n\nExample: `headers['Authorization'] = ZIMT_TOKEN eyJpZERhdGEiOnsiY3JlYXRlZEJ5IjoiM...`",
+        "type": "http",
+        "scheme": "bearer",
+        "in": "header"
+      }
+
+    }
+
+  }
+
+}

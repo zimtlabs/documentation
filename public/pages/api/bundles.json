@@ -1,0 +1,473 @@
+{
+  "components": {
+
+    "schemas": {
+
+      "Bundle-meta": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "base.json#/components/schemas/address"
+          },
+          "timestamp": {
+            "$ref": "base.json#/components/schemas/date"
+          },
+          "data_hash": {
+            "$ref": "base.json#/components/schemas/data-hash"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "created_by",
+          "timestamp",
+          "data_hash"
+        ]
+      },
+      "Bundle-object-data-strategy": {
+        "type": "object",
+        "properties": {
+            "id": { "type": "string" },
+            "name": { "type": "string" },
+            "hub": { "type": "boolean" },
+            "default": { "type": "boolean" },
+            "all": { "type": "boolean" },
+            "private": { "type": "boolean" },
+            "dedicated": { "type": "boolean" }
+        },
+        "required": ["objects"],
+        "additionalProperties": false
+      },
+      "Bundle-object-data-objects": {
+        "type": "object",
+        "properties": {
+          "accounts": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "apps": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "organizationApps": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "apiKeys": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "organizations": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "logs": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "permissions": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "assets": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "events": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "certificates": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "documents": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "services": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "hooks": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "defaults": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "plans": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          },
+          "teams": {
+            "type": "object",
+            "properties": {
+                "proofs": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "ids": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                }
+            }
+          }
+        }
+      },
+      "Bundle-object-data": {
+          "type": "object",
+          "properties": {
+            "strategy": {
+                "$ref": "#/components/schemas/Bundle-object-data-strategy"
+            },
+
+            "objects": {
+                "$ref": "#/components/schemas/Bundle-object-data-objects"
+            },
+
+            "version": { "type": "object" },
+
+            "properties": { "type": "object" }
+          },
+          "additionalProperties": false,
+          "required": ["strategy", "objects", "version"]
+      },
+      "Bundle-data": {
+        "type": "object",
+        "properties": {
+            "proof": {
+                "$ref": "strategies.json#/components/schemas/Strategy-object-data-proof"
+            }
+        },
+        "additionalProperties": false
+      },
+      "Bundle-object": {
+        "type": "object",
+        "properties": {
+            "meta": {
+                "$ref": "#/components/schemas/Bundle-meta"
+            },
+            "data": {
+                "$ref": "#/components/schemas/Bundle-object-data"
+            },
+            "signature": {
+                "$ref": "base.json#/components/schemas/signature"
+            }
+        },
+        "required": ["meta", "data", "signature"],
+        "additionalProperties": false
+      },
+      "Bundle": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "object": {
+            "$ref": "#/components/schemas/Bundle-object"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Bundle-data"
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "data",
+          "receipt"
+        ],
+        "additionalProperties": false
+      },
+      "Bundle-proof-storage-proof": {
+        "type": "object",
+        "properties": {
+          "proof": {
+            "$ref": "base.json#/components/schemas/proof"
+          }
+        },
+        "required": [
+          "proof"
+        ],
+        "additionalProperties": false
+      }
+
+    },
+    "examples": {
+
+      "Bundle-proof-storage-proof": {
+        "response": {
+            "proof": "0x123..."
+        },
+        "meta": {
+            "message": "Ok",
+            "code": 200
+        }
+      },
+
+      "Bundle": {
+        "response": {
+            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "object": {
+                "meta": {
+                    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                    "timestamp": "2020-02-10T19:16:13Z",
+                    "data_hash": "0x123..."
+                },
+                "signature": "0xe633051fc76ae...",
+                "data": {
+                    "strategy": {
+                        "id": "0x123...",
+                        "name": "Default all strategy",
+                        "hub": true,
+                        "active": true,
+                        "all": false,
+                        "default": false,
+                        "private": true
+                    },
+
+                    "objects": {
+                        "assets": {
+                            "proofs": [
+                                "0x123...",
+                                "0x123..."
+                            ]
+                        }
+                    },
+
+                    "version": "1.0.0",
+
+                    "properties": {
+                        "asd": 123
+                    }
+                }
+            },
+            "data": {
+                "proof": {
+                    "storage": [
+                        {
+                            "id": "0x123",
+
+                            "type": "cloud",
+                            "provider": "aws",
+                            "service": "s3",
+
+                            "name": "S3 proof storage",
+                            "environment": "test",
+
+                            "location": {
+                                "url": "https://google.com"
+                            },
+
+                            "properties": {
+                                "asd": 123
+                            }
+                        }
+                    ]
+                }
+            },
+          "receipt": {
+            "received_at": 1579967810
+          }
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      }
+
+    },
+    "parameters": {
+
+      "id-bundle": {
+        "name": "id",
+        "description": "ID of a bundle",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      },
+      "id-storage": {
+        "name": "id storage",
+        "description": "ID of a bundle storage",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      }
+
+    },
+
+    "responses": {
+
+      "Bundle": {
+        "description": "Bundle result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Bundle"
+            },
+            "example": {
+              "$ref": "#/components/examples/Bundle"
+            }
+          }
+        }
+      },
+
+      "Bundle-proof-storage-proof": {
+        "description": "Bundle proof storage proof result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Bundle-proof-storage-proof"
+            },
+            "example": {
+              "$ref": "#/components/examples/Bundle-proof-storage-proof"
+            }
+          }
+        }
+      }
+
+    },
+    "requestBodies": { }
+
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "components": {
+
+    "schemas": {
+
+      "query-team": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "teams": {
+                "type": "array",
+                "items": {
+                  "$ref": "base.json#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "base.json#/components/schemas/limit"
+          },
+          "skip": {
+            "$ref": "base.json#/components/schemas/skip"
+          }
+        }
+      },
+      "Team-data-members": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "full_name": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string",
+              "enum": ["member", "maintainer"]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "role"
+          ]
+        },
+        "additionalItems": false
+      },
+      "Team-data-parent-team": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "id"
+          ]
+      },
+      "Team-data": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "active": { "type": "string" },
+          "private": { "type": "string" },
+          "parent_team": {
+            "$ref": "#/components/schemas/Team-data-parent-team"
+          },
+          "members": {
+            "$ref": "#/components/schemas/Team-data-members"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "Team-Create": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "$ref": "base.json#/components/schemas/object-simple"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Team-data"
+          }
+        },
+        "required": [
+          "object",
+          "data"
+        ]
+      },
+      "Team": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "object": {
+            "$ref": "base.json#/components/schemas/object-simple"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Team-data"
+          },
+          "receipt": {
+            "$ref": "base.json#/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "data",
+          "receipt",
+          "proof_locations"
+        ],
+        "additionalProperties": false
+      },
+      "Teams": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Team"
+            }
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "base.json#/components/schemas/pagination-response"
+          }
+        }
+      }
+
+    },
+    "examples": {
+
+      "query-team": {
+        "query": {
+          "teams": [{
+            "field": "data.name",
+            "operator": "starts-with",
+            "value": "Team 1"
+          }]
+        },
+        "limit": 45,
+        "skip": 30
+      },
+      "Team-Create": {
+        "object": {
+          "meta": {
+            "created_by": "0x678b3c5090B25b3a63120CF0218750886e37A96E"
+          },
+          "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+        },
+        "data": {
+          "name": "Team 1",
+          "description": "Our main team",
+          "active": true,
+          "private": false,
+          "members": [{
+            "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+            "full_name": "John Doe",
+            "role": "maintainer"
+          }]
+        }
+      },
+      "Team": {
+        "response": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "object": {
+              "meta": {
+                    "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                    "timestamp": "2020-02-10T19:16:13Z"
+                },
+                "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+          },
+          "data": {
+            "name": "Team 1",
+            "description": "Our main team",
+            "active": true,
+            "private": false,
+            "members": [{
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "full_name": "John Doe",
+                "role": "maintainer"
+            }]
+          },
+          "receipt": {
+            "received_at": 1579967810
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Team-update": {
+        "data": {
+          "name": "Team (edited)"
+        }
+      },
+      "Teams": {
+        "response": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "object": {
+              "meta": {
+                    "created_by": "0x8752F61635543a870826D9F4CA20a9D1F3934079",
+                    "timestamp": "2020-02-10T19:16:13Z"
+                },
+                "signature": "0xed4f59dbd23ac9ea359f3b9215eca3ceb34e08e29b1f704fa198468cae08f9f0016e..."
+          },
+          "data": {
+            "name": "Team 1",
+            "description": "Our main team",
+            "active": true,
+            "private": false,
+            "members": [{
+                "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                "full_name": "John Doe",
+                "role": "maintainer"
+            }]
+          },
+          "receipt": {
+            "received_at": 1579967810
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "limit": 30,
+          "skip": 30,
+          "total": 120,
+          "next": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "previous": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "hasNext": true,
+          "hasPrevious": false
+        }
+      }
+    },
+
+    "parameters": {
+
+      "id-team": {
+        "name": "id",
+        "description": "ID of a team",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      }
+
+    },
+
+    "responses": {
+
+      "Team": {
+        "description": "Team result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Team"
+            },
+            "example": {
+              "$ref": "#/components/examples/Team"
+            }
+          }
+        }
+      },
+      "Teams": {
+        "description": "Team results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Teams"
+            },
+            "example": {
+              "$ref": "#/components/examples/Teams"
+            }
+          }
+        }
+      }
+
+    },
+
+    "requestBodies": {
+
+      "search-team": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-team"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-team"
+            }
+          }
+        }
+      },
+      "Team-Create": {
+        "description": "Team create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Team-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/Team-Create"
+            }
+          }
+        }
+      },
+      "Team-update": {
+        "description": "Team update",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Team-data"
+            },
+            "example": {
+              "$ref": "#/components/examples/Team-update"
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+
+}

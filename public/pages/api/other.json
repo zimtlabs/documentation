@@ -1,0 +1,49 @@
+{
+  "components": {
+
+    "schemas": {
+
+      "Health": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "string"
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          }
+        }
+      }
+
+    },
+    "examples": {
+
+      "Health": {
+        "response": "Ok",
+        "meta": {
+          "code": 200
+        }
+      }
+
+    },
+
+    "responses": {
+
+      "Health": {
+        "description": "Ok",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Health"
+            },
+            "example": {
+              "$ref": "#/components/examples/Health"
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+}

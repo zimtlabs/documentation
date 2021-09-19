@@ -1,0 +1,513 @@
+{
+  "components": {
+
+    "schemas": {
+
+      "query-event": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "events": {
+                "type": "array",
+                "items": {
+                  "$ref": "base.json#/components/schemas/query-operator"
+                },
+                "minItems": 0
+              }
+            }
+          },
+          "limit": {
+            "$ref": "base.json#/components/schemas/limit"
+          },
+          "skip": {
+            "$ref": "base.json#/components/schemas/skip"
+          }
+        }
+      },
+      "data-hash": {
+        "type": "string",
+        "description": "Hash of data object"
+      },
+      "entries-hash": {
+        "type": "string",
+        "description": "Hash of entries array"
+      },
+      "type": {
+        "type": "string"
+      },
+      "asset_type": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "documents": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 0,
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "#/components/parameters/id-document"
+            },
+            "url": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "properties": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "type"
+          ]
+        },
+        "additionalItems": false
+      },
+      "location": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["Feature"]
+          },
+          "geometry": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["Point"]
+              },
+              "coordinates": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                },
+                "minItems": 2,
+                "maxItems": 2,
+                "additionalItems": false
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "coordinates"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "geometry"
+        ]
+      },
+      "identifiers": {
+        "type": "object",
+        "properties": {
+          "Any property name": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "additionalItems": false
+          }
+        }
+      },
+      "properties": {
+        "type": "object"
+      },
+      "Event-meta": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "$ref": "base.json#/components/schemas/address"
+          },
+          "timestamp": {
+            "$ref": "base.json#/components/schemas/date"
+          },
+          "asset_id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "data_hash": {
+            "$ref": "base.json#/components/schemas/data-hash"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "created_by",
+          "timestamp",
+          "asset_id",
+          "data_hash"
+        ]
+      },
+      "Event-data": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "base.json#/components/schemas/type"
+          },
+          "name": {
+            "$ref": "base.json#/components/schemas/name"
+          },
+          "asset_type": {
+            "$ref": "base.json#/components/schemas/asset_type"
+          },
+          "documents": {
+            "$ref": "base.json#/components/schemas/documents"
+          },
+          "location": {
+            "$ref": "base.json#/components/schemas/location"
+          },
+          "identifiers": {
+            "$ref": "base.json#/components/schemas/identifiers"
+          },
+          "properties": {
+            "$ref": "base.json#/components/schemas/properties"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "name"
+        ]
+      },
+      "Event-Create": {
+        "type": "object",
+        "properties": {
+          "object": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "$ref": "#/components/schemas/Event-meta"
+                },
+                "data": {
+                    "$ref": "#/components/schemas/Event-data"
+                },
+                "signature": {
+                    "$ref": "base.json#/components/schemas/signature"
+                }
+            },
+            "required": [
+                "meta",
+                "data",
+                "signature"
+            ]
+          },
+          "namespace": {
+            "$ref": "base.json#/components/schemas/namespace"
+          }
+        },
+        "required": [
+          "object"
+        ]
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "base.json#/components/schemas/id"
+          },
+          "object": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "$ref": "#/components/schemas/Event-meta"
+                },
+                "data": {
+                    "$ref": "#/components/schemas/Event-data"
+                },
+                "signature": {
+                    "$ref": "base.json#/components/schemas/signature"
+                }
+            },
+            "required": [
+                "meta",
+                "data",
+                "signature"
+            ]
+          },
+          "receipt": {
+            "$ref": "base.json/components/schemas/receipt"
+          },
+          "proof_locations": {
+            "$ref": "base.json#/components/schemas/proof_locations"
+          }
+        },
+        "required": [
+          "id",
+          "object",
+          "receipt",
+          "proof_locations"
+        ],
+        "additionalProperties": false
+      },
+      "Events": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            }
+          },
+          "meta": {
+            "$ref": "base.json#/components/schemas/meta-response"
+          },
+          "pagination": {
+            "$ref": "base.json#/components/schemas/pagination-response"
+          }
+        }
+      }
+
+    },
+    "examples": {
+
+      "query-event": {
+        "query": {
+          "events": [{
+            "field": "object.data.name",
+            "operator": "starts-with",
+            "value": "Event"
+          }]
+        },
+        "limit": 45,
+        "skip": 30
+      },
+      "Event-Create": {
+          "object": {
+            "meta": {
+                "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                "timestamp": "2020-02-10T19:16:13Z",
+                "asset_id": "0x123...",
+                "data_hash": "0x123..."
+            },
+            "data": {
+                "type": "info",
+                "name": "Palette of fruit",
+                "documents": [{
+                    "name": "photo-457882-1-1587129086010",
+                    "type": "image/jpeg",
+                    "id": "0xb4d0f01d79e420ff4ff5edaabd49df2d677b1b01fd6d83801cd..."
+                    },
+                    {
+                    "name": "text-file-1-1587129090597",
+                    "type": "text/plain",
+                    "id": "0xb78321b49fbf5df5387f696a4d2c174ce0f01b7443f896030e1..."
+                    }
+                ],
+                "identifiers": {
+                    "AAB": [
+                    "123",
+                    "12345"
+                    ],
+                    "EEC": [
+                    "asd"
+                    ]
+                },
+                "location": {
+                    "type": "Feature",
+                    "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        21.8808406,
+                        14.333475399999998
+                    ]
+                    },
+                    "properties": {
+                    "name": "Street, Town, Country",
+                    "city": "Town",
+                    "country": "US",
+                    "route": "Street",
+                    "street_number": "Street number"
+                    }
+                },
+                "properties": {
+                    "Custom property 1": "123",
+                    "Custom property 2": "1234",
+                    "Nested custom prop": {
+                    "asd": 123
+                    }
+                }
+            },
+            "signature": "0xe633051fc76ae..."
+        },
+        "namespace": {
+            "app": true
+        }
+      },
+      "Event": {
+        "response": {
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "object": {
+              "meta": {
+                    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                    "timestamp": "2020-02-10T19:16:13Z",
+                    "asset_id": "0x123...",
+                    "data_hash": "0x123..."
+                },
+                "data": {
+                    "type": "info",
+                    "name": "Info event"
+                },
+                "signature": "0xe633051fc76ae..."
+          },
+          "receipt": {
+            "received_at": 1579278115
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        },
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        }
+      },
+      "Events": {
+        "response": [{
+          "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+          "object": {
+              "meta": {
+                    "created_by": "0x627969CD9Ef88bA7e61694947020540d7eD0001d",
+                    "timestamp": "2020-02-10T19:16:13Z",
+                    "asset_id": "0x123...",
+                    "data_hash": "0x123..."
+                },
+                "data": {
+                    "type": "info",
+                    "name": "Info event"
+                },
+                "signature": "0xe633051fc76ae..."
+          },
+          "receipt": {
+            "received_at": 1579278115
+          },
+          "proof_locations": [
+            {
+                "type": "bundle",
+                "bundle": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951"
+                },
+                "strategy": {
+                    "id": "0x1512258c1a082a1148e655cf4abf13b914e31e7e485191c2b6b5ee466e03c951",
+                    "name": "Default all global"
+                }
+            }
+          ]
+        }],
+        "meta": {
+          "code": 200,
+          "message": "Ok"
+        },
+        "pagination": {
+          "limit": 30,
+          "skip": 30,
+          "total": 120,
+          "next": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "previous": "eyJyZWNlaXB0LnJlY2VpdmVkX2F0IjoxNjE1MjQ4ODEyfQ==",
+          "hasNext": true,
+          "hasPrevious": false
+        }
+      }
+
+    },
+
+    "parameters": {
+
+      "id-event": {
+        "name": "Event ID",
+        "description": "ID of an event",
+        "in": "path",
+        "schema": {
+          "$ref": "base.json#/components/schemas/id"
+        }
+      }
+
+    },
+
+    "responses": {
+
+      "Event": {
+        "description": "Event result",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Event"
+            },
+            "example": {
+              "$ref": "#/components/examples/Event"
+            }
+          }
+        }
+      },
+      "Events": {
+        "description": "Event results",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Events"
+            },
+            "example": {
+              "$ref": "#/components/examples/Events"
+            }
+          }
+        }
+      }
+
+    },
+
+    "requestBodies": {
+
+      "search-event": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/query-event"
+            },
+            "example": {
+              "$ref": "#/components/examples/query-event"
+            }
+          }
+        }
+      },
+      "Event-Create": {
+        "description": "Event create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Event-Create"
+            },
+            "example": {
+              "$ref": "#/components/examples/Event-Create"
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+}
